@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Niche</title>
+<link rel="icon" href="data:,">
+<style>html,body{margin:0;height:100%;background:#081218;color:#f6f1e3;font:16px "Segoe UI",Arial,sans-serif}p{padding:24px}</style>
+</head>
+<body>
+<p>Opening Niche...</p>
+<script>
+// The student link: the game page, at its join step (?join=CODE also fills the code in).
+var q = new URLSearchParams(location.search), code = (q.get("join") || q.get("code") || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 4);
+location.replace("index.html?join=" + (code || "1"));
+</script>
+</body>
+</html>

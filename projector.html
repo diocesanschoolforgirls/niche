@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Niche</title>
+<link rel="icon" href="data:,">
+<style>html,body{margin:0;height:100%;background:#081218;color:#f6f1e3;font:16px "Segoe UI",Arial,sans-serif}p{padding:24px}</style>
+</head>
+<body>
+<p>Opening the projector...</p>
+<script>
+// The projector on a computer other than the teacher's (the dashboard's own "Open the projector" button is the usual way):
+// projector.html?code=ABCD shows that game. It only watches; it never changes the game.
+var q = new URLSearchParams(location.search), code = (q.get("code") || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 4);
+location.replace("index.html?view=projector" + (code ? "&code=" + code : ""));
+</script>
+</body>
+</html>

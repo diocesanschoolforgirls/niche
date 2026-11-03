@@ -1,0 +1,99 @@
+rules_version = '2';
+// Niche live: Cloud Firestore security rules (Kit, 2026-11-03; Māia's live-privacy-check.md section 3).
+// Default deny: anything not allowed below is refused. Every reader and writer is an anonymous Firebase user.
+//
+//   games/CODE        the teacher's game: the room (nicknames, settings, phase) and a class summary. Teacher writes.
+//   games/CODE-v      the projector's view, used only when the projector is not in the teacher's own browser. Teacher writes.
+//   players/CODE_UID  one girl's record: her nickname and her own play state. Only she writes it; only the teacher reads it.
+//   inbox/CODE_UID    the teacher's replies to one girl (joined, renamed, removed, a card aimed at her). Only she reads it.
+//
+// Every record carries expiresAt (at most 4 hours ahead, refreshed while the teacher is connected; never more than
+// 12 hours after the game was made). A Firestore TTL policy on expiresAt deletes old records; these rules refuse to
+// show a game or an inbox once its expiresAt has passed, because TTL can run up to a day late.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function me() { return request.auth.uid; }
+    function codeOk(c) { return c is string && c.matches('^[BCDFGHJKMNPQRSTVWXZ2-9]{4}$'); }
+    function gamePath(c) { return /databases/$(database)/documents/games/$(c); }
+    function ownsGame(c) { return get(gamePath(c)).data.owner == me(); }
+    // expiresAt: in the future, at most 4 hours (and 5 minutes for clock drift) ahead
+    function expiryOk(t) { return t is timestamp && t > request.time && t <= request.time + duration.value(245, 'm'); }
+
+    // ---------- the game and the projector's view (teacher only) ----------
+    match /games/{id} {
+      function isGame() { return id.matches('^[BCDFGHJKMNPQRSTVWXZ2-9]{4}$'); }
+      function isView() { return id.matches('^[BCDFGHJKMNPQRSTVWXZ2-9]{4}-v$'); }
+      function shape(d) {
+        return (isGame() || isView())
+          && d.keys().hasAll(['code', 'owner', 'bornAt', 'expiresAt', 'srvAt', 'd'])
+          && d.keys().hasOnly(['code', 'owner', 'open', 'bornAt', 'expiresAt', 'srvAt', 'd'])
+          && codeOk(d.code) && (isGame() ? id == d.code : id == d.code + '-v')
+          && d.owner == me()
+          && (isGame() ? d.open is bool : !('open' in d))
+          && d.d is string && d.d.size() <= 100000
+          && d.srvAt == request.time
+          && d.bornAt is timestamp && expiryOk(d.expiresAt)
+          && d.expiresAt <= d.bornAt + duration.value(12, 'h');
+      }
+      // a game is read only by its exact code, and not once it has expired (a code nobody is using reads as empty)
+      allow get: if signedIn() && (resource == null || resource.data.expiresAt > request.time);
+      allow list: if false;
+      // making a game (or taking over a code whose game has expired); a view only beside the same teacher's game
+      allow create: if signedIn() && shape(request.resource.data) && request.resource.data.bornAt == request.time
+        && (isGame() || ownsGame(request.resource.data.code));
+      allow update: if signedIn() && shape(request.resource.data) && (
+          (resource.data.owner == me() && request.resource.data.bornAt == resource.data.bornAt)
+          || (resource.data.expiresAt <= request.time && request.resource.data.bornAt == request.time
+              && (isGame() || ownsGame(request.resource.data.code))));
+      allow delete: if signedIn() && resource.data.owner == me();
+    }
+
+    // ---------- one girl's record (she writes it; the teacher reads and deletes it) ----------
+    match /players/{pid} {
+      function pshape(d) {
+        return d.keys().hasAll(['code', 'uid', 'owner', 'nick', 'jn', 'at', 'expiresAt', 'capAt', 'd'])
+          && d.keys().hasOnly(['code', 'uid', 'owner', 'nick', 'jn', 'at', 'expiresAt', 'capAt', 'd'])
+          && codeOk(d.code) && d.uid == me() && pid == d.code + '_' + me()
+          && d.owner is string && d.owner.size() <= 128
+          && d.nick is string && d.nick.size() >= 2 && d.nick.size() <= 16
+          && d.jn is int && d.d is string && d.d.size() <= 6000
+          && d.at == request.time
+          && expiryOk(d.expiresAt) && d.capAt is timestamp && d.expiresAt <= d.capAt;
+      }
+      function gameOpen(d) {
+        let g = get(gamePath(d.code)).data;
+        return g.expiresAt > request.time && g.open == true && d.owner == g.owner
+          && d.capAt == g.bornAt + duration.value(12, 'h');
+      }
+      // joining: only while the teacher's game exists and is open (lobby unlocked, or Let latecomers in) and has seats
+      allow create: if signedIn() && pshape(request.resource.data) && gameOpen(request.resource.data);
+      // her own record afterwards (a report, a rejoin from the same browser), never faster than about once a second
+      allow update: if signedIn() && resource.data.uid == me() && pshape(request.resource.data)
+        && request.resource.data.code == resource.data.code && request.resource.data.owner == resource.data.owner
+        && request.resource.data.capAt == resource.data.capAt
+        && request.time > resource.data.at + duration.value(900, 'ms');
+      allow get: if false;
+      // the teacher reads her own game's players (the page asks for owner == her id and the game's code)
+      allow list: if signedIn() && resource.data.owner == me();
+      allow delete: if signedIn() && (resource.data.owner == me() || resource.data.uid == me());
+    }
+
+    // ---------- the teacher's replies to one girl ----------
+    match /inbox/{iid} {
+      function ishape(d) {
+        return d.keys().hasAll(['code', 'uid', 'owner', 'expiresAt', 'm']) && d.keys().hasOnly(['code', 'uid', 'owner', 'expiresAt', 'm'])
+          && codeOk(d.code) && d.uid is string && iid == d.code + '_' + d.uid
+          && d.owner == me() && d.m is string && d.m.size() <= 8000 && expiryOk(d.expiresAt);
+      }
+      // only the girl it is addressed to (an inbox nobody has written yet reads as empty)
+      allow get: if signedIn() && iid.split('_')[1] == me() && (resource == null || resource.data.expiresAt > request.time);
+      allow list: if false;
+      allow create: if signedIn() && ishape(request.resource.data) && ownsGame(request.resource.data.code);
+      allow update: if signedIn() && ishape(request.resource.data)
+        && (resource.data.owner == me() || (resource.data.expiresAt <= request.time && ownsGame(request.resource.data.code)));
+      allow delete: if signedIn() && resource.data.owner == me();
+    }
+  }
+}

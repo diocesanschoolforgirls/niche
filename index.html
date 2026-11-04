@@ -1261,6 +1261,292 @@ body.pj #nk-lane,.nk-teacher #nk-lane{display:none!important}
 .dg-if details p{margin:0 0 8px}
 .dg-foot{margin-top:34px;padding-top:16px;border-top:2px dashed #d5d0c2;color:#4d5a5f;font-size:16px}
 .dg-foot p{margin:0 0 4px}
+/* =====================================================================
+   v35 "First class back" (Kit, 2026-11-04): Raj's look (design/v35-look.md).  One loud thing per screen; every new class namespaced.
+   ===================================================================== */
+:root{--rel-hunts:#e0322b;--rel-eat:#59c14a;--rel-kind:#9b8cff;--side-rival:#f2a516;--side-you:#59c14a;--nk-mute:#9fc3d6;--nk-mute2:#7fa3b6;--nk-sea:#1d5f8a}
+/* HUD (Raj 7) */
+.nk-en{width:280px;flex:0 0 280px}
+.nk-net-detail{display:none!important}
+.nk-state{animation:none}
+.nk-en--hunted .nk-state{display:none}   /* v35 fixes (Hugh nice 1): HUNTED alone, so the chips stay inside the energy block and clear of the tide label */
+.nk-state.nk-state--pulse{animation:nkBadge 2.4s ease-in-out 1}
+.nk-state--cutoff{background:var(--nk-sea)}
+.nk-tide-top{gap:8px;align-items:baseline}
+.nk-tide-next{order:1;font:700 18px/1 "Segoe UI",Arial,sans-serif;color:#cfe3ee;overflow:visible}
+.nk-tide-clock{order:2;font:900 20px/1 "Arial Black",Impact,sans-serif;color:#fff;font-variant-numeric:tabular-nums}
+.nk-tide-bar{height:8px;border-width:2px}
+.nk-tseg{font-size:0}
+.nk-tide-mark{top:-5px;bottom:-5px}
+@media (max-width:1300px){.nk-tide-phase{font-size:18px}}
+#nk-eco{display:none!important}
+#nk-btkai,#nk-btkai.on{display:none!important}
+.nk-me{gap:8px}
+.nk-ht-q{width:32px;height:32px;flex:0 0 32px;border-radius:50%;background:#16354a;border:2px solid var(--nk-mute);color:#fff;font:900 17px/1 "Arial Black",Impact,sans-serif;cursor:pointer;padding:0}
+.nk-ht-q:hover{border-color:#fff}
+.nk-sw-btn{display:none;font:800 14px/1 "Segoe UI",Arial,sans-serif;color:#fff;background:#16354a;border:2px solid var(--nk-mute);border-radius:8px;padding:8px 10px;cursor:pointer;white-space:nowrap;opacity:0;transition:opacity .2s}
+.nk-sw-btn.on{display:inline-block}
+.nk-sw-btn.in{opacity:1}
+/* bottom bar and the Near you strip (Raj 6) */
+#nk-panel{height:56px;flex:0 0 56px;gap:12px;padding:0 14px}
+#nk-diet{flex:0 1 auto;min-width:0;max-width:30%;overflow:hidden;text-overflow:ellipsis;font:700 17px/1.2 "Segoe UI",Arial,sans-serif;color:#9df08f;white-space:nowrap}   /* Kit's call: a long diet list ("kina, kūtai, oyster borer...") would push the strip off screen */
+#nk-panel-text{flex:1 1 0;min-width:0;font:600 17px/1.25 "Segoe UI",Arial,sans-serif;border-left:2px solid #24414f;padding-left:12px}
+.nk-panel-near{display:flex;align-items:center;gap:8px;flex:0 0 auto;max-width:none;white-space:nowrap}
+.nk-near-lab{font:900 12px/1.15 "Arial Black",Impact,sans-serif;letter-spacing:.1em;color:var(--nk-mute2);width:42px}
+.nk-near-row{display:flex;align-items:center;gap:7px;width:158px;height:46px;box-sizing:border-box;padding:0 8px 0 6px;border-radius:8px;background:#13293a;border-left:5px solid var(--nk-mute2);overflow:hidden}
+@media (min-width:1366px){.nk-near-row{width:170px}}
+.nk-near-row--new{animation:nkNearIn .15s ease-out both}
+@keyframes nkNearIn{from{opacity:0}to{opacity:1}}
+.nk-near-row--hunts{border-left-color:var(--rel-hunts)}.nk-near-row--eat{border-left-color:var(--rel-eat)}.nk-near-row--kind{border-left-color:var(--rel-kind)}
+.nk-near-row i{width:34px;height:34px;flex:0 0 34px;border-radius:50%;background-size:cover;background-position:center;border:2px solid var(--nk-mute2)}
+.nk-near-row--hunts i{border-color:var(--rel-hunts)}.nk-near-row--eat i{border-color:var(--rel-eat)}.nk-near-row--kind i{border-color:var(--rel-kind)}
+.nk-near-row>span{display:flex;flex-direction:column;min-width:0}
+.nk-near-row b{font:900 13px/1.3 "Arial Black",Impact,sans-serif;color:#fff;white-space:nowrap}
+.nk-near-row small{font:600 13px/1.25 "Segoe UI",Arial,sans-serif;color:var(--nk-mute);white-space:nowrap}
+.nk-near-row small em{font-style:normal;font-weight:800;color:#fff}
+.nk-near-none{font:600 15px/1.2 "Segoe UI",Arial,sans-serif;color:var(--nk-mute)}
+/* the map: rings, tags and faded animals (Raj 5); scale composes (house rule 3) */
+.nk-tok{scale:calc(var(--nk-rel-scale,1) * var(--nk-state-scale,1))}
+.nk-tok--hiding{--nk-state-scale:.82;scale:calc(var(--nk-rel-scale,1) * var(--nk-state-scale,1))}
+.nk-tok--closed{--nk-state-scale:.72;scale:calc(var(--nk-rel-scale,1) * var(--nk-state-scale,1))}
+.nk-tok--faded{--nk-rel-scale:.72;opacity:.5!important;filter:saturate(.4) brightness(.85);border:2px solid rgba(0,0,0,.6)!important;box-shadow:none!important;animation:none!important}
+.nk-tok--faded .nk-tag{display:none!important}
+.nk-tok--rel-hunts:not(.nk-tok--hunting){border:3px solid var(--rel-hunts);box-shadow:0 0 0 2px #000}
+.nk-tok--rel-eat{border:3px solid var(--rel-eat);box-shadow:0 0 0 2px #000}
+.nk-tok--rel-kind{border:3px solid var(--rel-kind);box-shadow:0 0 0 2px #000}
+.nk-tok .nk-tag.nk-tag--hunts,.nk-tok .nk-tag.nk-tag--eat,.nk-tok .nk-tag.nk-tag--kind{font:800 13px/1.25 "Segoe UI",Arial,sans-serif;letter-spacing:.06em;color:#fff;background:rgba(8,18,24,.86);padding:3px 6px 2px;border-radius:4px;border-bottom:3px solid var(--rel-hunts)}
+.nk-tok .nk-tag.nk-tag--eat{border-bottom-color:var(--rel-eat)}.nk-tok .nk-tag.nk-tag--kind{border-bottom-color:var(--rel-kind)}
+/* the centre toast (Raj 9) */
+.nk-tst{position:absolute;left:50%;top:30%;transform:translate(-50%,-50%);z-index:13;max-width:520px;width:max-content;box-sizing:border-box;padding:10px 18px;background:rgba(8,18,24,.92);border:3px solid #000;border-radius:12px;color:#fff;font:700 19px/1.3 "Segoe UI",Arial,sans-serif;text-align:center;pointer-events:none;opacity:0;transition:opacity .25s}
+.nk-tst.on{opacity:1;transition:opacity .12s}
+.nk-tst.low{top:70%}
+/* the pool pill above her token (Raj 9) */
+.nk-pool-pill{position:absolute;left:0;top:0;z-index:8;transform:translate(-50%,-100%);transform-origin:50% 100%;display:none;flex-direction:column;align-items:center;padding:6px 12px 7px;background:var(--nk-sea);border:3px solid #000;border-radius:10px;box-shadow:0 4px 0 #000;color:#fff;white-space:nowrap;pointer-events:none}
+.nk-pool-pill.on{display:flex}
+.nk-pool-pill.below{transform:translate(-50%,0);transform-origin:50% 0}
+.nk-pool-pill b{font:900 15px/1.2 "Arial Black",Impact,sans-serif;letter-spacing:.03em}
+.nk-pool-pill span{font:700 15px/1.25 "Segoe UI",Arial,sans-serif}
+/* one-time labels in the lane (Raj 2) */
+.nk-ol{display:none;align-items:center;gap:8px;max-width:540px;box-sizing:border-box;padding:6px 12px 6px 6px;background:var(--nk-paper,#f6f1e3);color:var(--nk-ink,#10181d);border:3px solid #000;border-radius:9px;box-shadow:0 3px 0 #000;font:700 16px/1.25 "Segoe UI",Arial,sans-serif}
+.nk-ol.on{display:flex;animation:nkLaneIn .3s cubic-bezier(.2,1.3,.4,1) both}
+.nk-ol.out{opacity:0;transition:opacity .25s}
+.nk-ol-chip{flex:0 0 auto;font:900 13px/1 "Arial Black",Impact,sans-serif;letter-spacing:.08em;padding:4px 6px;border:2px solid #000;border-radius:5px;color:#fff}
+.nk-ol-chip--hunts{background:var(--rel-hunts)}.nk-ol-chip--chest{background:#2b8fb8}.nk-ol-chip--full{background:var(--rel-eat);color:#06200a}
+.nk-ol-halo{box-shadow:0 0 0 3px #fff,0 0 16px 6px rgba(255,255,255,.55)!important}
+/* New animal: the confirm card in the lane (Raj 8) */
+.nk-sw-card{display:none;width:400px;max-width:100%;box-sizing:border-box;padding:12px 14px 0;background:var(--nk-paper,#f6f1e3);color:var(--nk-ink,#10181d);border:3px solid #000;border-radius:10px;box-shadow:0 3px 0 #000;pointer-events:auto;overflow:hidden}
+.nk-sw-card.on{display:block;animation:nkLaneIn .3s cubic-bezier(.2,1.3,.4,1) both}
+.nk-sw-card h4{margin:0 0 3px;font:900 18px/1.2 "Arial Black",Impact,sans-serif}
+.nk-sw-card p{margin:0 0 10px;font:600 15px/1.3 "Segoe UI",Arial,sans-serif;color:#3d4b52}
+.nk-sw-card .btns{display:flex;gap:10px;margin-bottom:12px}
+.nk-sw-card button{flex:1;font:800 16px/1 "Segoe UI",Arial,sans-serif;padding:10px 8px;border:3px solid #000;border-radius:9px;background:#fff;color:#10181d;cursor:pointer}
+.nk-sw-card button.sw{background:#ffe1dc}
+.nk-sw-drain{height:5px;margin:0 -14px;background:#d8d0bb}
+.nk-sw-drain i{display:block;height:100%;background:#3d4b52;width:100%;transform-origin:left}
+.nk-sw-card.on .nk-sw-drain i{animation:nkDrain 6s linear both}
+@keyframes nkDrain{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+/* How to play (Raj 1) */
+.nk-ht{position:relative;width:600px;max-width:calc(100vw - 32px);box-sizing:border-box;background:var(--nk-paper,#f6f1e3);color:var(--nk-ink,#10181d);border:4px solid #000;border-radius:18px;box-shadow:0 10px 0 #000;overflow:hidden;font-family:"Segoe UI",system-ui,sans-serif}
+.nk-ht-kick{background:var(--nk-sea);color:#fff;font:700 15px/1.2 "Segoe UI",Arial,sans-serif;padding:8px 24px}
+.nk-ht-in{padding:18px 24px 16px}
+.nk-ht-top{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+.nk-ht-top h3{margin:0;font:900 22px/1 "Arial Black",Impact,sans-serif;color:#0b2b3a}
+.nk-ht-top small{font:800 13px/1 "Segoe UI",Arial,sans-serif;letter-spacing:.1em;color:#5a6870}
+.nk-ht-skip{margin-left:auto;font:700 15px/1 "Segoe UI",Arial,sans-serif;color:#0b2b3a;text-decoration:underline;background:none;border:0;cursor:pointer;padding:4px}
+.nk-ht-x{margin-left:auto;width:28px;height:28px;border-radius:50%;border:2px solid #000;background:#fff;font:900 16px/1 "Arial Black",Impact,sans-serif;cursor:pointer;padding:0}
+.nk-ht-pic{position:relative;height:200px;border:3px solid #000;border-radius:12px;overflow:hidden;background:linear-gradient(160deg,#1f5470,#0f2230)}
+.nk-ht h2{margin:14px 0 6px;font:900 26px/1.15 "Arial Black",Impact,sans-serif;color:#0b2b3a}
+.nk-ht p{margin:0;font:600 18px/1.45 "Segoe UI",Arial,sans-serif;color:#1e2b31;min-height:78px}
+.nk-ht p b{font-weight:800}
+.nk-ht-nav{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+.nk-ht-back{font:800 17px/1 "Segoe UI",Arial,sans-serif;padding:10px 16px;border:3px solid #000;border-radius:10px;background:#fff;cursor:pointer}
+.nk-ht-next{font:900 20px/1 "Arial Black",Impact,sans-serif;padding:11px 20px;border:3px solid #000;border-radius:10px;background:var(--nk-yellow,#ffd23f);box-shadow:0 4px 0 #000;cursor:pointer}
+.nk-ht-dots{display:flex;gap:8px}
+.nk-ht-dots i{width:11px;height:11px;border-radius:50%;border:2px solid #0b2b3a;box-sizing:border-box}
+.nk-ht-dots i.on{background:#0b2b3a}
+.nk-ht-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#ede6d3;border-top:2px solid #d8d0bb;padding:8px 14px 8px 24px;font:700 16px/1.3 "Segoe UI",Arial,sans-serif}
+.nk-ht-foot .nk-snd{flex:0 0 auto;font:800 14px/1 "Segoe UI",system-ui,sans-serif;padding:8px 12px;border-radius:999px;border:2px solid #000;cursor:pointer}
+.nk-ht-again{display:block;margin:14px auto 0;font:800 17px/1 "Segoe UI",Arial,sans-serif;padding:10px 18px;border:2px solid #000;border-radius:10px;background:#fff;cursor:pointer}
+#nk-htov{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;background:rgba(4,14,20,.45)}
+#nk-htov.on{display:flex}
+.nk-ht-pic1 i{position:absolute;top:24px;width:118px;height:150px;border:3px solid #000;border-radius:10px;background-size:cover;background-position:center;box-shadow:0 5px 0 #000;rotate:var(--r)}
+.nk-ht-pic1 i.you{outline:4px solid var(--nk-yellow,#ffd23f);outline-offset:0;z-index:2}
+.nk-ht-pic2{display:flex;align-items:center;justify-content:center;gap:22px;background:linear-gradient(#13293a,#0c1c27)}
+.nk-ht-en{width:230px;color:#fff}
+.nk-ht-en .lab{font:800 13px/1 "Segoe UI",Arial,sans-serif;letter-spacing:.08em;color:#9fc3d6}
+.nk-ht-en b{font:900 24px/1 "Arial Black",Impact,sans-serif;margin-left:8px}
+.nk-ht-en .bar{height:14px;margin:6px 0;background:#061016;border:2px solid #000;border-radius:8px;overflow:hidden}
+.nk-ht-en .bar i{display:block;height:100%;background:var(--nk-green,#59c14a)}
+.nk-ht-en small{font:800 15px/1 "Segoe UI",Arial,sans-serif;color:#ff9b8f}
+.nk-ht-kai{position:relative;padding:8px 14px;border:3px solid #000;border-radius:10px;background:#0b2b3a;color:#fff;text-align:center}
+.nk-ht-kai span{display:block;font:900 12px/1 "Arial Black",Impact,sans-serif;letter-spacing:.1em;color:var(--nk-yellow,#ffd23f)}
+.nk-ht-kai b{font:900 28px/1.1 "Arial Black",Impact,sans-serif}
+.nk-ht-kai em{position:absolute;right:-46px;top:-6px;font:900 18px/1 "Arial Black",Impact,sans-serif;font-style:normal;color:#9df08f;-webkit-text-stroke:1px #000}
+.nk-ht-pic3{background-size:cover;background-position:center 60%}
+.nk-ht-pic3 img{position:absolute;bottom:4px;height:150px;left:40px}
+.nk-ht-pic3 img.r{left:auto;right:40px;transform:scaleX(-1)}
+.nk-ht-pic3 .pp{position:absolute;top:10px;display:flex;gap:5px}
+.nk-ht-pic3 .pp.l{left:14px}.nk-ht-pic3 .pp.r{right:14px}
+.nk-ht-pic3 .pp i{width:18px;height:18px;border-radius:50%;border:3px solid #000;background:rgba(255,255,255,.3);box-sizing:border-box}
+.nk-ht-pic3 .pp i.a{background:var(--side-rival)}.nk-ht-pic3 .pp i.g{background:var(--side-you)}
+.nk-ht-pic4{display:flex;align-items:center;justify-content:center;gap:16px;background:linear-gradient(160deg,#2a6f8f,#123247)}
+.nk-ht-pic4 svg{width:96px;height:auto}
+.nk-ht-card{width:96px;height:132px;box-sizing:border-box;padding:8px;border:3px solid #000;border-radius:10px;background:#f6f1e3;display:flex;align-items:flex-end;font:900 13px/1.15 "Arial Black",Impact,sans-serif;color:#10181d;box-shadow:0 4px 0 #000}
+.nk-ht-card.help{border-left:10px solid var(--nk-green,#59c14a)}.nk-ht-card.hit{border-left:10px solid var(--nk-red,#e0322b)}
+.nk-ht-full{font:900 14px/1 "Arial Black",Impact,sans-serif;letter-spacing:.06em;padding:6px 9px;border:2px solid #000;border-radius:6px;background:var(--rel-eat);color:#06200a}
+/* the fight screen (Raj 3) */
+.bt-top.nk-fh{display:grid;grid-template-columns:1fr 340px 1fr;align-items:start;height:auto;min-height:16vh;padding:10px 2.5vw 0;box-sizing:border-box;background:linear-gradient(rgba(4,14,20,.72),rgba(4,14,20,.45) 75%,rgba(4,14,20,0))}
+.nk-fh-side{display:flex;flex-direction:column;gap:6px;min-width:0}
+.nk-fh-r{align-items:flex-end;text-align:right}
+.nk-fh-name{white-space:nowrap;color:#fff}
+.nk-fh-name b{font:900 26px/1.25 "Arial Black",Impact,sans-serif}
+.nk-fh-name small{font:600 17px/1.25 "Segoe UI",Arial,sans-serif;color:#cfe3ee}
+.nk-fh-tagrow{display:flex;gap:14px;align-items:baseline;min-height:26px}
+.nk-fh-tag{font:900 13px/1 "Arial Black",Impact,sans-serif;letter-spacing:.08em;padding:5px 9px;border:2px solid #000;border-radius:6px;background:#e8e2cf;color:#10181d}
+.nk-fh-tag--hunted{background:var(--rel-hunts);color:#fff}.nk-fh-tag--prey{background:var(--rel-eat);color:#06200a}.nk-fh-tag--rival{background:var(--nk-amber,#f2a516);color:#1d1200}
+.nk-fh-nums span{font:600 15px/1 "Segoe UI",Arial,sans-serif;color:#cfe3ee}
+.nk-fh-nums b{font:900 18px/1 "Arial Black",Impact,sans-serif;color:#fff;font-variant-numeric:tabular-nums;margin-left:4px}
+.nk-fh-bar{position:relative;width:100%;max-width:420px;height:12px;border:3px solid #000;border-radius:7px;background:#061016;overflow:hidden}
+.nk-fh-bar i{position:absolute;top:0;bottom:0;left:0;background:var(--side-rival);transition:width 1.1s ease-out}
+.nk-fh-r .nk-fh-bar i{left:auto;right:0}
+.nk-fh-side--you .nk-fh-bar i{background:var(--side-you)}
+.nk-fh-pips{display:flex;gap:6px}
+.nk-fh-pips i{width:22px;height:22px;box-sizing:border-box;border-radius:50%;border:3px solid #000;background:rgba(255,255,255,.18);box-shadow:inset 0 0 0 2px rgba(255,255,255,.75);transition:background .25s}
+.nk-fh-side--rival .nk-fh-pips i.on{background:var(--side-rival);box-shadow:none}
+.nk-fh-side--you .nk-fh-pips i.on{background:var(--side-you);box-shadow:none}
+.nk-fh-mid{display:flex;flex-direction:column;align-items:center;gap:6px}
+.nk-fh .bt-head{position:static;transform:none;display:inline-flex}
+.nk-fh-stake{font:700 17px/1.2 "Segoe UI",Arial,sans-serif;color:#fff;text-shadow:0 2px 0 #000;text-align:center}
+.nk-fh-ahead{min-height:22px;font:900 20px/1.1 "Arial Black",Impact,sans-serif;letter-spacing:.06em;color:#fff;text-shadow:0 2px 0 #000}
+.nk-fh-ahead.you{color:var(--side-you)}.nk-fh-ahead.rival{color:var(--side-rival)}
+.nk-fh-call{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);z-index:6;display:none;flex-direction:column;align-items:center;gap:6px;pointer-events:none}
+.nk-fh-call.on{display:flex;animation:nkFhIn .18s ease-out both}
+.nk-fh-call.out{opacity:0;transition:opacity .2s}
+@keyframes nkFhIn{from{scale:.9}to{scale:1}}
+.nk-fh-kick{font:900 18px/1 "Arial Black",Impact,sans-serif;color:#fff;text-shadow:0 2px 0 #000,0 0 6px #000}
+.nk-fh-box{font:900 44px/1 "Arial Black",Impact,sans-serif;padding:12px 26px;border:4px solid #000;border-radius:14px;box-shadow:0 6px 0 #000;white-space:nowrap}
+.nk-fh-box--you{background:var(--side-you);color:#06200a}.nk-fh-box--rival{background:var(--side-rival);color:#1d1200}.nk-fh-box--even{background:#e8e2cf;color:#10181d}
+.nk-fh-stamp{font-size:64px;padding:14px 30px;border-width:5px;rotate:-4deg;box-shadow:0 8px 0 #000}
+.nk-fh-stamp.lose{background:var(--nk-coral);color:#2a0400}
+.bt-band{position:absolute}
+.bt-band--locked .nk-fh-first,.bt-band:not(.bt-band--up) .nk-fh-first{display:none}
+.nk-fh-first{position:absolute;left:50%;bottom:calc(100% + 10px);transform:translateX(-50%);white-space:nowrap;font:700 17px/1.2 "Segoe UI",Arial,sans-serif;color:#fff;background:rgba(4,14,20,.85);border:2px solid #000;border-radius:999px;padding:8px 16px}
+.nk-move.bt-btn b{font-size:22px;line-height:1.15}
+.nk-move.bt-btn .nk-fh-wheel{display:grid;grid-template-columns:auto auto;justify-content:start;align-items:center;column-gap:10px;row-gap:1px;margin:0;font:600 13px/1.2 "Segoe UI",Arial,sans-serif;color:#333;white-space:nowrap;letter-spacing:0}
+.nk-move.bt-btn .nk-fh-wheel>span:not(.nk-type){display:block;margin:0;font:600 13px/1.2 "Segoe UI",Arial,sans-serif;color:#333;letter-spacing:0}
+.nk-move.bt-btn .nk-fh-wheel .nk-type{grid-row:1/3;align-self:center}
+.nk-move.bt-btn .nk-fh-wheel em{display:inline;font:900 12px/1 "Arial Black",Impact,sans-serif;font-style:normal;letter-spacing:.06em;overflow:visible;-webkit-line-clamp:unset}
+.nk-fh-c-POWER{color:#c62828!important}.nk-fh-c-QUICK{color:#b35f00!important}.nk-fh-c-GUARD{color:#1d5f8a!important}.nk-fh-c-EVADE{color:#0f6d65!important}
+.nk-move.bt-btn.nk-move--long .nk-fh-look{-webkit-line-clamp:1}
+@media (max-height:800px){.bt-band{height:24vh}}
+/* the result card (Raj 4) */
+.nk-rc-scrim{position:absolute;inset:0;z-index:7;background:rgba(4,14,20,.55);display:flex;align-items:center;justify-content:center}
+.nk-rc{display:grid;grid-template-columns:84px 1fr 84px;align-items:center;column-gap:16px;width:560px;max-width:calc(100% - 32px);box-sizing:border-box;padding:20px 26px 18px;background:var(--nk-paper,#f6f1e3);color:var(--nk-ink,#10181d);border:4px solid #000;border-radius:18px;box-shadow:0 10px 0 #000;animation:nkRcIn .2s ease-out both}
+@keyframes nkRcIn{from{opacity:0;translate:0 8px}to{opacity:1;translate:0 0}}
+.nk-rc>i{width:84px;height:84px;border-radius:50%;border:4px solid #000;box-sizing:border-box;background-size:cover;background-position:center}
+.nk-rc>i.gone{filter:grayscale(1);opacity:.4}
+.nk-rc-mid{text-align:center}
+.nk-rc-mid h2{margin:0 0 6px;font:900 40px/1.05 "Arial Black",Impact,sans-serif;color:#2f8a22}
+.nk-rc-mid h2.lose{color:var(--nk-coral-dk)}.nk-rc-mid h2.even{color:#0b2b3a}
+.nk-rc-out{font:800 24px/1.25 "Segoe UI",Arial,sans-serif}
+.nk-rc-en{font:700 18px/1.3 "Segoe UI",Arial,sans-serif;color:#3d4b52;margin-top:4px}
+.nk-rc-chip{display:inline-block;vertical-align:middle;margin:0 4px;font:900 20px/1 "Arial Black",Impact,sans-serif;padding:4px 8px;border:3px solid #000;border-radius:8px;background:var(--nk-green,#59c14a);color:#06200a}
+.nk-rc-chip.loss{background:var(--nk-coral);color:#2a0400}
+.nk-rc-while{grid-column:1/-1;margin-top:12px;padding-top:10px;border-top:2px solid #d8d0bb}
+.nk-rc-while h5{margin:0 0 4px;font:800 13px/1 "Segoe UI",Arial,sans-serif;letter-spacing:.1em;color:#5a6870}
+.nk-rc-while div{font:600 16px/1.5 "Segoe UI",Arial,sans-serif;color:#3d4b52}
+.nk-rc-while .nk-rc-chip{font-size:15px;padding:2px 6px}
+/* awards on her podium (Raj 11) */
+.nk-pd35 .pd-card{max-height:calc(100% - 24px);overflow:auto}   /* v35 fixes (Hugh nice 6): a long line scrolls inside the card instead of pushing off a 720 px screen */
+.nk-aw:empty{display:none}
+.nk-aw h4{margin:12px 0 8px;text-align:center;font:900 14px/1 "Arial Black",Impact,sans-serif;letter-spacing:.14em;color:#5a6870}
+.nk-aw-tiles{display:flex;justify-content:center;gap:10px}
+.nk-aw-tile{display:grid;grid-template-columns:44px 1fr;column-gap:8px;align-items:center;width:210px;box-sizing:border-box;padding:8px 10px;background:#fff;border:3px solid #000;border-radius:10px;text-align:left}
+.nk-aw-tile.me{background:#ffe1dc;border-color:var(--nk-coral-dk)}
+.nk-aw-tile i{grid-row:1/4;width:44px;height:44px;border-radius:50%;border:2px solid #000;background-size:cover;background-position:center}
+.nk-aw-tile small{font:900 12px/1.25 "Arial Black",Impact,sans-serif;letter-spacing:.06em;color:#0b6b6b}
+.nk-aw-tile b{font:900 17px/1.25 "Arial Black",Impact,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nk-aw-tile span{font:600 14px/1.25 "Segoe UI",Arial,sans-serif;color:#3d4b52}
+.nk-pd35 .pd-stand .pd-pic{width:64px;height:64px}
+.nk-pd35 .pd-col--1 .pd-pic{width:80px;height:80px}
+/* FINAL STANDINGS on her laptop (Raj 11) */
+#nk-fst{position:fixed;inset:0;z-index:45;display:none;align-items:center;justify-content:center;background:rgba(4,14,20,.7)}
+#nk-fst.on{display:flex}
+.nk-fst{width:560px;max-width:calc(100% - 32px);box-sizing:border-box;padding:20px 26px 0;background:var(--nk-paper,#f6f1e3);color:var(--nk-ink,#10181d);border:4px solid #000;border-radius:18px;box-shadow:0 10px 0 #000;overflow:hidden;text-align:center}
+.nk-fst small{display:block;font:800 14px/1 "Segoe UI",Arial,sans-serif;letter-spacing:.12em;color:#5a6870}
+.nk-fst h2{margin:6px 0 14px;font:900 34px/1 "Arial Black",Impact,sans-serif;color:#0b2b3a}
+.nk-fst-row{display:grid;grid-template-columns:40px 48px 1fr auto;align-items:center;gap:8px;margin:0 0 8px;padding:6px 12px;background:#fff;border:3px solid #000;border-radius:10px;text-align:left;font:900 21px/1.2 "Arial Black",Impact,sans-serif}
+.nk-fst-row.p1{background:var(--nk-yellow,#ffd23f)}
+.nk-fst-row i{width:44px;height:44px;border-radius:50%;border:2px solid #000;background-size:cover;background-position:center}
+.nk-fst-row span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nk-fst-you{margin:12px 0 16px;font:900 24px/1.2 "Arial Black",Impact,sans-serif}
+.nk-fst-drain{height:6px;margin:0 -26px;background:#d8d0bb}
+.nk-fst-drain i{display:block;height:100%;background:#0b2b3a;transform-origin:left;animation:nkDrain 10s linear both}
+/* the projector: Scoreboard (Raj 10) */
+#pj-sb{position:absolute;left:0;top:70px;width:1920px;height:1010px;z-index:5;display:none;background:radial-gradient(ellipse at 40% 30%,#123d52,#071d28 75%)}
+#pj-sb.on{display:block}
+.pj--board #pj-tidebar{display:none}
+.pj-sb-body{position:absolute;left:0;top:0;right:0;bottom:96px;display:grid;grid-template-columns:1260px 1fr;gap:40px;padding:26px 40px;box-sizing:border-box}
+.pj-sb-h{margin:0 0 8px;height:34px;font:900 28px/34px "Arial Black",Impact,sans-serif;letter-spacing:.14em;color:var(--nk-yellow,#ffd23f)}
+.pj-sb-rows{position:relative;height:840px}
+.pj-sb-row{position:absolute;left:0;top:0;width:615px;height:62px;box-sizing:border-box;display:grid;grid-template-columns:60px 54px 1fr auto;align-items:center;column-gap:12px;padding:0 18px 0 6px;border-radius:12px;background:rgba(255,255,255,.045);transition:transform .6s cubic-bezier(.3,1.2,.5,1),opacity .4s}
+.pj-sb-row.pj-sb-row--top{background:linear-gradient(90deg,rgba(255,210,63,.34),rgba(255,210,63,.08))}
+.pj-sb-row .rk{text-align:center;font:900 30px/1 "Arial Black",Impact,sans-serif;color:var(--nk-mute2)}
+.pj-sb-row--top .rk{color:var(--nk-yellow,#ffd23f)}
+.pj-sb-row .pc{position:relative;width:54px;height:54px;box-sizing:border-box;border-radius:50%;border:3px solid #000;box-shadow:0 0 0 2px rgba(255,255,255,.35);background-size:cover;background-position:center}
+.pj-sb-row .pc .cr{position:absolute;left:50%;top:-22px;width:40px;height:28px;transform:translateX(-50%)}
+.pj-sb-row .pc .cr svg{width:40px;height:28px}
+.pj-sb-row .nm{font:800 32px/1.25 "Segoe UI",system-ui,sans-serif;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pj-sb-row .nm.anon{color:var(--nk-mute)}
+.pj-sb-row .kai{font:900 32px/1 "Arial Black",Impact,sans-serif;color:var(--nk-yellow,#ffd23f);font-variant-numeric:tabular-nums}
+#pj-sb-lost{display:flex;flex-direction:column;gap:12px}
+.pj-sb-it{display:grid;grid-template-columns:58px 1fr;column-gap:14px;align-items:center;animation:pjSbIn .3s ease-out both;transition:opacity .4s}
+.pj-sb-it.old{opacity:.55}
+@keyframes pjSbIn{from{opacity:0;translate:0 -20px}to{opacity:1;translate:0 0}}
+.pj-sb-it i{grid-row:1/3;width:58px;height:58px;border-radius:50%;border:3px solid #000;background-size:cover;background-position:center;filter:grayscale(.85);opacity:.8}
+.pj-sb-it b{font:800 30px/1.2 "Segoe UI",system-ui,sans-serif;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pj-sb-it span{font:600 25px/1.2 "Segoe UI",system-ui,sans-serif;color:var(--nk-mute)}
+.pj-sb-strip{position:absolute;left:0;right:0;bottom:0;height:96px;display:flex;align-items:center;justify-content:center;background:#0b2b3a;border-top:3px solid #000}
+.pj-sb-strip span{display:flex;align-items:center;gap:14px;font:900 42px/1 "Arial Black",Impact,sans-serif;color:var(--nk-yellow,#ffd23f);opacity:0;transition:opacity .25s}
+.pj-sb-strip span.on{opacity:1}
+.pj-sb-strip svg{width:52px;height:38px}
+.pj-sb-gold{display:inline-block;width:30px;height:40px;border:3px solid #000;border-radius:6px;background:var(--ct-gold,#ffc93c)}
+.pj-sb-count{position:absolute;left:0;right:0;top:0;bottom:96px;display:none;align-items:center;justify-content:center;font:900 300px/1 "Arial Black",Impact,sans-serif;color:#ffd23f;-webkit-text-stroke:10px #000;paint-order:stroke fill;pointer-events:none;z-index:2}
+.pj-sb-count.on{display:flex}
+.pj-sb-paused{position:absolute;left:0;right:0;top:0;bottom:96px;display:none;align-items:center;justify-content:center;background:rgba(4,14,20,.55);font:900 140px/1 "Arial Black",Impact,sans-serif;color:#fff;-webkit-text-stroke:6px #000;paint-order:stroke fill;z-index:3}
+.pj-sb-paused.on{display:flex}
+.pj-sb-chip{position:absolute;right:24px;bottom:112px;display:none;font:800 22px/1 "Segoe UI",system-ui,sans-serif;padding:10px 16px;border:3px solid #000;border-radius:999px;background:#0b2b3a;color:#fff;z-index:4}
+.pj-sb-chip.on{display:block}
+#pj-mchip{position:absolute;right:24px;bottom:210px;z-index:13;display:none;font:800 22px/1 "Segoe UI",system-ui,sans-serif;padding:10px 16px;border:3px solid #000;border-radius:999px;background:#0b2b3a;color:#fff}
+#pj-mchip.on{display:block}
+/* projector podium with Awards (Raj 11) */
+#pj-pod.pd2--aw{flex-direction:column;justify-content:flex-end}
+#pj-pod.pd2--aw .pd2-head{font-size:64px}
+#pj-pod.pd2--aw .pd2-col img{width:240px;height:200px;object-fit:contain}
+#pj-pod.pd2--aw .pd2-col.p1 .blk{height:170px}#pj-pod.pd2--aw .pd2-col.p2 .blk{height:120px}#pj-pod.pd2--aw .pd2-col.p3 .blk{height:84px}
+#pj-pod.pd2--aw .pd2-col .blk{font-size:70px}
+#pj-pod.pd2--aw .pd2-col .n{font-size:40px}
+#pj-pod.pd2--aw .pd2-rest{font-size:28px;line-height:1.4}
+#pj-aw{width:1920px;box-sizing:border-box;padding:14px 40px 40px;border-top:4px solid #000;background:rgba(4,14,20,.35)}
+#pj-aw:empty{display:none}
+#pj-aw h4{margin:0 0 12px;text-align:center;font:900 26px/1 "Arial Black",Impact,sans-serif;letter-spacing:.16em;color:var(--nk-mute)}
+.pj-aw-tiles{display:flex;justify-content:center;gap:26px}
+.pj-aw-tile{display:grid;grid-template-columns:96px 1fr;column-gap:16px;align-items:center;width:420px;box-sizing:border-box;padding:12px 16px;background:rgba(255,255,255,.06);border:3px solid #000;border-radius:16px}
+.pj-aw-tile i{grid-row:1/4;width:96px;height:96px;border-radius:50%;border:3px solid #000;background-size:cover;background-position:center}
+.pj-aw-tile small{font:900 20px/1.2 "Arial Black",Impact,sans-serif;letter-spacing:.06em;color:#19c3b1}
+.pj-aw-tile b{font:900 34px/1.2 "Arial Black",Impact,sans-serif;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pj-aw-tile span{font:600 22px/1.25 "Segoe UI",system-ui,sans-serif;color:var(--nk-mute)}
+/* FINAL STANDINGS on the projector */
+#pj-fst{position:absolute;inset:0;z-index:14;display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(ellipse at 50% 40%,#154f68,#05121a)}
+#pj-fst.on{display:flex}
+#pj-fst h2{margin:0 0 10px;font:900 64px/1 "Arial Black",Impact,sans-serif;color:var(--nk-yellow,#ffd23f);-webkit-text-stroke:2px #000;paint-order:stroke fill}
+#pj-fst small{font:800 28px/1 "Segoe UI",system-ui,sans-serif;letter-spacing:.12em;color:var(--nk-mute)}
+.pj-fst-row{display:grid;grid-template-columns:70px 80px 1fr auto;align-items:center;gap:18px;width:900px;height:90px;box-sizing:border-box;padding:0 24px;background:rgba(255,255,255,.06);border:3px solid #000;border-radius:14px;font:900 44px/1 "Arial Black",Impact,sans-serif;color:#fff}
+.pj-fst-row.p1{background:linear-gradient(90deg,rgba(255,210,63,.4),rgba(255,210,63,.1))}
+.pj-fst-row i{width:70px;height:70px;border-radius:50%;border:3px solid #000;background-size:cover;background-position:center}
+.pj-fst-row b{color:var(--nk-yellow,#ffd23f)}
+.pj-fst-row span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (prefers-reduced-motion:reduce){.pj-sb-it,.nk-rc,.nk-fh-call.on,.nk-sw-card.on,.nk-ol.on,.nk-near-row--new{animation:none}}
 </style>
 </head>
 <body>
@@ -1288,7 +1574,7 @@ body.pj #nk-lane,.nk-teacher #nk-lane{display:none!important}
     </div>
     <div class="nk-kai" id="nk-kai"><div class="nk-kai-top"><span class="nk-kai-lab">KAI</span><b class="nk-kai-num" id="nk-kai-num">0</b></div><div class="nk-kai-sub"><span class="nk-crown-ic"><svg viewBox="0 0 44 32" aria-hidden="true" width="22" height="16"><path d="M3 28 L6 8 L15 18 L22 3 L29 18 L38 8 L41 28 Z" fill="#ffd23f" stroke="#000" stroke-width="3" stroke-linejoin="round"/></svg></span><span id="nk-kai-rank">1st of 24</span><span>·</span><span class="nk-kai-left" id="nk-kai-left">8:00 left</span></div><span class="nk-kai-pop" id="nk-kai-pop"></span></div>
     <div class="nk-right">
-      <div class="nk-me"><i id="nk-me-pic"></i><span id="nk-me-name">Pūpū</span></div>
+      <div class="nk-me"><i id="nk-me-pic"></i><span id="nk-me-name">Pūpū</span><button class="nk-ht-q" id="nk-ht-q" type="button" aria-label="How to play">?</button><button class="nk-sw-btn" id="nk-sw-btn" type="button">New animal</button></div>
       <button class="nk-btn nk-snd" id="nk-snd" type="button">Sound: on</button>
     </div>
   </header>
@@ -1347,7 +1633,7 @@ body.pj #nk-lane,.nk-teacher #nk-lane{display:none!important}
       <div class="ch-right">
         <button class="nk-snd" type="button">Sound: on</button>
         <div class="ch-timer"><small>Your pick goes in when time runs out</small><div class="t ch-disp" id="ch-timer"><span>0:30</span></div></div>
-        <span class="ch-ver">V34</span>
+        <span class="ch-ver">V35</span>
       </div>
     </div>
     <div class="ch-roster" id="ch-roster" aria-hidden="true"></div>
@@ -2225,7 +2511,10 @@ function tidePhase(t) {
 }
 const waterYAt = level => SHORE.lowWaterY + (SHORE.highWaterY - SHORE.lowWaterY) * level;
 function poolAt(x, y) { for (const p of SHORE.pools) { const dx = (x - p.cx) / p.rx, dy = (y - p.cy) / p.ry; if (dx * dx + dy * dy <= 1) return p; } return null; }
-function isWet(g, x, y) { return !!poolAt(x, y) || y > g.waterY; }
+function isWet(g, x, y) { return !!poolAt(x, y) || y > g.waterY || inGutter(x, y); }   // v35: the surge channel is wet at every tide
+// v35 (Dayo 5a-1, Wren 1): a surge channel from the big pool's lower rim to the low-water line.  Water for swimming, not a pool: no pool rule, no patch.
+const GUTTER = { x0: 1150, x1: 1220, y0: 1215, y1: 1720 };
+function inGutter(x, y) { return x >= GUTTER.x0 && x <= GUTTER.x1 && y >= GUTTER.y0 && y <= GUTTER.y1; }
 function isHot(g, x, y) {
   if (!g.scorching) return false;
   const p = poolAt(x, y);
@@ -2340,7 +2629,7 @@ function dryLength(g, a, b) {          // shore px of dry rock on the straight l
   return dry;
 }
 function secondsUntilDry(g, x, y) {    // on an ebbing tide, open water here goes dry in this many seconds (Infinity otherwise)
-  if (poolAt(x, y) || !isWet(g, x, y) || g.phase !== "EBBING") return Infinity;
+  if (poolAt(x, y) || inGutter(x, y) || !isWet(g, x, y) || g.phase !== "EBBING") return Infinity;
   const T = TUNE.tide, lv = (y - SHORE.lowWaterY) / (SHORE.highWaterY - SHORE.lowWaterY);
   const tDry = T.ebbFrom + (1 - lv) * (T.lowFrom - T.ebbFrom);
   return Math.max(0, tDry - g.t);
@@ -2433,6 +2722,7 @@ function myBurnRate(g) {
 function cmdGo(g, kind, ref, x, y) {
   const me = g.me; if (g.over || g.modal || me.tangle || me.tumbleUntil > g.t) return false;   // v32: tangled in the net, or tumbling in a wave
   if (y < SHORE.landY) { emit(g, { k: "say", text: "That’s land." }); return false; }
+  me.via = null;   // v35: a new order forgets any channel route
   if (kind === "refuge" && ref.cap && anchorTaken(g, ref)) { emit(g, { k: "say", text: "Anchor: taken." }); return false; }
   if (kind === "patch" && ref && ref.herBlock > g.t) { emit(g, { k: "say", text: "A rival holds that spot for " + Math.ceil(ref.herBlock - g.t) + " s." }); return false; }   // v30
   // the pipe: from inside one mouth, a tap on the other is the covered route (slow going, counts as hiding)
@@ -2446,7 +2736,13 @@ function cmdGo(g, kind, ref, x, y) {
     const dest = kind === "prey" || kind === "pick" ? ref : { x, y }, nm = SP[me.sp].name.toLowerCase();
     if (!isWet(g, dest.x, dest.y)) { emit(g, { k: "say", text: kind === "prey" || kind === "pick" ? "Out of reach: that " + SP[ref.sp].name.toLowerCase() + " is on dry rock." : "A " + nm + " can only swim: that is dry rock." }); return false; }
     // a wet destination across dry rock: allowed if the dry stretch is a short flop, or if she is already stranded
-    if (!isStranded(g, me) && dryLength(g, me, dest) > (me.sp === "koura" ? TUNE.strand.kouraDryPx : TUNE.strand.flopMaxPx)) { emit(g, { k: "say", text: (me.sp === "koura" ? "A kōura stays in the water: no path through water to there." : "Too far over dry rock: a " + nm + " can flop about " + TUNE.strand.flopMaxPx + ".") }); return false; }
+    const lim = me.sp === "koura" ? TUNE.strand.kouraDryPx : TUNE.strand.flopMaxPx;
+    me.via = null;
+    if (!isStranded(g, me) && dryLength(g, me, dest) > lim) {
+      const via = gutterVia(g, me, dest, lim);   // v35 (Dayo 5a-1): the always-wet surge channel from the big pool to the sea
+      if (!via) { emit(g, { k: "say", refuse: true, text: (me.sp === "koura" ? "A kōura needs water: there is no wet way to there." : "Too far over dry rock: a " + nm + " can flop about " + TUNE.strand.flopMaxPx + ".") }); return false; }   // v35: Wren's kōura wording
+      me.mode = "moving"; me.target = { kind, ref }; me.dest = via.shift(); me.via = kind === "prey" || kind === "pick" ? via : via.concat([{ x, y }]); me.refuge = null; me.patch = null; me._rt = null; return true;   // a hunt follows its prey once the channel is behind her
+    }
   }
   me.mode = "moving"; me.target = { kind, ref }; me.dest = { x, y }; me.refuge = null; me.patch = null; me._rt = null;
   return true;
@@ -2463,7 +2759,7 @@ function tapRefuge(g, r) { return cmdGo(g, "refuge", r, r.x, r.y); }
 function tapPoint(g, x, y) { return cmdGo(g, "point", null, x, y); }
 function tapPrey(g, a) {
   const sp = g.me.sp, nm = SP[a.sp].name.toLowerCase();
-  if (g.me.fullUntil > g.t) { emit(g, { k: "say", text: "Full: you can hunt again in " + Math.ceil(g.me.fullUntil - g.t) + " s." }); return false; }
+  // v35 (Dayo 4a): full no longer blocks a hunt; a catch while full scores half kai (finishHunt)
   if (NEEDS_SMALL[sp] && NEEDS_SMALL[sp][a.sp] && !a.small) { emit(g, { k: "say", text: "Too big: a grown " + nm + " is too much for a " + SP[sp].name.toLowerCase() + ". Small ones are food." }); return false; }
   if (a.wary > g.t) { emit(g, { k: "say", text: "That " + nm + " is on guard in cover. Try another." }); return false; }
   if (!SWIMS(sp) && !canHuntAt(g, sp, a)) { emit(g, { k: "say", text: "Out of reach: " + (FLIES(sp) && sp !== "shag" ? "that " + nm + " is under water." : sp === "shag" ? "that " + nm + " is not in open water." : "that " + nm + " is on dry rock.") }); return false; }
@@ -2595,7 +2891,11 @@ function finishHunt(g) {
   const gain = Math.round(mealOf(me.sp, prey.sp) * TUNE.hunt1.mealScale * (big ? HB.mealX : 1) * (WX_BIRDS[me.sp] ? birdWx(g, me, true).intake : 1));   // v28: a meal pays mealScale of v27's; v29: less for a bird in bad weather or oil; v30: x mealX for the big five
   addFight(g, m.nRounds === 2 ? "hunt2" : "hunt3");
   let pre = me.energy;
-  if (meal) { pre = me.energy; me.energy = Math.min(TUNE.maxEnergy, me.energy + gain); gainKai(g, gain, true); g.stats.meals++; killCpu(g, prey); me.fullUntil = g.t + TUNE.hunt.digestSeconds * (big ? HB.digestX : 1); }   // v28: the paketi digests too; v30: big bodies digest longer
+  let wasFull = false, kaiGot = 0;
+  if (meal) { pre = me.energy; wasFull = me.fullUntil > g.t; g.stats.meals++; killCpu(g, prey);
+    if (wasFull) kaiGot = gainKai(g, gain * TUNE.hunt.fullKaiX, true);   // v35 (Dayo 4a, Wren 3): a catch while full scores half kai and no energy, and does not extend full
+    else { me.energy = Math.min(TUNE.maxEnergy, me.energy + gain); kaiGot = gainKai(g, gain, true); me.fullUntil = g.t + herFullSecs(me.sp); }
+    if (g.aw) g.aw.meal = Math.max(g.aw.meal || 0, kaiGot), g.aw.mealSp = g.aw.meal === kaiGot ? me.sp : g.aw.mealSp; }   // v35: Biggest meal (her laptop's running number)
   else {
     me.energy -= TUNE.costs.huntMiss;
     prey.wary = g.t + H.preyWarySeconds;
@@ -2604,7 +2904,7 @@ function finishHunt(g) {
     else if (prey.still || prey.school || prey.hop) { /* clamped, balled up or frozen where it is */ }
     else { const r = g.refuges.filter(q => !(q.cap && (anchorTaken(g, q) || (herHidden(g.me) && g.me.refuge === q))) && q.kind !== "kelp").sort((p, q) => dist(p, prey) - dist(q, prey))[0]; prey.patch = null; prey.dest = { x: r.x + g.rnd(-12, 12), y: r.y + g.rnd(-10, 10) }; prey.going = true; }
   }
-  emit(g, { k: "hunt", preySp: prey.sp, outcome: meal ? "meal" : "miss", nip, first, gain });
+  emit(g, { k: "hunt", preySp: prey.sp, outcome: meal ? "meal" : "miss", nip, first, gain, kai: Math.round(kaiGot), wasFull });
   g.modal = null; me.mode = "idle"; me.target = null;
   if (me.energy <= 0) { me.energy = 0; endRun(g, "starved"); }
   else if (meal && gain >= TUNE.rival.call.herSourceMinGain) rivalCall(g, me, { kind: "catch", meal: me.energy - pre, floor: pre });   // v30 item 1: rivals come for her catch
@@ -3776,7 +4076,7 @@ function classDeep(cl, m) {
     const nm = m.name + "’s " + SP[m.sp].name.toLowerCase();
     if (L.cur === "net" && cl.t >= m.downUntil && EV_HIT.net[m.sp]) {
       if (cl.rng() < (M.netCaught[EV_HIT.net[m.sp]] || 0)) { deepFeed(cl, nm + " was caught in a net");
-        const loss = take(m, m.kai * TUNE.kai.deathLoss); m.downUntil = cl.t + TUNE.classmates.downSeconds; m.sp = dealCpu(cl.rng, m.sp); m.deaths = (m.deaths || 0) + 1; m.lastLoss = loss; m.netted = (m.netted || 0) + 1; }
+        const loss = take(m, m.kai * TUNE.kai.deathLoss); m.downUntil = cl.t + TUNE.classmates.downSeconds; m.dk = [m.sp, "net", null]; m.sp = dealCpu(cl.rng, m.sp); m.deaths = (m.deaths || 0) + 1; m.lastLoss = loss; m.netted = (m.netted || 0) + 1; }   // v35: m.dk = the animal that died and why (the Just lost list)
       else deepFeed(cl, nm + " swam free of a net");
     } else if (L.cur === "heatwave" && m.sp === "kina") deepFeed(cl, m.name + "’s kina is grazing the dying kelp");
     else if (L.cur === "upwelling" && EV_GAIN.upwelling[m.sp]) deepFeed(cl, nm + " is feasting in the upwelling");
@@ -3794,7 +4094,7 @@ function classDeepSched(cl, m) {   // v34b: a computer classmate meets the sched
     const nm = m.name + "’s " + SP[m.sp].name.toLowerCase();
     if (kind === "net" && cl.t >= m.downUntil && EV_HIT.net[m.sp]) {
       if (cl.rng() < (M.netCaught[EV_HIT.net[m.sp]] || 0)) { deepFeed(cl, nm + " was caught in a net");
-        const loss = take(m, m.kai * TUNE.kai.deathLoss); m.downUntil = cl.t + TUNE.classmates.downSeconds; m.sp = dealCpu(cl.rng, m.sp); m.deaths = (m.deaths || 0) + 1; m.lastLoss = loss; m.netted = (m.netted || 0) + 1; }
+        const loss = take(m, m.kai * TUNE.kai.deathLoss); m.downUntil = cl.t + TUNE.classmates.downSeconds; m.dk = [m.sp, "net", null]; m.sp = dealCpu(cl.rng, m.sp); m.deaths = (m.deaths || 0) + 1; m.lastLoss = loss; m.netted = (m.netted || 0) + 1; }   // v35: m.dk = the animal that died and why (the Just lost list)
       else deepFeed(cl, nm + " swam free of a net");
     } else if (kind === "heatwave" && m.sp === "kina") deepFeed(cl, m.name + "’s kina is grazing the dying kelp");
     else if (kind === "upwelling" && EV_GAIN.upwelling[m.sp]) deepFeed(cl, nm + " is feasting in the upwelling");
@@ -4163,7 +4463,7 @@ function finishRivalry(g) {
 const HUNT_SCRIPT = {
   catch2:  [{ beat: "hold", l: [1, .95], r: [1, .7] }, { beat: "land", l: [.95, .95], r: [.7, 0] }],
   catch3:  [{ beat: "hold", l: [1, 1], r: [1, .85] }, { beat: "hitback", l: [1, .8], r: [.85, .7] }, { beat: "land", l: [.8, .8], r: [.7, 0] }],
-  escape2: [{ beat: "strike", l: [1, 1], r: [1, .6] }, { beat: "free", l: [1, .8], r: [.6, .45] }],
+  escape2: [{ beat: "hitback", l: [1, .8], r: [1, .8] }, { beat: "free", l: [.8, .6], r: [.8, .8] }],   // v35 (Dayo 2b): prey 2-0, so the pips add up to the real outcome
   escape3: [{ beat: "strike", l: [1, 1], r: [1, .75] }, { beat: "hitback", l: [1, .85], r: [.75, .55] }, { beat: "free", l: [.85, .65], r: [.55, .55] }] };
 function huntRounds(g, m, base, predSp, preySp, predMv, preyMv, p, caught, e0) {
   if (g.forceRoll) { p = g.forceRoll.p; base.p = p; g.forceRoll = null; }   // test hook: a set figure and outcome
@@ -4219,15 +4519,21 @@ function step(g, dt) {
     const tgt = me.target.ref;
     if (moveToward(me, me.dest, (dryNow ? TUNE.strand.flopSpeed : P.speed) * TUNE.pipe.speedFactor, dt)) { me.mode = "hiding"; me.refuge = tgt; me.target = null; }   // in the pipe, me.refuge stays the pipe
   }
+  if (me.via && me.mode !== "moving") me.via = null;   // v35: a scramble, a hide or a fight drops the channel route
   if (me.mode === "moving" || me.mode === "scramble") {
-    if (me.target && me.target.kind === "prey") { const pr = me.target.ref; if (!pr.alive || pr.away || pr.wary > g.t || !canHuntAt(g, me.sp, pr)) { me.mode = "idle"; me.target = null; emit(g, { k: "huntOff", text: huntOffText(g, me.sp, pr) }); } else me.dest = { x: pr.x, y: pr.y }; }
-    if (me.target && me.target.kind === "pick") { const a = me.target.ref; if (!meetable(g, a, true)) { me.mode = "idle"; me.target = null; } else me.dest = { x: a.x, y: a.y }; }   // step 5
+    const viaOn = !!me.via && (me.via.length > 0 || me.target && (me.target.kind === "prey" || me.target.kind === "pick"));   // v35: through the surge channel, one wet waypoint at a time
+    if (me.target && me.target.kind === "prey") { const pr = me.target.ref; if (!pr.alive || pr.away || pr.wary > g.t || !canHuntAt(g, me.sp, pr)) { me.mode = "idle"; me.target = null; me.via = null; emit(g, { k: "huntOff", text: huntOffText(g, me.sp, pr) }); } else if (!viaOn) me.dest = { x: pr.x, y: pr.y }; }
+    if (me.target && me.target.kind === "pick") { const a = me.target.ref; if (!meetable(g, a, true)) { me.mode = "idle"; me.target = null; me.via = null; } else if (!viaOn) me.dest = { x: a.x, y: a.y }; }   // step 5
+    if (viaOn && me.dest && dist(me, me.dest) < 6) { if (me.via.length) { me.dest = me.via.shift(); me._rt = null; } else me.via = null; }
     if (me.target && me.target.kind === "patch" && me.target.ref.kind === "wash") { const w = me.target.ref; if (!(w.until > g.t)) { me.mode = "idle"; me.target = null; me.dest = null; emit(g, { k: "say", text: "The wash is gone." }); } else me.dest = { x: w.x, y: w.y }; }
     if (me.dest) {
       // on dry rock a paketi flops at flopSpeed, whatever she is doing
       const sp = dryNow ? TUNE.strand.flopSpeed : P.speed * (me.mode === "scramble" ? 1.3 : 1);
       const arrived = me.mode !== "idle" && (me.target && (me.target.kind === "prey" || me.target.kind === "pick") ? (goTo(me, me.dest, sp, dt, "me", g), dist(me, me.dest) < 36) : goTo(me, me.dest, sp, dt, "me", g) || dist(me, me.dest) < 2);
-      if (arrived) {
+      const chase = me.target && (me.target.kind === "prey" || me.target.kind === "pick");
+      if (arrived && me.via && (me.via.length || chase)) { if (me.via.length) { me.dest = me.via.shift(); me._rt = null; } else me.via = null; }   // v35: a channel waypoint, not the goal
+      else if (arrived) {
+        me.via = null;
         const tk = me.target ? me.target.kind : "point";
         if (tk === "patch") { me.mode = "feeding"; me.patch = me.target.ref; }
         else if (tk === "refuge") { if (me.target.ref.cap && anchorTaken(g, me.target.ref)) { me.mode = "idle"; emit(g, { k: "say", text: "Anchor: taken." }); } else { me.mode = "hiding"; me.refuge = me.target.ref; } }
@@ -4297,7 +4603,7 @@ const CARDS = {   // Wren's names and text where she said CHANGE; Dayo's effects
   oil:    { name: "Oil slick", tier: "rare", type: "hit", aim: "all", text: "Oil from a boat drifts in. Everyone else slows for 20 seconds." },
   safe:   { name: "Safe haven", tier: "rare", type: "help", aim: "self", text: "Nothing can touch you for 45 seconds." },
   topple: { name: "Topple the crown", tier: "rare", type: "hit", aim: "leader", text: "Take 30% from the leader!" },
-  king:   { name: "King tide", tier: "gold", type: "help", aim: "self", text: "TRIPLE kai for 30 seconds!" },
+  king:   { name: "King tide", tier: "gold", type: "help", aim: "self", text: "TRIPLE kai for 20 seconds!" },   // v35: kingSeconds 30 -> 20
   rogue:  { name: "Rogue wave", tier: "gold", type: "hit", aim: "one", text: "Swap kai with anyone!" },
   maki:   { name: "Maki's pod", tier: "gold", type: "hit", aim: "top3", text: "Orca raid! The shallows empty: the top three lose 15%." },
 };
@@ -4583,7 +4889,7 @@ function stepClass(cl, dt, g) {
   if (cl.over) return;
   cl.t = g ? g.t : cl.t + dt;
   const C = TUNE.classmates, R = TUNE.runSeconds;
-  if (!cl.final && cl.t >= R - TUNE.finalSeconds) { cl.final = true; feed(cl, "FINAL MINUTE! Chests every 15 seconds, more gold", { me: true, big: true, kind: "final" }); cl.events.push({ k: "final" }); }
+  if (!cl.final && cl.t >= R - TUNE.finalSeconds) { cl.final = true; feed(cl, "FINAL MINUTE! Chests every " + TUNE.chest.finalEvery + " seconds, more gold", { me: true, big: true, kind: "final" }); cl.events.push({ k: "final" }); }
   for (const m of cl.members) {
     if (m.me || m.remote) continue;     // v34: a girl on another laptop plays herself (her kai comes from her reports)
     m.tickT -= dt; m.dx = classDeep(cl, m);   // v32: its own deep lane
@@ -4591,7 +4897,7 @@ function stepClass(cl, dt, g) {
       m.tickT += C.tickSeconds;
       if (cl.t < m.downUntil) continue;
       m.kai += C.kaiPerMinute / 60 * C.tickSeconds * m.skill * cl.rnd(...C.noise) * kaiMult(cl, m) * (m.dx || 1);
-      if (cl.rng() < C.hazard) { const loss = take(m, m.kai * TUNE.kai.deathLoss); m.downUntil = cl.t + C.downSeconds; m.sp = dealCpu(cl.rng, m.sp); m.deaths = (m.deaths || 0) + 1; m.lastLoss = loss; }
+      if (cl.rng() < C.hazard) { const loss = take(m, m.kai * TUNE.kai.deathLoss); m.downUntil = cl.t + C.downSeconds; m.dk = cpuDeathCause(cl.rng, m.sp); m.sp = dealCpu(cl.rng, m.sp); m.deaths = (m.deaths || 0) + 1; m.lastLoss = loss; }
     }
     if ((m.chestT -= dt) <= 0) { m.chestT = chestGap(cl, m); cpuChest(cl, m, g); }
   }
@@ -4717,7 +5023,7 @@ function carefulNew(g, b, me, P) {
       if (sc && !(me.mode === "moving" && me.target && me.target.ref === sc)) { tapPatch(g, sc); b.retarget = g.t + 4; g.events.length = 0; return; }
       if (sc) return;
     }
-    if (me.fullUntil > g.t) return;
+    if (me.fullUntil > g.t && !BOTFULL.hunt) return;   // v35 (Dayo 4a "the bot must still use the full rule"): Kit's reading: the careful bot waits out full (now 12 s / 15 s), as v31 calibrated; BOTFULL.hunt = the hunt-through-full variant (build notes)
     const prey = g.animals.filter(ok).sort((p, q) => dist(p, me) - dist(q, me))[0];
     if (prey && dist(prey, me) < 1500) { tapPrey(g, prey); b.retarget = g.t + 3; g.events.length = 0; return; }
     if ((me.mode === "idle" || me.mode === "feeding" || me.mode === "hiding") && (b.roamAt || 0) < g.t) {   // nothing in reach: look somewhere else
@@ -5592,11 +5898,21 @@ function drawShore() {
     <mask id="nkHeatMask"><rect x="0" y="0" width="1600" height="${H}" fill="#fff"/><path d="${blobPath(big.cx, big.cy, big.rx, big.ry, 0.08, 11)}" fill="#000"/>${SHORE.shade.map(q => `<ellipse cx="${q.x}" cy="${q.y}" rx="${q.rx}" ry="${q.ry}" fill="#000"/>`).join("")}</mask>`;
   // zone labels (names only): a small dark plaque, so they read on rock and on water alike
   UI.zoneBoxes = [];   // v33c: the event labels keep clear of these
-  const zl = (x, y, t) => { const g = el("g", { transform: `translate(${x} ${y})` }, s);
+  const zl = (x, y, t) => { const g = el("g", { transform: `translate(${x} ${y})`, opacity: TEACHER ? 1 : .7 }, s);   // v35 (Raj 5): zone names keep their pill, at .7 on her laptop
     const bg = el("rect", { x: -14, y: -31, height: 42, rx: 9, fill: "rgba(6,20,28,.58)", stroke: "rgba(235,248,255,.32)", "stroke-width": 2 }, g);
     const e = el("text", { x: 0, y: 0, fill: "#f4eedc", "font-family": "Arial Black, Impact, sans-serif", "font-size": 24, "letter-spacing": 4 }, g); e.textContent = t;
     let w = t.length * 19; try { w = e.getComputedTextLength() || w; } catch (err) {} bg.setAttribute("width", (w + 28).toFixed(0)); UI.zoneBoxes.push({ x0: x - 14, y0: y - 31, x1: x + w + 14, y1: y + 17 });
     el("rect", { x: -14, y: 13, width: 46, height: 4, rx: 2, fill: "#ffd23f", opacity: .85 }, g); };
+  { // v35 (Dayo 5a-1, Raj 9): the surge channel from the big pool to the low-water line, worn into the rock; only above the sea's edge (the sea covers the rest)
+    UI.gut = null;   // v35 fixes: drawWater re-finds the clip after a rebuild
+    defs.insertAdjacentHTML("beforeend", `<linearGradient id="nkGutG" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#1d5f8a" stop-opacity=".55"/><stop offset=".5" stop-color="#164a6c" stop-opacity=".7"/><stop offset="1" stop-color="#1d5f8a" stop-opacity=".55"/></linearGradient><clipPath id="nkGutClip"><rect id="nk-gut-clip" x="1100" y="0" width="200" height="0"/></clipPath>`);
+    const cen = y => 1185 + 2 * Math.sin(y / 61), half = y => 24 + 3 * (y - 1215) / 505, ys = []; for (let y = 1218; y <= 1716; y += 14) ys.push(y);   // painted water 6 px inside the wet rectangle (x 1150-1220)
+    const edge = sgn => ys.map(y => `${(cen(y) + sgn * half(y)).toFixed(1)},${y}`).join(" L"), d = `M${edge(-1)} L${ys.slice().reverse().map(y => `${(cen(y) + half(y)).toFixed(1)},${y}`).join(" L")} Z`;
+    const gg = el("g", { "clip-path": "url(#nkGutClip)" }, s);
+    el("path", { d, fill: "url(#nkGutG)", stroke: "rgba(43,47,46,.5)", "stroke-width": 3 }, gg);
+    UI.gutRip = [0, 1].map(i => el("path", { d: "M" + ys.map(y => `${(cen(y) + (i ? 7 : -7)).toFixed(1)},${y}`).join(" L"), fill: "none", stroke: "rgba(255,255,255,.22)", "stroke-width": 2, "stroke-dasharray": "14 34" }, gg));
+    for (let k = 0; k < 7; k++) { const y = 1600 + k * 16, sd = k % 2 ? 1 : -1; el("circle", { cx: (cen(y) + sd * (half(y) - 4)).toFixed(1), cy: y, r: 2.2, fill: "#fff", opacity: .5 }, gg); }
+  }
   zl(1040, 214, "SPLASH ZONE"); zl(110, SHORE.platY + 56, "MID-SHORE PLATFORM"); zl(844, SHORE.platY + 56, "ROCK POOLS"); zl(40, SHORE.reefY + 62, "LOW-SHORE REEF"); zl(40, SHORE.kelpY + 66, "KELP SHALLOWS");
   // patches (dynamic size): sea lettuce turf with a soft contact shadow
   UI.patchEls.clear();
@@ -5614,7 +5930,8 @@ function drawShore() {
   G.refuges.forEach(rf => {
     const ly = rf.kind === "crack" || rf.kind === "crevice" || rf.kind === "shallow" ? 38 : rf.kind === "kelp" ? rf.ry + 24 : rf.kind === "cave" ? -122 : rf.kind === "pipe" ? (rf.id === "pipeT" ? -24 : 34) : rf.kind === "anchor" ? 58 : rf.kind === "hold" ? 44 : 48;
     const lx = rf.kind === "pipe" ? 44 : rf.kind === "cave" ? -40 : 0;
-    const tl = el("text", { x: rf.x + lx, y: rf.y + ly, "text-anchor": "middle", fill: "#fff", "font-family": "Segoe UI, Arial, sans-serif", "font-weight": 800, "font-size": 17, stroke: "#000", "stroke-width": 4, "paint-order": "stroke" }, s); tl.textContent = rf.label;
+    const quiet = !TEACHER;   // v35 (Raj 5, adjudication 2): landmark words stay on her laptop, quieter (12 px, .55)
+    const tl = el("text", { x: rf.x + lx, y: rf.y + ly, "text-anchor": "middle", fill: "#fff", "font-family": "Segoe UI, Arial, sans-serif", "font-weight": 800, "font-size": quiet ? 12 : 17, stroke: "#000", "stroke-width": quiet ? 3 : 4, "paint-order": "stroke", opacity: quiet ? .55 : 1 }, s); tl.textContent = rf.label;
   });
   // scorcher heat (dynamic)
   UI.heat = el("rect", { x: 0, y: SHORE.landY, width: 1600, height: 0, fill: "#ff6a00", opacity: 0, mask: "url(#nkHeatMask)" }, s);
@@ -5623,11 +5940,19 @@ function drawShore() {
 function drawWater(g, now) {
   const y0 = g.waterY; drawSea(g, now);   // v20: water, foam, kelp and ambient life on the sea canvas
   const arrow = g.phase === "EBBING" ? "▼ TIDE GOING OUT" : g.phase === "FLOODING" ? "▲ TIDE COMING IN" : "";
-  UI.tideLab.textContent = arrow; UI.tideLab.setAttribute("y", clamp(y0 + 34, SHORE.top + 80, SHORE.H - 8));
-  UI.heat.setAttribute("height", Math.max(0, y0 - SHORE.landY).toFixed(1));
-  UI.heat.setAttribute("opacity", g.scorching ? (0.2 + 0.08 * Math.sin(now / 200)).toFixed(3) : 0);
-  for (const p of g.patches) { const e = UI.patchEls.get(p.id); const k = 0.25 + 0.75 * Math.sqrt(p.stock / p.max); e.inner.setAttribute("transform", `scale(${k.toFixed(3)})`); e.grp.setAttribute("opacity", p.stock < 0.5 ? 0.25 : 1);
-    e.inner.setAttribute("filter", ""); e.grp.style.filter = (!isWet(g, p.x, p.y) ? "sepia(.55) saturate(.8)" : ""); }
+  // v35 fixes (Jisoo 1): every SVG write below happens only when its value changes (most frames nothing does)
+  const setA = (e, k, v) => { const c = e._a || (e._a = {}); if (c[k] !== v) { c[k] = v; e.setAttribute(k, v); } };
+  if (UI.tideLab.textContent !== arrow) UI.tideLab.textContent = arrow; setA(UI.tideLab, "y", clamp(y0 + 34, SHORE.top + 80, SHORE.H - 8).toFixed(0));
+  setA(UI.heat, "height", Math.max(0, y0 - SHORE.landY).toFixed(1));
+  { // v35: the channel shows above the sea's edge; two faint ripples drift seaward (6 s a loop).
+    // v35 fixes (Jisoo 1): write the clip only when the sea's edge moves a pixel, and the ripples only when the uncovered channel is on screen and their whole-pixel offset changes
+    const G2 = UI.gut || (UI.gut = { c: document.getElementById("nk-gut-clip"), h: "", o: "" }), h = Math.max(0, y0).toFixed(0);
+    if (G2.c && G2.h !== h) { G2.h = h; G2.c.setAttribute("height", h); }
+    const bot = Math.min(1716, y0), vis = bot > 1218 && (TEACHER || PROJV || (bot > CAM.y - 40 && 1218 < CAM.y + CAM.viewH + 40));
+    if (UI.gutRip && !NOMOTION && vis) { const o = (-(now / 1000) * (48 / 6) % 48).toFixed(0); if (o !== G2.o) { G2.o = o; UI.gutRip.forEach(p => p.setAttribute("stroke-dashoffset", o)); } } }
+  setA(UI.heat, "opacity", g.scorching ? (0.2 + 0.08 * Math.sin(now / 200)).toFixed(2) : "0");
+  for (const p of g.patches) { const e = UI.patchEls.get(p.id); const k = 0.25 + 0.75 * Math.sqrt(p.stock / p.max); setA(e.inner, "transform", `scale(${k.toFixed(3)})`); setA(e.grp, "opacity", p.stock < 0.5 ? "0.25" : "1");
+    const f = !isWet(g, p.x, p.y) ? "sepia(.55) saturate(.8)" : ""; if (e._f !== f) { e._f = f; e.grp.style.filter = f; } }
 }
 function buildTideBar() {
   const T = TUNE.tide, R = TUNE.runSeconds, b = $("nk-tidebar"); b.innerHTML = "";
@@ -5704,7 +6029,8 @@ function drawTokens(g) {
     // which would otherwise scale the whole shore position and throw the token tens of pixels sideways
     t.e.style.left = (a.x - t.s / 2).toFixed(1) + "px"; t.e.style.top = (a.y - t.s / 2).toFixed(1) + "px";
     // step 4: anything in the water passes UNDER the wharf deck (drawn beneath the planks); birds, and crabs on the deck, stay on top
-    const under = !FLIES(a.sp) && !(a.wild && CPUH[a.sp] && CPUH[a.sp].fly) && (SWIMS(a.sp) || isWet(g, a.x, a.y)); const z = under ? "2" : "6"; if (t.e.style.zIndex !== z) t.e.style.zIndex = z;
+    if (a !== g.me && !TEACHER) relTok(g, a, t);   // v35 (Dayo 2e, Raj 5): a ring and a tag for what can fight her; everything else smaller and faded
+    const under = !FLIES(a.sp) && !(a.wild && CPUH[a.sp] && CPUH[a.sp].fly) && (SWIMS(a.sp) || isWet(g, a.x, a.y)); const z = under ? (t.faded ? "1" : "2") : (t.faded ? "5" : "6"); if (t.e.style.zIndex !== z) t.e.style.zIndex = z;
     if (a === g.me) drawHerFx(g, t);
     if (a.sp === "kotoretore") t.e.classList.toggle("nk-tok--closed", !isWet(g, a.x, a.y));   // step 6: out of the water she closes into a blob
     if (a === g.me && $("nk-mefx")) { const fx = $("nk-mefx"); fx.style.display = g.waiting ? "none" : "block"; fx.style.zIndex = t.e.style.zIndex === "2" ? "3" : "7"; }
@@ -5845,17 +6171,19 @@ function drawHud(g, now) {
   $("nk-en").classList.toggle("nk-en--hungry", me.energy <= TUNE.hungryAt);
   { const stt = herState(g), burn = g.waiting ? 0 : Math.round(me.burnRate);
     const eatNow = (stt === "feeding" || me.mode === "hiding") ? Math.round(me.eatRate) : 0; const net = eatNow - burn;
-    const sb = $("nk-state"); sb.textContent = g.waiting ? "CHOOSING" : STATE_LABEL[stt]; sb.className = "nk-state nk-state--" + stt;
+    const cut = !g.waiting && poolCut(g, me), lab = g.waiting ? "CHOOSING" : cut ? "CUT OFF" : STATE_LABEL[stt], sb = $("nk-state");   // v35 (Raj 9): CUT OFF in a cut-off pool
+    if (sb.textContent !== lab) { sb.textContent = lab; sb.className = "nk-state nk-state--" + (cut ? "cutoff" : stt); void sb.offsetWidth; sb.classList.add("nk-state--pulse"); }   // v35 (Raj house rule 4): one pulse when it changes, then still
     $("nk-net").className = "nk-net nk-net--" + (net > 0 ? "up" : net < 0 ? "down" : "flat");
     $("nk-net-arrow").textContent = net > 0 ? "\u25B2" : net < 0 ? "\u25BC" : "\u25A0";
     $("nk-net-num").textContent = net > 0 ? "+" + net : net < 0 ? "\u2212" + Math.abs(net) : "0";
     $("nk-net-detail").textContent = (eatNow > 0 ? "eating +" + eatNow + " \u00B7 " : "") + "burning " + burn;
     const en = $("nk-en"); en.classList.toggle("nk-en--up", net > 0); en.classList.toggle("nk-en--down", net < 0);
     en.classList.toggle("nk-en--hunted", !!(stalkerOnMe(g) || lingererOnMe(g))); }
-  const ph = g.phase; $("nk-phase").textContent = ph === "HIGH" ? "HIGH TIDE" : ph === "LOW" ? "LOW TIDE" : ph === "EBBING" ? "TIDE GOING OUT" : "TIDE COMING IN";
-  $("nk-clock").textContent = fmt(g.t) + " / " + fmt(TUNE.runSeconds);
-  const T = TUNE.tide; const nxt = [[T.ebbFrom, "Tide goes out at "], [T.lowFrom, "Low tide at "], [T.floodFrom, "Tide comes in at "], [T.highFrom, "High tide at "]].find(([a]) => a > g.t);
-  $("nk-next").textContent = nxt ? nxt[1] + fmt(nxt[0]) : "Hold on to " + fmt(TUNE.runSeconds);
+  { const ph = g.phase, T = TUNE.tide;   // v35 (Dayo 3a, Raj 7): the phase word and one countdown only
+    const nxt = [[T.ebbFrom, "ebbing in"], [T.lowFrom, "low in"], [T.floodFrom, "flooding in"], [T.highFrom, "high in"]].find(([a]) => a > g.t) || [TUNE.runSeconds, "round ends in"];
+    const pw = ph === "HIGH" ? "HIGH TIDE" : ph === "LOW" ? "LOW TIDE" : ph;
+    if ($("nk-phase").textContent !== pw) $("nk-phase").textContent = pw;
+    $("nk-next").textContent = nxt[1]; $("nk-clock").textContent = fmt(nxt[0] - g.t); }
   $("nk-tidemark").style.left = (g.t / TUNE.runSeconds * 100) + "%";
   // banners
   const st = stalkerOnMe(g), li = lingererOnMe(g);
@@ -5885,7 +6213,7 @@ function drawHud(g, now) {
   else if (me.mode === "feeding" && me.patch && me.patch.kind === "wash") txt = "Wash: " + Math.round(me.patch.stock) + " left, " + Math.max(0, Math.ceil(me.patch.until - g.t)) + " s. Drift weed and small animals.";
   else if (me.mode === "feeding" && !me.patch && EATS(me.sp) === "filter") { const r = Math.round(me.eatRate);
     txt = r <= 0 ? "Out of the water: nothing to filter." : (me.sp === "kotoretore" ? "Tentacles open" : me.sp === "triplefin" ? "Picking tiny critters" : "Filtering plankton") + ": +" + r + " a minute, and any glowing food that drifts in" + (inBloom(g, me.x, me.y) ? " (plankton bloom: ×" + TUNE.blooms.filterBoost + ")" : poolAt(me.x, me.y) && LIFE[me.sp].water === "sea" ? " (a pool holds less plankton than the sea)" : "") + "."; }
-  else if (me.fullUntil > g.t && EATS(me.sp) === "hunt" && me.mode !== "moving") txt = "Full after your meal: you can hunt again in " + Math.ceil(me.fullUntil - g.t) + " s.";
+  else if (me.fullUntil > g.t && EATS(me.sp) === "hunt" && me.mode !== "moving") txt = "Full after your meal: a catch scores half kai for " + Math.ceil(me.fullUntil - g.t) + " s.";   // v35 (Dayo 4a)
   else if (me.mode === "feeding" && me.patch) {
     const left = Math.round(me.patch.stock), wet = isWet(g, me.patch.x, me.patch.y);
     if ((me.sp === "pupu" || (GRAZERS[me.sp] && me.sp !== "papaka")) && !wet) txt = "This patch is dry: a " + SP[me.sp].name.toLowerCase() + " can only graze wet rock.";
@@ -5906,13 +6234,13 @@ function drawHud(g, now) {
       else if (c.kind === "dog" && DOG_PREY[me.sp]) txt += " A dog is on the beach: it catches birds, seals and wheke on dry ground."; } }
   $("nk-panel").classList.toggle("nk-panel--alert", alert);
   $("nk-panel-text").textContent = txt;
-  const near = g.animals.filter(h => h.hunter && h.alive && !h.away && hunterActive(g, h)).map(h => ({ h, d: dist(h, me) })).sort((a, b) => a.d - b.d)[0];
-  const roost = g.animals.find(h => h.roosting && dist(h, me) < 520);
-  $("nk-panel-near").textContent = !alert && near && near.d < 520 ? SP[near.h.sp].name + " " + where(near.h) + "." : !alert && roost ? "Tōrea roosting." : "";
+  nearFrame(g);   // v35 (Dayo 2e, Raj 6): the Near you strip replaces the nearest-hunter line
 }
 // step 4: the shore now, facts only (ruling 18): counts with which way they moved, how much reef weed is left, who is visiting
 function drawEco(g) {
-  const e = $("nk-eco"); if (!e) return; if (!G || g.over || $("nk-start").style.display === "flex") { e.style.display = "none"; return; } e.style.display = "block";
+  const e = $("nk-eco"); if (!e) return;
+  if (e.style.display !== "none") e.style.display = "none"; return;   // v35 (Dayo 3a): THE SHORE NOW is off her laptop (population news is the projector's job); kept below for reference
+  // eslint-disable-next-line no-unreachable if (!G || g.over || $("nk-start").style.display === "flex") { e.style.display = "none"; return; } e.style.display = "block";
   if (e._t && performance.now() - e._t < 400) return; e._t = performance.now();
   const n = sp => { const k = g.eco[sp]; if (!k) return ""; const ar = k.trend > 0 ? '<span class="up">▲</span>' : k.trend < 0 ? '<span class="down">▼</span>' : ""; return SP[sp].name + " " + k.n + ar; };
   const vis = Object.keys(g.visits).filter(sp => g.visits[sp].active).map(sp => SP[sp].name + (sp === "orca" ? (g.pod ? " (orca): a pod of " + g.pod.n : " (orca)") : ""));
@@ -6093,14 +6421,14 @@ function wxSound(g) {   // the rain loop sits quietly under rain and storms, hea
 const BT = { open: false, m: null, round: 0, meLeft: false };
 function btSides(m) { const opp = oppOf(m), me = G.me.sp, meLeft = m.type === "hunt"; return { opp, me, meLeft, L: meLeft ? me : opp, R: meLeft ? opp : me }; }
 function btOpen(g, m, head, sub) {
-  const s = btSides(m), S = Math.min(SPEED, 4), bgk = G.fightBg || stageFor(g); BT.open = true; BT.m = m; BT.round = 0; BT.meLeft = s.meLeft;
+  const s = btSides(m), S = Math.min(SPEED, 4), bgk = G.fightBg || stageFor(g); BT.open = true; BT.m = m; BT.round = 0; BT.meLeft = s.meLeft; sndLabels();
   BT.wet = !!UNDERWATER[bgk] || bgk === "wash" || isWet(g, g.me.x, g.me.y); BT.bgk = bgk;
   const op = $("nk-payoff"); op.classList.add("bt-on");
   op.style.background = `linear-gradient(rgba(4,10,14,.18),rgba(4,10,14,.05) 30%,rgba(4,10,14,0) 60%,rgba(4,10,14,.78) 80%,rgba(4,10,14,.92)), url("${stageUrl(bgk)}") center/cover no-repeat`;
   const e0 = m.type === "fight" || m.type === "hunt" || m.type === "rivalry" ? 1 : g.me.energy / TUNE.maxEnergy, bar = (name, a, side, mine) => `<div class="nk-pbar nk-pbar--${side}${mine ? " nk-pbar--me" : ""}"><span>${name}${mine ? ` <em id="bt-en">${Math.max(0, Math.round(g.me.energy))}</em>` : ""}</span><div class="nk-pbar-t"><i id="bt-bar-${side}" style="width:${(clamp(a, 0, 1) * 100).toFixed(1)}%"></i></div></div>`;
   const bubbles = UNDERWATER[bgk] && !NOMOTION ? Array.from({ length: 16 }, (_, i) => { const sz = 6 + (i * 7) % 16; return `<i class="nk-pbub" style="left:${(3 + (i * 37) % 94)}%;width:${sz}px;height:${sz}px;animation-duration:${(2.6 + (i % 5) * .5).toFixed(1)}s;animation-delay:${(-(i * .41) % 3).toFixed(2)}s;--sw:${(i % 2 ? 1 : -1) * (6 + i % 9)}px"></i>`; }).join("") : "";
-  show("nk-payoff", `<div class="bt-top"><div class="bt-head" id="bt-head">VS</div><div class="bt-sub" id="bt-sub"></div>
-      <div class="nk-pbars">${bar(s.meLeft ? "YOU" : SP[s.opp].up, s.meLeft ? e0 : 1, "l", s.meLeft)}${bar(s.meLeft ? SP[s.opp].up : "YOU", s.meLeft ? 1 : e0, "r", !s.meLeft)}</div></div>
+  void bar;   // v35: the header is fhHeader (rival | round | her), the bars look only and without numbers
+  show("nk-payoff", fhHeader(g, m, s, e0) + `
     <div class="nk-pay bt-arena" id="nk-pay">${bubbles}
       <div class="nk-pfw nk-pfw-l" id="nk-pfw-l"><img class="nk-pay-img" src="${ART}cut/fighter-${s.L}.webp" alt=""></div>
       <div class="nk-pfw nk-pfw-r" id="nk-pfw-r"><img class="nk-pay-img" src="${ART}cut/fighter-${s.R}.webp" alt=""></div>
@@ -6112,12 +6440,13 @@ function btOpen(g, m, head, sub) {
   op.style.transition = "none"; op.style.opacity = "0"; void op.offsetWidth; op.style.transition = `opacity ${(0.25 / S).toFixed(2)}s ease`; op.style.opacity = "1";   // the map dims out 0.25 s
   sfx("vs-sting");
 }
-function btBtn(x, i) { return `<button class="nk-move bt-btn bt-btn--${ATTACK(x.t) ? "atk" : "def"}" data-i="${i}"><b>${x.n}</b>${typeTag(x.t)}<em>${x.look}</em></button>`; }
+function btBtn(x, i) {   // v35 (Dayo 1c, Raj 3): the wheel as two short lines beside the type chip
+  const lose = Object.keys(BEATS).find(k => BEATS[k] === x.t), w = BEATS[x.t];
+  return `<button class="nk-move bt-btn bt-btn--${ATTACK(x.t) ? "atk" : "def"}" data-i="${i}"><b>${x.n}</b><span class="nk-fh-wheel">${typeTag(x.t)}<span>Beats <em class="nk-fh-c-${w}">${w}</em></span><span>Loses to <em class="nk-fh-c-${lose}">${lose}</em></span></span><em class="nk-fh-look">${x.look}</em></button>`; }
 function btChoice(g, m, o) {
   const S = Math.min(SPEED, 4), s = btSides(m), vs = $("bt-vs"); if (vs) vs.remove();
   BT.round = o.n;
-  $("bt-head").innerHTML = o.one ? (m.type === "hunt" ? "YOUR STRIKE" : m.type === "rivalry" ? "YOUR MOVE" : "IT POUNCES") : `ROUND ${o.n} OF ${o.R}${pips(m, o.R)}`;   // v29: one pick, then the rounds
-  $("bt-sub").textContent = o.kicker + " · " + o.score;
+  $("bt-head").innerHTML = o.one ? (m.type === "hunt" ? "YOUR STRIKE" : m.type === "rivalry" ? "YOUR MOVE" : "IT POUNCES") : `ROUND ${o.n} OF ${o.R}`;   // v29: one pick, then the rounds; v35: the pips sit under each side (fhHeader)
   // her opponent's shown move above its head (the telegraph, as v26's card); cleared by the round's own tags at the wind-up
   const os = s.meLeft ? "r" : "l";
   $("bt-fx").innerHTML = `<div class="bt-tele bt-tele--${os}"><div class="nk-tele" style="${o.bg || ""}">${icon(o.tele.icon)}${SP[s.opp].up}: ${o.chip}</div>${typeTag(o.tele.t)}<p>${o.look}</p></div>`;
@@ -6129,7 +6458,9 @@ function btChoice(g, m, o) {
   band.classList.remove("bt-band--up", "bt-band--locked"); void band.offsetWidth; band.classList.add("bt-band--up"); $("bt-timer").classList.add("bt-timer--on");
   for (const sd of ["l", "r"]) { const w = $("nk-pfw-" + sd); if (w) w.className = w.className.replace(/ ?(nk-act|bt-act)-\S+/g, ""); }
   sfx("ui-tick");
-  btTimer(TUNE.fight.choiceSeconds, i => fightRound(g, i));
+  const first = fhFirstFight(band);   // v35 (Dayo 1c): her first fight of the session: one line above the buttons and 3 s more
+  fhLongNames(band);
+  btTimer(TUNE.fight.choiceSeconds + (first ? TUNE.howto.firstFightExtraSeconds : 0), i => fightRound(g, i));
 }
 function btTimer(secs, done) {
   const start = performance.now(), band = $("bt-band"); let fired = false;
@@ -6170,7 +6501,7 @@ function btRound(p, done) {   // one round, in place: wind-up, impact (hit-stop,
   const q = $("nk-pay"), fx = $("bt-fx"); if (!q || !fx) return done();
   q.style.setProperty("--hit", hit.toFixed(2) + "s"); q.style.setProperty("--line", line.toFixed(2) + "s");
   const mv = (m, side) => m ? `<div class="nk-pmove nk-pmove--${side}">${m.n}${typeTag(m.t)}</div>` : "";
-  fx.innerHTML = `${mv(p.lm, "l")}${mv(p.rm, "r")}${p.tag ? `<div class="nk-pay-tag nk-pay-tag--${p.tagCls}">${p.tag}</div>` : ""}<div class="nk-rays"></div><div class="nk-flash"></div>
+  fx.innerHTML = `${mv(p.lm, "l")}${mv(p.rm, "r")}<div class="nk-rays"></div><div class="nk-flash"></div>
     <div class="nk-burst${p.call.length > 9 ? " nk-burst--long" : ""}"><svg viewBox="0 0 560 330"><polygon points="${burstPts()}" fill="#ffd23f" stroke="#000" stroke-width="8" stroke-linejoin="round"/></svg><b>${p.call}</b></div>
     <div class="nk-pay-line">${p.words}</div>`;
   fx.className = "nk-pay--slow" + (NOMOTION ? " bt-calm" : "");
@@ -6215,6 +6546,7 @@ function btRound(p, done) {   // one round, in place: wind-up, impact (hit-stop,
       if (a) a.style.width = (clamp(p.e1 / TUNE.maxEnergy, 0, 1) * 100).toFixed(1) + "%"; if (b) b.style.width = (clamp(p.o1, 0, 1) * 100).toFixed(1) + "%"; if (en) en.textContent = Math.round(p.e1); }
   }, hit * 1000);
   BT.roundsShown = (BT.roundsShown || 0) + 1;
+  setTimeout(() => fhRoundLands(p), line * 1000);   // v35 (Dayo 2b, Raj 3): ROUND TO YOU / ROUND TO WHEKE (or the win stamp on the last), the pip fills at the same moment
   setTimeout(() => {   // round over: the callout and line fade; fighters back to their stance
     if (!$("nk-pay")) return done(); fx.classList.add("bt-fx-out");
     for (const sd of ["l", "r"]) { const w = $("nk-pfw-" + sd); if (w) { w.className = w.className.replace(/ ?(nk-act|bt-act)-\S+/g, ""); w.classList.remove("bt-outline", "bt-guardflash"); w.classList.add("bt-act-stance"); } }
@@ -6246,12 +6578,12 @@ function btHuntRound(ev, done) {
   let tag = null, tagCls = "feint";
   if (r.n === 1 && !meLeft && r.feint) tag = `FEINT! ${r.theirs.n}, not ${r.shown.n}.`;
   if (r.n === 1 && meLeft && r.bluff) tag = `BLUFF! It ${DID[r.theirs.n] || r.theirs.n.toLowerCase()}.`;
-  let pp = ""; for (let i = 1; i <= r.of; i++) pp += `<i class="${i < r.n ? "on" : ""}" style="${i <= r.n ? "" : "opacity:.35"}"></i>`;
-  $("bt-head").innerHTML = `ROUND ${r.n} OF ${r.of}<span class="nk-pips">${pp}</span>`;
-  $("bt-sub").textContent = (meLeft ? `You hunt the ${SP[prey].name.toLowerCase()}` : `${SP[pred].name} attacks`) + " · the struggle";
+  $("bt-head").innerHTML = `ROUND ${r.n} OF ${r.of}`;   // v35: the pips are under each side (fhHeader); the beat line is gone (the pay-line narrates it)
+  if (r.n === 1) fhSetRounds(r.of);
   if (r.n === 1) { const t = document.querySelector(".bt-tele"); if (t) t.remove(); }
   if (ink && r.beat === "free") setTimeout(() => btParts("r", "ink", 5), TUNE.hunt1.roundSeconds / S * TUNE.fight.impactAt * 1000);
-  btRound({ left: pred, right: prey, call, words, tag, tagCls, secs: TUNE.hunt1.roundSeconds, lm, rm, meLeft, bars: r.bars, act },
+  btRound({ left: pred, right: prey, call, words, tag, tagCls, secs: TUNE.hunt1.roundSeconds, lm, rm, meLeft, bars: r.bars, act,
+      win: r.beat === "hold" || r.beat === "strike" || r.beat === "land" ? "l" : "r", last: !!r.last },   // v35 (Dayo 2b): hunter's round on hold/strike/land, prey's on hitback/free
     () => { if (r.last) btHuntOutcome(ev, done); else setTimeout(done, TUNE.hunt1.betweenSeconds * 1000 / S); });
 }
 function btHuntOutcome(ev, done) {
@@ -6267,7 +6599,7 @@ function btHuntOutcome(ev, done) {
     <div class="nk-pay-line">${words}</div>`;
   const cls = (side, c, at) => setTimeout(() => { const w = $("nk-pfw-" + side); if (!w) return; w.className = w.className.replace(/ ?(nk-act|bt-act)-\S+/g, ""); void w.offsetWidth; if (c) w.classList.add(c); }, Math.max(0, at) * 1000);
   const herGood = meLeft ? caught : !caught;
-  $("bt-head").innerHTML = `ROUND ${r.of} OF ${r.of}<span class="nk-pips">${Array.from({ length: r.of }, (_, i) => `<i class="${i === r.of - 1 ? (herGood ? "win" : "on") : "on"}"></i>`).join("")}</span>`;
+  $("bt-head").innerHTML = `ROUND ${r.of} OF ${r.of}`; void herGood;   // v35: the side pips carry the tally
   if (caught) {
     if (!NOMOTION) { q.classList.remove("bt-shake"); void q.offsetWidth; q.classList.add("bt-shake"); cls("l", "bt-act-hold-l", 0); }
     const w = $("nk-pfw-r"); if (w) { w.className = w.className.replace(/ ?(nk-act|bt-act)-\S+/g, ""); w.classList.add(NOMOTION ? "bt-outline" : "nk-act-hurt-r"); }
@@ -6301,7 +6633,7 @@ function resultText(ev) {   // the v26 result words (unchanged), plus who won (f
     else { head = "EATEN!"; line = `The ${shortName(ev.hunterSp)}’s ${ev.byMove.n} wins. Lunch is served.`; gone = "r"; won = false; }
   } else if (ev.k === "hunt") {
     left = me; right = ev.preySp;
-    if (ev.outcome === "meal") { head = "A MEAL!"; line = `Caught: +${ev.gain || TUNE.costs.huntMeal}. Full for ${Math.round(TUNE.hunt.digestSeconds * (BIG[G.me.sp] ? TUNE.bigBody.hunger.digestX : 1))} s.`; gone = "r"; won = true; }   // v28
+    if (ev.outcome === "meal") { head = "A MEAL!"; line = ev.wasFull ? `Caught while full: +${KAI(ev.kai || 0)} kai (half).` : `A meal! +${KAI(ev.kai || 0)} kai. Full for ${Math.round(herFullSecs(G.me.sp))} s.`; gone = "r"; won = true; }   // v35 (Dayo 4a)
     else if (ev.nip) { head = "SWOOSH! A NIP ONLY"; line = `One bite: +${TUNE.hunt.nip}, and −${TUNE.costs.huntMiss} for the chase. It is on guard now.`; won = false; }
     else { head = "SWOOSH! MISSED"; line = `No meal this time. −${TUNE.costs.huntMiss}. It is on guard now.`; won = false; }
   } else if (ev.k === "pick") {
@@ -6339,7 +6671,7 @@ function btResult(ev, done) {   // the ending beat on the same screen: loser slu
 }
 function btClose(cb) {   // the backdrop fades out 0.4 s and she is back on the map, once
   if (!BT.open) return cb && cb();
-  const S = Math.min(SPEED, 4), op = $("nk-payoff"); BT.open = false; BT.m = null; BT.closes = (BT.closes || 0) + 1;
+  const S = Math.min(SPEED, 4), op = $("nk-payoff"); BT.open = false; BT.m = null; BT.closes = (BT.closes || 0) + 1; sndLabels();
   op.style.transition = `opacity ${(0.4 / S).toFixed(2)}s ease`; op.style.opacity = "0";
   setTimeout(() => { op.style.display = "none"; op.style.opacity = ""; op.style.transition = ""; op.classList.remove("bt-on"); op.innerHTML = ""; if (cb) cb(); }, 400 / S);
 }
@@ -6478,7 +6810,9 @@ function drawMini(g, now) {
     if (onMe) { const ph = (now / 700) % 1; x.strokeStyle = `rgba(255,59,48,${(1 - ph * .6).toFixed(2)})`; x.lineWidth = 2; x.beginPath(); x.arc(h.x * K, Y(h.y), 6 * (0.8 + ph * .4), 0, 7); x.stroke(); }
     if (h.sp === "orca" && g.pod && g.pod.entered) { x.font = "900 10px Segoe UI, Arial, sans-serif"; x.textBaseline = "middle"; x.lineWidth = 3; x.strokeStyle = "#000"; x.strokeText(String(g.pod.n), h.x * K + 5, Y(h.y)); x.fillStyle = "#fff"; x.fillText(String(g.pod.n), h.x * K + 5, Y(h.y)); x.textBaseline = "top"; } }   // v27: one dot for the pod, with its number
   x.strokeStyle = "#fff"; x.lineWidth = 1; x.strokeRect(0.5, Y(CAM.y) + 0.5, c.width - 1, CAM.viewH * K - 1);
-  x.fillStyle = "#fff"; x.strokeStyle = "#000"; x.lineWidth = 1.5; x.beginPath(); x.arc(g.me.x * K, Y(g.me.y), 3.5, 0, 7); x.fill(); x.stroke();
+  // v35 (Raj 7): her dot 14 px across, yellow, a 2 px black edge and a 2 px white halo, drawn last
+  x.beginPath(); x.arc(g.me.x * K, Y(g.me.y), 9, 0, 7); x.fillStyle = "#fff"; x.fill();
+  x.beginPath(); x.arc(g.me.x * K, Y(g.me.y), 7, 0, 7); x.fillStyle = "#ffd23f"; x.fill(); x.strokeStyle = "#000"; x.lineWidth = 2; x.stroke();
 }
 
 // ---------- teacher view: band names down the left ----------
@@ -6493,10 +6827,12 @@ $("nk-stage").addEventListener("click", e => {
   if (h.kind === "prey") {   // v33c: "Hunting" only when the hunt is on; otherwise the reason, beside her
     const n0 = G.events.length, ok = tapPrey(G, h.ref); HUNTTAP.n++;
     if (ok) { HUNTTAP.ok++; showHoverAt(h.ref, "Hunting: " + SP[h.ref.sp].name); }
-    else { HUNTTAP.no++; hover.style.display = "none"; herNote(huntWhyNot(G, n0)); }
+    else { HUNTTAP.no++; hover.style.display = "none"; refuseToast(G, n0, huntWhyNot(G, n0)); }   // v35 (Dayo 5a-4, Raj 9): the reason as a centre toast, said once
     return;
   }
-  if (h.kind === "animal") tapAnimal(G, h.ref); else if (h.kind === "refuge") tapRefuge(G, h.ref); else if (h.kind === "patch") { if (!eatsPatches(G.me.sp) || (h.ref.kind === "wash" && !WASH_EATERS[G.me.sp])) tapPoint(G, p.x, p.y); else tapPatch(G, h.ref); } else tapPoint(G, p.x, p.y);
+  const n0 = G.events.length; let ok;
+  if (h.kind === "animal") ok = tapAnimal(G, h.ref); else if (h.kind === "refuge") ok = tapRefuge(G, h.ref); else if (h.kind === "patch") { if (!eatsPatches(G.me.sp) || (h.ref.kind === "wash" && !WASH_EATERS[G.me.sp])) ok = tapPoint(G, p.x, p.y); else ok = tapPatch(G, h.ref); } else ok = tapPoint(G, p.x, p.y);
+  if (ok === false && G.events.slice(n0).some(e => e.k === "say")) refuseToast(G, n0, null);   // v35: a refused move is said in the centre of the stage
 });
 const HUNTTAP = { n: 0, ok: 0, no: 0, notes: [] };   // test counts only
 function huntWhyNot(g, n0) {   // the say line tapPrey (or cmdGo) gave, else the state that stopped her
@@ -6674,6 +7010,7 @@ function handleEvents(g) {
       if (ev.k === "visit") play("tide"); }
     if (ev.k === "round" || ev.k === "fight" || ev.k === "hunt" || ev.k === "food" || ev.k === "pick" || ev.k === "standoff" || ev.k === "rivalry") queue.push(ev);
     if (ev.k === "end" || ev.k === "died") queue.push(ev);
+    if (ev.k === "died") v35Died(g, ev);   // v35: the cause for the Just lost list, the life for Survivor
   }
   g.events.length = 0;
 }
@@ -6859,10 +7196,10 @@ function roundPanel(ev) {      // 1.2 s comic panel for one round
   else if (ev.type === "hunt") act.hurt = r.hit ? "r" : r.pinched ? "l" : null;
   else act.hurt = r.res === "stare" ? null : r.hit ? "l" : "r";
   for (const [sd, mv, other] of [["l", lmv, ra], ["r", rmv, la]]) if (act.hurt !== sd && mv) { if (mv.t === "EVADE" && other) act.dodge = sd; else if (mv.t === "GUARD") act.guard = act.guard || sd; }
-  if (ev.type === "rivalry" && BT.open) { let pp = ""; for (let i = 1; i <= 3; i++) { const q = i <= r.n ? (i === r.n ? (r.hit ? "win" : "on") : "") : ""; pp += `<i class="${q}" style="${i <= r.n ? "" : "opacity:.35"}"></i>`; }
-    $("bt-head").innerHTML = `ROUND ${r.n} OF 3<span class="nk-pips">${pp}</span>`; if (r.n === 1) { const t = document.querySelector(".bt-tele"); if (t) t.remove(); } }
+  if (BT.open) { $("bt-head").innerHTML = `ROUND ${r.n} OF ${r.of || F.rounds}`; if (r.n === 1) { const t = document.querySelector(".bt-tele"); if (t) t.remove(); } }   // v35: the pips sit under each side
+  const herSide = meLeft ? "l" : "r", win = r.res === "stare" ? null : r.hit ? herSide : herSide === "l" ? "r" : "l";   // v35 (Dayo 2b): the round's real winner (stare: nobody)
   return { left: ev.left, right: ev.right, call, words, kill, recoil, tag, tagCls, round: `ROUND ${r.n} OF ${F.rounds}`, secs: F.roundSeconds,
-    lm: meLeft ? r.mine : r.theirs, rm: meLeft ? r.theirs : r.mine, meLeft, e0: r.e0, e1: r.e1, o0: r.o0, o1: r.o1, act, bars: r.rivalry ? r.bars : null };
+    lm: meLeft ? r.mine : r.theirs, rm: meLeft ? r.theirs : r.mine, meLeft, e0: r.e0, e1: r.e1, o0: r.o0, o1: r.o1, act, bars: r.rivalry ? r.bars : null, win, last: r.n >= (r.of || F.rounds) };
 }
 function comic(p, done) {      // step 5 (v24): about TUNE.fight.roundSeconds a round: both moves, then the callout and both bars moving, then the result line
   if (BT.open) return btRound(p, done);   // v27: in place on the battle screen
@@ -6904,7 +7241,7 @@ function comic(p, done) {      // step 5 (v24): about TUNE.fight.roundSeconds a 
   setTimeout(close, R * 1000);
 }
 function resultCard(ev, done) {   // 2 s result card after the last round
-  if (BT.open) return btResult(ev, done);   // v27: the ending beat on the battle screen (the stand-off card stays on the map)
+  if (BT.open) return fhResult(ev, done);   // v35 (Dayo 2d, Raj 4): the result card on the battle screen (was btResult); the stand-off card stays on the map
   const me = G.me.sp, F = TUNE.fight; let head, line, left, right, gone = "";
   if (ev.k === "fight") {
     left = ev.hunterSp; right = me;
@@ -6967,7 +7304,7 @@ function showDeath(ev) {           // v26: the death card, then a fresh deal (ru
   const me = G.me.sp, g0 = G;
   const head = ev.cause === "net" ? "Caught in a set net!" : ev.cause === "eaten" ? "Eaten!" : ev.cause === "rivalry" ? "Driven off!" : "Starved!";
   const got = ev.cause === "net" ? "What got you: a set net. It was hauled in with you in it." : ev.cause === "rivalry" ? `What got you: a rival ${SP[ev.bySp].name.toLowerCase()}, when you were already weak.` : ev.cause === "eaten" ? `What got you: ${SP[ev.bySp].name}, ${ev.byMove}.` : ev.bySp ? `What got you: hunger, after a ${SP[ev.bySp].name.toLowerCase()} attack.` : "What got you: hunger. The bar ran out.";
-  const deaths = G.lives.filter(l => l.cause !== "survived").length;
+  const deaths = G.lives.filter(l => l.cause !== "survived" && l.cause !== "swapped").length;   // v35: a swap is not a death
   const zone = BAND_ZONE[bandAt(G.me.x, G.me.y)] || CH_ZONE[me] || 3;
   const alive = Math.max(0, Math.round(G.t - (G.lifeStart || 0)));
   const news = (ev.cause === "net" ? "Caught in a set net in " : ev.cause === "eaten" ? `Eaten by a ${SP[ev.bySp].name.toLowerCase()} in ` : ev.cause === "rivalry" ? `Driven off by a rival ${SP[ev.bySp].name.toLowerCase()} in ` : "Ran out of energy in ") + ZONE_HOME[zone] + " · alive " + fmt(alive);
@@ -6994,7 +7331,7 @@ function showEnd() {
   else if (c.cause === "eaten") { head = "Eaten!"; got = `What got you: ${SP[c.bySp].name}, ${c.byMove}.`; }
   else if (c.cause === "rivalry") { head = "Driven off!"; got = `What got you: a rival ${SP[c.bySp].name.toLowerCase()}, when you were already weak.`; }
   else { head = "Starved!"; got = c.bySp ? `What got you: hunger, after a ${SP[c.bySp].name.toLowerCase()} attack.` : "What got you: hunger. The bar ran out."; }
-  show("nk-end", `<div class="nk-card nk-card--cast"><div class="nk-kicker">One tide <span class="nk-ver">V34</span></div><h2>${head}</h2>
+  show("nk-end", `<div class="nk-card nk-card--cast"><div class="nk-kicker">One tide <span class="nk-ver">V35</span></div><h2>${head}</h2>
     <div class="nk-big">${t}</div><p>${got}</p>${list}
     <p class="nk-small">Meals caught: ${G.stats.meals} · Fights: ${G.stats.fights} · Escapes: ${G.stats.escapes} · Best this session: ${fmt(best)}</p>
     <div class="nk-row" style="margin-top:14px"><button class="nk-btn" id="nk-again" type="button">Play again</button></div></div>`);
@@ -7268,7 +7605,7 @@ function frame(ts) {
     if (!uiBusy && (queue.length)) runQueue();
     else if (!uiBusy && G.modal) openModal(G);
     stepCam(G, real);                    // after the sim step, one transform a frame
-    if (!TICKFRAME) { drawWater(G, ts); drawEvents(G, ts); drawDrift(G); drawTokens(G); drawPod(G); drawWeather(G, ts); drawSignals(G); drawHud(G, ts); laneFrame(G); herNoteFrame(G); drawEdgeArrows(G); drawMini(G, ts); drawEco(G); }   // v33: a page nobody can see skips the drawing
+    if (!TICKFRAME) { drawWater(G, ts); drawEvents(G, ts); drawDrift(G); drawTokens(G); drawPod(G); drawWeather(G, ts); drawSignals(G); drawHud(G, ts); if ((LANE.tick = (LANE.tick || 0) + 1) % 3 === 0) laneFrame(G); herNoteFrame(G);   /* v35 (lag, Kit): the lane's layout reads every third frame, not every frame (7 ms a frame at 4x throttle) */ drawEdgeArrows(G); drawMini(G, ts); drawEco(G); }   // v33: a page nobody can see skips the drawing
   }
   FRAME_MS.push(performance.now() - _f0); if (FRAME_MS.length > 600) FRAME_MS.shift();
   kick();
@@ -7347,6 +7684,7 @@ function v31Start(g) {
   V.raiders.forEach(r => r.e.remove()); V.raiders = [];
   for (const id of ["nk-tray", "nk-incoming", "nk-notice", "nk-chest"]) $(id).className = "";
   $("nk-app").classList.remove("nk-final"); $("nk-kai").classList.remove("nk-kai--crown");
+  v35Start(g);   // v35: per-round state (awards, deaths, labels, the swap)
 }
 function chestBlocked(g) {
   const dg = g.ev && g.ev.cur && g.ev.cur.kind === "dog" && g.ev.cur.dog && g.ev.cur.dog.chase === g.me;
@@ -7359,7 +7697,7 @@ function v31Frame(g, ts) {
   for (const ev of cl.events) v31Event(g, ev); cl.events.length = 0;
   if (!g.over) { chestFrame(g); incomingFrame(g); } hudKai(g); feedFrame(g); herFx(g);
   { const t = $("nk-tray"); $("nk-alerts").style.bottom = (t.className ? t.offsetHeight + 24 : 104) + "px"; }   // the alerts sit low, clear of the banners at the top: above the chest, or above the open tray
-  const bk = $("nk-btkai"); bk.classList.toggle("on", BT.open && !g.over); if (BT.open) $("nk-btkai-n").textContent = KAI(cl.members[0].kai);
+  v35Frame(g);   // v35: labels, Near you, New animal, the pool pill, awards on the podium (the centred battle KAI box is gone: Raj 3)
   if (ts - V.lastPost > 500) { V.lastPost = ts; postSnap(g); }
 }
 function v31Event(g, ev) {
@@ -7388,7 +7726,7 @@ function v31Event(g, ev) {
   else if (ev.k === "bounty") { kaiBump(); kaiFloat({ x: g.me.x, y: g.me.y - 130, text: "+" + ev.amt + " CROWN BOUNTY", big: true }); }
   else if (ev.k === "crown") { if (ev.id === 0) { notice("YOU HAVE THE CROWN!", "Everyone’s after you.", "gold"); snd31("fanfare"); } }
   else if (ev.k === "oilOnMe") { kaiFloat({ x: g.me.x, y: g.me.y - 50, text: "OIL: SLOWED", loss: true }); }
-  else if (ev.k === "final") { $("nk-app").classList.add("nk-final"); notice("FINAL MINUTE!", "Chests every 15 seconds. More gold.", ""); snd31("warn"); }
+  else if (ev.k === "final") { $("nk-app").classList.add("nk-final"); notice("FINAL MINUTE!", "Chests every " + TUNE.chest.finalEvery + " seconds. More gold.", ""); snd31("warn"); }
   else if (ev.k === "card" && ev.from === 0) { if (ev.id === "frenzy" || ev.id === "king" || ev.id === "lucky") kaiBump(); }
 }
 function notice(head, sub, kind) {
@@ -7414,6 +7752,7 @@ function raiderDone(id, hit) {
 // ---------- the kai strip ----------
 function hudKai(g) {
   const cl = g.cl, me = cl.members[0];
+  if (BT.open) return;   // v35 (Dayo 2c): kai holds still in a fight; it moves on when the map comes back
   V.kaiShown += (me.kai - V.kaiShown) * 0.2; if (Math.abs(me.kai - V.kaiShown) < 1) V.kaiShown = me.kai;
   $("nk-kai-num").textContent = KAI(V.kaiShown);
   $("nk-kai-rank").innerHTML = `<b>${ORD(me.rank)}</b> of ${cl.n}`;
@@ -7431,6 +7770,7 @@ function feedFrame(g) {
   const cl = g.cl, now = performance.now(), box = $("nk-feed");
   for (const e of cl.feed) {
     if (e.n <= V.feedSeen) continue; V.feedSeen = e.n;
+    if (!e.me) continue;   // v35 (Dayo 3a): only the lines about her; classmates' news is the projector's
     if (!e.me && now - V.lastOther < 3000) continue;
     if (!e.me) V.lastOther = now;
     const d = document.createElement("div"); d.className = "nk-fl" + (e.me ? " nk-fl--me" : "") + (e.kind === "gold" && !e.me ? " nk-fl--gold" : ""); d.textContent = e.text;
@@ -7615,11 +7955,13 @@ function showPodium() {
     const steal = H.steal ? `<b>Biggest steal:</b> ${KAI(H.steal.amt)} kai from ${H.steal.from}` : `<b>Biggest steal:</b> none this tide`;
     const hurt = H.hurt ? `<b>Biggest hit you took:</b> ${KAI(H.hurt.amt)} kai, from ${H.hurt.by}` : `<b>Biggest hit you took:</b> nothing landed on you`;
     const animals = `<b>Animals you played:</b> ${H.animals.map(sp => SP[sp].name).join(", ")}`;
-    show("nk-end", `<div class="pd-card"><div class="pd-kicker">One tide · ${cl.n} in the class <span class="nk-ver">V34</span></div><h2 class="pd-title">The tide has turned</h2>
+    show("nk-end", `<div class="pd-card"><div class="pd-kicker">One tide · ${cl.n} in the class <span class="nk-ver">V35</span></div><h2 class="pd-title">The tide has turned</h2>
       ${podiumHTML(cl.order, {})}
       <div class="pd-you">You: ${ORD(me.rank)}, ${KAI(me.kai)} kai</div>
       <ul class="pd-lines"><li>${steal}</li><li>${hurt}</li><li>${animals}</li></ul>
-      <button class="pd-again" id="nk-again" type="button">PLAY AGAIN</button></div>`);
+      <div class="nk-aw" id="nk-aw"></div>
+      <button class="pd-again" id="nk-again" type="button">PLAY AGAIN</button></div>`);   // v35 (Dayo 4d, Raj 11): Awards, filled when the room has them (v35Frame)
+    $("nk-end").classList.add("nk-pd35"); V35.awKey = "";
     $("nk-again").addEventListener("click", () => chOpen({}));
     snd31("fanfare");
   }, 1500 / Math.min(SPEED, 4));
@@ -7630,7 +7972,7 @@ const CLV = { cl: null, snap: null, snapAt: -1e9, mode: "", rows: new Map(), sho
 function startClassView() {
   document.body.classList.add("nk-classview");
   $("nk-class").innerHTML = `<div class="cv-top"><div class="cv-title">NICHE · THE ROCKY SHORE</div><span class="cv-src" id="cv-src"></span>
-      <div class="cv-clock" id="cv-clock">THE TIDE TURNS IN <b>8:00</b></div><button class="nk-btn nk-snd" type="button">Sound: on</button><span class="nk-ver">V34</span></div>
+      <div class="cv-clock" id="cv-clock">ROUND ENDS IN <b>8:00</b></div><button class="nk-btn nk-snd" type="button">Sound: on</button><span class="nk-ver">V35</span></div>
     <div class="cv-main"><section class="cv-board"><h2>KAI</h2><div class="cv-rows" id="cv-rows"></div></section>
       <section class="cv-feed"><h2>ON THE SHORE</h2><ul class="cv-list" id="cv-feed"></ul></section></div>
     <div id="cv-banner"></div><div id="cv-podium"></div>`;
@@ -7655,7 +7997,7 @@ function cvReset() { CLV.rows.forEach(r => r.remove()); CLV.rows.clear(); CLV.sh
 function renderClass(v, live) {
   const R = v.R || TUNE.runSeconds, left = Math.max(0, R - v.t);
   $("nk-class").classList.toggle("cv-final", !!v.final && !v.over);
-  $("cv-clock").innerHTML = v.over ? "THE TIDE HAS TURNED" : `THE TIDE TURNS IN <b>${fmt(left)}</b>`;
+  $("cv-clock").innerHTML = v.over ? "THE TIDE HAS TURNED" : `ROUND ENDS IN <b>${fmt(left)}</b>`;
   $("cv-src").textContent = live ? "Mirroring the laptop" : "A class of computer players";
   const mem = v.members.map(([id, name, sp, kai, me]) => ({ id, name, sp, kai, me: !!me })).sort((a, b) => b.kai - a.kai || a.id - b.id);
   mem.forEach((m, i) => m.rank = i + 1);
@@ -8033,10 +8375,18 @@ function netViewOut(m) {
   const p = nt.viewMade ? NET.fb.updateDoc(fsDoc("games", nt.code + "-v"), data) : NET.fb.setDoc(fsDoc("games", nt.code + "-v"), Object.assign(data, { bornAt: NET.fb.serverTimestamp() }));
   p.then(() => { nt.viewMade = true; nt.viewBusy = false; }, () => { nt.viewBusy = false; });
 }
-function netWipe() {      // End game and clear: the game, the view, every girl's record and inbox, now
+function netWipe(fin) {      // End game and clear: the game, the view, every girl's record and inbox, now
   const nt = NT; if (!nt || NET.mode !== "live") return; nt.dead = true; clearTimeout(nt.timer); nt.inbox.forEach(ib => clearTimeout(ib.t)); netTeacherUnlisten();
   try { sessionStorage.removeItem("niche-teacher"); } catch (e) {}
   if (!nt.created) return;
+  if (fin) {   // v35 (Dayo 4d, Māia condition 2): the final standings ride on the game's own record (no new collection, the same short expiry), then the clear below runs as before
+    netCount("game", "w"); let went = false; const go = () => { if (went) return; went = true; netWipeNow(nt); };
+    NET.fb.updateDoc(fsDoc("games", nt.code), { d: JSON.stringify(fin), open: false, expiresAt: tsAt(Math.min(rmNow() + LIVE.life, (nt.bornMs || rmNow()) + LIVE.cap - 60e3)), srvAt: NET.fb.serverTimestamp() }).then(() => setTimeout(go, 2500), go);
+    setTimeout(go, 6000); return;
+  }
+  netWipeNow(nt);
+}
+function netWipeNow(nt) {
   const F = NET.fb, refs = [fsDoc("games", nt.code)];
   if (nt.viewMade) refs.push(fsDoc("games", nt.code + "-v"));
   nt.pl.forEach((st, uid) => refs.push(fsDoc("players", nt.code + "_" + uid)));
@@ -8174,7 +8524,7 @@ function sndRunning() { return !!(SND.ctx && SND.ctx.state === "running"); }
 function sndLabels() {
   const lock = SND.lockedOff;
   document.querySelectorAll(".nk-snd").forEach(b => { b.textContent = lock ? "Sound: off (teacher)" : SND.on ? "Sound: on" : "Sound: off"; b.classList.toggle("nk-snd--on", SND.on && !lock); b.disabled = !!lock; });
-  const chip = $("rm-sndchip"); if (chip) chip.classList.toggle("on", !DASHV && !PROJV && SND.on && !lock && !sndRunning());
+  const chip = $("rm-sndchip"); if (chip) chip.classList.toggle("on", !DASHV && !PROJV && SND.on && !lock && !sndRunning() && !BT.open);   // v35 fixes (Hugh nice 7): not over the fight buttons
 }
 function sndArm() {      // the first click, tap or key in this window
   SND.armed = true;
@@ -8260,7 +8610,11 @@ function rmWaitCard(line) {
     <p class="rm-msg">${line}</p><p class="rm-small">Game ${esc(RMS.code)}. Keep this tab open.</p></div>`;
   sndLabels();
 }
-function rmWaiting() { rmWaitCard(`You're in, <b>${esc(RMS.nick)}</b>. Waiting for your teacher to start.`); }
+function rmWaiting() {   // v35 (Dayo 1a, Raj 1): first time, the four How to play cards are the waiting card; after that, a How to play button
+  if (!HT.seen) return htOpen("lobby");
+  rmWaitCard(`You're in, <b>${esc(RMS.nick)}</b>. Waiting for your teacher to start.`);
+  const c = $("rm-join").querySelector(".rm-card"); if (c) { c.insertAdjacentHTML("beforeend", `<button class="nk-ht-again" id="nk-ht-again" type="button">How to play</button>`); $("nk-ht-again").addEventListener("click", () => htOpen("lobby")); }
+}
 function rmHideCard() { $("rm-join").className = "rm-ov"; $("rm-join").innerHTML = ""; }
 rmOn(d => {
   if (!JOINV) return;
@@ -8272,8 +8626,11 @@ rmOn(d => {
   if (d.k === "removed" && d.id === RMS.id && d.code === RMS.code) { ssSet(null); location.replace(location.pathname + "?join=" + RMS.code + "&removed=1" + rmPass()); return; }
   if (d.k === "renamed" && d.id === RMS.id && d.code === RMS.code) { RMS.nick = d.nick; RMS.note = "Your teacher changed your nickname to " + d.nick + "."; ssSet({ code: RMS.code, nick: d.nick, id: RMS.id });
     if (RMS.st === "wait") rmWaiting(); else if (RMS.st === "locked") rmLockedCard(); return; }
+  if (d.k === "room" && d.phase === "ended" && d.was === RMS.code) {   // v35 (Dayo 4d): End game mid-round: FINAL STANDINGS for 10 s, then the join screen
+    if (d.fin) return fstShow(d.fin);
+    if (FST.on) return;   // the record's delete arrives while the standings are up: they finish first
+    ssSet(null); location.replace(location.pathname + "?join=1&ended=1" + rmPass()); return; }
   if (d.k === "room" && d.code === RMS.code) rmRoom(d);
-  if (d.k === "room" && d.phase === "ended" && d.was === RMS.code) { ssSet(null); location.replace(location.pathname + "?join=1&ended=1" + rmPass()); }
 });
 function rmRoom(r) {
   RMS.room = r; RMS.roomAt = performance.now();
@@ -8292,9 +8649,11 @@ function rmRoom(r) {
     rmHideCard(); RMS.late = true; RMS.rid = r.rid; RMS.host = r.host === RMS.id; RMS.sp = RMS.resume.sp; const kai = RMS.resume.kai; RMS.resume = null; rmStart();
     const mm = G && G.cl && G.cl.members.find(q => q.me); if (mm && Number.isFinite(kai)) mm.kai = kai;
   } else if ((ph === "go" || ph === "playing") && RMS.st === "wait" && (r.late || RMS.again)) {   // a latecomer (or a rejoin with nothing to carry over): 0 kai and a 0:15 deal
-    rmHideCard(); RMS.st = "deal"; RMS.late = true; RMS.rid = r.rid; RMS.host = false; chOpen({}); DEAL.total = TUNE.room.lateDealSeconds; DEAL.left = DEAL.total; chTimerDraw();
+    const lateDeal = () => { if (RMS.st !== "wait" && RMS.st !== "howto") return; rmHideCard(); RMS.st = "deal"; RMS.late = true; RMS.rid = r.rid; RMS.host = false; chOpen({}); DEAL.total = TUNE.room.lateDealSeconds; DEAL.left = DEAL.total; chTimerDraw(); };
+    if (!HT.seen && !RMS.again) { RMS.st = "howto"; htOpen("late", lateDeal); }   // v35 (Dayo 1a): a latecomer reads the four cards first (Got it, Skip, or 40 s), then her deal
+    else lateDeal();
   } else if (ph === "playing" && RMS.st === "locked") rmStart();
-  else if (ph === "over" && RMS.st === "play" && G && !G.over) { if (!RMS.overSeen) RMS.overSeen = performance.now(); else if (performance.now() - RMS.overSeen > 3000) { RMS.overSeen = 0; showPodium(); } }
+  else if (ph === "over" && RMS.st === "play" && G && !G.over) { if (!RMS.overSeen) RMS.overSeen = performance.now(); else if (performance.now() - RMS.overSeen > 3000) { RMS.overSeen = 0; showPodium(); G.over = true; RMS.st = "over"; } }   // v35 fix: her own clock (stopped in fights) can be short of the end when the room's round is over; without this she stayed "play" and PLAY AGAIN never dealt her round 2 (live mode)
   if (ph !== "over") RMS.overSeen = 0;
   RMS.lastPhase = ph;
 }
@@ -8340,6 +8699,9 @@ function rmReport(urgent) {   // what her laptop tells the teacher's: never ener
     if (RMS.repSp && RMS.repSp !== m.sp) m.urgent = true; RMS.repSp = m.sp;   // a new animal: the projector shows it soon
     m.pos = g.waiting || g.me.alive === false ? null : [Math.round(g.me.x), Math.round(g.me.y), herHidden(g.me) || (g.me.duckUntil || 0) > g.t ? 1 : 0, BT.open ? 1 : 0];
     m.ev = rmEvs(g); m.feed = RMS.feedOut.slice(-6); m.plays = RMS.plays.slice(-6);
+    // v35 (Dayo 3b, 4d; Māia's addendum): game state only.  dc/dk = her deaths and swaps so far and the last one [animal, cause, killer species];
+    // aw = the four award numbers [biggest meal, longest life (s), animals played, places climbed, meal animal, life animal]
+    m.dc = V35.dc; if (V35.dk) m.dk = V35.dk; m.aw = awNumbers(g);
   }
   rmSend(m);
 }
@@ -8458,6 +8820,7 @@ function dbClassStep() {
     if (s && s.rid === r.rid) { if (Number.isFinite(s.kai)) m.kai = Math.max(0, s.kai); if (s.sp && SP[s.sp]) m.sp = s.sp; } }
   const t = Math.min(TUNE.runSeconds, dbClock()), dt = t - cl.t;
   if (dt > 0) stepClass(cl, Math.min(dt, 2), null);
+  lostScan(cl, DB, r);   // v35 (Dayo 3b): the Just lost list (deaths and swaps, girls and computer classmates)
   cl.t = Math.max(cl.t, t); cl.events.length = 0; cl.n = cl.members.length;
   if (cl.t >= TUNE.runSeconds) endClass(cl);
 }
@@ -8484,7 +8847,8 @@ function dbRep(x, d) {     // her report: kai, animal, where she is, the lines a
   const r = DB.room; x.hb = performance.now(); if (d.cid) x.cid = d.cid;
   if (d.lk && r.phase === "picking" && !x.lockedIn && d.rid === r.rid && SP[d.lk]) { x.lockedIn = true; x.sp = d.lk; dbPush(); }
   if (d.rid !== r.rid) return;
-  x.rep = { rid: d.rid, kai: d.kai, sp: d.sp, pos: d.pos, ev: d.ev, st: d.st };
+  x.rep = { rid: d.rid, kai: d.kai, sp: d.sp, pos: d.pos, ev: d.ev, st: d.st, dc: d.dc, dk: d.dk, aw: d.aw };   // v35: deaths, last cause, award numbers
+  if (r.phase === "over") dbAwards(true);   // v35: a late report can still change the awards
   const cl = DB.cl; if (!cl || r.phase !== "playing") return;
   for (const p of d.plays || []) { if (!(p.n > (x.playN || 0))) continue; x.playN = p.n; dbGirlPlay(x, p); }
   for (const e of d.feed || []) { if (!(e.n > (x.feedN || 0))) continue; x.feedN = e.n;
@@ -8505,9 +8869,9 @@ function dbView() {     // what the projector is told (5 times a second in this 
   let ev = null;
   const members = cl.members.map(m => { let pos = 0;
     if (m.remote) { const x = r.names.find(y => y.id === m.gid); if (fresh(x)) { pos = x.rep.pos || -1; if (!ev && x.rep.ev) ev = x.rep.ev; } }
-    return [m.id, m.name, m.sp, Math.round(m.kai), 0, m.girl ? 1 : 0, pos]; });
+    return [m.id, m.name, m.sp, Math.round(m.kai), 0, m.girl ? 1 : 0, pos, m.gid == null ? null : m.gid]; });   // v35: gid, so the Scoreboard can honour "Show names"
   return { k: "snap", from: "teacher", code: r.code, rid: r.rid, host: "teacher", t: cl.t, R: TUNE.runSeconds, final: cl.final, over: cl.over, crown: cl.crown, n: members.length,
-    paused: !!r.paused, members, her: null, ev: ev || [],
+    paused: !!r.paused, members, her: null, ev: ev || [], lost: lostOut(DB),   // v35: the Just lost list (species and cause only)
     feed: cl.feed.slice(-12).map(e => ({ n: e.n, text: e.text, me: false, big: e.big, kind: e.kind, from: e.from, to: e.to, amt: e.amt, skip: !!e.skip })) };
 }
 function dbClassRestore(m) {    // a reloaded dashboard mid-round: the board as it was at the last save
@@ -8600,7 +8964,7 @@ function startDash() {
     <div class="db-ctrls"><span class="db-group"><b>PROJECTOR</b><button class="db-btn on" id="db-mute" type="button">Sound: on</button><label>Volume <input type="range" id="db-vol" min="0" max="1" step="0.05" value="1"></label></span>
     <span class="db-group"><b>GIRLS' LAPTOPS</b><button class="db-btn on" id="db-lap" type="button">Sound effects: on</button></span>
     <button class="db-btn" id="db-calm" type="button">Calm effects: off</button>
-    <button class="db-btn on" id="db-snd" type="button" title="A quiet pop on this laptop each time a girl joins">Join pops here: on</button><span class="db-ver">V34</span></div></div>
+    <button class="db-btn on" id="db-snd" type="button" title="A quiet pop on this laptop each time a girl joins">Join pops here: on</button><span class="db-ver">V35</span></div></div>
     <div class="db-main" id="db-main"></div><div class="db-toast" id="db-toast"></div>
     <div class="db-dlg" id="db-dlg"><div><p>End the game and clear everything? Nicknames and results are deleted now and can't be brought back.</p>
     <div class="btns"><button class="db-btn" id="db-keep" type="button">Keep playing</button><button class="db-btn danger" id="db-wipe" type="button">End game and clear</button></div></div></div>
@@ -8644,7 +9008,7 @@ function dbCopyOld(text) { try { const t = document.createElement("textarea"); t
 function dbToast(t) { const e = $("db-toast"); e.textContent = t; e.className = "db-toast on"; clearTimeout(DB.toastT); DB.toastT = setTimeout(() => e.className = "db-toast", 3200); }
 function dbCreate(auto) {   // v33d: auto = made on page load or after End game (no click, so no sound)
   if (!auto) sndArm();
-  DB.room = { k: "room", code: rmCode(), phase: "lobby", locked: false, late: false, size: DB.size, names: [], showNames: TUNE.room.showNames, calm: false, laptop: TUNE.room.laptopSounds,
+  DB.room = { k: "room", code: rmCode(), phase: "lobby", locked: false, late: false, size: DB.size, names: [], showNames: TUNE.room.showNames, pjView: TUNE.room.pjView, calm: false, laptop: TUNE.room.laptopSounds,
     vol: 1, mute: false, paused: false, pausedAt: 0, pausedAcc: 0, pickEnd: 0, goEnd: 0, playStart: 0, host: null, rid: null, seq: 0, R: DB.round };
   applyRound(DB.round);
   DB.banned = new NickBan(); DB.n = 0; DB.cleared = false; DB.snaps = {}; DB.winner = ""; DB.renaming = null; DB.cl = null; DB.view = null;
@@ -8705,7 +9069,8 @@ function dbStart() {
   r.pickEnd = rmNow() + TUNE.room.pickSeconds * 1000 / SPEED; r.rid = "r" + Math.random().toString(36).slice(2, 9);
   r.host = "teacher";   // v34: this laptop runs the class; a girl's laptop dropping out changes nothing for anyone else
   r.sched = dealSchedule((Math.random() * 2147483646 + 1) | 0);   // v34b (ruling 40): the round's shore events, dealt once for the whole class
-  r.names.forEach(x => { x.lockedIn = false; x.rep = null; x.playN = 0; x.feedN = 0; if (x.practice) x.lockAt = rmNow() + (3 + Math.random() * Math.max(4, TUNE.room.pickSeconds - 6)) * 1000 / SPEED; });
+  r.aw = null; DB.lost = [];   // v35: a new round, no awards and an empty Just lost list
+  r.names.forEach(x => { x.lockedIn = false; x.rep = null; x.playN = 0; x.feedN = 0; x.lostN = 0; if (x.practice) x.lockAt = rmNow() + (3 + Math.random() * Math.max(4, TUNE.room.pickSeconds - 6)) * 1000 / SPEED; });
   DB.snaps = {}; DB.winner = ""; DB.cl = null; DB.view = null; dbPush(); dbRender(true);
 }
 function dbTick() {
@@ -8723,7 +9088,7 @@ function dbTick() {
     const s = dbSnap();
     if ((s && s.over) || dbClock() >= TUNE.runSeconds + 2) {
       let w = ""; if (s) { const top = s.members.slice().sort((a, b) => b[3] - a[3])[0]; const cw = s.members.find(m => m[0] === s.crown); w = (cw || top || [])[1] || ""; }
-      DB.winner = w; r.phase = "over"; r.paused = false; if (DB.cl) { endClass(DB.cl); DB.view = dbView(); } dbPush(); dbRender(true);
+      DB.winner = w; r.phase = "over"; r.paused = false; if (DB.cl) { endClass(DB.cl); DB.view = dbView(); } dbAwards(false); dbPush(); dbRender(true);   // v35 (Dayo 4d): the four awards ride on the room
     }
   }
   else if (r.phase === "over" && DB.view) rmSend(DB.view);   // v34: the podium stays on the projector (unchanged, so nothing is written)
@@ -8771,7 +9136,7 @@ function dbRender(full) {
   if (stage === "lobby") {
     m.innerHTML = top + `<div class="db-grid"><div class="db-panel"><p class="db-privacy">${privacy}</p>
       <div class="db-row-top"><span>${c.n} joined · ${c.ok} checked</span><button class="db-btn small" data-a="tickall" type="button">Tick all</button>
-      <label class="db-switch"><input type="checkbox" data-a="shownames" ${r.showNames ? "checked" : ""}> Show names on the projector as they join</label></div>
+      <label class="db-switch"><input type="checkbox" data-a="shownames" ${r.showNames ? "checked" : ""}> Show names on the projector as they join</label>${dbPjSeg(r)}</div>
       <div class="db-list" id="db-list">${dbList(false)}</div>
       ${NET.mode === "local" || params.get("practice") === "1" ? `<div class="db-mock">Mock-up only: <button class="db-btn small" data-a="prac" type="button">Add 5 practice joiners</button><button class="db-btn small" data-a="test" type="button">Add a test name</button><button class="db-btn small" data-a="stu" type="button">Open a student tab</button></div>` : ""}</div>
       <div class="db-side"><div class="db-panel"><label class="db-switch"><input type="checkbox" data-a="lock" ${r.locked ? "checked" : ""}> Lock the lobby</label>
@@ -8792,7 +9157,7 @@ function dbRender(full) {
   } else if (stage === "playing") {
     m.innerHTML = top + `<div class="db-grid"><div class="db-panel"><div class="db-clock" id="db-clock"></div><div class="db-status" id="db-play"></div>
       <p style="display:flex;gap:10px;flex-wrap:wrap;margin:14px 0"><button class="db-btn big db-pause" data-a="pause" type="button">${r.paused ? "RESUME" : "PAUSE"}</button></p>
-      <label class="db-switch"><input type="checkbox" data-a="late" ${r.late ? "checked" : ""}> Let latecomers in</label>
+      <label class="db-switch"><input type="checkbox" data-a="late" ${r.late ? "checked" : ""}> Let latecomers in</label>${dbPjSeg(r)}
       <p class="db-help">A girl who joins now is dealt an animal with 0 kai and a 0:15 deal.</p>${names}
       <div class="db-foot" style="margin-top:40px"><button class="db-btn danger" data-a="end" type="button">End game</button></div></div>
       <div class="db-side"><div class="db-panel"><p class="db-p db-len">${esc(roundWords(r.R || DB.round))}</p><p class="db-p" style="font-weight:700">${c.n} girl${c.n === 1 ? "" : "s"} + ${c.comp} computer classmate${c.comp === 1 ? "" : "s"}</p>
@@ -8837,7 +9202,9 @@ function dbClick(e) {
   if (a === "start") return dbStart();
   if (a === "again") return dbStart();
   if (a === "pause") { if (r.paused) { r.pausedAcc += rmNow() - r.pausedAt; if (r.phase === "picking") r.pickEnd += rmNow() - r.pausedAt; r.paused = false; } else { r.paused = true; r.pausedAt = rmNow(); } dbPush(); dbRender(true); return; }
-  if (a === "end") { $("db-dlg").className = "db-dlg on"; setTimeout(() => $("db-keep").focus(), 0); return; }
+  if (a === "pjview") { r.pjView = b.dataset.s === "map" ? "map" : "board"; dbPush(); dbRender(true); return; }   // v35 (Dayo 3b): Projector shows: Scoreboard / Shore map
+  if (a === "end") { const p = $("db-dlg").querySelector("p"); if (p) p.textContent = r.phase === "playing" ? "End the game? Everyone sees the final standings, then the game is cleared." : "End the game and clear everything? Nicknames and results are deleted now and can't be brought back.";   // v35 (Dayo 4d)
+    $("db-dlg").className = "db-dlg on"; setTimeout(() => $("db-keep").focus(), 0); return; }
 }
 function dbChange(e) {
   const b = e.target.closest("[data-a]"); if (!b) return; const a = b.dataset.a, r = DB.room; if (!r) return;
@@ -8854,8 +9221,9 @@ function dbRenameSave() {
 }
 function dbWipe() {     // End game: nicknames and results are deleted now; every page is told
   const r = DB.room; $("db-dlg").className = "db-dlg";
-  if (r) rmSend({ k: "room", phase: "ended", was: r.code, code: null, names: [] });
-  netWipe();    // v34 live: the game record, the projector's, every girl's record and inbox, deleted now
+  const fin = r ? finalStandings(r) : null;   // v35 (Dayo 4d, Māia 2): mid-round, the final standings ride on the ended message, then everything is deleted as before
+  if (r) rmSend(fin ? Object.assign({ k: "room", phase: "ended", was: r.code, code: r.code, names: [] }, { fin }) : { k: "room", phase: "ended", was: r.code, code: null, names: [] });
+  netWipe(fin ? { k: "room", phase: "ended", was: r.code, code: r.code, names: [], fin } : null);    // v34 live: the game record, the projector's, every girl's record and inbox, deleted now (v35: 2.5 s after the standings are written)
   DB.room = null; DB.banned = new Set(); DB.snaps = {}; DB.winner = ""; DB.renaming = null; DB.cleared = true; dbCreate(true); dbToast("Everything cleared. A new game code is ready.");   /* v33d: back to a fresh lobby with a new code */
 }
 addEventListener("beforeunload", () => { if (DASHV && DB.room && NET.mode === "local") rmSend({ k: "room", phase: "ended", was: DB.room.code, code: null, names: [] });   /* live: a reload takes the game back; End game clears it */
@@ -8875,7 +9243,7 @@ function startProjector() {
   SND.vol = 1;
   const root = $("pj");
   root.innerHTML = `<div id="pj-top"><span class="pj-word">NICHE</span><div id="pj-tide"><b id="pj-phase">HIGH TIDE</b><div id="pj-tidebar"><i></i></div></div>
-      <div id="pj-clock">THE TIDE TURNS IN <b>8:00</b></div><button class="pj-chip" id="pj-snd" type="button">Click for sound</button><span id="pj-ver">V34</span></div>
+      <div id="pj-clock">ROUND ENDS IN <b>8:00</b></div><button class="pj-chip" id="pj-snd" type="button">Click for sound</button><span id="pj-ver">V35</span></div>
     <div id="pj-map"><div id="pj-zones"></div><div id="pj-world"></div><div id="pj-toks"></div><div id="pj-names"></div><div id="pj-fx"></div>
       <div id="pj-edge"></div><div id="pj-count"></div><div id="pj-paused">PAUSED</div></div>
     <div id="pj-ladder"><h2>KAI</h2><div id="pj-rows"></div></div>
@@ -8931,7 +9299,9 @@ function pjApplyCam() { const M = PJ.map;
 rmOn(d => {
   if (!PROJV) return;
   if (d.k === "room") {
-    if (d.phase === "ended") { if (PJ.room) { PJ.room = null; PJ.endedUntil = performance.now() + TUNE.room.endedCard * 1000; } PJ.demo = null; return; }
+    if (d.phase === "ended") {
+      if (d.fin && !PJ.fin) { PJ.fin = { fin: d.fin, room: PJ.room, until: performance.now() + 10000 }; PJ.endedUntil = PJ.fin.until + TUNE.room.endedCard * 1000; }   // v35: FINAL STANDINGS for 10 s, then the ended card
+      if (PJ.room) { PJ.room = null; PJ.endedUntil = Math.max(PJ.endedUntil, performance.now() + TUNE.room.endedCard * 1000); } PJ.demo = null; return; }
     if (PJ.demo) PJ.demo = null;   // a dashboard takes over from the demo
     if (d.R) applyRound(d.R);      // v33c: the room's round length
     PJ.room = d; PJ.roomAt = performance.now(); pjChip(); return;
@@ -8969,6 +9339,7 @@ function pjFrame(ts, dt, real) {
   else if (PJ.tags.size && view !== "lobby") { PJ.tags.forEach(t => t.e.remove()); PJ.tags.clear(); PJ.slots = []; }
   if (view === "map") pjMap(r, ts, dt, real);
   if (view === "idle" || view === "ended") { $("pj-pod").className = ""; PJ.podKey = ""; }
+  pjBoardFrame(r, view);   // v35 (Dayo 3b, Raj 10): the Scoreboard, and FINAL STANDINGS after an early End game
   pjMusic(r, view);
   PJ.view = view; if (now - PJ.chipT > 700 || !PJ.chipT) { PJ.chipT = now; pjChip(); }
 }
@@ -9037,10 +9408,11 @@ function pjView(r) {    // the class to show: the hosting girl's tab if it is li
   PJ.live = live;
   // v34: pos is where her laptop says she is ([x, y, hiding, fighting]); -1 = between animals (not shown); 0 = no report (placed in her animal's zone)
   if (live) return { t: Math.min(s.R, s.t + (s.over || r.paused ? 0 : (now - PJ.snapAt) / 1000 * SPEED)), R: s.R, final: s.final, over: s.over, crown: s.crown,
-    members: s.members.map(([id, name, sp, kai, me, girl, pos]) => ({ id, name, sp, kai, me: !!me, girl: !!girl, pos: Array.isArray(pos) ? pos : null, gone: pos === -1 })), feed: s.feed, her: s.her, ev: s.ev };
+    members: s.members.map(([id, name, sp, kai, me, girl, pos, gid]) => ({ id, name, sp, kai, me: !!me, girl: !!girl, gid: gid == null ? null : gid, pos: Array.isArray(pos) ? pos : null, gone: pos === -1 })), feed: s.feed, her: s.her, ev: s.ev, lost: s.lost || [] };
   const cl = PJ.cl; if (!cl) return null;
-  return { t: cl.t, R: TUNE.runSeconds, final: cl.final, over: cl.over, crown: cl.crown, members: cl.members.map(m => ({ id: m.id, name: m.name, sp: m.sp, kai: m.kai, me: false, girl: !!m.girl })),
-    feed: cl.feed.slice(-12), her: null, ev: null };
+  lostScan(cl, PJ, r);   // v35: the projector's own computer class has a Just lost list too
+  return { t: cl.t, R: TUNE.runSeconds, final: cl.final, over: cl.over, crown: cl.crown, members: cl.members.map(m => ({ id: m.id, name: m.name, sp: m.sp, kai: m.kai, me: false, girl: !!m.girl, gid: m.gid == null ? null : m.gid })),
+    feed: cl.feed.slice(-12), her: null, ev: null, lost: lostOut(PJ) };
 }
 function pjSnapOut(v, r) {    // the projector's own class, told to the dashboard (no energy, no hunger, no stalk targets)
   return { k: "snap", from: "projector", code: r.code, rid: r.rid, t: v.t, R: v.R, final: v.final, over: v.over, crown: v.crown, n: v.members.length,
@@ -9062,13 +9434,14 @@ function pjMap(r, ts, dt, real) {
   if (r.phase === "over" && PJ.cl && !PJ.cl.over) endClass(PJ.cl);
   const v = pjView(r); if (!v) return;
   // the world: computer animals, events and the tide; it follows the hosting tab's clock when there is one
+  const board = pjBoardOn(r); PJ.v = v;   // v35: the Scoreboard view skips drawing the shore; the shore itself keeps running, so the map is right the moment M brings it back
   if (playing && !paused && G && !G.over) {
     let d = dt; if (PJ.live) { const want = v.t - G.t; d = want > 3 ? 3 : want > 0.5 ? dt + Math.min(want, 0.5) : want < -1 ? 0 : dt; if (!G.sched) pjSyncEv(v.ev); }
     if (d > 0) teacherStep(G, d);
   }
   if (!PJ.live && playing && now - PJ.postT > P.snapMs) { PJ.postT = now; rmSend(pjSnapOut(v, r)); }
-  if (!TICKFRAME) { drawWater(G, ts); drawEvents(G, ts); drawWeather(G, ts); drawWash(G); stepCam(G, real); drawDeepOver(G, NOMOTION ? 0 : ts / 1000); }
-  pjTop(v, r); pjTokens(v, r); pjBursts(v, r); pjFeed(v); pjLadder(v); pjLanes(v, r); pjStamps();
+  if (!TICKFRAME && !board) { drawWater(G, ts); drawEvents(G, ts); drawWeather(G, ts); drawWash(G); stepCam(G, real); drawDeepOver(G, NOMOTION ? 0 : ts / 1000); }
+  pjTop(v, r); if (!board) { pjTokens(v, r); pjBursts(v, r); pjFeed(v); pjLadder(v); pjLanes(v, r); pjStamps(); } else pjBoard(v, r);
   // 3, 2, 1, GO! over the map, then the final minute's last ten
   const cnt = $("pj-count"); let want = null, cls = "on";
   if (r.phase === "playing" && PJ.prevPhase === "go") PJ.goAt = now;
@@ -9099,7 +9472,7 @@ function pjTop(v, r) {
   const ph = tidePhase(v.t), names = { EBBING: "EBBING", LOW: "LOW TIDE", FLOODING: "FLOODING", HIGH: "HIGH TIDE" };
   const pe = $("pj-phase"); if (pe.textContent !== names[ph]) pe.textContent = names[ph];
   $("pj-tidebar").firstChild.style.width = (clamp(v.t / v.R, 0, 1) * 100).toFixed(1) + "%";
-  const ck = $("pj-clock"), txt = v.over ? "THE TIDE HAS TURNED" : r.phase === "go" ? `THE TIDE TURNS IN <b>${fmt(v.R)}</b>` : `THE TIDE TURNS IN <b>${fmt(v.R - v.t)}</b>`;
+  const ck = $("pj-clock"), txt = v.over ? "THE TIDE HAS TURNED" : r.phase === "go" ? `ROUND ENDS IN <b>${fmt(v.R)}</b>` : `ROUND ENDS IN <b>${fmt(v.R - v.t)}</b>`;   // v35 (Wren S1): the tide turns several times a round
   if (ck.innerHTML !== txt) ck.innerHTML = txt; ck.classList.toggle("final", !!v.final && !v.over);
   if (ph !== PJ.phaseTide) { if (PJ.phaseTide && r.phase === "playing") play("tide"); PJ.phaseTide = ph; }
 }
@@ -9308,8 +9681,7 @@ function pjLanes(v, r) {
 }
 // ---------- the kai ladder (top ten; the crown on first; no "You" row) ----------
 function pjLadder(v) {
-  const box = $("pj-rows"), mem = v.members.slice().sort((a, b) => b.kai - a.kai || a.id - b.id);
-  const ci = mem.findIndex(m => m.id === v.crown); if (ci > 0) mem.unshift(mem.splice(ci, 1)[0]);   // the wearer stays first until someone is clearly ahead (as v31)
+  const box = $("pj-rows"), ord = pjShownOrder(v, PJ.shownKai, PJ.ladderClock || (PJ.ladderClock = {})), mem = ord.map(o => o.m), shownOf = new Map(ord.map(o => [o.m.id, o.s]));   // v35 fixes: ordered by the shown number, as the Scoreboard
   const keep = new Set();
   mem.slice(0, 10).forEach((m, i) => {
     let row = PJ.ladder.get(m.id);
@@ -9319,8 +9691,7 @@ function pjLadder(v) {
     const pc = row.querySelector(".pc"), bg = `url("${ART}portrait-${m.sp}.webp")`; if (pc._bg !== bg) { pc._bg = bg; pc.style.backgroundImage = bg; }
     const hasCr = !!pc.querySelector(".cr"); if (m.id === v.crown && !hasCr) pc.insertAdjacentHTML("beforeend", `<span class="cr">${CROWN_SVG}</span>`); else if (m.id !== v.crown && hasCr) pc.querySelector(".cr").remove();
     const nm = row.querySelector(".nm"); if (nm.textContent !== m.name) { nm.textContent = m.name; nm.style.fontSize = (m.name.length > 8 ? Math.max(28, 34 * 8 / m.name.length) : 34).toFixed(1) + "px"; }
-    const s0 = PJ.shownKai.has(m.id) ? PJ.shownKai.get(m.id) : m.kai, s = Math.abs(m.kai - s0) < 1 ? m.kai : s0 + (m.kai - s0) * 0.12; PJ.shownKai.set(m.id, s);
-    row.querySelector(".kai").textContent = KAI(s); keep.add(m.id);
+    row.querySelector(".kai").textContent = KAI(shownOf.get(m.id)); keep.add(m.id);
   });
   PJ.ladder.forEach((row, id) => { if (!keep.has(id)) { row.style.opacity = "0"; row.style.transform = "translateY(800px)"; } });
 }
@@ -9338,7 +9709,8 @@ function pjPodium(v, r) {
     const col = (m, i) => !m ? `<div class="pd2-col"></div>` : `<div class="pd2-col p${i + 1}">${i === 0 ? `<span class="cr">${CROWN_SVG}</span>` : ""}<img alt="" src="${ART}cut/fighter-${m.sp}.webp"><div class="n">${esc(m.name)}</div><div class="k">${KAI(m.kai)} kai</div><div class="blk">${i + 1}</div></div>`;
     const rest = mem.slice(3, 10).map((m, i) => `<li><span>${i + 4}. ${esc(m.name)}</span><b>${KAI(m.kai)}</b></li>`).join("");
     const conf = NOMOTION || r.calm ? "" : Array.from({ length: 40 }, (_, i) => `<i class="pj-conf" style="left:${(Math.random() * 100).toFixed(1)}%;background:${["#ffd23f", "#59c3c3", "#ff8a70", "#fff", "#59c14a"][i % 5]};animation-delay:${(-Math.random() * 6).toFixed(2)}s;animation-duration:${(5 + Math.random() * 3).toFixed(1)}s"></i>`).join("");
-    pod.innerHTML = `${conf}<div class="pd2-head">THE TIDE HAS TURNED</div><div class="pd2"><div class="pd2-stand">${col(mem[1], 1)}${col(mem[0], 0)}${col(mem[2], 2)}</div>${rest ? `<ol class="pd2-rest">${rest}</ol>` : ""}</div>`;
+    pod.innerHTML = `${conf}<div class="pd2-head">THE TIDE HAS TURNED</div><div class="pd2"><div class="pd2-stand">${col(mem[1], 1)}${col(mem[0], 0)}${col(mem[2], 2)}</div>${rest ? `<ol class="pd2-rest">${rest}</ol>` : ""}</div><div id="pj-aw"></div>`;   // v35: the Awards strip (filled by pjBoardFrame when the room has them)
+    pod.classList.add("pd2--aw"); PJ.awKey = "";
     snd31("fanfare");
   }, 1500);
 }
@@ -9363,6 +9735,501 @@ function pjAuditSample() {
     for (let j = i + 1; j < rs.length; j++) { const a = rs[i], b = rs[j]; if (a.left < b.right - 2 && a.right > b.left + 2 && a.top < b.bottom - 2 && a.bottom > b.top + 2) ov++; } }
   PJ.audit.samples++; PJ.audit.overlaps += ov; PJ.audit.small += small; PJ.audit.lastN = rs.length;
 }
+
+/* =====================================================================
+   v35 "FIRST CLASS BACK" (Kit, 2026-11-04).  Sources, in order of authority: design/v35-adjudications.md, Wren's
+   design/characters/_notes/v35-science-check.md, Raj's design/v35-look.md, Dayo's design/v35-first-class-back.md, and Māia's
+   v35 addendum in design/live-privacy-check.md.  Kit's own calls: design/v35-build-notes.md.
+   ===================================================================== */
+// ---------- numbers (Dayo 4a, 4b, 4c, 1c, 3a, 3b, 5a) ----------
+TUNE.hunt.herFullSeconds = 12; TUNE.hunt.fullKaiX = 0.5; TUNE.bigBody.hunger.herFullX = 1.25;   // her full: 12 s (15 s for the big five); a catch while full scores half kai.  CPU hunters keep digestSeconds 25 x1.40
+Object.assign(TUNE.chest, { firstAt: 30, every: [40, 50], finalEvery: 25, minRare: 1 });            // about 15 chests in 12 minutes (was 27); every chest holds a rare or gold card
+TUNE.cards.muscle = [0.25, 400]; TUNE.cards.kingSeconds = 20;
+TUNE.weather.maxStreaks = 80;                                                                        // look only; a lag suspect (Dayo 5b)
+TUNE.strand.kouraDryPx = 60;                                                                         // Wren 2: a short strip of wet rock and weed
+TUNE.howto = { cards: 4, storageKey: "niche-howto-seen", lateWaitSeconds: 40, tipSeconds: 4, tipGapSeconds: 20, firstFightExtraSeconds: 3 };
+TUNE.swap = { afterSeconds: params.get("swap") === "1" ? 5 : 45, kaiLoss: 0.10, minLoss: 30, confirmSeconds: 6, notInFinalSeconds: 30 };
+TUNE.room.pjView = params.get("pj") === "map" ? "map" : "board";
+// kai for hunters: more meals a minute (full no longer blocks), so every eat:"hunt" species took kaiX x0.75, then the careful bot re-evened each
+// to 2,400 a round +-20% (3 seeds x 8 min, shared schedule; _build/v35-bots.txt).  These are the results.
+// Kit's call (design/v35-build-notes.md 1): the x0.75 start point stands and no further cut.  The careful bot on game time put the hunters at 2,900-5,300
+// (it waits out full, now 12 s, so it fights twice as often), but once each fight's ~11.5 s on the battle screen is charged to the class's round, every
+// x0.75 hunter lands at 1,500-2,100, inside the cast's own spread (grazers 1,500-2,400 the same way).  A game-time re-even would have halved them in class.
+const V35_REEVEN = {};
+for (const sp in TUNE.kai.kaiX) if (EATS(sp) === "hunt") TUNE.kai.kaiX[sp] = Math.round(TUNE.kai.kaiX[sp] * 0.75 * 100) / 100;
+Object.assign(TUNE.kai.kaiX, V35_REEVEN);
+var BOTFULL = { hunt: false };   // test switch for the careful bot (bots.mjs): hunt straight through full
+const herFullSecs = sp => TUNE.hunt.herFullSeconds * (BIG[sp] ? TUNE.bigBody.hunger.herFullX : 1);
+// every chest holds at least one rare (Dayo 4b minRare): Kit's call, at the tier: one slot becomes rare (the literal "help slot" would make Safe haven half of all chests)
+{ const base = chestTiers; chestTiers = function (cl, m) { const t = base(cl, m); if (TUNE.chest.minRare && !t.some(x => x >= 1)) t[Math.floor(cl.rng() * t.length)] = 1; return t; }; }
+
+// ---------- words (Wren 5): the killer's plain English name, with its article ----------
+const SAY = { wheke: "an octopus", koura: "a rock lobster", patangaroa: "a seastar", papaka: "a rock crab", oyster_borer: "an oyster borer", spotty: "a spotty", tamure: "a snapper",
+  kahawai: "a kahawai", bronze_whaler: "a bronze whaler", eagle_ray: "an eagle ray", matuku: "a white-faced heron", torea: "an oystercatcher", karoro: "a gull", shag: "a shag",
+  korora: "a little penguin", kotoretore: "an anemone", fur_seal: "a fur seal", orca: "an orca", haku: "a kingfish", white_shark: "a great white shark", kotare: "a kingfisher",
+  cat: "a cat", kina: "a sea urchin", pupu: "a cat’s eye snail", kutai: "a mussel", pilchard: "a pilchard", butterfish: "a butterfish", triplefin: "a triplefin",
+  kahu: "a swamp harrier", paua: "a black-foot pāua", dog: "a dog" };
+const plainOf = sp => (SAY[sp] || ("a " + (SP[sp] ? SP[sp].what : sp))).replace(/^an? /, "");   // "octopus": the fight header's "WHEKE · octopus"
+const aOf = w => (/^[aeiou]/i.test(w) ? "an " : "a ") + w;
+function causeLine(sp, c, by) {   // Just lost, line 2.  Māia condition 1: a species or an event, never a classmate's nickname
+  if (c === "swapped") return "swapped for a new animal";
+  if (c === "net") return "caught in a set net";
+  if (c === "dog" || by === "dog") return "killed by a dog";
+  if (c === "rivalry") return "lost a fight with " + (SAY[by] || "a rival");
+  if (c === "eaten" && by) return "eaten by " + (SAY[by] || "a hunter");
+  return "ran out of energy";
+}
+const HUNTERS_OF = {}; for (const k in CATCH1) { const [h, p] = k.split(">"); if (SAY[h]) (HUNTERS_OF[p] = HUNTERS_OF[p] || []).push(h); }
+function cpuDeathCause(rng, sp) {   // a computer classmate's death (off the map): a real hunter of that animal, or energy.  Math.random, so the class's own numbers do not move
+  const hs = HUNTERS_OF[sp] || []; if (hs.length && Math.random() < 0.8) return [sp, "eaten", hs[Math.floor(Math.random() * hs.length)]]; return [sp, "energy", null]; }
+
+// ---------- per-round state on her laptop ----------
+const V35 = { dc: 0, dk: null, awKey: "" };
+function v35Start(g) {
+  V35.dc = 0; V35.dk = null; V35.awKey = ""; g.aw = { meal: 0, mealSp: null, life: 0, lifeSp: null, worst: 0, climb: 0 };
+  NEAR.slots = [null, null, null]; NEAR.html = ""; NEAR.t = 0; swClose(); POOL.warned = {};
+  if (FH) FH.on = false;
+}
+function v35LifeEnd(g) { if (!g.aw) return; const L = g.t - (g.lifeStart || 0); if (L > g.aw.life) { g.aw.life = L; g.aw.lifeSp = g.me.sp; } }
+function v35Died(g, ev) {
+  v35LifeEnd(g); V35.dc++;
+  const c = ev.cause === "net" ? "net" : ev.cause === "rivalry" ? "rivalry" : ev.cause === "eaten" ? (ev.bySp === "dog" ? "dog" : "eaten") : "energy";
+  V35.dk = [g.me.sp, c, c === "eaten" || c === "rivalry" ? ev.bySp || null : null];
+  if (JOINV && RMS.id !== null) rmReport(true);   // sooner after a death (queued by the transport, never a retry: Māia's write-rate note)
+}
+function awNumbers(g) {   // [biggest meal, longest life (s), animals played, places climbed, meal animal, life animal, animal now]
+  const a = g.aw || {}, H = g.cl && g.cl.her, alive = !g.waiting && g.me && g.me.alive !== false, now = alive ? g.t - (g.lifeStart || 0) : 0;
+  const life = Math.max(a.life || 0, now), lifeSp = now >= (a.life || 0) && alive ? g.me.sp : a.lifeSp;
+  return [Math.round(a.meal || 0), Math.round(life), H ? H.animals.length : 1, a.climb || 0, a.mealSp || null, lifeSp || g.me.sp, g.me.sp];
+}
+
+// ---------- the surge channel (Dayo 5a-1): a route through it for a waterbound animal ----------
+function gutterVia(g, me, dest, lim) {
+  const A = { x: 1185, y: 1200 }, B = { x: 1185, y: Math.min(MAXY, Math.max(1735, g.waterY + 35)) };   // A: inside the big pool at the channel's mouth; B: open sea at its foot
+  for (const [p, q] of [[A, B], [B, A]]) if (dryLength(g, me, p) <= lim && dryLength(g, q, dest) <= lim) return [{ ...p }, { ...q }];
+  return null;
+}
+// placement on a deal (Dayo 5a-3): a waterbound animal dealt at EBBING or LOW is never put in a small pool; open sea water at the water's edge, at the x of her zone
+function v35Place(g) {
+  const me = g && g.me; if (!me || !WATERBOUND(me.sp) || (g.phase !== "EBBING" && g.phase !== "LOW")) return;
+  const p = poolAt(me.x, me.y); if (!p || !p.small) return;
+  const c = clearPointNear({ x: clamp(me.x, 60, 1540), y: SHORE.lowWaterY + 70 }); Object.assign(me, { x: c.x, y: c.y, refuge: null, mode: "idle", dest: null, target: null, via: null });
+}
+{ const base = respawnAs; respawnAs = function (g, sp, at0) { const me = base(g, sp, at0); v35Place(g); return me; }; }
+{ const base = start; start = function (sp, seed) { base(sp, seed); v35Place(G); v35Tests(); }; }
+{ const base = rmStart; rmStart = function () { base(); if (G) v35Place(G); }; }
+function v35Tests() {   // test links: ?pool=1 a triplefin in the big pool at the start of low tide (?pool=small: a small pool); ?full=1 she starts full; ?howto=1 (solo) the cards
+  const pl = params.get("pool");
+  if (pl && G && !JOINV) { G.t = TUNE.tide.lowFrom; G.level = tideLevel(G.t); G.waterY = waterYAt(G.level); G.phase = tidePhase(G.t); if (G.cl) G.cl.t = G.t;
+    const p = pl === "small" ? SHORE.pools[1] : SHORE.pools[0]; Object.assign(G.me, { x: p.cx, y: p.cy + 20, mode: "idle", refuge: null, dest: null, target: null }); stepCam(G, 0, true); }
+  if (params.get("full") === "1" && G) G.me.fullUntil = G.t + herFullSecs(G.me.sp);
+  if (params.get("howto") === "1" && !JOINV && G) setTimeout(() => htOpen("game"), 600);
+}
+if (params.get("pool") && !DEAL.forced) DEAL.forced = "triplefin";
+
+// ---------- a refused move: a centre toast, said once (Dayo 5a-4, Raj 9) ----------
+const TST = { el: null, t: 0 };
+function refuseToast(g, n0, text) {
+  const says = g.events.slice(n0).filter(e => e.k === "say"); if (!text) text = says.length ? says[says.length - 1].text : ""; if (!text) return;
+  for (const e of says) e.k = "said";   // not again in the bottom bar
+  HUNTTAP.notes.push(text); if (HUNTTAP.notes.length > 40) HUNTTAP.notes.shift();
+  let e = TST.el; if (!e) { e = TST.el = document.createElement("div"); e.className = "nk-tst"; e.setAttribute("role", "status"); $("nk-stagewrap").appendChild(e); }
+  e.textContent = text; e.classList.remove("low");
+  const t = UI.toks.get(0); if (t && t.e.style.display !== "none") { const wr = $("nk-stagewrap").getBoundingClientRect(), r = t.e.getBoundingClientRect(), cy = wr.height * 0.3, h = 70, w = Math.min(520, wr.width - 40);
+    if (r.right > wr.left + wr.width / 2 - w / 2 - 24 && r.left < wr.left + wr.width / 2 + w / 2 + 24 && r.bottom > wr.top + cy - h / 2 - 24 && r.top < wr.top + cy + h / 2 + 24) e.classList.add("low"); }
+  e.classList.remove("on"); void e.offsetWidth; e.classList.add("on"); clearTimeout(TST.t); TST.t = setTimeout(() => e.classList.remove("on"), 2000);
+  try { snd31("block"); } catch (er) {}
+}
+
+// ---------- a cut-off pool: the pill above her token, the CUT OFF chip, the 15 s warning (Dayo 5a-4, Raj 9) ----------
+const POOL = { el: null, warned: {} };
+const levelOfY = y => (y - SHORE.lowWaterY) / (SHORE.highWaterY - SHORE.lowWaterY);
+function poolCut(g, me) {   // a small pool the sea no longer reaches; back = seconds until the flood reaches its rim (the big pool has the channel: never cut off)
+  if (!me || !WATERBOUND(me.sp)) return null;
+  const p = poolAt(me.x, me.y); if (!p || !p.small) return null; const rim = p.cy + p.ry; if (g.waterY <= rim) return null;
+  const T = TUNE.tide, back = T.floodFrom + levelOfY(rim) * (T.highFrom - T.floodFrom); return { p, back: Math.max(0, back - g.t) };
+}
+function poolFrame(g) {
+  const me = g.me; let e = POOL.el; if (!e) { e = POOL.el = document.createElement("div"); e.className = "nk-pool-pill"; e.innerHTML = "<b>CUT OFF IN THE POOL</b><span></span>"; $("nk-chips").appendChild(e); }
+  const cut = !g.waiting && !g.over && me.alive !== false && WATERBOUND(me.sp) ? poolCut(g, me) : null;
+  if (!cut || BT.open) { if (e.classList.contains("on")) e.classList.remove("on"); }
+  else { e.querySelector("span").textContent = "the sea comes back in " + fmt(cut.back); const t = UI.toks.get(0), r = t ? t.s / 2 : 30;
+    const below = (me.y - r - 10 - 60 / scale - CAM.y) * scale < 8; e.classList.toggle("below", below); e.style.left = me.x.toFixed(1) + "px"; e.style.top = (below ? me.y + r + 10 : me.y - r - 10).toFixed(1) + "px";
+    const k = (1 / (scale || 1)).toFixed(3); if (e.style.scale !== k) e.style.scale = k;   // Raj's sizes are screen pixels; the stage is scaled
+    if (!e.classList.contains("on")) e.classList.add("on"); }
+  // 15 s before the pool she is in is cut off, once
+  const p = !g.waiting && WATERBOUND(me.sp) && g.phase === "EBBING" ? poolAt(me.x, me.y) : null;
+  if (p && p.small) { const T = TUNE.tide, tCut = T.ebbFrom + (1 - levelOfY(p.cy + p.ry)) * (T.lowFrom - T.ebbFrom), left = tCut - g.t, key = p.id + "|" + Math.floor(tCut);
+    if (left > 0 && left <= 15 && !POOL.warned[key]) { POOL.warned[key] = 1; banner("nk-ev-banner", "POOL CUTTING OFF IN 15 s", 3200); } }
+}
+
+// ---------- who can fight her: rings, tags, faded animals, the Near you strip (Dayo 2e, Raj 5-6; adjudication 1: own kind is lilac) ----------
+const RELC = new Map();
+function relKind(meSp, a) {
+  const key = meSp + "|" + a.sp; let v = RELC.get(key); if (v !== undefined) return v;
+  const ro = relOf(meSp, a.sp);
+  v = a.sp === meSp ? "kind" : (ro === "hunted" || CATCH1[a.sp + ">" + meSp] !== undefined) ? "hunts" : (EATS(meSp) === "hunt" && (ro === "hunts" || CATCH1[meSp + ">" + a.sp] !== undefined)) ? "eat" : null;
+  RELC.set(key, v); return v;
+}
+function relTok(g, a, t) {
+  if (t.relSp === g.me.sp && t.relA === a.sp && t.relAl === !!a.alive) return;   // v35 fixes (Jisoo 2): nothing changed, so no key string and no lookup this frame
+  const k = a.alive ? relKind(g.me.sp, a) : null; t.relA = a.sp; t.relAl = !!a.alive; if (t.rel === k && t.relSp === g.me.sp) return; t.rel = k; t.relSp = g.me.sp; t.faded = !k;
+  const e = t.e; e.classList.toggle("nk-tok--faded", !k); for (const c of ["hunts", "eat", "kind"]) e.classList.toggle("nk-tok--rel-" + c, k === c);
+  let tag = e.querySelector(".nk-tag"); if (k && !tag) { tag = document.createElement("span"); e.appendChild(tag); }
+  if (tag) { tag.className = "nk-tag" + (k ? " nk-tag--" + k : ""); tag.textContent = SP[a.sp].up; }
+}
+const NEAR = { t: 0, sp: null, slots: [null, null, null], html: "", prev: new Set() };
+function nearFrame(g) {
+  const now = performance.now(); if (now - NEAR.t < 1000 && NEAR.sp === g.me.sp) return; NEAR.t = now; NEAR.sp = g.me.sp;
+  const box = $("nk-panel-near"); if (!box) return;
+  let html = "";
+  if (!g.waiting && g.me.alive !== false && !g.over) {
+    const me = g.me, cand = new Map();
+    for (const a of g.animals) { if (!a.alive || a.gone || a.away) continue; const k = relKind(me.sp, a); if (!k) continue; const d = dist(a, me); if (d > (NEAR.slots.includes(a.id) ? 650 : 600)) continue; cand.set(a.id, { a, k, d }); }
+    const top = [...cand.values()].sort((x, y) => x.d - y.d).slice(0, 3), ids = new Set(top.map(q => q.a.id));
+    NEAR.slots = NEAR.slots.map(id => ids.has(id) ? id : null);
+    for (const q of top) if (!NEAR.slots.includes(q.a.id)) { const i = NEAR.slots.indexOf(null); if (i >= 0) NEAR.slots[i] = q.a.id; }
+    const rows = NEAR.slots.map(id => id == null ? null : cand.get(id)).filter(Boolean);
+    html = rows.length ? `<b class="nk-near-lab">NEAR<br>YOU</b>` + rows.map(q => `<span class="nk-near-row nk-near-row--${q.k}${NEAR.prev.has(q.a.id) ? "" : " nk-near-row--new"}"><i style="background-image:url('${ART}portrait-${q.a.sp}.webp')"></i><span><b>${SP[q.a.sp].up}</b><small>${q.k === "hunts" ? "hunts you" : q.k === "eat" ? "you eat it" : "your kind"} · ${q.d < 250 ? "<em>close</em>" : "near"}</small></span></span>`).join("")
+      : `<span class="nk-near-none">Nothing near you that hunts you or that you eat.</span>`;
+    NEAR.prev = new Set(rows.map(q => q.a.id));
+  }
+  if (html === NEAR.html) return; NEAR.html = html; box.innerHTML = html;
+  box.querySelectorAll(".nk-near-row b").forEach(b => { for (const fs of [12, 11]) { if (b.scrollWidth <= b.parentElement.clientWidth + 0.5) break; b.style.fontSize = fs + "px"; } });   // never an ellipsis: 13, then 12, then 11 px
+}
+
+// ---------- one-time labels in the lane (Dayo 1b, Raj 2) ----------
+const OL = { done: {}, q: [], lastAt: -1e9, until: 0, el: null, halo: null };
+function olWant(key, chip, cls, text, halo) { if (OL.done[key]) return; OL.done[key] = true; OL.q.push({ chip, cls, text, halo }); }
+function olFrame(g) {
+  const now = performance.now(), H = TUNE.howto;
+  if (OL.until && now > OL.until) { OL.until = 0; if (OL.el) { OL.el.classList.add("out"); setTimeout(() => { if (!OL.until && OL.el) OL.el.classList.remove("on", "out"); }, 260); } if (OL.halo) { OL.halo.classList.remove("nk-ol-halo"); OL.halo = null; } }
+  if (!OL.q.length || OL.until || now - OL.lastAt < H.tipGapSeconds * 1000) return;
+  if (BT.open || g.modal || uiBusy || g.waiting || $("nk-tray").className || vis("nk-choose")) return;   // never over a fight or the chest tray
+  const q = OL.q.shift(); let e = OL.el; if (!e) { e = OL.el = document.createElement("div"); e.className = "nk-ol"; e.setAttribute("role", "status"); $("nk-lane").prepend(e); }
+  e.innerHTML = `<span class="nk-ol-chip nk-ol-chip--${q.cls}">${q.chip}</span><span>${esc(q.text)}</span>`; e.classList.remove("out"); e.classList.add("on");
+  OL.until = now + H.tipSeconds * 1000; OL.lastAt = now;
+  const h = q.halo && q.halo(); if (h) { h.classList.add("nk-ol-halo"); OL.halo = h; }
+}
+function olTriggers(g) {
+  if (g.waiting || g.over) return;
+  const st = stalkerOnMe(g); if (st) olWant("hunted", "HUNTED", "hunts", SP[st.sp].name + " has picked you. The number counts down to its strike.", () => { const t = UI.toks.get(st.id); return t && t.e; });
+  if (V.cw.st === "washed") olWant("chest", "WAVE CHEST", "chest", "tap it and pick one card.", () => $("nk-chest"));
+  if (g.me.fullUntil > g.t && EATS(g.me.sp) === "hunt") olWant("full", "FULL", "full", "for " + Math.round(herFullSecs(g.me.sp)) + " s a catch scores half kai.");
+}
+
+// ---------- New animal (Dayo 4c, Raj 8) ----------
+const SW = { open: false, t: 0, el: null };
+function swAllowed(g) {
+  if (!g || TEACHER || g.over || g.waiting || !g.me || g.me.alive === false || g.modal || BT.open || uiBusy) return false;
+  if (g.t - (g.lifeStart || 0) < TUNE.swap.afterSeconds || TUNE.runSeconds - g.t <= TUNE.swap.notInFinalSeconds) return false;
+  if (stalkerOnMe(g) || g.me.tangle || g.me.tumbleUntil > g.t || $("nk-tray").className || vis("nk-choose") || vis("nk-death") || vis("nk-end") || FST.on) return false;
+  return !!g.cl;
+}
+function swFrame(g) {
+  const b = $("nk-sw-btn"), ok = swAllowed(g);
+  if (ok && !b.classList.contains("on")) { b.classList.add("on"); requestAnimationFrame(() => b.classList.add("in")); }
+  else if (!ok && b.classList.contains("on")) b.classList.remove("on", "in");
+  if (SW.open && !ok) swClose();
+}
+function swOpen() {
+  if (!swAllowed(G) || SW.open) return; SW.open = true;
+  let e = SW.el; if (!e) { e = SW.el = document.createElement("div"); e.className = "nk-sw-card"; $("nk-lane").prepend(e); }
+  e.innerHTML = `<h4>Swap for a new animal?</h4><p>You lose 10% of your kai (at least 30).</p><div class="btns"><button class="sw" type="button" data-sw="1">Swap</button><button type="button" data-sw="0">Keep playing</button></div><div class="nk-sw-drain"><i></i></div>`;
+  e.querySelectorAll("button").forEach(x => x.addEventListener("click", ev => { ev.stopPropagation(); if (x.dataset.sw === "1") doSwap(G); else swClose(); }));
+  e.classList.remove("on"); void e.offsetWidth; e.classList.add("on");
+  clearTimeout(SW.t); SW.t = setTimeout(swClose, TUNE.swap.confirmSeconds * 1000);   // no answer = Keep playing
+}
+function swClose() { SW.open = false; clearTimeout(SW.t); if (SW.el) SW.el.classList.remove("on"); }
+function doSwap(g) {
+  if (!swAllowed(g)) return swClose();
+  swClose();
+  const cl = g.cl, m = cl.members[0], S = TUNE.swap, loss = take(m, Math.max(S.minLoss, m.kai * S.kaiLoss)), me = g.me;   // 10% as a death, but at least 30 (a death has no minimum); the card says so (v35 fixes, Jisoo 4)
+  cl.her.lostToTide += loss;
+  g.lives.push({ sp: me.sp, from: g.lifeStart, to: g.t, cause: "swapped" });
+  v35LifeEnd(g); V35.dc++; V35.dk = [me.sp, "swapped", null];
+  for (const h of g.animals) if (h.hunter && h.stalk && h.stalk.target === me) h.stalk = null;
+  Object.assign(me, { alive: false, mode: "dead", target: null, dest: null, via: null }); g.waiting = true;
+  banner("nk-news-banner", "Swapped. The tide took " + KAI(loss) + " kai.", 3200);   // no death card
+  if (JOINV && RMS.id !== null) rmReport(true);
+  const zone = BAND_ZONE[bandAt(me.x, me.y)] || CH_ZONE[me.sp] || 3;
+  chOpen({ respawn: true, zone, news: "Swapped for a new animal" });
+}
+$("nk-sw-btn").addEventListener("click", e => { e.stopPropagation(); swOpen(); });
+addEventListener("keydown", e => { if (e.key === "Escape" && SW.open) { swClose(); e.preventDefault(); } });
+
+// ---------- How to play: four cards (Dayo 1a, Raj 1; Wren S1 on card 2) ----------
+const HT = { seen: false, i: 0, mode: "", done: null, timer: 0 };
+try { HT.seen = localStorage.getItem(TUNE.howto.storageKey) === "1"; } catch (e) {}
+if (params.get("howto") === "1") HT.seen = false;
+const HT_CARDS = [
+  { h: "You are dealt an animal", t: "A real rocky-shore animal. When it dies, you get a new one. Tap the shore to play: <b>food</b> to eat, <b>cover</b> to hide, <b>an animal</b> to hunt it or take it on, <b>anywhere</b> to move there." },
+  { h: "Energy keeps you alive. Kai is your score.", t: "Energy drains all the time, faster when you move. Eating fills it. At zero you die. Everything you eat also adds <b>kai</b>. Most kai when the round ends wins." },
+  { h: "Fights: pick one move", t: "Attack or defend. Each move beats one move and loses to one. Then two or three rounds play out. Most rounds wins. Some animals are hard to beat: that’s nature." },
+  { h: "Wave chests and full", t: "A chest washes up now and then. Pick one card: <b>green</b> helps you, <b>red</b> hits a classmate you choose. After a meal a hunter is <b>full</b> for a few seconds: a catch then scores half." } ];
+function htPic(i) {
+  const P = sp => `${ART}portrait-${sp}.webp`;
+  if (i === 0) return `<div class="nk-ht-pic nk-ht-pic1"><i style="left:96px;--r:-9deg;background-image:url('${P("wheke")}')"></i><i class="you" style="left:238px;top:18px;--r:0deg;background-image:url('${P("koura")}')"></i><i style="left:380px;--r:9deg;background-image:url('${P("korora")}')"></i></div>`;
+  if (i === 1) return `<div class="nk-ht-pic nk-ht-pic2"><div class="nk-ht-en"><span class="lab">ENERGY</span><b>62</b><div class="bar"><i style="width:62%"></i></div><small>▼ −18 a minute</small></div><div class="nk-ht-kai"><span>KAI</span><b>1,240</b><em>+40</em></div></div>`;
+  if (i === 2) return `<div class="nk-ht-pic nk-ht-pic3" style="background-image:url('${STAGE_ART.rockpool}')"><img src="${ART}cut/fighter-wheke.webp" alt=""><img class="r" src="${ART}cut/fighter-koura.webp" alt=""><div class="pp l"><i class="a"></i><i></i><i></i></div><div class="pp r"><i class="g"></i><i class="g"></i><i></i></div></div>`;
+  const svg = ($("nk-chest") && $("nk-chest").querySelector("svg")) ? $("nk-chest").querySelector("svg").outerHTML : "";
+  return `<div class="nk-ht-pic nk-ht-pic4">${svg}<div class="nk-ht-card help"><b>Lucky find</b></div><div class="nk-ht-card hit"><b>Send the karoro</b></div><span class="nk-ht-full">FULL</span></div>`;
+}
+function htMark() { HT.seen = true; try { localStorage.setItem(TUNE.howto.storageKey, "1"); } catch (e) {} }
+function htHTML() {
+  const i = HT.i, c = HT_CARDS[i], game = HT.mode === "game", last = i === HT_CARDS.length - 1;
+  return `<div class="nk-ht" role="dialog" aria-label="How to play">${game ? `<div class="nk-ht-kick">The shore carries on while you read.</div>` : ""}<div class="nk-ht-in">
+    <div class="nk-ht-top"><h3>HOW TO PLAY</h3><small>${i + 1} OF ${HT_CARDS.length}</small>${game ? `<button class="nk-ht-x" type="button" data-ht="x" aria-label="Close">×</button>` : `<button class="nk-ht-skip" type="button" data-ht="skip">Skip</button>`}</div>
+    ${htPic(i)}<h2>${c.h}</h2><p>${c.t}</p>
+    <div class="nk-ht-nav"><button class="nk-ht-back" type="button" data-ht="back" style="${i ? "" : "visibility:hidden"}">Back</button><span class="nk-ht-dots">${HT_CARDS.map((_, k) => `<i class="${k === i ? "on" : ""}"></i>`).join("")}</span><button class="nk-ht-next" type="button" data-ht="next">${last ? "Got it" : "Next"}</button></div></div>
+    ${HT.mode === "lobby" ? `<div class="nk-ht-foot"><span>You're in, <b>${esc(RMS.nick || "")}</b>. Waiting for your teacher to start.</span><button class="nk-snd" type="button">Sound: on</button></div>` : ""}</div>`;   // the waiting card's sound switch stays with it
+}
+function htRender() {
+  const host = HT.mode === "game" ? $("nk-htov") : $("rm-join"); if (!host) return;
+  host.innerHTML = htHTML(); host.className = HT.mode === "game" ? "on" : "rm-ov on";
+  host.querySelectorAll("[data-ht]").forEach(b => b.addEventListener("click", ev => { ev.stopPropagation(); htAct(b.dataset.ht); }));
+  sndLabels();
+}
+function htOpen(mode, done) {
+  HT.mode = mode; HT.i = 0; HT.done = done || null; clearTimeout(HT.timer);
+  if (mode === "game" && !$("nk-htov")) { const o = document.createElement("div"); o.id = "nk-htov"; o.addEventListener("click", e => { if (e.target === o) htAct("x"); }); document.body.appendChild(o); }
+  if (mode === "late") HT.timer = setTimeout(() => htClose(false), (AUTOPLAY ? 1.5 : TUNE.howto.lateWaitSeconds) * 1000);   // her deal waits for Got it, Skip or 40 s (the autoplay test bot skips at once)
+  htRender();
+}
+function htAct(a) {
+  if (a === "back") { HT.i = Math.max(0, HT.i - 1); return htRender(); }
+  if (a === "next" && HT.i < HT_CARDS.length - 1) { HT.i++; return htRender(); }
+  htClose(a !== "x");
+}
+function htClose(mark) {
+  if (mark) htMark(); clearTimeout(HT.timer); const mode = HT.mode, done = HT.done; HT.mode = ""; HT.done = null;
+  if (mode === "game") { const o = $("nk-htov"); if (o) { o.className = ""; o.innerHTML = ""; } return; }
+  if (mode === "late") { if (done) done(); return; }
+  if (mode === "lobby" && RMS.st === "wait") rmWaiting();
+}
+$("nk-ht-q").addEventListener("click", e => { e.stopPropagation(); htOpen("game"); });
+addEventListener("keydown", e => { if (e.key === "Escape" && HT.mode === "game") { htClose(false); e.preventDefault(); } });
+
+// ---------- the fight screen: header, pips, callouts, stamp, result card (Dayo 2a-2d, Raj 3-4) ----------
+const FH = { on: false, kind: "", kai0: 0, e0: 0, rounds: 3, wins: { l: 0, r: 0 }, meSide: "r", opp: "", lines: [], firstDone: false, stamp: "", won: null };
+const FH_TAG = { hunted: ["HUNTING YOU", "Lose and you’re eaten."], prey: ["YOUR PREY", "Win and you eat."], food: ["SAME FOOD", "Win and you keep the spot."],
+  rival: ["RIVAL", "Lose and you’re driven off."], pick: ["YOU PICKED THIS FIGHT", "No knockouts. Losing costs energy."] };
+const fhKind = m => m.type === "fight" ? "hunted" : m.type === "hunt" ? "prey" : m.type === "rival" ? "food" : m.type === "rivalry" ? "rival" : "pick";
+function fhHeader(g, m, s, e0) {
+  const k = fhKind(m), cl = g.cl, kai = cl ? Math.round(cl.members[0].kai) : 0, meSide = s.meLeft ? "l" : "r", opp = s.opp;
+  Object.assign(FH, { on: true, kind: k, kai0: kai, e0: g.me.energy, rounds: 3, wins: { l: 0, r: 0 }, meSide, opp, lines: [], stamp: "", won: null });
+  const pips = side => `<div class="nk-fh-pips" id="nk-fh-pips-${side}">${"<i></i>".repeat(3)}</div>`;
+  const rival = side => `<div class="nk-fh-side nk-fh-side--rival nk-fh-${side}"><div class="nk-fh-name"><b>${SP[opp].up}</b><small> · ${plainOf(opp)}</small></div><div class="nk-fh-tagrow"><span class="nk-fh-tag nk-fh-tag--${k}">${FH_TAG[k][0]}</span></div><div class="nk-fh-bar"><i id="bt-bar-${side}" style="width:100%"></i></div>${pips(side)}</div>`;
+  const her = side => `<div class="nk-fh-side nk-fh-side--you nk-fh-${side}"><div class="nk-fh-name"><small>YOU · </small><b>${SP[g.me.sp].up}</b></div><div class="nk-fh-tagrow nk-fh-nums"><span>Energy<b>${Math.max(0, Math.round(g.me.energy))}</b></span><span>Kai<b>${KAI(kai)}</b></span></div><div class="nk-fh-bar"><i id="bt-bar-${side}" style="width:${(clamp(e0, 0, 1) * 100).toFixed(1)}%"></i></div>${pips(side)}</div>`;
+  return `<div class="bt-top nk-fh">${meSide === "l" ? her("l") : rival("l")}<div class="nk-fh-mid"><div class="bt-head" id="bt-head">VS</div><div class="nk-fh-stake">${FH_TAG[k][1]}</div><div class="nk-fh-ahead" id="nk-fh-ahead"></div><div class="bt-sub" id="bt-sub" hidden></div></div>${meSide === "r" ? her("r") : rival("r")}</div><div class="nk-fh-call" id="nk-fh-call"></div>`;
+}
+function fhSetRounds(n) { if (FH.rounds === n || FH.wins.l || FH.wins.r) return; FH.rounds = n; for (const s of ["l", "r"]) { const row = $("nk-fh-pips-" + s); if (row) row.innerHTML = "<i></i>".repeat(n); } }
+function fhCall(kick, text, cls, stamp) {
+  const c = $("nk-fh-call"); if (!c) return; clearTimeout(FH.callT);
+  c.innerHTML = `${kick ? `<div class="nk-fh-kick">${esc(kick)}</div>` : ""}<div class="nk-fh-box nk-fh-box--${cls}${stamp ? " nk-fh-stamp" + (cls === "lose" ? " lose" : "") : ""}">${text}</div>`;
+  c.className = "nk-fh-call"; void c.offsetWidth; c.className = "nk-fh-call on";
+  if (!stamp) FH.callT = setTimeout(() => { c.classList.add("out"); setTimeout(() => { if (c.classList.contains("out")) c.className = "nk-fh-call"; }, 200); }, 1000);
+}
+function fhAhead() {
+  const a = $("nk-fh-ahead"); if (!a || !FH.on) return; const me = FH.wins[FH.meSide], th = FH.wins[FH.meSide === "l" ? "r" : "l"];
+  a.className = "nk-fh-ahead " + (me > th ? "you" : th > me ? "rival" : ""); a.textContent = me > th ? "YOU’RE AHEAD" : th > me ? SP[FH.opp].up + " IS AHEAD" : "LEVEL";
+}
+function fhRoundLands(p) {
+  if (!FH.on || !$("nk-pay")) return;
+  const w = p.win; if (w) { FH.wins[w]++; const row = $("nk-fh-pips-" + w), pip = row && row.children[FH.wins[w] - 1]; if (pip) pip.className = "on"; }
+  const me = FH.wins[FH.meSide], th = FH.wins[FH.meSide === "l" ? "r" : "l"], nm = SP[FH.opp].up;
+  if (p.last) {   // the stamp in place of the last callout; it holds into the result card
+    FH.won = me > th ? true : th > me ? false : null; FH.stamp = me > th ? `YOU WIN ${me}–${th}` : th > me ? `${nm} WINS ${th}–${me}` : `LEVEL ${me}–${th}`; fhAhead();
+    return fhCall(p.tag, FH.stamp, FH.won === true ? "you" : FH.won === false ? "lose" : "even", true);
+  }
+  fhCall(p.tag, w ? (w === FH.meSide ? "ROUND TO YOU" : "ROUND TO " + nm) : "NOBODY TAKES IT", w ? (w === FH.meSide ? "you" : "rival") : "even");
+  setTimeout(fhAhead, 1250);
+}
+function fhFirstFight(band) { if (FH.firstDone) return false; FH.firstDone = true; band.insertAdjacentHTML("afterbegin", `<div class="nk-fh-first">Pick one move. Then the rounds play out. Most rounds wins.</div>`); return true; }
+function fhLongNames(band) { band.querySelectorAll(".bt-btn").forEach(b => { const n = b.querySelector("b"); if (n && n.getBoundingClientRect().height > 34) b.classList.add("nk-move--long"); }); }
+function fhWhile(g, ev) {   // a kai change while she fights: held, then one line each on the result card
+  // v35 fixes (Jisoo 5): these lines never name a classmate: "A classmate’s karoro took 40 kai"
+  if (ev.k === "onMe") { const gain = ev.id === "rogue" && /^\+/.test(ev.sub || ""); const amt = gain ? Number((ev.sub.match(/\d+/) || [0])[0]) : ev.amt || 0;
+    FH.lines.push({ text: ev.id === "rogue" ? `A classmate swapped kai with you` : `A classmate’s ${shortCard(ev.id)} took ${KAI(amt)} kai`, amt: gain ? amt : -amt }); }
+  else if (ev.k === "dodged") FH.lines.push({ text: `You dodged a classmate’s ${ev.id === "offlead" ? "dog" : "karoro"}`, amt: TUNE.cards.dodgeBonus });
+  else if (ev.k === "blocked") FH.lines.push({ text: `A classmate’s ${shortCard(ev.id)} was blocked`, amt: 0 });
+  else if (ev.k === "bounty") FH.lines.push({ text: "Crown bounty", amt: ev.amt || 0 });
+}
+{ const base = v31Event; v31Event = function (g, ev) { if (BT.open && FH.on) fhWhile(g, ev); return base(g, ev); }; }
+function fhResult(ev, done) {
+  const S = Math.min(SPEED, 4), r = resultText(ev), meS = BT.meLeft ? "l" : "r", opS = BT.meLeft ? "r" : "l", me = G.me;
+  if (r.won !== null) for (const [sd, c] of [[r.won ? opS : meS, "bt-act-slump"], [r.won ? meS : opS, NOMOTION ? "" : "bt-act-win"]]) { const w = $("nk-pfw-" + sd); if (w) { w.className = w.className.replace(/ ?(nk-act|bt-act)-\S+/g, ""); if (c) w.classList.add(c); } }
+  if (r.gone) { const w = $("nk-pfw-" + r.gone); if (w) w.classList.add("bt-act-gone"); }
+  if (ev.k === "fight" && ev.outcome === "eaten") { sfx("eaten-gulp"); play("eaten"); }
+  setTimeout(() => sfx(r.won ? "win-ping" : "lose-thud", { vol: 0.7 }), 250);
+  const won = FH.won !== null ? FH.won : r.won, head = FH.stamp || (won === true ? "YOU WIN" : won === false ? SP[FH.opp].up + " WINS" : "LEVEL");
+  const chip = (n, big) => `<span class="nk-rc-chip${n < 0 ? " loss" : ""}"${big ? "" : ' style="font-size:15px"'}>${n < 0 ? "−" : "+"}${KAI(Math.abs(n))}</span>`;
+  let out;
+  if (ev.k === "fight") out = ev.outcome === "eaten" ? "Eaten." : "Escaped.";
+  else if (ev.k === "hunt") out = ev.outcome === "meal" ? (ev.wasFull ? `A catch while full: ${chip(ev.kai || 0, true)} half kai.` : `A meal! ${chip(ev.kai || 0, true)} <span style="white-space:nowrap">Full for ${Math.round(herFullSecs(me.sp))} s.</span>`) : "It got away.";
+  else if (ev.k === "pick") out = ev.outcome === "won" ? "It backs off." : ev.outcome === "lost" ? "You back off." : "Nobody gives way.";
+  else if (ev.k === "rivalry") out = ev.outcome === "won" ? "You keep the spot." : ev.outcome === "lost" ? "Driven off." : "Driven off, too weak to go on.";
+  else out = ev.outcome === "won" ? "You keep the spot." : "Shoved off the spot.";
+  const de = Math.round(me.energy - FH.e0), enLine = ev.k === "fight" && ev.outcome === "eaten" ? "" : `Energy ${de < 0 ? "−" : "+"}${Math.abs(de)}`;
+  const lines = FH.lines.slice(0, 3), more = FH.lines.length - lines.length;
+  const L = BT.meLeft ? me.sp : FH.opp, R = BT.meLeft ? FH.opp : me.sp;
+  const herGone = ev.k === "fight" && ev.outcome === "eaten", oppGone = (ev.k === "hunt" && ev.outcome === "meal") || (ev.k === "rivalry" && ev.killed);
+  const goneL = BT.meLeft ? herGone : oppGone, goneR = BT.meLeft ? oppGone : herGone;
+  const cardHTML = `<div class="nk-rc-scrim" id="nk-rc"><div class="nk-rc"><i class="${goneL ? "gone" : ""}" style="background-image:url('${ART}portrait-${L}.webp')"></i>
+    <div class="nk-rc-mid"><h2 class="${won === true ? "" : won === false ? "lose" : "even"}">${head}</h2><div class="nk-rc-out">${out}</div>${enLine ? `<div class="nk-rc-en">${enLine}</div>` : ""}</div>
+    <i class="${goneR ? "gone" : ""}" style="background-image:url('${ART}portrait-${R}.webp')"></i>
+    ${lines.length ? `<div class="nk-rc-while"><h5>WHILE YOU FOUGHT</h5>${lines.map(l => `<div>${esc(l.text)}${l.amt ? " " + chip(l.amt) : ""}</div>`).join("")}${more > 0 ? `<div>and ${more} more</div>` : ""}</div>` : ""}</div></div>`;
+  const pay = $("nk-payoff"); const c = $("nk-fh-call"); if (c) setTimeout(() => { c.className = "nk-fh-call"; }, 400);
+  pay.insertAdjacentHTML("beforeend", cardHTML);
+  const secs = Math.min(5, TUNE.fight.resultSeconds + FH.lines.length);   // adjudication 3: 2.5 s plus 1 s a "While you fought" line, up to 5 s
+  let closed = false; const close = () => { if (closed) return; closed = true; pay.onclick = null; const rc = $("nk-rc"); if (rc) rc.remove(); FH.on = false; done(); };
+  setTimeout(() => pay.onclick = close, 500);
+  setTimeout(close, secs * 1000 / S);
+}
+
+// ---------- the Just lost list and the awards (Dayo 3b, 4d; Māia conditions 1-3) ----------
+function lostScan(cl, S, r) {
+  const rid = r ? r.rid : null; if (S.lostRid !== rid) { S.lostRid = rid; S.lost = []; S.seenD = new Map(); S.lostN = 0; }
+  S.lost = S.lost || []; S.seenD = S.seenD || new Map(); const now = Date.now();
+  for (const m of cl.members) {
+    if (m.remote) { const x = r && r.names.find(y => y.id === m.gid), rep = x && x.rep; if (!rep || rep.rid !== r.rid || !Array.isArray(rep.dk)) continue;
+      const n = Number(rep.dc) || 0; if (n > (x.lostN || 0)) { x.lostN = n; S.lost.unshift({ n: ++S.lostN, mid: m.id, gid: m.gid, dk: rep.dk.slice(0, 3).map(v => v == null ? null : String(v).slice(0, 20)), at: now }); } continue; }
+    const d = m.deaths || 0, was = S.seenD.has(m.id) ? S.seenD.get(m.id) : d; S.seenD.set(m.id, d);
+    if (d > was && m.dk) S.lost.unshift({ n: ++S.lostN, mid: m.id, gid: m.gid == null ? null : m.gid, dk: m.dk.slice(0, 3), at: now });
+  }
+  S.lost = S.lost.filter(q => now - q.at < 60000).slice(0, 6);
+}
+function lostOut(S) { const now = Date.now(); return (S.lost || []).filter(q => now - q.at < 60000).map(q => ({ n: q.n, mid: q.mid, gid: q.gid, sp: q.dk[0], c: q.dk[1], by: q.dk[2], age: Math.round((now - q.at) / 1000) })); }
+const AW_DEFS = [["Biggest meal", 0, 4], ["Survivor", 1, 5], ["Tried them all", 2, 6], ["Comeback", 3, 6]];   // Wren 6: "Shape-shifter" is "Tried them all"
+function dbAwards(push) {   // girls only, each to a different girl where possible; built here, shown, and gone with the record (Māia condition 2)
+  const r = DB.room; if (!r) return;
+  const rows = r.names.filter(x => !x.practice && x.rep && x.rep.rid === r.rid && Array.isArray(x.rep.aw)).map(x => ({ id: x.id, aw: x.rep.aw, sp: x.rep.sp }));
+  const used = new Set(), out = [];
+  for (const [t, k, sk] of AW_DEFS) {
+    const c = rows.filter(q => Number(q.aw[k]) > (k === 2 ? 1 : 0)).sort((a, b) => b.aw[k] - a.aw[k]); if (!c.length) continue;
+    const pick = c.find(q => !used.has(q.id)) || c[0]; used.add(pick.id);
+    const sp = SP[pick.aw[sk]] ? pick.aw[sk] : SP[pick.sp] ? pick.sp : null; out.push({ t, id: pick.id, sp });
+  }
+  const nv = out.length ? out : null; if (JSON.stringify(nv) === JSON.stringify(r.aw || null)) return; r.aw = nv; if (push) dbPush();
+}
+const asAnimal = sp => SP[sp] ? "as " + aOf(SP[sp].name.toLowerCase()) : "";
+function awTilesHTML(aw, nameOf, meId, cls) {
+  return `<h4>AWARDS</h4><div class="${cls}-tiles">${aw.map(a => { const nm = nameOf(a.id); return `<div class="${cls}-tile${a.id === meId ? " me" : ""}"><i style="background-image:url('${ART}portrait-${a.sp || "koura"}.webp')"></i><small>${esc(a.t.toUpperCase())}</small><b>${nm ? esc(nm) : esc(SP[a.sp] ? SP[a.sp].name : "")}</b><span>${nm ? esc(asAnimal(a.sp)) : ""}</span></div>`; }).join("")}</div>`;
+}
+
+// ---------- her laptop, every frame (from v31Frame) ----------
+function v35Frame(g) {
+  if (TEACHER || !g || !g.cl) return;
+  const me = g.cl.members[0]; if (g.aw && g.cl.t >= 60 && me.rank) { g.aw.worst = Math.max(g.aw.worst || 0, me.rank); g.aw.climb = Math.max(g.aw.climb || 0, g.aw.worst - me.rank); }
+  olTriggers(g); olFrame(g); swFrame(g); poolFrame(g);
+  const box = $("nk-aw"); if (box && vis("nk-end")) {   // the awards on her podium, when the room has them
+    const aw = JOINV && RMS.room && RMS.room.rid === RMS.rid ? RMS.room.aw : null, key = JSON.stringify(aw || null);
+    if (key !== V35.awKey) { V35.awKey = key; box.innerHTML = aw && aw.length ? awTilesHTML(aw, id => { const x = RMS.room.names.find(y => y.id === id); return x ? x.nick : ""; }, RMS.id, "nk-aw") : ""; }
+  }
+}
+
+// ---------- FINAL STANDINGS after an early End game (Dayo 4d, Raj 11) ----------
+const FST = { on: false };
+function finalStandings(r) {
+  if (!r || r.phase !== "playing" || !DB.cl) return null; const cl = DB.cl; ranks(cl, true);
+  return { top: cl.order.slice(0, 3).map(m => [String(m.name).slice(0, 16), m.sp, Math.round(m.kai), m.gid == null ? null : m.gid]),
+    all: cl.order.map((m, i) => [m.gid == null ? null : m.gid, i + 1, Math.round(m.kai)]).filter(q => q[0] != null), n: cl.order.length,
+    showNames: !!r.showNames, ok: r.names.filter(x => x.ok).map(x => x.id) };
+}
+function fstShow(fin) {
+  if (FST.on) return; FST.on = true; uiBusy = true; if (G) G.over = true; chCancel(); swClose(); htClose(false);
+  for (const id of ["nk-choose", "nk-death", "nk-fight", "nk-payoff", "nk-science", "nk-end"]) { const e = $(id); if (e) e.style.display = "none"; }
+  rmHideCard();
+  const mine = (fin.all || []).find(q => q[0] === RMS.id), row = (q, i) => `<div class="nk-fst-row${i === 0 ? " p1" : ""}"><b>${i + 1}</b><i style="background-image:url('${ART}portrait-${SP[q[1]] ? q[1] : "koura"}.webp')"></i><span>${esc(q[3] === RMS.id ? "You" : q[0])}</span><b>${KAI(q[2])}</b></div>`;
+  let o = $("nk-fst"); if (!o) { o = document.createElement("div"); o.id = "nk-fst"; document.body.appendChild(o); }
+  o.innerHTML = `<div class="nk-fst"><small>THE GAME HAS ENDED</small><h2>FINAL STANDINGS</h2>${(fin.top || []).map(row).join("")}${mine ? `<div class="nk-fst-you">You: ${ORD(mine[1])}, ${KAI(mine[2])} kai</div>` : `<div style="height:12px"></div>`}<div class="nk-fst-drain"><i></i></div></div>`;
+  o.className = "on";
+  setTimeout(() => { ssSet(null); location.replace(location.pathname + "?join=1&ended=1" + rmPass()); }, 10000);
+}
+
+// ---------- the projector: Scoreboard, M key, FINAL STANDINGS, Awards (Dayo 3b, 4d; Raj 10-11; Māia condition 3) ----------
+PJ.mOverride = params.get("pj") === "map" ? "map" : null; PJ.sb = { rows: new Map(), shown: new Map(), items: new Map(), q: [], feedSeen: 0, lineUntil: 0, lineAt: -1e9 };
+function pjBoardOn(r) { const mode = PJ.mOverride || (r && r.pjView) || TUNE.room.pjView; return mode === "board"; }
+function pjNameOk(r, gid) {   // "Show names on the projector": off, only a name the teacher has ticked shows; computer classmates follow the switch
+  if (!r || r.showNames) return true; if (gid == null) return false; const x = (r.names || []).find(y => y.id === gid); return !!(x && x.ok);
+}
+function pjBoardEnsure() {
+  if ($("pj-sb")) return; const e = document.createElement("div"); e.id = "pj-sb";
+  e.innerHTML = `<div class="pj-sb-body"><div><h2 class="pj-sb-h">KAI</h2><div class="pj-sb-rows" id="pj-sb-rows"></div></div><div><h2 class="pj-sb-h">JUST LOST</h2><div id="pj-sb-lost"></div></div></div>
+    <div class="pj-sb-strip"><span id="pj-sb-line"></span></div><div class="pj-sb-count" id="pj-sb-count"></div><div class="pj-sb-paused" id="pj-sb-paused">PAUSED</div>`;
+  $("pj").appendChild(e);
+}
+// v35 fixes (Hugh 1, Jisoo 3): the wall's rows are ordered by the number they SHOW, so a row never sits above a bigger number.
+// The shown kai eases toward the true kai by elapsed time (about 0.15 s), not by a share a frame, so a slow projector settles as fast as a quick one.
+// The crown holder is no longer pinned to row 1: the crown icon stays on the holder's row wherever their number puts it, and wins a tie for the top.
+function pjShownOrder(v, shown, clock) {
+  const now = performance.now(), dt = clock.t ? Math.min(1, Math.max(0, (now - clock.t) / 1000)) : 1, k = 1 - Math.exp(-dt / 0.15); clock.t = now;
+  const out = v.members.map(m => { const s0 = shown.has(m.id) ? shown.get(m.id) : m.kai, s = Math.abs(m.kai - s0) < 1 ? m.kai : s0 + (m.kai - s0) * k; shown.set(m.id, s); return { m, s, d: Math.round(Math.max(0, s)) }; });
+  return out.sort((a, b) => b.d - a.d || (b.m.id === v.crown) - (a.m.id === v.crown) || a.m.id - b.m.id);
+}
+function pjBoard(v, r) {
+  pjBoardEnsure(); const S = PJ.sb, now = performance.now(), box = $("pj-sb-rows");
+  const ord = pjShownOrder(v, S.shown, S.clock || (S.clock = {})), mem = ord.map(o => o.m), shownOf = new Map(ord.map(o => [o.m.id, o.s]));
+  const n = Math.min(mem.length, 24), half = Math.ceil(n / 2), keep = new Set();
+  mem.slice(0, 24).forEach((m, i) => {
+    let row = S.rows.get(m.id); const col = i < half ? 0 : 1, ri = col ? i - half : i, tf = `translate(${col * 645}px,${ri * 70}px)`;
+    if (!row) { row = document.createElement("div"); row.className = "pj-sb-row"; row.innerHTML = `<span class="rk"></span><i class="pc"></i><span class="nm"></span><b class="kai"></b>`; row.style.transform = tf; box.appendChild(row); S.rows.set(m.id, row); }
+    if (row._tf !== tf) { row._tf = tf; row.style.transform = tf; }
+    row.classList.toggle("pj-sb-row--top", i === 0); row.querySelector(".rk").textContent = i + 1;
+    const pc = row.querySelector(".pc"), bg = `url("${ART}portrait-${m.sp}.webp")`; if (pc._bg !== bg) { pc._bg = bg; pc.style.backgroundImage = bg; }
+    const hasCr = !!pc.querySelector(".cr"); if (m.id === v.crown && !hasCr) pc.insertAdjacentHTML("beforeend", `<span class="cr">${CROWN_SVG}</span>`); else if (m.id !== v.crown && hasCr) pc.querySelector(".cr").remove();
+    const ok = pjNameOk(r, m.gid), label = ok ? m.name : (SP[m.sp] ? SP[m.sp].name : ""), nm = row.querySelector(".nm"); if (nm.textContent !== label) nm.textContent = label; nm.classList.toggle("anon", !ok);
+    const kt = KAI(shownOf.get(m.id)), k = row.querySelector(".kai"); if (k.textContent !== kt) k.textContent = kt; keep.add(m.id);
+  });
+  S.rows.forEach((row, id) => { if (!keep.has(id)) { row.remove(); S.rows.delete(id); } });
+  // Just lost: the last six, newest on top, 60 s each, faded in their last 15 s
+  const lb = $("pj-sb-lost"), seen = new Set();
+  for (const q of (v.lost || []).slice(0, 6)) {
+    seen.add(q.n); let it = S.items.get(q.n);
+    const m = v.members.find(x => x.id === q.mid), gid = q.gid != null ? q.gid : m ? m.gid : null, ok = m && pjNameOk(r, gid);
+    const l1 = ok ? `${m.name}’s ${SP[q.sp] ? SP[q.sp].name.toLowerCase() : ""}` : (SP[q.sp] ? SP[q.sp].name : "");
+    if (!it) { it = document.createElement("div"); it.className = "pj-sb-it"; it.innerHTML = `<i style="background-image:url('${ART}portrait-${SP[q.sp] ? q.sp : "koura"}.webp')"></i><b></b><span></span>`; lb.prepend(it); S.items.set(q.n, it); }
+    const b = it.querySelector("b"); if (b.textContent !== l1) b.textContent = l1; it.querySelector("span").textContent = causeLine(q.sp, q.c, q.by); it.classList.toggle("old", q.age >= 45);
+  }
+  S.items.forEach((it, k) => { if (!seen.has(k)) { it.remove(); S.items.delete(k); } });
+  // the banner strip: crown changes and gold cards only, at most one every 6 s, 3 s each
+  for (const e of v.feed || []) { if (e.n <= S.feedSeen) continue; S.feedSeen = e.n;
+    const gold = e.kind === "gold" || e.kind === "rogue" || e.kind === "maki" || e.kind === "king";
+    if (e.kind === "crown") S.q.push({ crown: true, text: r && !r.showNames ? "The crown changes hands!" : e.text.replace(/!?$/, "!") });
+    else if (gold) S.q.push({ gold: true, text: r && !r.showNames ? (CARDS[e.kind] ? "Gold card: " + CARDS[e.kind].name.toUpperCase() + "!" : "A gold card!") : e.text }); }
+  PJ.feedSeen = Math.max(PJ.feedSeen, S.feedSeen); S.q = S.q.slice(-3);
+  const line = $("pj-sb-line");
+  if (S.lineUntil && now > S.lineUntil) { S.lineUntil = 0; line.classList.remove("on"); }
+  if (!S.lineUntil && S.q.length && now - S.lineAt > 6000) { const q = S.q.shift(); line.innerHTML = (q.crown ? CROWN_SVG : q.gold ? `<i class="pj-sb-gold"></i>` : "") + `<span>${esc(q.text)}</span>`; line.classList.add("on"); S.lineAt = now; S.lineUntil = now + 3000; }
+  // 3-2-1, the last ten and PAUSED stay on the wall
+  const cnt = $("pj-count"), sc = $("pj-sb-count"); if (sc.textContent !== cnt.textContent) sc.textContent = cnt.textContent; sc.classList.toggle("on", cnt.classList.contains("on"));
+  $("pj-sb-paused").classList.toggle("on", !!(r && r.paused) && !v.over);
+}
+function pjBoardFrame(r, view) {
+  const now = performance.now(), pod = $("pj-pod"), on = view === "map" && pjBoardOn(r) && !(pod && pod.className.includes("on"));
+  pjBoardEnsure(); $("pj-sb").classList.toggle("on", on); $("pj").classList.toggle("pj--board", view === "map" && pjBoardOn(r));
+  // the Awards strip under the podium (names only when the switch allows)
+  const aw = $("pj-aw"); if (aw && pod && pod.className.includes("on")) { const a = r && r.aw, key = JSON.stringify([a || null, r && r.showNames]);
+    if (key !== PJ.awKey) { PJ.awKey = key; aw.innerHTML = a && a.length ? awTilesHTML(a, id => pjNameOk(r, id) ? ((r.names.find(y => y.id === id) || {}).nick || "") : "", null, "pj-aw") : ""; } }
+  // FINAL STANDINGS (10 s) after an early End game
+  let f = $("pj-fst"); const F = PJ.fin, live = F && now < F.until;
+  if (live && !f) { f = document.createElement("div"); f.id = "pj-fst"; $("pj").appendChild(f); }
+  if (live && !f.className) { const fin = F.fin, okN = gid => fin.showNames || (gid != null && (fin.ok || []).includes(gid));
+    f.innerHTML = `<small>THE GAME HAS ENDED</small><h2>FINAL STANDINGS</h2>` + (fin.top || []).map((q, i) => `<div class="pj-fst-row${i === 0 ? " p1" : ""}"><b>${i + 1}</b><i style="background-image:url('${ART}portrait-${SP[q[1]] ? q[1] : "koura"}.webp')"></i><span>${esc(okN(q[3]) ? q[0] : SP[q[1]] ? SP[q[1]].name : "")}</span><b>${KAI(q[2])}</b></div>`).join("");
+    f.className = "on"; }
+  if (!live && f && f.className) { f.className = ""; PJ.fin = null; }
+}
+function dbPjSeg(r) {   // the dashboard switch, on its own row under Show names / Let latecomers in (v35 fixes, Hugh 2: it ran into the latecomers label at 1366x768)
+  const v = r.pjView === "map" ? "map" : "board";
+  return `<div class="db-step" style="display:flex;width:max-content;max-width:100%;flex-wrap:wrap;margin:12px 0 0"><span>Projector shows</span><span class="db-seg" role="radiogroup" aria-label="Projector shows">${[["board", "Scoreboard"], ["map", "Shore map"]].map(([k, t]) => `<button type="button" role="radio" aria-checked="${v === k}" class="${v === k ? "on" : ""}" data-a="pjview" data-s="${k}">${t}</button>`).join("")}</span></div>`;
+}
+if (PROJV) addEventListener("keydown", e => {   // M flips the projector between the Scoreboard and the shore map (this screen only)
+  if (e.key !== "m" && e.key !== "M") return; const r = PJ.room || (PJ.demo && PJ.demo.room); const board = pjBoardOn(r); PJ.mOverride = board ? "map" : "board";
+  let c = $("pj-mchip"); if (!c) { c = document.createElement("div"); c.id = "pj-mchip"; $("pj").appendChild(c); }
+  c.textContent = board ? "SHORE MAP" : "SCOREBOARD"; c.className = "on"; clearTimeout(PJ.mchipT); PJ.mchipT = setTimeout(() => c.className = "", 2000);
+});
+var V35_HOOKS = { V35, FH, HT, OL, SW, NEAR, FST, gutterVia, poolCut, relKind, causeLine, finalStandings, lostOut, awNumbers, doSwap: () => doSwap(G), swAllowed: () => swAllowed(G), htOpen, herFullSecs, rmReport,
+  tapAt(x, y) { const p = toLogical({ clientX: x, clientY: y }), h = hitTest(p); return { h: h.kind, p, busy: uiBusy, modal: !!(G && G.modal) }; } };
 
 buildTideBar();
 netStart();     // v34: anonymous sign-in (live), nothing (local)
@@ -9454,6 +10321,7 @@ Object.defineProperty(window.__niche, "NT", { get: () => NT });
 Object.assign(window.__niche, { dealSchedule, roomT, v32Round });   // v34b (tests): the shared schedule
 Object.defineProperty(window.__niche, "sched", { get: () => G && G.sched ? { sched: G.sched, log: G.schedLog || [], t: G.t, rt: schedT(G), shore: G.ev && G.ev.cur ? G.ev.cur.kind : null, deep: G.ev && G.ev.deep && G.ev.deep.cur ? G.ev.deep.cur.kind : null, land: G.ev && G.ev.land ? G.ev.land.kind : null, sky: G.sky ? G.sky.kind : null } : null });
 Object.assign(window.__niche, { LANE, HUNTTAP, LABELS, applyRound, herNote, roundWords, BANNER });   // v33c (tests)
+Object.assign(window.__niche, V35_HOOKS); Object.defineProperty(window.__niche, "G", { get: () => G });   // v35 (tests)
 </script>
 </body>
 </html>

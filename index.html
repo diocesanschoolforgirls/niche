@@ -1612,6 +1612,78 @@ body.pj #nk-lane,.nk-teacher #nk-lane{display:none!important}
 .pj-fst-row b{color:var(--nk-yellow,#ffd23f)}
 .pj-fst-row span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media (prefers-reduced-motion:reduce){.pj-sb-it,.nk-rc,.nk-fh-call.on,.nk-sw-card.on,.nk-ol.on,.nk-near-row--new{animation:none}}
+/* v37 (Kit, design/v37-classmate-battles.md 2c, 5, 8, 13): classmate battles. Plates, the battle screen's two-girl pieces, the projector strip */
+:root{--rel-fight:#9aa6ad}
+.nk-nt--fight{border-bottom-color:var(--rel-fight)}
+.nk-nt.nk-nt--tap{max-width:230px;border-width:2.5px;border-bottom-width:4px}
+.nk-nt .mb-tap{flex:0 0 auto;font:900 12px/1 "Arial Black",Impact,sans-serif;letter-spacing:.04em;color:#fff;background:#10181d;border-radius:999px;padding:3px 7px;animation:mbTap 1s ease-in-out infinite}
+.nk-nt--eat .mb-tap{background:#2f7a24}.nk-nt--kind .mb-tap{background:#5b4fc4}.nk-nt--fight .mb-tap{background:#46525a}
+@keyframes mbTap{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.nk-nt .mb-glyph{flex:0 0 14px;width:14px;height:14px}
+#nk-stage .nk-nt svg.mb-glyph{width:14px;height:14px}
+.nk-nt small.mb-hunts{color:#b3221c;font-weight:800}
+.nk-nt.nk-nt--quiet{opacity:.8}
+.nk-tok.nk-shadow.nk-tok--rel-hunts{border:3px solid var(--rel-hunts)}
+.nk-tok.nk-shadow.nk-tok--rel-eat{border:3px solid var(--rel-eat)}
+.nk-tok.nk-shadow.nk-tok--rel-kind{border:3px solid var(--rel-kind)}
+.nk-tok.nk-shadow.nk-tok--rel-fight{border:3px solid var(--rel-fight)}
+.nk-tok.nk-shadow.mb-rest{opacity:.45}
+.nk-near-row--mate[data-mate]{cursor:pointer;pointer-events:auto}
+.nk-near-row--mate.mb-near-tap small{color:#fff6cf;font-weight:800}
+.nk-near-row--mate.mb-near-hunts{border-left-color:var(--rel-hunts)}
+/* the battle screen with a classmate */
+.mb-call{display:inline-flex;align-items:center;gap:10px}
+.mb-spin{display:inline-block;width:22px;height:22px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cg stroke='%2310181d' stroke-width='2.6' stroke-linecap='round' fill='none'%3E%3Cpath d='M5 5 Q11 9 17 17'/%3E%3Cpath d='M17 5 Q11 9 5 17'/%3E%3C/g%3E%3C/svg%3E") center/18px no-repeat;animation:mbSpin 1s linear infinite}
+@keyframes mbSpin{to{transform:rotate(360deg)}}
+.bt-plays.mb-locked{display:flex;flex-direction:column;align-items:center;gap:3px;background:#fff6cf}
+.bt-plays.mb-locked small{font:700 14px/1.1 "Segoe UI",Arial,sans-serif;letter-spacing:0;color:#3d4b52}
+.bt-band--locked .bt-plays.mb-locked{display:flex}
+.bt-band.bt-band--locked:not(.bt-band--up) .bt-plays.mb-locked{display:none}
+.nk-move.mb-back{flex:1;min-width:110px;background:#e8e2d0;padding:8px 10px;border-left:12px solid #6b6b6b!important}
+.nk-move.mb-back b{font-size:15px}
+.mb-backgrp{flex:0 0 auto;max-width:14vw}
+.mb-act-think{animation:mbThink 1.1s ease-in-out infinite}
+@keyframes mbThink{0%,100%{translate:0 0}50%{translate:0 -10px}}
+.mb-q{position:absolute;left:50%;top:-6%;translate:-50% 0;font:900 46px/1 "Arial Black",Impact,sans-serif;color:#ffd23f;-webkit-text-stroke:3px #000;paint-order:stroke fill;animation:mbThink 1.1s ease-in-out infinite}
+.mb-act-charge-l{animation:mbChargeL .9s ease-in-out infinite alternate}
+.mb-act-charge-r{animation:mbChargeR .9s ease-in-out infinite alternate}
+@keyframes mbChargeL{from{translate:0 0}to{translate:12% 2%}}
+@keyframes mbChargeR{from{translate:0 0}to{translate:-12% 2%}}
+.mb-dust{position:absolute;left:50%;top:58%;width:40%;height:34%;translate:-50% -50%;border-radius:50%;background:radial-gradient(closest-side,rgba(226,207,154,.95),rgba(179,150,99,.6) 60%,rgba(179,150,99,0));animation:mbDust .6s ease-in-out infinite alternate;pointer-events:none}
+@keyframes mbDust{from{scale:.9}to{scale:1.08}}
+.nk-burst.mb-clash{animation:none}
+.mb-wait{bottom:6%}
+.mb-rc-chip{display:inline-flex;align-items:center;gap:5px;font:900 12px/1 "Arial Black",Impact,sans-serif;letter-spacing:.06em;background:#fff;color:#10181d;border:2px solid #000;border-radius:999px;padding:3px 8px;margin-bottom:4px}
+.mb-rc-chip svg{width:12px;height:12px}
+@media (prefers-reduced-motion:reduce){.mb-act-think,.mb-q,.mb-act-charge-l,.mb-act-charge-r,.mb-dust,.nk-nt .mb-tap,.mb-spin{animation:none}}
+/* the projector's battle strip (Dayo 8) */
+#pj-mb{position:absolute;left:24px;top:84px;z-index:6;display:flex;flex-direction:column;gap:12px;pointer-events:none}
+#pj-mb.board{left:50%;top:78px;translate:-50% 0;flex-direction:row}
+.pj-mb-card{position:relative;width:660px;box-sizing:border-box;padding:10px 16px 12px;background:#fff6cf;color:#10181d;border:4px solid #000;border-radius:16px;box-shadow:0 6px 0 #000;animation:pjMbIn .35s cubic-bezier(.2,1.5,.4,1) both}
+@keyframes pjMbIn{from{translate:0 -30px;opacity:0}to{translate:0 0;opacity:1}}
+.pj-mb-tag{position:absolute;left:16px;top:-16px;font:900 18px/1 "Arial Black",Impact,sans-serif;letter-spacing:.06em;background:#ff6b5b;color:#fff;border:3px solid #000;border-radius:999px;padding:5px 12px}
+.pj-mb-row{display:flex;align-items:center;gap:12px;margin-top:6px}
+.pj-mb-row>i{flex:0 0 76px;height:76px;border-radius:50%;border:4px solid #000;background-size:cover;background-position:center}
+.pj-mb-row>i.r{transform:scaleX(-1)}
+.pj-mb-row>em{font:900 36px/1 "Arial Black",Impact,sans-serif;color:#ff6b5b;-webkit-text-stroke:2px #000;paint-order:stroke fill;font-style:normal}
+.pj-mb-nm{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:2px}
+.pj-mb-nm.r{text-align:right;align-items:flex-end}
+.pj-mb-nm span{font:800 22px/1.1 "Segoe UI",Arial,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.pj-mb-nm b{font:900 28px/1.05 "Arial Black",Impact,sans-serif}
+.pj-mb-pips{display:flex;gap:6px}
+.pj-mb-pips i{width:18px;height:18px;border-radius:50%;border:3px solid #000;background:#fff}
+.pj-mb-pips i.on{background:#ffd23f}
+.pj-mb-round{position:absolute;right:16px;top:-14px;font:900 16px/1 "Arial Black",Impact,sans-serif;background:#10181d;color:#fff;border-radius:999px;padding:5px 10px}
+.pj-mb-round:empty{display:none}
+.pj-mb-stamp{position:absolute;left:50%;top:50%;translate:-50% -50%;rotate:-4deg;white-space:nowrap;font:900 44px/1 "Arial Black",Impact,sans-serif;color:#2a1600;background:#ffd23f;border:5px solid #000;border-radius:14px;padding:10px 24px;box-shadow:0 6px 0 #000;animation:btSlowIn .2s cubic-bezier(.2,1.5,.4,1) both}
+#pj-mb-lines{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible}
+#pj-mb-lines line{stroke:#fff;stroke-width:4;stroke-dasharray:10 9;filter:drop-shadow(0 0 2px #000)}
+#pj-mb-lines circle{fill:#ffd23f;stroke:#000;stroke-width:3}
+#pj-mb-lines path{stroke:#000;stroke-width:3.5;stroke-linecap:round;fill:none}
+.calm .pj-mb-card,.calm .pj-mb-stamp{animation:none}
+/* the dashboard switch */
+.db-mates{margin:10px 0 0}
+.db-mates-n{font-weight:700;margin-left:10px}
 </style>
 </head>
 <body>
@@ -1699,7 +1771,7 @@ body.pj #nk-lane,.nk-teacher #nk-lane{display:none!important}
       <div class="ch-right">
         <button class="nk-snd" type="button">Sound: on</button>
         <div class="ch-timer"><small>Your pick goes in when time runs out</small><div class="t ch-disp" id="ch-timer"><span>0:30</span></div></div>
-        <span class="ch-ver">V36</span>
+        <span class="ch-ver">V37</span>
       </div>
     </div>
     <div class="ch-roster" id="ch-roster" aria-hidden="true"></div>
@@ -7096,10 +7168,9 @@ $("nk-stage").addEventListener("click", e => {
   const h = hitTest(p);
   // v36 QA fixes (Jisoo 1): a shadow never swallows a tap. Real targets (prey, an animal, food, a refuge) are hit-tested first and take the tap as
   // always; on open ground she still travels there. The shadow line is said only when the tap lands on a shadow and nothing else is there.
-  { const s = h.kind === "point" ? shadowAt(G, p) : null; if (s) { const n0 = G.events.length, nm = mateName(s.m); SHD.taps++;   // v36 (Dayo 3b): a shadow is not on her shore: no fight, no meeting
-      const ok = tapPoint(G, p.x, p.y); SHD.lastTapMoved = ok !== false;
-      if (ok === false && G.events.slice(n0).some(e => e.k === "say")) refuseToast(G, n0, null);   // the ground itself said no: that reason, as any refused move
-      else refuseToast(G, n0, `${nm ? nm : "A classmate"} is on her own shore. Classmates meet you through chest cards.`); return; } }
+  { const s = h.kind === "point" ? shadowAt(G, p) : null; if (s) { SHD.taps++;   // v37 (Dayo 2c): a tap on a classmate's shadow: a battle, or the reason (and she travels towards her)
+      if (JOINV) { mbTap(G, s, p); return; }
+      const n0 = G.events.length, ok = tapPoint(G, p.x, p.y); SHD.lastTapMoved = ok !== false; if (ok === false) refuseToast(G, n0, null); return; } }
   if (h.kind === "prey") {   // v33c: "Hunting" only when the hunt is on; otherwise the reason, beside her
     const n0 = G.events.length, ok = tapPrey(G, h.ref); HUNTTAP.n++;
     if (ok) { HUNTTAP.ok++; showHoverAt(h.ref, "Hunting: " + SP[h.ref.sp].name); }
@@ -7635,7 +7706,7 @@ function showEnd() {
   else if (c.cause === "eaten") { head = "Eaten!"; got = `What got you: ${SP[c.bySp].name}, ${c.byMove}.`; }
   else if (c.cause === "rivalry") { head = "Driven off!"; got = `What got you: a rival ${SP[c.bySp].name.toLowerCase()}, when you were already weak.`; }
   else { head = "Starved!"; got = c.bySp ? `What got you: hunger, after a ${SP[c.bySp].name.toLowerCase()} attack.` : "What got you: hunger. The bar ran out."; }
-  show("nk-end", `<div class="nk-card nk-card--cast"><div class="nk-kicker">One tide <span class="nk-ver">V36</span></div><h2>${head}</h2>
+  show("nk-end", `<div class="nk-card nk-card--cast"><div class="nk-kicker">One tide <span class="nk-ver">V37</span></div><h2>${head}</h2>
     <div class="nk-big">${t}</div><p>${got}</p>${list}
     <p class="nk-small">Meals caught: ${G.stats.meals} · Fights: ${G.stats.fights} · Escapes: ${G.stats.escapes} · Best this session: ${fmt(best)}</p>
     <div class="nk-row" style="margin-top:14px"><button class="nk-btn" id="nk-again" type="button">Play again</button></div></div>`);
@@ -8272,7 +8343,7 @@ function showPodium() {
     const steal = H.steal ? `<b>Biggest steal:</b> ${KAI(H.steal.amt)} kai from ${H.steal.from}` : `<b>Biggest steal:</b> none this tide`;
     const hurt = H.hurt ? `<b>Biggest hit you took:</b> ${KAI(H.hurt.amt)} kai, from ${H.hurt.by}` : `<b>Biggest hit you took:</b> nothing landed on you`;
     const animals = `<b>Animals you played:</b> ${H.animals.map(sp => SP[sp].name).join(", ")}`;
-    show("nk-end", `<div class="pd-card"><div class="pd-kicker">One tide · ${cl.n} in the class <span class="nk-ver">V36</span></div><h2 class="pd-title">The tide has turned</h2>
+    show("nk-end", `<div class="pd-card"><div class="pd-kicker">One tide · ${cl.n} in the class <span class="nk-ver">V37</span></div><h2 class="pd-title">The tide has turned</h2>
       ${podiumHTML(cl.order, {})}
       <div class="pd-you">You: ${ORD(me.rank)}, ${KAI(me.kai)} kai</div>
       <ul class="pd-lines"><li>${steal}</li><li>${hurt}</li><li>${animals}</li></ul>
@@ -8299,7 +8370,7 @@ const CLV = { cl: null, snap: null, snapAt: -1e9, mode: "", rows: new Map(), sho
 function startClassView() {
   document.body.classList.add("nk-classview");
   $("nk-class").innerHTML = `<div class="cv-top"><div class="cv-title">NICHE · THE ROCKY SHORE</div><span class="cv-src" id="cv-src"></span>
-      <div class="cv-clock" id="cv-clock">ROUND ENDS IN <b>8:00</b></div><button class="nk-btn nk-snd" type="button">Sound: on</button><span class="nk-ver">V36</span></div>
+      <div class="cv-clock" id="cv-clock">ROUND ENDS IN <b>8:00</b></div><button class="nk-btn nk-snd" type="button">Sound: on</button><span class="nk-ver">V37</span></div>
     <div class="cv-main"><section class="cv-board"><h2>KAI</h2><div class="cv-rows" id="cv-rows"></div></section>
       <section class="cv-feed"><h2>ON THE SHORE</h2><ul class="cv-list" id="cv-feed"></ul></section></div>
     <div id="cv-banner"></div><div id="cv-podium"></div>`;
@@ -8607,7 +8678,7 @@ function rmSend(m) {
     if (m.k === "room") { bcPost(m); if (m.phase !== "ended") netRoomOut(m); return; }
     if (m.k === "snap") { bcPost(m); netViewOut(m); return; }
     if (m.k === "joined" || m.k === "refused") return netInbox(m.cid, m);
-    if (m.k === "renamed" || m.k === "removed" || m.k === "card") { const x = DB.room && DB.room.names.find(y => y.id === m.id); const cid = m.cid || (x && x.cid); if (cid) netInbox(cid, m); return; }
+    if (m.k === "renamed" || m.k === "removed" || m.k === "card" || m.k === "bt") { const x = DB.room && DB.room.names.find(y => y.id === m.id); const cid = m.cid || (x && x.cid); if (cid) netInbox(cid, m); return; }
     return;
   }
   if (PROJV) { if (m.k === "pj") bcPost(m); return; }
@@ -8705,7 +8776,7 @@ function netPlayerIn(nt, p) {
 function netInbox(uid, m) {
   if (!uid || !NT || NT.dead) return; const nt = NT;
   let ib = nt.inbox.get(uid); if (!ib) { ib = { msgs: [], last: 0, t: 0 }; nt.inbox.set(uid, ib); }
-  const n = Math.max(ib.last + 1, Date.now()); ib.last = n; ib.msgs.push(Object.assign({}, m, { n })); if (ib.msgs.length > 8) ib.msgs.shift();
+  const n = Math.max(ib.last + 1, Date.now()); ib.last = n; ib.msgs.push(Object.assign({}, m, { n })); if (ib.msgs.length > 12) ib.msgs.shift();   // v37 (Dayo 4b): 8 -> 12, for the battle messages
   if (!ib.t) ib.t = setTimeout(() => { ib.t = 0; if (nt.dead) return; netCount("inbox", "w"); ib.made = true;
     NET.fb.setDoc(fsDoc("inbox", nt.code + "_" + uid), { code: nt.code, uid, owner: NET.uid, expiresAt: tsAt(netExpiry()), m: JSON.stringify(ib.msgs) }).catch(() => {}); }, 150);
 }
@@ -8780,19 +8851,22 @@ function netRep(m) {
   if (!NG.code || NG.gone || !NG.joined) return;
   if (m.k === "bye") { NG.pend = Object.assign({}, NG.pend || { id: RMS.id }, { bye: 1 }); return netGirlWrite(); }
   if (m.k === "lockin") return netGirlFlush(LIVE.urgentGap);
-  NG.pend = m; netGirlFlush(m.fin && m.urgent ? LIVE.minGap : m.urgent ? LIVE.urgentGap : LIVE.repEvery);   // v36: her final kai goes as soon as the write gap allows
+  NG.pend = m; netGirlFlush((m.fin && m.urgent) || m.btu ? LIVE.minGap : m.urgent ? LIVE.urgentGap : LIVE.repEvery);   // v36: her final kai goes as soon as the write gap allows; v37: a battle action too
 }
 function netGirlFlush(gap) {
   const due = NG.lastW + Math.max(gap, LIVE.minGap);
   if (NG.timer && NG.due <= due) return; clearTimeout(NG.timer); NG.due = due; NG.timer = setTimeout(netGirlWrite, Math.max(0, due - performance.now()));
 }
 function netGirlWrite() {
-  clearTimeout(NG.timer); NG.timer = 0; const m = NG.pend; if (!m || NG.gone || !NG.joined || NG.busy) return;
+  clearTimeout(NG.timer); NG.timer = 0; const m = NG.pend; if (!m || NG.gone || !NG.joined) return;
+  if (NG.busy) { NG.again = true; return; }   // v37: a write is in flight: this one goes when it lands (queued, never a burst: Māia 6)
   if (NG.game && NG.game.expiresAt.toMillis() <= rmNow()) { NG.gone = true; return; }
-  const o = Object.assign({}, m); delete o.k; delete o.cid; delete o.code; delete o.urgent;
-  NG.lastW = performance.now(); NG.busy = true; netCount(m.urgent ? "player-urgent" : "player-report", "w");
-  NET.fb.updateDoc(fsDoc("players", NG.code + "_" + NET.uid), { d: JSON.stringify(o).slice(0, 6000), at: NET.fb.serverTimestamp(), expiresAt: tsAt(Math.min(rmNow() + LIVE.life, NG.capMs - 60e3)) })
-    .then(() => { NG.busy = false; }, () => { NG.busy = false; });
+  const o = Object.assign({}, m); delete o.k; delete o.cid; delete o.code; delete o.urgent; delete o.btu;
+  NG.lastW = performance.now(); NG.busy = true; NG.wrote = m; netCount(m.btu ? "player-battle" : m.urgent ? "player-urgent" : "player-report", "w");
+  const d = JSON.stringify(o); NG.maxD = Math.max(NG.maxD || 0, d.length);   // v37 (Māia 6): the real worst case is measured
+  const after = () => { NG.busy = false; if (NG.again || (NG.pend && NG.pend !== NG.wrote && NG.pend.btu)) { NG.again = false; netGirlFlush(NG.pend && NG.pend.btu ? LIVE.minGap : LIVE.urgentGap); } };
+  NET.fb.updateDoc(fsDoc("players", NG.code + "_" + NET.uid), { d: d.slice(0, 6000), at: NET.fb.serverTimestamp(), expiresAt: tsAt(Math.min(rmNow() + LIVE.life, NG.capMs - 60e3)) })
+    .then(after, after);
 }
 
 // ---------- the projector's side (in the teacher's browser: the BroadcastChannel; anywhere else: Firestore) ----------
@@ -8925,7 +8999,7 @@ function showJoin(flag) {
     <label for="rm-code">GAME CODE <span class="rm-hint" id="rm-codehint">4 characters, from the board</span></label><input id="rm-code" maxlength="4" inputmode="text" spellcheck="false" placeholder="ABCD" value="${esc(code)}" aria-describedby="rm-codehint rm-err">
     <label for="rm-nick">NICKNAME <span class="rm-count" id="rm-ncount">0 of 16</span></label><input id="rm-nick" maxlength="16" spellcheck="false" value="${esc(flag === "removed" ? "" : nick)}">
     ${NET.mode === "local" ? `<p class="rm-note">Pick a nickname that isn't your real name.<small>Nothing is saved after the game.</small></p>`
-      : `<p class="rm-note">Pick a nickname that isn't your real name.<small>Your teacher can see it. It is held on a Google computer in Australia while you play, and deleted when your teacher ends the game.</small></p>`}
+      : `<p class="rm-note">Pick a nickname that isn't your real name.<small>Your teacher sees it first, and your classmates see it once your teacher has approved it. It is held on a Google computer in Australia while you play, and deleted when your teacher ends the game.</small></p>`}
     <div class="rm-err" id="rm-err" role="alert"></div>
     <button class="rm-go" id="rm-go" type="submit">${re ? "REJOIN" : "JOIN"}</button></form>`;
   sndLabels();
@@ -8964,6 +9038,7 @@ rmOn(d => {
   if (!JOINV) return;
   if (d.k === "joined" && d.cid === RMS.cid && RMS.id !== null && RMS.id === d.id && RMS.st !== "join") return;   // live: an old reply, she is already in
   if (d.k === "card" && RMS.id !== null && d.id === RMS.id && d.code === RMS.code) return rmCardIn(d);   // live: a card a classmate (or a computer classmate) aimed at her
+  if (d.k === "bt" && RMS.id !== null && d.id === RMS.id && d.code === RMS.code) return mbIn(d);   // v37: a classmate battle message from the teacher's laptop
   if (d.k === "joined" && d.cid === RMS.cid) { clearTimeout(RMS.wait); RMS.id = d.id; RMS.nick = d.nick; RMS.code = d.code; RMS.st = "wait"; RMS.again = !!d.again; RMS.resume = d.resume || null; ssSet({ code: d.code, nick: d.nick, id: d.id }); rmWaiting(); return; }
   if (d.k === "refused" && d.cid === RMS.cid) { clearTimeout(RMS.wait); const e = $("rm-err"); if (e) e.textContent = d.why; const b = $("rm-go"); if (b) b.disabled = false; return; }
   if (RMS.id === null) return;
@@ -8977,7 +9052,7 @@ rmOn(d => {
   if (d.k === "room" && d.code === RMS.code) rmRoom(d);
 });
 function rmRoom(r) {
-  RMS.room = r; RMS.roomAt = performance.now();
+  RMS.room = r; RMS.roomAt = performance.now(); mbRoomCheck(r);   // v37: Pause or the tide turning calls her battle off
   if (r.cls && r.rid === RMS.rid && G && G.cl && (RMS.st === "play" || RMS.st === "over")) { rmMirror(r.cls); rmTfeed(r); if (RMS.st === "over") pdRefresh(); }   // the class as the teacher's laptop has it (v36: and her podium follows it)
   if (r.R && RMS.st !== "play") applyRound(r.R);   // v33c: the room's round length (fixed at Start)
   if (r.names.some(x => x.id === RMS.id)) RMS.seenIn = RMS.id;
@@ -9019,7 +9094,7 @@ function rmStart() {
 // v34 (Kit): her report replaces the heartbeat. A timer, not frames, so a tab behind others still counts as connected.
 // Local: every 0.5 s over the BroadcastChannel. Live: the transport writes it every 10 s, sooner after a card, a new animal or lock-in.
 function rmTick() {
-  if (RMS.id !== null) rmReport(false);
+  if (RMS.id !== null && !(NET.mode === "live" && MB.st)) rmReport(false);   // v37: no routine report during a classmate battle (her picks carry it; kai is held still)
   // live: the room arrives only when it changes, so the last one is shown again each second (the podium waits for a second look at "over")
   if (NET.mode === "live" && NG.room && !NG.gone && NG.room.code === RMS.code) rmDeliver(NG.room);
 }
@@ -9041,13 +9116,17 @@ function rmReport(urgent) {   // what her laptop tells the teacher's: never ener
     const me = g.cl.members[0];
     m.kai = Math.round(me.kai); m.sp = g.me.sp;
     if (RMS.repSp && RMS.repSp !== m.sp) m.urgent = true; RMS.repSp = m.sp;   // a new animal: the projector shows it soon
-    m.pos = g.waiting || g.me.alive === false ? null : [Math.round(g.me.x), Math.round(g.me.y), herHidden(g.me) || (g.me.duckUntil || 0) > g.t ? 1 : 0, BT.open ? 1 : 0];
+    m.pos = g.waiting || g.me.alive === false ? null : [Math.round(g.me.x), Math.round(g.me.y), herHidden(g.me) || (g.me.duckUntil || 0) > g.t ? 1 : 0, BT.open && MB.st !== "call" && !MB.ended ? 1 : 0];   // v37: calling a classmate out is not yet a fight; nor is her result card
+    m.sty = DEAL.style || 0;   // v37 (Dayo 4b): her Style index (Styles do not change move power anywhere in the game yet)
     m.ev = rmEvs(g); m.feed = RMS.feedOut.slice(-6); m.plays = RMS.plays.slice(-6);
     // v35 (Dayo 3b, 4d; Māia's addendum): game state only.  dc/dk = her deaths and swaps so far and the last one [animal, cause, killer species];
     // aw = the four award numbers [biggest meal, longest life (s), animals played, places climbed, meal animal, life animal]
     m.dc = V35.dc; if (V35.dk) m.dk = V35.dk; m.aw = awNumbers(g);
     if (RMS.st === "over" && RMS.finKai != null) { m.kai = RMS.finKai; m.fin = 1; }   // v36: her final kai, exactly as her podium shows it
   }
+  // v37 (Dayo 4b; Māia 5): her last three battle actions, each with its own number; member ids only, never a nickname; emptied after the battle
+  if (MB.acts.length) m.bt = MB.acts.slice(-3);
+  if (RMS.btUrgent) { m.btu = 1; m.urgent = true; RMS.btUrgent = false; }
   rmSend(m);
 }
 function rmFrame() {      // every frame, student tab in a room
@@ -9076,6 +9155,7 @@ function rmMirror(cls) {    // everyone but her, exactly as the teacher's laptop
     const m = keep.get(id) || { id, fx: [], hide: 0, safeUntil: 0, lastHitBy: null, payback: false, rank: cl.members.length + 1 };
     Object.assign(m, { remote: true, name, sp, kai, girl: !!girl, gid, hide: hide || 0, safeUntil: safe ? cl.t + safe : 0,
       pos: Array.isArray(pos) && pos.length >= 2 && isFinite(pos[0]) && isFinite(pos[1]) ? [clamp(+pos[0], 0, 1600), clamp(+pos[1], 0, 3150), pos[2] ? 1 : 0] : null }); out.push(m);   // v36: her shadow, ~15 s old at most
+    const rest = Array.isArray(pos) ? Math.max(0, Number(pos[3]) || 0) : 0; if (rest !== m.rest || !m.restAt) { m.rest = rest; m.restAt = performance.now(); }   // v37: seconds until she can be battled (her plate says "resting")
   }
   cl.members = out; cl.n = out.length; cl.mirrored = true;
   // the crown is the teacher's laptop's, so every laptop and the wall agree on who wears it
@@ -9207,7 +9287,8 @@ function dbRep(x, d) {     // her report: kai, animal, where she is, the lines a
   const r = DB.room; x.hb = performance.now(); if (d.cid) x.cid = d.cid;
   if (d.lk && r.phase === "picking" && !x.lockedIn && d.rid === r.rid && SP[d.lk]) { x.lockedIn = true; x.sp = d.lk; dbPush(); }
   if (d.rid !== r.rid) return;
-  x.rep = { rid: d.rid, kai: d.kai, sp: d.sp, pos: d.pos, ev: d.ev, st: d.st, dc: d.dc, dk: d.dk, aw: d.aw };   // v35: deaths, last cause, award numbers
+  x.rep = { rid: d.rid, kai: d.kai, sp: d.sp, pos: d.pos, ev: d.ev, st: d.st, dc: d.dc, dk: d.dk, aw: d.aw, sty: d.sty };   // v35: deaths, last cause, award numbers; v37: her Style
+  if (r.phase === "playing" && Array.isArray(d.bt)) refActs(x, d.bt);   // v37: her battle actions (the referee; nothing kept beyond its memory)
   if (r.phase === "over") dbAwards(true);   // v35: a late report can still change the awards
   const cl = DB.cl; if (!cl || r.phase !== "playing") return;
   for (const p of d.plays || []) { if (!(p.n > (x.playN || 0))) continue; x.playN = p.n; dbGirlPlay(x, p); }
@@ -9224,7 +9305,7 @@ function dbCls() { const cl = DB.cl; if (!cl) return null;
   // Transient: only while the round is playing; null when she is dead or being dealt, hiding, stale or the round is over. Never logged, exported or kept.
   const posOf = m => { if (!m.remote || !r || r.phase !== "playing") return null; const x = r.names.find(y => y.id === m.gid);
     const rp = x && x.rep; if (!rp || rp.rid !== r.rid || now - x.hb >= TUNE.room.staleSeconds * 1000 || !Array.isArray(rp.pos) || rp.pos[2]) return null;
-    return [Math.round(Number(rp.pos[0]) || 0), Math.round(Number(rp.pos[1]) || 0), rp.pos[3] ? 1 : 0]; };
+    return [Math.round(Number(rp.pos[0]) || 0), Math.round(Number(rp.pos[1]) || 0), rp.pos[3] ? 1 : 0, refRestLeft(m.gid)]; };   // v37: + seconds until she can be battled (no pair data: Māia 2)
   return { t: Math.round(cl.t), crown: cl.crown, m: cl.members.map(m => [m.id, m.name, m.sp, Math.round(m.kai), m.girl ? 1 : 0, m.gid == null ? null : m.gid,
     m.remote ? 0 : (m.hide || 0), m.remote ? 0 : Math.max(0, Math.round((m.safeUntil || 0) - cl.t)), posOf(m)]) }; }
 function dbTfeed() { const cl = DB.cl; if (!cl) return null;
@@ -9238,6 +9319,7 @@ function dbView() {     // what the projector is told (5 times a second in this 
     return [m.id, m.name, m.sp, Math.round(m.kai), 0, m.girl ? 1 : 0, pos, m.gid == null ? null : m.gid]; });   // v35: gid, so the Scoreboard can honour "Show names"
   return { k: "snap", from: "teacher", code: r.code, rid: r.rid, host: "teacher", t: cl.t, R: TUNE.runSeconds, final: cl.final, over: cl.over, crown: cl.crown, n: members.length,
     paused: !!r.paused, members, her: null, ev: ev || [], lost: lostOut(DB),   // v35: the Just lost list (species and cause only)
+    bt: refView(),   // v37 (Dayo 8; Māia 5): at most two battles: member ids, species, kind, round and pips; never a nickname or a pick
     feed: cl.feed.slice(-12).map(e => ({ n: e.n, text: e.text, me: false, big: e.big, kind: e.kind, from: e.from, to: e.to, amt: e.amt, skip: !!e.skip })) };
 }
 function dbClassRestore(m) {    // a reloaded dashboard mid-round: the board as it was at the last save
@@ -9251,7 +9333,7 @@ const WELCOME_KEY = "niche-welcome-seen";
 function dwSeen() { try { return localStorage.getItem(WELCOME_KEY) === "1"; } catch (e) { return false; } }
 function dwMark() { try { localStorage.setItem(WELCOME_KEY, "1"); } catch (e) {} }
 const LV = (local, live) => NET.mode === "local" ? local : live;   // v34b: Dayo's live wording (design/live-guide-wording.md Part 1); ?local=1 keeps the v33f lines
-const ROUNDS_DAY = [6, 8];   // v34b: rounds a day on the free plan, [12-minute, 8-minute], 24 girls, measured 2026-11-03 (KIT-STATUS.md, START-HERE Live build)
+const ROUNDS_DAY = [5, 7];   // v37: about 11 writes a classmate battle (Kit, emulator, small test, 2026-11-06), about 48 battles in a 24-girl 12-minute round: 5 and 7 (was 6 and 8)   // v34b: rounds a day on the free plan, [12-minute, 8-minute], 24 girls, measured 2026-11-03 (KIT-STATUS.md, START-HERE Live build)
 const GUIDE_STEPS = [
   { h: "Open your dashboard", pics: [["A0", "guide-A0-dashboard-open", LV("Your dashboard opens with the game already made, and the code is in the banner. You don't have to set anything up.",
     "Open your teacher link. The game is already made, and the code is in the banner. Press <b>Copy the student link</b> and send it to the class.")]] },
@@ -9259,7 +9341,7 @@ const GUIDE_STEPS = [
     "Press <b>Open the projector</b>. It opens in a new window: drag it to the projector screen and click <b>FULL SCREEN</b> once. That click also turns the sound on. The projector only shows the game, so nothing in it can change anything.")]] },
   { h: "Girls join", pics: [["S1", "guide-S1-join", LV("Each girl opens the Niche link, types the code and a nickname that isn't her real name, and taps <b>JOIN</b>.",
     "Each girl opens the student link, types the code and a nickname that isn't her real name, and taps <b>JOIN</b>.")]] },
-  { h: "Check the names, then start", pics: [["A1", "guide-A1-dashboard-names", "Names appear as girls join. Read them, press <b>Tick all</b>, then <b>START THE GAME</b>. Set <b>Class size</b> and <b>Round</b> on the right first; computer classmates fill any empty places."]] },
+  { h: "Check the names, then start", pics: [["A1", "guide-A1-dashboard-names", "Names appear as girls join. Read them, press <b>Tick all</b>, then <b>START THE GAME</b>. Girls whose animals meet can battle each other. Check the nicknames, then tick them so girls see who they're fighting. Set <b>Class size</b> and <b>Round</b> on the right first; computer classmates fill any empty places."]] },
   { h: "Girls choose", pics: [["S2", "guide-S2-deal", "Each girl is dealt an animal. She picks one of its three Styles and taps <b>LOCK IN!</b>. She has about 30 seconds, and the game starts by itself."]] },
   { h: "Watch the shore", pics: [["P2", "guide-P2-projector-shore", "The whole shore is on the wall: every animal, the Kai leaderboard and what is happening. There is nothing to press here. Let it run." + LV("", " When an oil spill, a dog or a big swell arrives, it arrives on every girl's shore at the same moment.")]] },
   { h: "What the girls are doing", pics: [["S3", "guide-S3-fight", "On her own screen a girl fights in three rounds when animals meet, picks a card from each wave chest, and hides when she is warned. If she is eaten, she loses a tenth of her kai and gets a new animal."]] },
@@ -9271,6 +9353,7 @@ const GUIDE_IF = [
   ["A girl's laptop drops out or refreshes.", LV("<p>Her name shows under “Not connected” here. She does not need you: she opens the Niche link and types the same code and the same nickname again, and she is back as herself, whether it is still the lobby or the round is running. In a round she comes back with the same animal and her kai, and the tide where it is; she starts from her animal's usual spot. A nickname that belongs to a girl who is still connected is never given away, so nobody can take a classmate's place. If a girl cannot get back in, it is almost always a typo in the nickname.</p>", "<p><b>On the same laptop</b>, she opens the student link and types the same code and nickname again. She is back as herself straight away, with the same animal and her kai. Her animal starts from its usual spot.</p><p><b>On a different laptop</b>, she has to wait until her name shows under “Not connected” here, which takes about 30 seconds. Then she types the same code and nickname. Before the start this only works while <b>Lock the lobby</b> is off. Once the game has started, turn on <b>Let latecomers in</b> for her.</p><p>Nobody can take a classmate's place: the nickname of a girl who is still connected is never given away. If she can't get back in, it is almost always a typo in the nickname.</p>")],
   ...(NET.mode === "local" ? [] : [["You refresh or close this page.", "<p>Refreshing is fine: the page picks the game up again where it was. Don't close it while girls are playing. This laptop runs the class, so the kai board and the computer classmates stop with it.</p><p>If you do close it, open your teacher link again. You get a new game with a new code. Until the girls join it, their laptops carry on with the old shore on their own, but the kai board stops moving, so the podium each girl sees at the end is out of date. Each girl opens the student link again and types the new code.</p>"]]),   // v34b (Dayo); checked against the code: a closed tab loses sessionStorage, so the link makes a new game
   ["Someone has a silly nickname, or her real name.", "<p>Before you start, press <b>Rename</b>, type a new one and <b>Save</b>; she sees “Your teacher changed your nickname to ...”. Press <b>Remove</b> if you would rather she chose again: she goes back to the join screen and that nickname can't be used again this game. Names only show on the wall if you have ticked them and switched on <b>Show names on the projector as they join</b>, so nothing unchecked ever appears.</p>"],
+  ["One girl keeps picking on another.", "<p>Each pair can only battle every two minutes, and a girl who is caught twice is left alone for a while. If it still isn't kind, turn <b>Classmate battles</b> off, or rename or remove a nickname.</p>"],   // v37 (Dayo 9; Māia: right as written)
   ["A girl arrives late.", "<p>Before you start, leave <b>Lock the lobby</b> off. After you start, turn on <b>Let latecomers in</b>. She is dealt an animal with 0 kai and has 15 seconds to pick a style.</p>"],
   ["You need a break.", "<p>Press <b>Pause</b>. Everything freezes: the wall says PAUSED and each laptop says “Paused by your teacher”. Press <b>Resume</b> to carry on.</p>"],
   ["You want to stop early.", "<p>Press <b>End game</b>, then <b>End game and clear</b> to confirm. The girls see “The game has ended. Thanks for playing.” Nicknames and results are deleted straight away, so there is no podium; let the clock run out if you want one.</p>"],
@@ -9330,7 +9413,7 @@ function startDash() {
     <div class="db-ctrls"><span class="db-group"><b>PROJECTOR</b><button class="db-btn on" id="db-mute" type="button">Sound: on</button><label>Volume <input type="range" id="db-vol" min="0" max="1" step="0.05" value="1"></label></span>
     <span class="db-group"><b>GIRLS' LAPTOPS</b><button class="db-btn on" id="db-lap" type="button">Sound effects: on</button></span>
     <button class="db-btn" id="db-calm" type="button">Calm effects: off</button>
-    <button class="db-btn on" id="db-snd" type="button" title="A quiet pop on this laptop each time a girl joins">Join pops here: on</button><span class="db-ver">V36</span></div></div>
+    <button class="db-btn on" id="db-snd" type="button" title="A quiet pop on this laptop each time a girl joins">Join pops here: on</button><span class="db-ver">V37</span></div></div>
     <div class="db-main" id="db-main"></div><div class="db-toast" id="db-toast"></div>
     <div class="db-dlg" id="db-dlg"><div><p>End the game and clear everything? Nicknames and results are deleted now and can't be brought back.</p>
     <div class="btns"><button class="db-btn" id="db-keep" type="button">Keep playing</button><button class="db-btn danger" id="db-wipe" type="button">End game and clear</button></div></div></div>
@@ -9339,7 +9422,7 @@ function startDash() {
       <p class="dw-lede">Each girl plays a real shore animal for one round. The most kai (food points) when the tide turns wins.</p>
       <ol class="dw-steps">
         <li><span class="dw-n">1</span><div><h3>Put the code on the wall.</h3><p>Press <b>Open the projector</b>, drag that window to the screen, then click <b>FULL SCREEN</b>. The game code appears there, big.</p></div></li>
-        <li><span class="dw-n">2</span><div><h3>Get the girls in.</h3><p>${LV("Send the class the Niche link.", "Press <b>Copy the student link</b> and paste it wherever your class usually gets links.")} They type the code and a nickname, and their names appear on this page. Read them, then press <b>Tick all</b>.</p></div></li>
+        <li><span class="dw-n">2</span><div><h3>Get the girls in.</h3><p>${LV("Send the class the Niche link.", "Press <b>Copy the student link</b> and paste it wherever your class usually gets links.")} They type the code and a nickname, and their names appear on this page. Read them, then press <b>Tick all</b>. Girls whose animals meet can battle each other. Check the nicknames, then tick them so girls see who they're fighting.</p></div></li>
         <li><span class="dw-n">3</span><div><h3>Press START THE GAME.</h3><p>The girls each pick a style for their animal (about 30 seconds), then the tide starts. A round is 8 minutes; change <b>Round</b> first if you want 5 or 12.</p></div></li>
       </ol>
       <button class="db-btn big dw-go" id="dw-go" type="button">Take me to the lobby</button>
@@ -9374,7 +9457,7 @@ function dbCopyOld(text) { try { const t = document.createElement("textarea"); t
 function dbToast(t) { const e = $("db-toast"); e.textContent = t; e.className = "db-toast on"; clearTimeout(DB.toastT); DB.toastT = setTimeout(() => e.className = "db-toast", 3200); }
 function dbCreate(auto) {   // v33d: auto = made on page load or after End game (no click, so no sound)
   if (!auto) sndArm();
-  DB.room = { k: "room", code: rmCode(), phase: "lobby", locked: false, late: false, size: DB.size, names: [], showNames: TUNE.room.showNames, pjView: TUNE.room.pjView, calm: false, laptop: TUNE.room.laptopSounds,
+  DB.room = { k: "room", code: rmCode(), phase: "lobby", locked: false, late: false, size: DB.size, names: [], showNames: TUNE.room.showNames, mates: TUNE.mate.on, pjView: TUNE.room.pjView, calm: false, laptop: TUNE.room.laptopSounds,
     vol: 1, mute: false, paused: false, pausedAt: 0, pausedAcc: 0, pickEnd: 0, goEnd: 0, playStart: 0, host: null, rid: null, seq: 0, R: DB.round };
   applyRound(DB.round);
   DB.banned = new NickBan(); DB.n = 0; DB.cleared = false; DB.snaps = {}; DB.winner = ""; DB.renaming = null; DB.cl = null; DB.view = null;
@@ -9450,10 +9533,12 @@ function dbTick() {
   else if (r.phase === "go" && now >= r.goEnd) { if (!DB.cl) dbClassStart(); r.phase = "playing"; r.playStart = now; r.pausedAcc = 0; DB.view = dbView(); dbPush(); dbRender(true); }
   else if (r.phase === "playing") {
     if (!DB.cl) dbClassStart();
+    refStep(r);   // v37: the classmate battles' referee (deadlines, Pause, the hard stop, new lives)
     dbClassStep(); DB.view = dbView(); if (DB.view) rmSend(DB.view);   // v34: the class, every quarter second; the projector is told
     const s = dbSnap();
     if ((s && s.over) || dbClock() >= TUNE.runSeconds + 2) {
       let w = ""; if (s) { const top = s.members.slice().sort((a, b) => b[3] - a[3])[0]; const cw = s.members.find(m => m[0] === s.crown); w = (cw || top || [])[1] || ""; }
+      refAllOff("tide");   // v37: the tide turned: running classmate battles are called off, no stakes
       DB.winner = w; r.phase = "over"; r.paused = false; if (DB.cl) { endClass(DB.cl); dbFinalSync(); DB.view = dbView(); if (DB.cl.order[0]) DB.winner = DB.cl.order[0].name; } dbAwards(false); dbPush(); dbRender(true);   // v35 (Dayo 4d): the four awards ride on the room
     }
   }
@@ -9489,7 +9574,7 @@ function dbCounts() { const r = DB.room, n = r.names.length, comp = Math.max(0, 
 function dbRender(full) {
   const r = DB.room, m = $("db-main"); if (!m) return;
   const stage = !r ? (DB.cleared ? "cleared" : "setup") : r.phase;
-  const list = r ? JSON.stringify([r.names.map(x => [x.id, x.nick, x.ok, x.lockedIn, !x.practice && performance.now() - x.hb > TUNE.room.staleSeconds * 1000]), DB.renaming, DB.renameErr, r.locked, r.late, r.paused, r.showNames, r.size, r.R]) : "";
+  const list = r ? JSON.stringify([r.names.map(x => [x.id, x.nick, x.ok, x.lockedIn, !x.practice && performance.now() - x.hb > TUNE.room.staleSeconds * 1000]), DB.renaming, DB.renameErr, r.locked, r.late, r.paused, r.showNames, r.size, r.R, r.mates]) : "";
   if (!full && stage === DB.stageSig && list === DB.listSig) { dbLive(); return; }
   if (document.activeElement && document.activeElement.id === "db-rn" && !full) { dbLive(); return; }
   DB.stageSig = stage; DB.listSig = list;
@@ -9497,12 +9582,13 @@ function dbRender(full) {
   const c = dbCounts(), code = r.code.split("").join(" ");
   const top = `<div class="db-go"><div class="db-link">STUDENTS GO TO <span class="db-url">THE LINK YOU GIVE THEM</span> AND TYPE <b>${code}</b></div>
     <button class="db-btn" data-a="link" type="button">Copy the student link</button>${NET.mode === "local" ? `<button class="db-btn teal" data-a="pj" type="button">Open the projector</button>` : `<span class="db-pjg"><button class="db-btn teal" data-a="pj" type="button">Open the projector</button><button class="db-btn small db-pjlink" data-a="pjlink" type="button">Copy the projector link</button></span>`}</div>`;
-  const privacy = NET.mode === "local" ? "Check the nicknames before you start; everything is cleared when you end the game."
-    : "Check the nicknames before you start. Niche keeps only nicknames and the game itself, held with Google in Australia. Pressing End game and clear deletes them straight away. If you forget, they are deleted automatically within a day.";
+  const privacy = (NET.mode === "local" ? "Check the nicknames before you start; everything is cleared when you end the game."
+    : "Check the nicknames before you start. Niche keeps only nicknames and the game itself, held with Google in Australia. Pressing End game and clear deletes them straight away. If you forget, they are deleted automatically within a day.")
+    + " Girls see a classmate's nickname in a battle only once you have ticked it, or if Show names is on.";   // v37 (Māia, wording)
   if (stage === "lobby") {
     m.innerHTML = top + `<div class="db-grid"><div class="db-panel"><p class="db-privacy">${privacy}</p>
       <div class="db-row-top"><span>${c.n} joined · ${c.ok} checked</span><button class="db-btn small" data-a="tickall" type="button">Tick all</button>
-      <label class="db-switch"><input type="checkbox" data-a="shownames" ${r.showNames ? "checked" : ""}> Show names on the projector as they join</label>${dbPjSeg(r)}</div>
+      <label class="db-switch"><input type="checkbox" data-a="shownames" ${r.showNames ? "checked" : ""}> Show names on the projector as they join</label><label class="db-switch db-mates"><input type="checkbox" data-a="mates" ${r.mates !== false ? "checked" : ""}> Classmate battles</label>${dbPjSeg(r)}</div>
       <div class="db-list" id="db-list">${dbList(false)}</div>
       ${NET.mode === "local" || params.get("practice") === "1" ? `<div class="db-mock">Mock-up only: <button class="db-btn small" data-a="prac" type="button">Add 5 practice joiners</button><button class="db-btn small" data-a="test" type="button">Add a test name</button><button class="db-btn small" data-a="stu" type="button">Open a student tab</button></div>` : ""}</div>
       <div class="db-side"><div class="db-panel"><label class="db-switch"><input type="checkbox" data-a="lock" ${r.locked ? "checked" : ""}> Lock the lobby</label>
@@ -9523,7 +9609,8 @@ function dbRender(full) {
   } else if (stage === "playing") {
     m.innerHTML = top + `<div class="db-grid"><div class="db-panel"><div class="db-clock" id="db-clock"></div><div class="db-status" id="db-play"></div>
       <p style="display:flex;gap:10px;flex-wrap:wrap;margin:14px 0"><button class="db-btn big db-pause" data-a="pause" type="button">${r.paused ? "RESUME" : "PAUSE"}</button></p>
-      <label class="db-switch"><input type="checkbox" data-a="late" ${r.late ? "checked" : ""}> Let latecomers in</label>${dbPjSeg(r)}
+      <label class="db-switch"><input type="checkbox" data-a="late" ${r.late ? "checked" : ""}> Let latecomers in</label>
+      <div class="db-mates"><label class="db-switch"><input type="checkbox" data-a="mates" ${r.mates !== false ? "checked" : ""}> Classmate battles</label><span class="db-mates-n" id="db-mates-n"></span></div>${dbPjSeg(r)}
       <p class="db-help">A girl who joins now is dealt an animal with 0 kai and a 0:15 deal.</p>${names}
       <div class="db-foot" style="margin-top:40px"><button class="db-btn danger" data-a="end" type="button">End game</button></div></div>
       <div class="db-side"><div class="db-panel"><p class="db-p db-len">${esc(roundWords(r.R || DB.round))}</p><p class="db-p" style="font-weight:700">${c.n} girl${c.n === 1 ? "" : "s"} + ${c.comp} computer classmate${c.comp === 1 ? "" : "s"}</p>
@@ -9542,6 +9629,7 @@ function dbLive() {    // the parts that tick
     pk.textContent = r.phase === "go" ? "3, 2, 1... the tide starts now." : `Girls are choosing animals ${fmt(Math.max(0, (r.pickEnd - rmNow()) / 1000 * SPEED))}, ${locked} of ${n} locked in.`; }
   const ck = $("db-clock"); if (ck) { const s = dbSnap(), t = s ? s.t : dbClock(), left = Math.max(0, TUNE.runSeconds - t); const txt = r.paused ? "PAUSED · " + fmt(left) + " left" : fmt(left) + " left";
     if (ck.textContent !== txt) ck.textContent = txt; ck.classList.toggle("final", left <= TUNE.finalSeconds); }
+  const mn = $("db-mates-n"); if (mn) { const t = r.phase === "playing" ? "Battles now: " + refLiveCount() : ""; if (mn.textContent !== t) mn.textContent = t; }   // v37 (Dayo 9)
   const pl = $("db-play"); if (pl) { const n = r.names.length, off = r.names.filter(x => !x.practice && performance.now() - x.hb > TUNE.room.staleSeconds * 1000);
     pl.innerHTML = `Playing: ${n - off.length} of ${n} girl${n === 1 ? "" : "s"}` + (off.length ? `<br><span class="off">Not connected: ${off.map(x => esc(x.nick)).join(", ")}</span>` : ""); }
 }
@@ -9578,6 +9666,7 @@ function dbChange(e) {
   if (a === "shownames") { r.showNames = b.checked; dbPush(); }
   if (a === "lock") { r.locked = b.checked; dbPush(); }
   if (a === "late") { r.late = b.checked; dbPush(); }
+  if (a === "mates") { r.mates = b.checked; dbPush(); }   // v37 (Dayo 9): running battles finish; new ones are refused while off
 }
 function dbRenameSave() {
   const r = DB.room, x = r && r.names.find(y => y.id === DB.renaming), i = $("db-rn"); if (!x || !i) return;
@@ -9588,6 +9677,7 @@ function dbRenameSave() {
 function dbWipe() {     // End game: nicknames and results are deleted now; every page is told
   const r = DB.room; $("db-dlg").className = "db-dlg";
   const fin = r ? finalStandings(r) : null;   // v35 (Dayo 4d, Māia 2): mid-round, the final standings ride on the ended message, then everything is deleted as before
+  REF.live.clear(); REF.g.clear(); REF.pair.clear(); REF.wins.clear(); REF_PJ.length = 0;   // v37: End game: the referee forgets everything (the girls' laptops close any battle on the ended room)
   if (r) rmSend(fin ? Object.assign({ k: "room", phase: "ended", was: r.code, code: r.code, names: [] }, { fin }) : { k: "room", phase: "ended", was: r.code, code: null, names: [] });
   netWipe(fin ? { k: "room", phase: "ended", was: r.code, code: r.code, names: [], fin } : null);    // v34 live: the game record, the projector's, every girl's record and inbox, deleted now (v35: 2.5 s after the standings are written)
   DB.room = null; DB.banned = new Set(); DB.snaps = {}; DB.winner = ""; DB.renaming = null; DB.cleared = true; dbCreate(true); dbToast("Everything cleared. A new game code is ready.");   /* v33d: back to a fresh lobby with a new code */
@@ -9609,7 +9699,7 @@ function startProjector() {
   SND.vol = 1;
   const root = $("pj");
   root.innerHTML = `<div id="pj-top"><span class="pj-word">NICHE</span><div id="pj-tide"><b id="pj-phase">HIGH TIDE</b><div id="pj-tidebar"><i></i></div></div>
-      <div id="pj-clock">ROUND ENDS IN <b>8:00</b></div><button class="pj-chip" id="pj-snd" type="button">Click for sound</button><span id="pj-ver">V36</span></div>
+      <div id="pj-clock">ROUND ENDS IN <b>8:00</b></div><button class="pj-chip" id="pj-snd" type="button">Click for sound</button><span id="pj-ver">V37</span></div>
     <div id="pj-map"><div id="pj-zones"></div><div id="pj-world"></div><div id="pj-toks"></div><div id="pj-names"></div><div id="pj-fx"></div>
       <div id="pj-edge"></div><div id="pj-count"></div><div id="pj-paused">PAUSED</div></div>
     <div id="pj-ladder"><h2>KAI</h2><div id="pj-rows"></div></div>
@@ -9774,7 +9864,7 @@ function pjView(r) {    // the class to show: the hosting girl's tab if it is li
   PJ.live = live;
   // v34: pos is where her laptop says she is ([x, y, hiding, fighting]); -1 = between animals (not shown); 0 = no report (placed in her animal's zone)
   if (live) return { t: Math.min(s.R, s.t + (s.over || r.paused ? 0 : (now - PJ.snapAt) / 1000 * SPEED)), R: s.R, final: s.final, over: s.over, crown: s.crown,
-    members: s.members.map(([id, name, sp, kai, me, girl, pos, gid]) => ({ id, name, sp, kai, me: !!me, girl: !!girl, gid: gid == null ? null : gid, pos: Array.isArray(pos) ? pos : null, gone: pos === -1 })), feed: s.feed, her: s.her, ev: s.ev, lost: s.lost || [] };
+    members: s.members.map(([id, name, sp, kai, me, girl, pos, gid]) => ({ id, name, sp, kai, me: !!me, girl: !!girl, gid: gid == null ? null : gid, pos: Array.isArray(pos) ? pos : null, gone: pos === -1 })), feed: s.feed, her: s.her, ev: s.ev, lost: s.lost || [], bt: Array.isArray(s.bt) ? s.bt : [] };   // v37: the battle strip
   const cl = PJ.cl; if (!cl) return null;
   lostScan(cl, PJ, r);   // v35: the projector's own computer class has a Just lost list too
   return { t: cl.t, R: TUNE.runSeconds, final: cl.final, over: cl.over, crown: cl.crown, members: cl.members.map(m => ({ id: m.id, name: m.name, sp: m.sp, kai: m.kai, me: false, girl: !!m.girl, gid: m.gid == null ? null : m.gid })),
@@ -9808,6 +9898,7 @@ function pjMap(r, ts, dt, real) {
   if (!PJ.live && playing && now - PJ.postT > P.snapMs) { PJ.postT = now; rmSend(pjSnapOut(v, r)); }
   if (!TICKFRAME && !board) { drawWater(G, ts); drawEvents(G, ts); drawWeather(G, ts); drawWash(G); stepCam(G, real); drawDeepOver(G, NOMOTION ? 0 : ts / 1000); }
   pjTop(v, r); if (!board) { pjTokens(v, r); pjBursts(v, r); pjFeed(v); pjLadder(v); pjLanes(v, r); pjStamps(); } else pjBoard(v, r);
+  pjMateFrame(v, r, board);   // v37 (Dayo 8): classmate battles on the wall, both views
   // 3, 2, 1, GO! over the map, then the final minute's last ten
   const cnt = $("pj-count"); let want = null, cls = "on";
   if (r.phase === "playing" && PJ.prevPhase === "go") PJ.goAt = now;
@@ -10364,7 +10455,7 @@ if (params.get("howto") === "1") HT.seen = false;
 const HT_CARDS = [
   { h: "You are dealt an animal", t: "A real rocky-shore animal. When it dies, you get a new one. Tap the shore to play: <b>food</b> to eat, <b>cover</b> to hide, <b>an animal</b> to hunt it or take it on, <b>anywhere</b> to move there." },
   { h: "Energy keeps you alive. Kai is your score.", t: "Energy drains all the time, faster when you move. Eating fills it. At zero you die. Everything you eat also adds <b>kai</b>. Most kai when the round ends wins." },
-  { h: "Fights: pick one move", t: "Attack or defend. Each move beats one move and loses to one. Then two or three rounds play out. Most rounds wins. Some animals are hard to beat: that’s nature." },
+  { h: "Fights: pick one move", t: "Attack or defend. Each move beats one move and loses to one. Then two or three rounds play out. Most rounds wins. Some animals are hard to beat: that’s nature. See-through animals are classmates. Tap one with a coloured edge to battle her!" },   // v37 (Dayo 9)
   { h: "Wave chests and full", t: "A chest washes up now and then. Pick one card: <b>green</b> helps you, <b>red</b> hits a classmate you choose. After a meal a hunter is <b>full</b> for a few seconds: a catch then scores half." } ];
 function htPic(i) {
   const P = sp => `${ART}portrait-${sp}.webp`;
@@ -10412,11 +10503,14 @@ addEventListener("keydown", e => { if (e.key === "Escape" && HT.mode === "game")
 // ---------- the fight screen: header, pips, callouts, stamp, result card (Dayo 2a-2d, Raj 3-4) ----------
 const FH = { on: false, kind: "", kai0: 0, e0: 0, rounds: 3, wins: { l: 0, r: 0 }, meSide: "r", opp: "", lines: [], firstDone: false, stamp: "", won: null };
 const FH_TAG = { hunted: ["HUNTING YOU", "Lose and you’re eaten."], prey: ["YOUR PREY", "Win and you eat."], food: ["SAME FOOD", "Win and you keep the spot."],
-  rival: ["RIVAL", "Lose and you’re driven off."], pick: ["YOU PICKED THIS FIGHT", "No knockouts. Losing costs energy."] };
-const fhKind = m => m.type === "fight" ? "hunted" : m.type === "hunt" ? "prey" : m.type === "rival" ? "food" : m.type === "rivalry" ? "rival" : "pick";
+  rival: ["RIVAL", "Lose and you’re driven off."], pick: ["YOU PICKED THIS FIGHT", "No knockouts. Losing costs energy."],
+  // v37 (Dayo 5a): classmate battles (the stakes line is filled per battle)
+  mprey: ["YOUR PREY", "First to 2 rounds. Win and you eat."], mhunted: ["HUNTING YOU", "First to 2 rounds. Win and you get away."], mown: ["YOUR KIND", ""], mfood: ["SAME FOOD", ""],
+  mpicked: ["YOU PICKED THIS FIGHT", ""], mpickedon: ["PICKED ON YOU", ""] };
+const fhKind = m => m.type === "mate" ? m.mk : m.type === "fight" ? "hunted" : m.type === "hunt" ? "prey" : m.type === "rival" ? "food" : m.type === "rivalry" ? "rival" : "pick";
 function fhHeader(g, m, s, e0) {
   const k = fhKind(m), cl = g.cl, kai = cl ? Math.round(cl.members[0].kai) : 0, meSide = s.meLeft ? "l" : "r", opp = s.opp;
-  Object.assign(FH, { on: true, kind: k, kai0: kai, e0: g.me.energy, rounds: 3, wins: { l: 0, r: 0 }, meSide, opp, lines: [], stamp: "", won: null });
+  Object.assign(FH, { on: true, kind: k, kai0: kai, e0: g.me.energy, rounds: 3, wins: { l: 0, r: 0 }, meSide, opp, lines: [], stamp: "", won: null, oppNm: m.type === "mate" ? FH.oppNm : null });
   const pips = side => `<div class="nk-fh-pips" id="nk-fh-pips-${side}">${"<i></i>".repeat(3)}</div>`;
   // v36 (Raj 5): the CLASSMATE chip ships DORMANT: no fight is with a classmate in v36 (Dayo 3c), so `mate` is never set; computers are unchanged
   const oa = m.rival || m.hunter || m.prey || null, mate = !!(oa && oa.mate && oa.nick), mateNm = mate ? (mateName({ name: oa.nick, gid: oa.gid }) || "Classmate") : "";
@@ -10433,12 +10527,12 @@ function fhCall(kick, text, cls, stamp) {
 }
 function fhAhead() {
   const a = $("nk-fh-ahead"); if (!a || !FH.on) return; const me = FH.wins[FH.meSide], th = FH.wins[FH.meSide === "l" ? "r" : "l"];
-  a.className = "nk-fh-ahead " + (me > th ? "you" : th > me ? "rival" : ""); a.textContent = me > th ? "YOU’RE AHEAD" : th > me ? SP[FH.opp].up + " IS AHEAD" : "LEVEL";
+  a.className = "nk-fh-ahead " + (me > th ? "you" : th > me ? "rival" : ""); a.textContent = me > th ? "YOU’RE AHEAD" : th > me ? (FH.oppNm || SP[FH.opp].up) + " IS AHEAD" : "LEVEL";   // v37: a classmate by name (or CLASSMATE)
 }
 function fhRoundLands(p) {
   if (!FH.on || !$("nk-pay")) return;
   const w = p.win; if (w) { FH.wins[w]++; const row = $("nk-fh-pips-" + w), pip = row && row.children[FH.wins[w] - 1]; if (pip) pip.className = "on"; }
-  const me = FH.wins[FH.meSide], th = FH.wins[FH.meSide === "l" ? "r" : "l"], nm = SP[FH.opp].up;
+  const me = FH.wins[FH.meSide], th = FH.wins[FH.meSide === "l" ? "r" : "l"], nm = FH.oppNm || SP[FH.opp].up;   // v37: ROUND TO {NICK}
   if (p.last) {   // the stamp in place of the last callout; it holds into the result card
     FH.won = me > th ? true : th > me ? false : null; FH.stamp = me > th ? `YOU WIN ${me}–${th}` : th > me ? `${nm} WINS ${th}–${me}` : `LEVEL ${me}–${th}`; fhAhead();
     return fhCall(p.tag, FH.stamp, FH.won === true ? "you" : FH.won === false ? "lose" : "even", true);
@@ -10523,15 +10617,19 @@ function shadowFrame(g) {
     if (s.sp !== m.sp) { s.sp = m.sp; s.e.style.backgroundImage = `url("${ART}portrait-${m.sp}.webp")`; s.size = tokSize({ sp: m.sp }); s.e.style.width = s.e.style.height = s.size + "px"; }
     s.e.style.left = (s.x - s.size / 2).toFixed(1) + "px"; s.e.style.top = (s.y - s.size / 2).toFixed(1) + "px";
     s.fight = !!m.pos[2]; s.e.classList.toggle("nk-shadow--fight", s.fight); s.m = m; if (s.e.style.display !== "block") s.e.style.display = "block";
+    { const ms = JOINV ? mateState(g, s) : { st: "quiet", rel: null }; s.mst = ms;   // v37 (Dayo 2c; Wren 5): the ring reads the whitelist, not CATCH1
+      const rk = ms.st === "quiet" ? null : ms.rel; if (s.rk !== rk) { s.rk = rk; for (const c of ["hunts", "eat", "kind", "fight"]) s.e.classList.toggle("nk-tok--rel-" + c, rk === c); }
+      s.e.classList.toggle("mb-rest", ms.st === "resting" || ms.st === "quiet"); if (ms.st !== "quiet" && ms.st !== "fighting") SHD.anyFightable = true; }
     if (s.y + s.size / 2 >= vy0 && s.y - s.size / 2 <= vy1) SHD.inView.add(m.id);
   }
   for (const [id, s] of SHD.map) if (!seen.has(id)) { s.e.remove(); SHD.map.delete(id); }
-  if (mates.length && !g.waiting) olWant("shadows", MATE_SVG, "mate", "See-through animals are classmates, on their own shores.");
+  if (mates.length && !g.waiting && SHD.anyFightable && JOINV) olWant("shadows", MATE_SVG, "mate", "Classmates with a coloured edge can be battled. Tap one near you!");   // v37 (Dayo 2c): replaces v36's line
+  SHD.anyFightable = false;
   platesFrame(g, now);
 }
 function pickPlates(g) {   // Raj 3: priority (related first, then nearest), crowds share one plate, at most 4, no plate over a plate
   const me = g.me, K = 1 / (scale || 1), list = [...SHD.map.values()].filter(s => SHD.inView.has(s.id) && s.m);
-  const rel = s => relKind(me.sp, { sp: s.sp }), pr = s => rel(s) ? 0 : 1;
+  const rel = s => s.mst ? (s.mst.st === "quiet" ? null : s.mst.rel) : relKind(me.sp, { sp: s.sp }), pr = s => s.mst && (s.mst.st === "tap" || s.mst.st === "hunts") ? -1 : rel(s) ? 0 : 1;   // v37: a classmate in reach (or one who hunts her) first
   list.sort((a, b) => pr(a) - pr(b) || dist(a, me) - dist(b, me));
   // v36 QA fixes (Raj check 3, Hugh S4): a crowd is two classmates within half the larger token OR within 24 screen px, so 20 px apart is one "Sophie +1"
   const crowd = (a, b) => dist(a, b) < Math.max(Math.max(a.size, b.size) / 2, 24 * K);
@@ -10543,13 +10641,14 @@ function pickPlates(g) {   // Raj 3: priority (related first, then nearest), cro
   for (const G0 of groups) {
     if (out.length >= 4) break;
     const s = G0.lead, nm = mateName(s.m), text = (nm || "Classmate") + (G0.n ? " +" + Math.min(9, G0.n) : "");
-    const w = Math.min(132, 30 + text.length * 8.4 + (s.fight ? 52 : 0)) * K, h = 24 * K, r = s.size / 2;
+    const st = s.mst ? s.mst.st : (s.fight ? "fighting" : "far");   // v37 (Dayo 2c): tap / far / hunts / resting / fighting / quiet
+    const extra = st === "tap" ? 108 : st === "hunts" ? 62 : st === "resting" ? 56 : s.fight ? 52 : 0, w = Math.min(st === "tap" ? 230 : 132, 30 + Math.min(text.length, st === "tap" ? 11 : 99) * 8.4 + extra) * K, h = 24 * K, r = s.size / 2;
     // Raj: below the token first, then above; v36 QA fixes: then beside it (right, left) before giving the plate up
     const spots = [[s.x, s.y + r + 4], [s.x, s.y - r - 4 - h], [s.x + r + 4 + w / 2, s.y - h / 2], [s.x - r - 4 - w / 2, s.y - h / 2]];
     let at = null; for (const [cx, top] of spots) { const b = { x0: cx - w / 2, y0: top, x1: cx + w / 2, y1: top + h }; if (!hit(b)) { at = { b, ox: cx - s.x, oy: top - s.y }; break; } }
     faces.push({ x0: s.x - r, y0: s.y - r, x1: s.x + r, y1: s.y + r });   // a lower-priority plate may not cover this face
     if (!at) continue;
-    placed.push(at.b); out.push({ id: s.id, text, named: !!nm, rel: rel(s), up: at.oy < 0 && at.ox === 0, ox: at.ox, oy: at.oy, fight: s.fight });
+    placed.push(at.b); out.push({ id: s.id, text, named: !!nm, rel: rel(s), st, up: at.oy < 0 && at.ox === 0, ox: at.ox, oy: at.oy, fight: s.fight });
   }
   return out;
 }
@@ -10574,8 +10673,10 @@ function platesFrame(g, now) {
   for (const [id, w] of want) {
     let P = SHD.plates.get(id); if (!P) { P = { e: document.createElement("div"), on: false, wantSince: now, missSince: 0, key: "" }; P.e.className = "nk-nt"; names.appendChild(P.e); SHD.plates.set(id, P); }
     if (!P.wantSince) P.wantSince = now; P.missSince = 0; P.w = w;
-    const key = [w.text, w.fight, w.rel].join("|"); if (P.key !== key) { P.key = key; P.e.innerHTML = MATE_SVG + "<span></span>" + (w.fight ? "<small>fighting</small>" : ""); P.e.querySelector("span").textContent = w.text;   // textContent: a girl typed it
-      P.e.className = "nk-nt" + (w.rel ? " nk-nt--" + w.rel : "") + (P.on ? " on" : ""); }
+    const key = [w.text, w.fight, w.rel, w.st].join("|"); if (P.key !== key) { P.key = key;   // v37 (Dayo 2c): the plate says what she can do
+      const st = w.st || (w.fight ? "fighting" : "far"), glyph = st === "tap" ? MB_CLAW_SVG : MATE_SVG;   /* Dayo 2c: the claws only when she can tap to battle */
+      P.e.innerHTML = glyph + "<span></span>" + (st === "tap" ? "<b class=\"mb-tap\">TAP TO BATTLE</b>" : st === "hunts" ? "<small class=\"mb-hunts\">hunts you</small>" : st === "resting" ? "<small>resting</small>" : st === "fighting" ? "<small>fighting</small>" : ""); P.e.querySelector("span").textContent = w.text;   // textContent: a girl typed it
+      P.e.className = "nk-nt" + (w.rel ? " nk-nt--" + w.rel : "") + (st === "tap" ? " nk-nt--tap" : "") + (st === "resting" || st === "quiet" ? " nk-nt--quiet" : "") + (P.on ? " on" : ""); }
     if (!P.on && now - P.wantSince >= 300) { P.on = true; P.e.classList.add("on"); }   // a new plate waits 0.3 s
   }
   for (const [id, P] of SHD.plates) {
@@ -10589,10 +10690,20 @@ function platesFrame(g, now) {
 function shadowAt(g, p) { if (!g || g.waiting) return null; let best = null, bd = 1e9; for (const s of SHD.map.values()) { if (s.e.style.display === "none") continue; const d = dist(p, s); if (d < s.size / 2 + 6 && d < bd) { bd = d; best = s; } } return best; }
 function nearMateRow(g) {   // "Sophie (kina) is near" / "Sophie and 2 more are near" when any shadow is within 600 px
   if (!g || g.waiting) return ""; const me = g.me, near = [...SHD.map.values()].filter(s => s.m && dist(s, me) <= 600).sort((a, b) => dist(a, me) - dist(b, me));
-  if (!near.length) return ""; const s = near[0], nm = mateName(s.m) || (near.length > 1 ? "A classmate" : "A classmate"), more = near.length - 1;
+  if (!near.length) return "";
+  // v37 (Dayo 2c): a classmate who hunts her outranks the rest; then one she can battle now (the row is tappable)
+  const st = s => s.mst ? s.mst.st : "", s = near.find(q => st(q) === "hunts") || near.find(q => st(q) === "tap") || near[0], k = st(s);
+  const nm = mateName(s.m) || "A classmate", more = near.length - 1, spn = esc(SP[s.sp].name.toLowerCase());
+  if (k === "hunts" || k === "tap") {
+    SHD.nearText = k === "hunts" ? `${nm} (${SP[s.sp].name.toLowerCase()}) hunts you` : `${nm} (${SP[s.sp].name.toLowerCase()}) · TAP TO BATTLE`;
+    return `<span class="nk-near-row nk-near-row--mate ${k === "hunts" ? "mb-near-hunts" : "mb-near-tap"}" data-mate="${s.id}"${k === "tap" ? ` role="button" tabindex="0" aria-label="Battle ${esc(nm)}"` : ""}><i style="background-image:url('${ART}portrait-${s.sp}.webp')"></i><span><b>${esc(nm)}</b><small>${k === "hunts" ? `(${spn}) hunts you` : `(${spn}) · TAP TO BATTLE`}</small></span></span>`;
+  }
   SHD.nearText = more ? `${nm} and ${more} more are near` : `${nm} (${SP[s.sp].name.toLowerCase()}) is near`;
-  return `<span class="nk-near-row nk-near-row--mate"><i style="background-image:url('${ART}portrait-${s.sp}.webp')"></i><span><b>${esc(nm)}</b><small>${more ? `and ${more} more are near` : `(${esc(SP[s.sp].name.toLowerCase())}) is near`}</small></span></span>`;
+  return `<span class="nk-near-row nk-near-row--mate"><i style="background-image:url('${ART}portrait-${s.sp}.webp')"></i><span><b>${esc(nm)}</b><small>${more ? `and ${more} more are near` : `(${spn}) is near`}</small></span></span>`;
 }
+{ const box = document.getElementById("nk-panel-near"); if (box) { const go = e => { const r = e.target.closest(".mb-near-tap[data-mate]"); if (!r || !G) return; e.stopPropagation();   // v37: the Near you row starts the battle
+    const s = SHD.map.get(Number(r.dataset.mate)); if (s && JOINV) mbTap(G, s, null); };
+  box.addEventListener("click", go); box.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") go(e); }); } }
 
 // ---------- the Just lost list and the awards (Dayo 3b, 4d; Māia conditions 1-3) ----------
 function lostScan(cl, S, r) {
@@ -10617,11 +10728,12 @@ function dbAwards(push) {   // girls only, each to a different girl where possib
     const pick = c.find(q => !used.has(q.id)) || c[0]; used.add(pick.id);
     const sp = SP[pick.aw[sk]] ? pick.aw[sk] : SP[pick.sp] ? pick.sp : null; out.push({ t, id: pick.id, sp });
   }
+  if (r.phase === "over") { const tb = refTopBattler(r); if (tb) out.push(tb); }   // v37: TOP BATTLER, a win count only (Māia 4)
   const nv = out.length ? out : null; if (JSON.stringify(nv) === JSON.stringify(r.aw || null)) return; r.aw = nv; if (push) dbPush();
 }
 const asAnimal = sp => SP[sp] ? "as " + aOf(SP[sp].name.toLowerCase()) : "";
 function awTilesHTML(aw, nameOf, meId, cls) {
-  return `<h4>AWARDS</h4><div class="${cls}-tiles">${aw.map(a => { const nm = nameOf(a.id); return `<div class="${cls}-tile${a.id === meId ? " me" : ""}"><i style="background-image:url('${ART}portrait-${a.sp || "koura"}.webp')"></i><small>${esc(a.t.toUpperCase())}</small><b>${nm ? esc(nm) : esc(SP[a.sp] ? SP[a.sp].name : "")}</b><span>${nm ? esc(asAnimal(a.sp)) : ""}</span></div>`; }).join("")}</div>`;
+  return `<h4>AWARDS</h4><div class="${cls}-tiles">${aw.map(a => { const nm = nameOf(a.id); return `<div class="${cls}-tile${a.id === meId ? " me" : ""}"><i style="background-image:url('${ART}portrait-${a.sp || "koura"}.webp')"></i><small>${esc(a.t.toUpperCase())}</small><b>${nm ? esc(nm) : esc(SP[a.sp] ? SP[a.sp].name : "")}</b><span>${a.n ? `${a.n} battle${a.n === 1 ? "" : "s"} won` : nm ? esc(asAnimal(a.sp)) : ""}</span></div>`; }).join("")}</div>`;   // v37: TOP BATTLER shows the win count, nothing else
 }
 
 // ---------- her laptop, every frame (from v31Frame) ----------
@@ -10644,7 +10756,7 @@ function finalStandings(r) {
     showNames: !!r.showNames, ok: r.names.filter(x => x.ok).map(x => x.id) };
 }
 function fstShow(fin) {
-  if (FST.on) return; FST.on = true; uiBusy = true; if (G) G.over = true; chCancel(); swClose(); htClose(false);
+  if (FST.on) return; FST.on = true; uiBusy = true; if (MB.st) { mbClear(); MB.st = null; MB.b = null; MB.acts = []; MB.q = []; BT.open = false; }   /* v37: a classmate battle ends with the game */ if (G) G.over = true; chCancel(); swClose(); htClose(false);
   for (const id of ["nk-choose", "nk-death", "nk-fight", "nk-payoff", "nk-science", "nk-end"]) { const e = $(id); if (e) e.style.display = "none"; }
   rmHideCard();
   const mine = (fin.all || []).find(q => q[0] === RMS.id), row = (q, i) => `<div class="nk-fst-row${i === 0 ? " p1" : ""}"><b>${i + 1}</b><i style="background-image:url('${ART}portrait-${SP[q[1]] ? q[1] : "koura"}.webp')"></i><span>${esc(q[3] === RMS.id ? "You" : q[0])}</span><b>${KAI(q[2])}</b></div>`;
@@ -10737,6 +10849,724 @@ if (PROJV) addEventListener("keydown", e => {   // M flips the projector between
 });
 var V35_HOOKS = { V35, FH, HT, OL, SW, NEAR, FST, gutterVia, poolCut, relKind, causeLine, finalStandings, lostOut, awNumbers, doSwap: () => doSwap(G), swAllowed: () => swAllowed(G), htOpen, herFullSecs, rmReport,
   tapAt(x, y) { const p = toLogical({ clientX: x, clientY: y }), h = hitTest(p); return { h: h.kind, p, busy: uiBusy, modal: !!(G && G.modal) }; } };
+
+/* =====================================================================
+   v37 CLASSMATE BATTLES (Kit, 2026-11-06). Two girls whose animals meet battle each other; the teacher's laptop is the referee.
+   Built to, in this order of authority: design/v37-classmate-battles.md (Dayo, with Simon's four "yes" answers),
+   design/v37-wren-verdicts.md (Wren: HUNT from her whitelist, per-pair rCap, own-kind no-clash four, reach rules, cards),
+   design/live-privacy-check.md "v37 classmate battles" (Māia: seven conditions, wording). No rules change: everything rides in
+   the records that already exist (her players d: bt + sty; her inbox m: {k:"bt"}; games/CODE-v d: bt of at most two).
+   Māia 2: no battle history anywhere. The referee's memory (REF) lives in the teacher's browser only; a result is a card.
+   Māia 7: no console logging; moves are buttons; no typed text between girls.
+   ===================================================================== */
+TUNE.mate = {
+  on: true,                       // the dashboard switch's starting value (Classmate battles)
+  challenges: true,               // Simon's answer 2: any two nearby girls can battle (unrelated animals as a CHALLENGE)
+  reach: 300, serverReach: 650,   // px: her tap; the teacher's loose re-check (positions are up to 15 s old)
+  startGrace: 60, endGuard: 50,   // s: none in the round's first minute or last 50 s
+  choiceSeconds: 5, openTransit: 3, graceSeconds: 2.5, clashMaxSeconds: 4,
+  roundSeconds: 3, betweenSeconds: 1, openWaitSeconds: 6, maxBattleSeconds: 50,
+  giveUpSeconds: 8,               // her laptop: nothing from the teacher's laptop this long after its deadline = called off
+  vsSeconds: 0.8, bannerSeconds: 1, heardSeconds: 12,
+  maxLive: 6,                     // classmate battles at once in one class
+  perGirlPerRound: 6,             // a girl is in at most 6 a round; then her plate says "resting" for the rest of it
+  hunt: { firstTo: 2, rCap: 0.85 },
+  clash: { wheelWin: 0.75, evenStep: 0.1, evenMin: 0.2, evenMax: 0.8, offKindPenalty: 2, lossEnergy: 3, stepBack: 150 },
+  stake: { share: 0.08, min: 40, max: 200, challengeScale: 0.5 },   // of the LOSER's kai when the battle opens
+  catchBonus: 100, escapeBonus: 60, noShowBonus: 30, backOffForfeit: 25,
+  cool: { afterBattle: 40, samePair: 120, sameHunt: 240, newLife: 45, afterLoss: 60, eatenCap: 2, eatenWindow: 180, eatenShield: 90, noShow: 120 },
+  // Wren (verdict 1): HUNT comes from this whitelist, never from relOf. The hunter starts it; the prey never can.
+  huntPairs: [
+   "oyster_borer>kutai","oyster_borer>pupu",
+   "koura>kina","koura>kutai","koura>oyster_borer","koura>papaka","koura>pupu",
+   "wheke>pupu","wheke>papaka","wheke>koura","wheke>kutai","wheke>oyster_borer","wheke>paua",
+   "spotty>oyster_borer",
+   "tamure>kina","tamure>kutai","tamure>papaka","tamure>pilchard","tamure>pupu","tamure>triplefin","tamure>wheke",
+   "eagle_ray>kutai","eagle_ray>oyster_borer","eagle_ray>papaka","eagle_ray>pupu",
+   "kahawai>pilchard","kahawai>spotty","kahawai>triplefin",
+   "bronze_whaler>butterfish","bronze_whaler>eagle_ray","bronze_whaler>kahawai","bronze_whaler>korora","bronze_whaler>pilchard","bronze_whaler>spotty","bronze_whaler>tamure","bronze_whaler>wheke",
+   "fur_seal>butterfish","fur_seal>kahawai","fur_seal>korora","fur_seal>koura","fur_seal>pilchard","fur_seal>spotty","fur_seal>tamure","fur_seal>triplefin","fur_seal>wheke",
+   "korora>pilchard","korora>triplefin",
+   "shag>papaka","shag>spotty","shag>pilchard","shag>triplefin",
+   "torea>pupu","torea>papaka","torea>kutai","torea>oyster_borer",
+   "karoro>pupu","karoro>papaka","karoro>kutai"
+  ],
+  rCapPair: { "tamure>wheke": 1.0 },   // Wren verdict 1: a right read always wins that round (the octopus's ink and crevice)
+  noOwnClash: ["eagle_ray","pilchard","kahawai","butterfish"],   // Wren verdict 2: own kind falls to CHALLENGE, no off-kind penalty
+};
+{ const q = params.get("mates"); if (q === "0") TUNE.mate.on = false; }
+const MATE_HUNT = new Set(TUNE.mate.huntPairs);
+// Wren verdict 2: the result card for these four own-kind battles (paste-ready, her words)
+const MATE_OWN_CARD = {
+  eagle_ray: "Eagle rays do not really fight each other: at a rich patch they crowd in and the biggest digs first. This battle is only for the game.",
+  pilchard: "Pilchards do not fight each other. Being one fish among thousands in a shoal is their main defence. This battle is only for the game.",
+  kahawai: "Kahawai do not fight each other. They hunt together in schools, which helps protect each fish from sharks and seals. This battle is only for the game.",
+  butterfish: "Butterfish usually feed side by side in the kelp without fighting. This battle is only for the game." };
+// Wren verdict 4: the generic stand-off line ("an" only before oyster borer; species names lower case, as the live SP names)
+function mateSoCard(a, b) { const art = sp => sp === "oyster_borer" ? "an" : "a", nm = sp => SP[sp].name.toLowerCase();
+  return `In nature, ${art(a)} ${nm(a)} and ${art(b)} ${nm(b)} have no reason to fight: neither eats the other and they share no food. This battle is only for the game.`; }
+// The kind of battle between a starter (a) and a target (b): Wren's whitelist first, then own kind, then shared food (relOf), else a challenge
+function mateKind(a, b) {
+  if (MATE_HUNT.has(a + ">" + b)) return { k: "hunt", hunter: "a" };
+  if (MATE_HUNT.has(b + ">" + a)) return { k: "hunt", hunter: "b" };
+  if (a === b) return TUNE.mate.noOwnClash.includes(a) ? { k: "challenge", own: true } : { k: "clash", why: "own" };
+  if (relOf(a, b) === "food") return { k: "clash", why: "food" };
+  return { k: "challenge", own: false };
+}
+// Dayo 4d: r is solved per pair so that blind guessing on both sides gives exactly Wren's figure: escape = 3p² − 2p³ = 1 − q, r = min(2p, rCap)
+const MATE_R = new Map();
+function mateR(h, p) {
+  const key = h + ">" + p; if (MATE_R.has(key)) return MATE_R.get(key);
+  const q = catchOf(h, p), want = 1 - q; let lo = 0, hi = 1;
+  for (let i = 0; i < 60; i++) { const m = (lo + hi) / 2; if (3 * m * m - 2 * m * m * m < want) lo = m; else hi = m; }
+  const cap = TUNE.mate.rCapPair[key] !== undefined ? TUNE.mate.rCapPair[key] : TUNE.mate.hunt.rCap, r = Math.min(2 * lo, cap);
+  MATE_R.set(key, r); return r;
+}
+// one round of a CLASSMATE HUNT: hunter's attack index (0/1), prey's index (0-3). Pure: the roll is passed in.
+function mateHuntRound(hSp, hi, pSp, pi, r, roll) {
+  const hm = MOVES[hSp][hi], pm = MOVES[pSp][pi];
+  if (ATTACK(pm.t)) return { win: roll < r / 2 ? "p" : "h", cls: "back" };   // fighting back: neutral, the same as a blind guess
+  const read = (hm.t === "POWER" && pm.t === "GUARD") || (hm.t === "QUICK" && pm.t === "EVADE");
+  if (read) return { win: roll < r ? "p" : "h", cls: "read" };
+  return { win: "h", cls: "wrong" };
+}
+// one round of a CLASH or CHALLENGE: both pick from four. penA/penB: the challenger's off-kind penalty on her attacks.
+function mateClashRound(aSp, ai, bSp, bi, penA, penB, roll) {
+  const C = TUNE.mate.clash, am = MOVES[aSp][ai], bm = MOVES[bSp][bi];
+  if (!ATTACK(am.t) && !ATTACK(bm.t)) return { win: null, cls: "stare" };
+  if (ATTACK(am.t) && ATTACK(bm.t)) { const ch = clamp(0.5 + C.evenStep * ((am.p - penA) - (bm.p - penB)), C.evenMin, C.evenMax); return { win: roll < ch ? "a" : "b", cls: "both" }; }
+  const fav = BEATS[am.t] === bm.t ? "a" : "b";
+  return { win: roll < C.wheelWin ? fav : fav === "a" ? "b" : "a", cls: "fav-" + fav };
+}
+// the hunt maths test (Dayo test 6): resolved battles on this laptop, both sides random, or the prey always reading right
+function mateHuntSim(h, p, n, preyReads) {
+  const r = mateR(h, p); let esc = 0;
+  for (let i = 0; i < n; i++) { let wh = 0, wp = 0;
+    while (wh < 2 && wp < 2) { const hi = Math.random() < 0.5 ? 0 : 1, hm = MOVES[h][hi];
+      const pi = preyReads ? (hm.t === "POWER" ? 2 : 3) : Math.floor(Math.random() * 4);
+      const res = mateHuntRound(h, hi, p, pi, r, Math.random()); if (res.win === "p") wp++; else wh++; }
+    if (wp === 2) esc++; }
+  return { r, q: catchOf(h, p), escape: esc / n };
+}
+const mateStake = (kai, kind) => { const S = TUNE.mate.stake; return Math.round(clamp(Math.round(Math.max(0, kai) * S.share), S.min, S.max) * (kind === "challenge" ? S.challengeScale : 1)); };
+
+/* ---------- the teacher's laptop: the referee (REF lives in this browser's memory only, Māia 2) ---------- */
+const REF = { live: new Map(), n: 0, g: new Map(), pair: new Map(), wins: new Map(), rid: null, rolls: [], stall: false,
+  stats: { asks: 0, opened: 0, off: 0, ended: 0, resolved: 0, lostPicks: 0, msgs: 0 } };   // counts only: no who-with-whom
+const refRoll = () => REF.rolls.length ? REF.rolls.shift() : Math.random();
+function refGirl(gid) { let s = REF.g.get(gid); if (!s) { s = { rest: 0, shield: 0, life: 0, noShow: 0, eaten: [], battles: 0, alive: false, sp: null }; REF.g.set(gid, s); } return s; }
+function refReset(rid) { REF.rid = rid; REF.live.clear(); REF.g.clear(); REF.pair.clear(); REF.wins.clear(); }
+const refNow = () => performance.now();
+function refRestLeft(gid) {   // what the class summary tells the laptops: seconds until she can be battled (her plate says "resting")
+  const s = REF.g.get(gid); if (!s) return 0; const now = refNow();
+  if (s.battles >= TUNE.mate.perGirlPerRound) return 999;
+  return Math.max(0, Math.ceil((Math.max(s.rest, s.shield, s.life) - now) / 1000));
+}
+function refInBattle(gid) { for (const B of REF.live.values()) if (B.a.gid === gid || B.b.gid === gid) return B; return null; }
+function refSend(x, msg) {   // one message to one girl's inbox (live) or the BroadcastChannel (local)
+  const r = DB.room; if (!r || !x) return; REF.stats.msgs++;
+  rmSend(Object.assign({ k: "bt", id: x.id, cid: x.cid, code: r.code, rid: r.rid }, msg));
+}
+const refRow = gid => DB.room && DB.room.names.find(y => y.id === gid);
+const refNick = (x) => DB.room && x && (x.ok || DB.room.showNames) ? x.nick : null;   // Māia 1: the teacher never sends a nickname that is not cleared
+function refStep(r) {     // every dashboard tick while playing: new lives, deadlines, pause, the hard stop
+  if (REF.rid !== r.rid) refReset(r.rid);
+  const now = refNow(), T = TUNE.mate;
+  for (const x of r.names) { if (x.practice) continue; const rp = x.rep; if (!rp || rp.rid !== r.rid) continue; const s = refGirl(x.id), alive = Array.isArray(rp.pos);
+    if (alive && (!s.alive || (s.sp && rp.sp !== s.sp))) s.life = now + T.cool.newLife * 1000;   // Dayo 6: the new-life shield, after every deal
+    s.alive = alive; if (alive) s.sp = rp.sp; }
+  if (r.paused) { for (const B of [...REF.live.values()]) refOff(B, "paused"); return; }
+  for (const B of [...REF.live.values()]) {
+    if (now - B.t0 > T.maxBattleSeconds * 1000) { refOff(B, "stuck"); continue; }
+    if (!REF.stall && now >= B.deadline) refDeadline(B);
+  }
+}
+function refAllOff(why) { for (const B of [...REF.live.values()]) refOff(B, why); }
+function refActs(x, acts) {   // her report's bt: her last three actions, each with its own sequence number (a coalesced snapshot loses nothing)
+  if (!Array.isArray(acts)) return;
+  for (const a of acts.slice(-3)) {
+    if (!a || !(Number(a.s) > (x.btS || 0))) continue; x.btS = Number(a.s);
+    if (a.a === "ask") refAsk(x, a);
+    else if (a.a === "pick") refPick(x, a);
+    else if (a.a === "no") refDecline(x, a);
+    else if (a.a === "back") refBack(x, a);
+  }
+}
+function refAsk(x, a) {
+  const r = DB.room, T = TUNE.mate, now = refNow(); REF.stats.asks++;
+  const no = (why, s) => { REF.stats.off++; REF.lastNo = { why, s: s || 0 };   /* (tests) the last refusal reason only, no ids */ refSend(x, { ph: "off", ask: String(a.id).slice(0, 40), b: null, why, s: s || 0 }); };
+  if (!r || r.phase !== "playing" || !DB.cl) return no("tide");
+  if (r.paused) return no("paused");
+  if (r.mates === false) return no("switch");
+  const t = dbClock(); if (t < T.startGrace) return no("grace"); if (TUNE.runSeconds - t < T.endGuard) return no("guard");
+  const y = refRow(Number(a.to)); if (!y || y === x || y.practice) return no("gone");
+  // two girls ask each other: one battle (the earlier ask is the starter); a second ask from her is dropped silently
+  const mine = refInBattle(x.id); if (mine) { if (mine.a.gid === y.id || mine.b.gid === y.id) return; return no("you"); }
+  const theirs = refInBattle(y.id); if (theirs) return no("taken");
+  const fresh = q => q.rep && q.rep.rid === r.rid && performance.now() - q.hb < T.heardSeconds * 1000;
+  if (!fresh(x)) return no("you"); if (!fresh(y)) return no("gone");
+  const px = x.rep.pos, py = y.rep.pos; if (!Array.isArray(px)) return no("you"); if (!Array.isArray(py)) return no("gone");
+  if (py[2]) return no("hidden"); if (py[3]) return no("busy");
+  const sx = refGirl(x.id), sy = refGirl(y.id);
+  if (now < sx.noShow) return no("you", Math.ceil((sx.noShow - now) / 1000));
+  if (now < sx.rest || sx.battles >= T.perGirlPerRound) return no("you", sx.battles >= T.perGirlPerRound ? 999 : Math.ceil((sx.rest - now) / 1000));
+  const yl = refRestLeft(y.id); if (yl > 0) return no("resting", yl);
+  if (Math.hypot(px[0] - py[0], px[1] - py[1]) > T.serverReach) return no("far");
+  const k = mateKind(x.rep.sp, y.rep.sp);
+  if (k.k === "hunt" && k.hunter === "b") return no("prey");
+  if (k.k === "challenge" && !k.own && !T.challenges) return no("switch");
+  const pk = x.id + "|" + y.id, pk2 = y.id + "|" + x.id, hk = k.k === "hunt" ? (k.hunter === "a" ? x.id + ">" + y.id : y.id + ">" + x.id) : null;
+  const pairT = Math.max(REF.pair.get(pk) || 0, REF.pair.get(pk2) || 0, hk ? REF.pair.get(hk) || 0 : 0);
+  if (now < pairT) return no("resting", Math.ceil((pairT - now) / 1000));
+  if (REF.live.size >= T.maxLive) return no("max");
+  const cl = DB.cl, mx = cl.members.find(m => m.gid === x.id), my = cl.members.find(m => m.gid === y.id); if (!mx || !my) return no("gone");
+  const kind = k.k, B = { id: ++REF.n, kind, why: k.why || null, own: !!k.own, t0: now, round: 1, deadline: now + (T.choiceSeconds + T.openTransit + T.graceSeconds) * 1000,
+    a: { gid: x.id, mid: mx.id, sp: x.rep.sp, stake: mateStake(mx.kai, kind) }, b: { gid: y.id, mid: my.id, sp: y.rep.sp, stake: mateStake(my.kai, kind) },
+    hunter: kind === "hunt" ? k.hunter : null, picks: { a: null, b: null }, auto: { a: 0, b: 0 }, miss: { a: 0, b: 0 }, wins: { a: 0, b: 0 }, reads: { a: 0, b: 0 }, rounds: [], ask: String(a.id).slice(0, 40), pjEnd: 0, res: null };
+  if (kind === "hunt") { const H = B[B.hunter], P = B[B.hunter === "a" ? "b" : "a"]; B.r = mateR(H.sp, P.sp); B.q = catchOf(H.sp, P.sp); }
+  REF.live.set(B.id, B); REF.stats.opened++;
+  const mk = side => { const me = B[side], other = B[side === "a" ? "b" : "a"], row = side === "a" ? y : x;
+    const role = kind === "hunt" ? (B.hunter === side ? "hunter" : "prey") : side;
+    const hk2 = kind === "hunt" ? (B.hunter === side ? "mprey" : "mhunted") : kind === "clash" ? (B.why === "own" ? "mown" : "mfood") : side === "a" ? "mpicked" : "mpickedon";
+    return { ph: "open", at: Math.round(rmNow()), b: B.id, ask: side === "a" ? B.ask : null, kind, own: B.own, role, mk: hk2, r: 1, stake: me.stake, win: other.stake,
+      foe: { gid: other.gid, mid: other.mid, sp: other.sp, nick: refNick(row) } }; };
+  refSend(x, mk("a")); refSend(y, mk("b"));
+}
+const refSide = (B, gid) => B.a.gid === gid ? "a" : B.b.gid === gid ? "b" : null;
+function refPick(x, a) {
+  const B = REF.live.get(Number(a.b)); if (!B) return; const side = refSide(B, x.id); if (!side || Number(a.r) !== B.round || B.picks[side] !== null) return;
+  const sp = B[side].sp, n = MOVES[sp] ? MOVES[sp].length : 4, hunterSide = B.kind === "hunt" && B.hunter === side;
+  let mv = Math.floor(Number(a.mv)); if (!(mv >= 0 && mv < (hunterSide ? 2 : n))) mv = 0;
+  B.picks[side] = mv; B.auto[side] = a.auto ? 1 : 0; B.miss[side] = 0; (REF.stats.recv = REF.stats.recv || []).push(Date.now()); if (REF.stats.recv.length > 60) REF.stats.recv.shift();   /* (tests) when a pick reaches this laptop: a time only */   // her pick: never forwarded; the other learns it only in the round message (Māia 5)
+  if (B.picks.a !== null && B.picks.b !== null && !REF.stall) refResolve(B);
+}
+function refDecline(x, a) {   // only the target's laptop, only in a race (busy, hiding, dead): the starter is told, nobody cools down
+  const B = REF.live.get(Number(a.b)); if (!B || refSide(B, x.id) !== "b" || B.round !== 1 || B.rounds.length) return;
+  REF.live.delete(B.id); REF.stats.off++;
+  const xa = refRow(B.a.gid), why = a.why === "hidden" ? "hidden" : a.why === "dead" ? "gone" : "busy";
+  if (xa) refSend(xa, { ph: "off", b: B.id, ask: B.ask, why, s: 0 });
+}
+function refBack(x, a) {      // Dayo 5c: the target backs off a CLASH or CHALLENGE, before her first pick only
+  const B = REF.live.get(Number(a.b)); if (!B || refSide(B, x.id) !== "b" || B.kind === "hunt" || B.round !== 1 || B.picks.b !== null) return;
+  const f = TUNE.mate.backOffForfeit; B.res = "back"; refFinish(B, { a: { res: "theyBacked", kai: f, energy: 0 }, b: { res: "backedOff", kai: -f, energy: 0 } }, null);
+}
+function refDeadline(B) {     // Dayo 4c-4: a missing pick gets a random move (as a timed-out pick); two rounds missing in a row = she has gone
+  for (const side of ["a", "b"]) if (B.picks[side] === null) {
+    B.miss[side]++; REF.stats.lostPicks++;
+    if (B.miss[side] >= 2) return refDrop(B, side);
+    const hunterSide = B.kind === "hunt" && B.hunter === side; B.picks[side] = Math.floor(Math.random() * (hunterSide ? 2 : 4)); B.auto[side] = 1; B["lost" + side] = 1;
+  }
+  refResolve(B);
+}
+function refDrop(B, side) {   // Dayo 7: her laptop dropped out; the other girl gets noShowBonus, the absent girl a no-show cool-down, nothing else changes
+  const other = side === "a" ? "b" : "a", xo = refRow(B[other].gid), xs = refRow(B[side].gid), now = refNow();
+  REF.live.delete(B.id); REF.stats.off++;
+  refGirl(B[side].gid).noShow = now + TUNE.mate.cool.noShow * 1000;
+  refGirl(B[other].gid).rest = now + TUNE.mate.cool.afterBattle * 1000;
+  if (xo) refSend(xo, { ph: "off", b: B.id, why: "drop", bonus: TUNE.mate.noShowBonus, s: TUNE.mate.cool.afterBattle });
+  if (xs) refSend(xs, { ph: "off", b: B.id, why: "dropme", s: TUNE.mate.cool.noShow });
+  B.pjEnd = now; B.res = "off"; refPjKeep(B);
+}
+function refOff(B, why) {     // paused, the tide turned, End game, the hard stop: called off, no stakes, nobody cools down
+  REF.live.delete(B.id); REF.stats.off++;
+  for (const side of ["a", "b"]) { const xr = refRow(B[side].gid); if (xr) refSend(xr, { ph: "off", b: B.id, ask: side === "a" ? B.ask : null, why, s: 0 }); }
+}
+function refResolve(B) {
+  const T = TUNE.mate, roll = refRoll(); let res;
+  const pa = B.picks.a, pb = B.picks.b;
+  if (B.kind === "hunt") {
+    const hs = B.hunter, ps = hs === "a" ? "b" : "a", h = mateHuntRound(B[hs].sp, B.picks[hs], B[ps].sp, B.picks[ps], B.r, roll);
+    res = { win: h.win === "h" ? hs : ps, cls: h.cls }; if (h.cls === "read") B.reads[ps]++;
+  } else {
+    const pen = B.kind === "challenge" && !B.own ? T.clash.offKindPenalty : 0;   // Wren 5: the -2 only when the species differ, on the challenger (a) only
+    const c = mateClashRound(B.a.sp, pa, B.b.sp, pb, pen, 0, roll); res = { win: c.win, cls: c.cls };
+    if (c.cls === "fav-a") B.reads.a++; else if (c.cls === "fav-b") B.reads.b++;
+  }
+  if (res.win) B.wins[res.win]++; REF.stats.resolved++;
+  B.rounds.push({ n: B.round, a: pa, b: pb, win: res.win, cls: res.cls });
+  const done = B.kind === "hunt" ? (B.wins.a >= T.hunt.firstTo || B.wins.b >= T.hunt.firstTo) : B.round >= 3;
+  let ends = null;
+  if (done) ends = refEnds(B);
+  for (const side of ["a", "b"]) {
+    const o = side === "a" ? "b" : "a", xr = refRow(B[side].gid); if (!xr) continue;
+    refSend(xr, { ph: "round", b: B.id, r: B.round, mine: B.picks[side], theirs: B.picks[o], autoMine: B.auto[side], autoTheirs: B.auto[o], lostMine: B["lost" + side] ? 1 : 0,
+      win: res.win === side ? "me" : res.win === o ? "them" : "none", cls: res.cls, score: [B.wins[side], B.wins[o]], next: !done, end: ends ? ends[side] : null });
+  }
+  delete B.losta; delete B.lostb;
+  if (done) { refFinish(B, ends, true); return; }
+  B.round++; B.picks = { a: null, b: null }; B.auto = { a: 0, b: 0 };
+  B.deadline = refNow() + (T.roundSeconds + T.betweenSeconds + T.choiceSeconds + T.graceSeconds) * 1000;
+}
+function refEnds(B) {         // each girl's side of the result: her result word, her kai change, her energy change, whether she dies
+  const T = TUNE.mate, C = T.clash, out = {};
+  if (B.kind === "hunt") {
+    const hs = B.hunter, ps = hs === "a" ? "b" : "a", caught = B.wins[hs] >= T.hunt.firstTo;
+    out[hs] = caught ? { res: "caught", kai: T.catchBonus, energy: 0 } : { res: "missed", kai: 0, energy: -TUNE.costs.huntMiss };
+    out[ps] = caught ? { res: "eaten", kai: 0, energy: 0, dies: 1 } : { res: "escaped", kai: T.escapeBonus, energy: 0 };
+    B.res = caught ? "caught" : "escaped";
+    return out;
+  }
+  const wa = B.wins.a, wb = B.wins.b;
+  if (wa === wb) { out.a = { res: "level", kai: 0, energy: 0 }; out.b = { res: "level", kai: 0, energy: 0 }; B.res = "level"; return out; }
+  const w = wa > wb ? "a" : "b", l = w === "a" ? "b" : "a", stake = B[l].stake, lost = B.rounds.filter(q => q.win === w).length;
+  out[w] = { res: "won", kai: stake, energy: 0 }; out[l] = { res: "lost", kai: -stake, energy: -C.lossEnergy * lost, step: C.stepBack };
+  B.res = "won-" + w; return out;
+}
+function refFinish(B, ends, played) {   // cool-downs, shields and the win count (teacher memory only); the projector keeps the stamp 3 s
+  const T = TUNE.mate.cool, now = refNow(); REF.live.delete(B.id); REF.stats.ended++;
+  for (const side of ["a", "b"]) { const s = refGirl(B[side].gid); s.rest = now + T.afterBattle * 1000; s.battles++;
+    const e = ends[side]; if (!e) continue;
+    if (e.res === "lost") s.shield = Math.max(s.shield, now + T.afterLoss * 1000);   // the beaten shield: no piling on
+    if (e.res === "eaten") { s.eaten = s.eaten.filter(t => now - t < T.eatenWindow * 1000).concat(now);
+      if (s.eaten.length >= T.eatenCap) { s.shield = Math.max(s.shield, now + T.eatenShield * 1000); s.eaten = []; e.safe = T.eatenShield; } }
+    const w = REF.wins.get(B[side].gid) || { w: 0, l: 0 };   // TOP BATTLER: a count only (Māia 4)
+    if (e.res === "won" || e.res === "caught" || e.res === "escaped" || e.res === "theyBacked") w.w++; else if (e.res === "lost" || e.res === "eaten" || e.res === "missed") w.l++;
+    REF.wins.set(B[side].gid, w); }
+  REF.pair.set(B.a.gid + "|" + B.b.gid, now + T.samePair * 1000);
+  if (B.kind === "hunt") { const hs = B.hunter, ps = hs === "a" ? "b" : "a"; REF.pair.set(B[hs].gid + ">" + B[ps].gid, now + T.sameHunt * 1000); }
+  if (!played) { for (const side of ["a", "b"]) { const xr = refRow(B[side].gid); if (xr) refSend(xr, { ph: "round", b: B.id, r: B.round, backoff: 1, next: false, end: ends[side], score: [0, 0], win: "none" }); } }
+  B.pjEnd = now; refPjKeep(B);
+}
+const REF_PJ = [];   // the last ended battles, for the projector's 3 s stamp only (species and kind; nothing else is kept)
+function refPjKeep(B) { REF_PJ.push({ id: B.id, kind: B.kind, a: [B.a.mid, B.a.sp], b: [B.b.mid, B.b.sp], hunter: B.hunter, r: B.round, p: [B.wins.a, B.wins.b], res: B.res, at: refNow() }); while (REF_PJ.length > 4) REF_PJ.shift(); }
+function refView() {          // the projector's strip: at most two (the newest), member ids, species, kind, round and pips; never a nickname, never a pick (Māia 5)
+  const now = refNow(); while (REF_PJ.length && now - REF_PJ[0].at > 3500) REF_PJ.shift();
+  const live = [...REF.live.values()].filter(B => B.round > 1 || B.rounds.length || now - B.t0 > 1500).map(B => ({ id: B.id, kind: B.kind, a: [B.a.mid, B.a.sp], b: [B.b.mid, B.b.sp], hunter: B.hunter, r: B.round, p: [B.wins.a, B.wins.b], res: null }));
+  const ended = REF_PJ.filter(e => e.res && e.res !== "off").map(e => ({ id: e.id, kind: e.kind, a: e.a, b: e.b, hunter: e.hunter, r: e.r, p: e.p, res: mateStampText(e) }));
+  return ended.concat(live).sort((x, y) => y.id - x.id).slice(0, 2);
+}
+function mateStampText(e) {   // species only (Māia 3): "KEKENO WINS 2–1", "GOT AWAY!", "CAUGHT!", "LEVEL!"
+  if (e.res === "caught") return "CAUGHT!"; if (e.res === "escaped") return "GOT AWAY!"; if (e.res === "level") return "LEVEL!"; if (e.res === "back") return "BACKED OFF!";
+  const w = e.res === "won-a" ? "a" : "b", l = w === "a" ? "b" : "a"; return SP[e[w][1]].up + " WINS " + e.p[w === "a" ? 0 : 1] + "–" + e.p[l === "a" ? 0 : 1];
+}
+function refTopBattler(r) {   // the award: most classmate battles won this round, ties on fewest lost; a count under the name rule, nothing else
+  let best = null; for (const [gid, w] of REF.wins) { if (!w.w) continue; if (!best || w.w > best.w.w || (w.w === best.w.w && w.l < best.w.l)) best = { gid, w }; }
+  if (!best) return null; const x = r.names.find(y => y.id === best.gid); if (!x) return null;
+  return { t: "Top battler", id: best.gid, sp: x.rep && SP[x.rep.sp] ? x.rep.sp : null, n: best.w.w };
+}
+const refLiveCount = () => REF.live.size;
+
+/* ---------- a girl's laptop: the battle ---------- */
+const MB = { st: null, b: null, ask: null, acts: [], seq: 0, restUntil: 0, safeSay: 0, q: [], playing: false, stats: { opens: 0, rounds: 0, waits: [], offs: [], says: [] }, timers: [] };
+function mbClear() { MB.timers.forEach(t => clearTimeout(t)); MB.timers = []; cancelAnimationFrame(MB.raf); }
+const mbLater = (f, ms) => { const t = setTimeout(f, ms); MB.timers.push(t); return t; };
+const mbActive = () => !!MB.st;
+function mbAct(a) {           // Māia 5: the classmate's game member id, never a nickname; the list keeps her last three actions
+  MB.seq = Math.max(MB.seq + 1, Date.now()); MB.acts.push(Object.assign({ s: MB.seq }, a)); if (MB.acts.length > 3) MB.acts.shift();
+  RMS.btUrgent = true; rmReport(true);
+}
+function mbFoeRow(gid) { const r = RMS.room; return r && (r.names || []).find(y => y.id === gid); }
+function mbNick(foe) {        // Māia 1: built locally at the moment it draws, so a Rename or Remove mid-battle is followed; else null ("Classmate")
+  if (!foe) return null; const x = mbFoeRow(foe.gid); const nm = x ? x.nick : foe.nick; if (!nm) return null;
+  return mateName({ name: nm, gid: foe.gid }) || null;
+}
+const mbName = (foe, start) => mbNick(foe) || (start ? "A classmate" : "a classmate");
+const mbUp = foe => (mbNick(foe) || "a classmate").toUpperCase();
+const mbSay = text => { MB.stats.says.push(text); if (MB.stats.says.length > 40) MB.stats.says.shift(); refuseToast(G, G.events.length, text); };
+function mbRestLeft(m) { if (!m || !(m.rest > 0)) return 0; return Math.max(0, Math.ceil(m.rest - (performance.now() - (m.restAt || 0)) / 1000)); }
+function mbPrey(m) { return { sp: m.sp, x: m.pos[0], y: m.pos[1], alive: true }; }
+function mbCheck(g, m) {      // her laptop checks first (Dayo 2b, Wren 1): { ok } or { say, travel }
+  const T = TUNE.mate, r = RMS.room, me = g.me, now = performance.now(), Nm = mbName({ gid: m.gid, nick: m.name }, true), nm = mbName({ gid: m.gid, nick: m.name });
+  if (!r || r.mates === false) return { say: "Your teacher has turned classmate battles off.", travel: true };
+  const rt = roomT(r); if (rt < T.startGrace) return { say: "Classmate battles start after the first minute.", travel: true };
+  if (TUNE.runSeconds - rt < T.endGuard) return { say: "Too close to the end of the round.", travel: true };
+  if (MB.restUntil > now) return { say: `You're resting after a battle. ${Math.ceil((MB.restUntil - now) / 1000)} s to go.`, travel: true };
+  const k = mateKind(me.sp, m.sp);
+  if (k.k === "hunt" && k.hunter === "b") return { say: `${Nm}'s ${SP[m.sp].name.toLowerCase()} hunts you: you can't start that fight.` };
+  if (m.pos[2]) return { say: `${Nm} is in a fight. Try again soon.`, travel: true };
+  const rest = mbRestLeft(m); if (rest > 0) return { say: rest >= 900 ? `${Nm} is resting for the rest of this round.` : `${Nm} is resting after a battle. Try again in ${rest} s.`, travel: true };
+  if (k.k === "challenge" && !k.own && !T.challenges) return { say: null, travel: true, quiet: true };
+  if (k.k === "hunt" && me.fullUntil > g.t) return { say: `You're full. Hunt again in ${Math.ceil(me.fullUntil - g.t)} s.`, travel: true };
+  const p = mbPrey(m);
+  if (dist(me, p) > T.reach) return { say: `Get closer to battle ${nm}.`, travel: true };
+  if (k.k === "hunt") {
+    if (!canHuntAt(g, me.sp, p)) { const who = `${Nm}'s ${SP[m.sp].name.toLowerCase()}`;
+      return { say: me.sp === "shag" ? `Out of reach: ${who} is not in open water.` : me.sp === "karoro" || me.sp === "torea" ? `Out of reach: ${who} is under water.` : `Out of reach: ${who} is on dry rock.` }; }
+    if (SWIMS(me.sp) && !(swimPath(g, me, p) && (poolAt(p.x, p.y) || secondsUntilDry(g, p.x, p.y) > 12))) return { say: `${Nm} can't be reached by water right now.` };
+  } else if (!sameWater(g, me, p)) return { say: `Your ${SP[me.sp].name.toLowerCase()} can't reach ${nm} from here.` };
+  return { ok: true, k };
+}
+function mbTap(g, s, p) {     // a tap on a classmate's shadow (or her Near you row): battle, or the reason, or travel towards her
+  const m = s && s.m; if (!m || !Array.isArray(m.pos) || MB.st || g.over || g.waiting || g.modal || uiBusy) return false;
+  const c = mbCheck(g, m); MB.stats.lastCheck = c;
+  if (c.ok) return mbCall(g, m, c.k);
+  const n0 = g.events.length;
+  if (c.travel) { const ok = tapPoint(g, p ? p.x : m.pos[0], p ? p.y : m.pos[1]); SHD.lastTapMoved = ok !== false; }
+  if (c.say) refuseToast(g, n0, c.say); else if (g.events.slice(n0).some(e => e.k === "say")) refuseToast(g, n0, null);
+  if (c.say) { MB.stats.says.push(c.say); if (MB.stats.says.length > 40) MB.stats.says.shift(); }
+  return false;
+}
+function mbBusyFor(g) {        // the target's laptop, when the open lands: is she free?
+  if (!g || g.over || RMS.st !== "play") return "dead";
+  if (g.waiting || g.me.alive === false || vis("nk-choose") || vis("nk-death")) return "dead";
+  if (herHidden(g.me)) return "hidden";
+  if (g.modal || BT.open || uiBusy || queue.length || FST.on || vis("nk-science") || vis("nk-fight") || vis("nk-end")) return "busy";
+  return null;
+}
+function mbCall(g, m, k) {
+  const T = TUNE.mate; mbClear(); MB.q = [];
+  Object.assign(MB, { rlog: [], autoN: 0, autoMv: null, ended: false, end: null, mk: null, stepBack: 0, foeMove: null, st: "call", b: null, kind: k.k, foe: { gid: m.gid, mid: m.id, sp: m.sp, nick: null }, ask: RMS.id + "-" + (Date.now() % 1e7), tCall: performance.now(), round: 0, role: null });
+  htClose(false); swClose(); uiBusy = true; g.me.mode = "idle"; g.me.dest = null; g.me.target = null;
+  mbScreen(g, true);
+  mbAct({ id: MB.ask, a: "ask", to: m.gid, kind: k.k });
+  mbLater(() => { if (MB.st === "call") mbAbort(`${mbName(MB.foe, true)} couldn't be reached. Back to the shore.`); }, T.openWaitSeconds * 1000);
+  return true;
+}
+function mbIn(d) {             // a battle message from the teacher's laptop (her inbox, or the BroadcastChannel in ?local=1)
+  if (!G || d.rid !== RMS.rid) return;
+  if (d.ph === "open") { if (!(rmNow() - (d.at || 0) < 8000)) return; return mbOpen(d); }   // a rejoining laptop reads her whole inbox again: an old open is never a battle (Google-corrected clock)
+  if (d.ph === "off") return mbOffIn(d);
+  if (d.ph === "round") { if (!MB.st || d.b !== MB.b) return; if (MB.playing) { MB.q.push(d); return; } return mbRound(d); }
+}
+function mbOpen(d) {
+  const g = G, T = TUNE.mate;
+  if (MB.st === "call" && (d.ask === MB.ask || (d.foe && d.foe.gid === MB.foe.gid))) {   // hers (or the girl she called asked her first: one battle)
+    mbClear(); Object.assign(MB, { st: "open", b: d.b, kind: d.kind, own: d.own, role: d.role, mk: d.mk, foe: Object.assign({}, MB.foe, d.foe), stake: d.stake, win: d.win, round: 1, tOpen: performance.now() });
+    MB.stats.opens++; MB.stats.openWait = Math.round(performance.now() - MB.tCall);
+    mbHeader(g);   /* the real tag (and, if the girl she called asked her first, she is the target after all) */
+    const vs = $("bt-vs"); if (vs) { const p = vs.querySelector("p"); if (p) p.innerHTML = `<b>${esc(mbVsHead())}</b> · ${esc(mbStakeLine())}`; }
+    mbLater(() => mbBand(1), T.vsSeconds * 1000 / Math.min(SPEED, 4)); mbWatch(); return;
+  }
+  const busy = MB.st ? "busy" : mbBusyFor(g);
+  if (busy) { MB.stats.declines = (MB.stats.declines || 0) + 1; mbActOnly({ a: "no", b: d.b, why: busy }); return; }
+  mbClear(); MB.q = [];
+  Object.assign(MB, { rlog: [], autoN: 0, autoMv: null, ended: false, end: null, mk: null, stepBack: 0, foeMove: null, st: "open", b: d.b, ask: null, kind: d.kind, own: d.own, role: d.role, mk: d.mk, foe: d.foe, stake: d.stake, win: d.win, round: 1, tOpen: performance.now(), tCall: performance.now() });
+  MB.stats.opens++;
+  htClose(false); swClose(); uiBusy = true; g.me.mode = "idle"; g.me.dest = null; g.me.target = null;
+  const nm = mbUp(MB.foe), sp = SP[MB.foe.sp].up, line = d.kind === "hunt" ? (nm === "A CLASSMATE" ? `A CLASSMATE'S ${sp} IS COMING FOR YOU!` : `${nm}'S ${sp} IS COMING FOR YOU!`) : (nm === "A CLASSMATE" ? "A CLASSMATE WANTS A BATTLE!" : `${nm} WANTS A BATTLE!`);
+  MB.banner = line; bannerNow("nk-wild-banner", line, T.bannerSeconds * 1000); try { snd31("warn"); } catch (e) {}
+  mbLater(() => { if (MB.st !== "open" || MB.b !== d.b) return; mbScreen(g, false); mbLater(() => mbBand(1), T.vsSeconds * 1000 / Math.min(SPEED, 4)); mbWatch(); }, T.bannerSeconds * 1000);
+}
+function mbActOnly(a) { MB.seq = Math.max(MB.seq + 1, Date.now()); MB.acts.push(Object.assign({ s: MB.seq }, a)); if (MB.acts.length > 3) MB.acts.shift(); RMS.btUrgent = true; rmReport(true); }
+const MB_OFF = { tide: "The tide turned! Battle off.", paused: "Paused by your teacher. Battle off.", switch: "Your teacher has turned classmate battles off.",
+  grace: "Classmate battles start after the first minute.", guard: "Too close to the end of the round.", max: "Lots of battles on right now. Try again soon.",
+  stuck: "The battle was called off. Back to the shore.", ended: "The battle was called off. Back to the shore." };
+function mbOffIn(d) {
+  const n = MB.foe, Nm = mbName(n, true), nm = mbName(n);
+  const mine = MB.st && ((d.b && d.b === MB.b) || (d.ask && d.ask === MB.ask && MB.st === "call"));
+  if (!mine) return;
+  if (d.s && d.why !== "drop") MB.restUntil = Math.max(MB.restUntil, performance.now() + (d.s >= 999 ? 1e7 : d.s * 1000));
+  let text = MB_OFF[d.why];
+  if (d.why === "busy") text = `${Nm} is in a fight. Try again soon.`;
+  else if (d.why === "hidden") text = `${Nm} slipped into hiding. Too late!`;
+  else if (d.why === "taken") text = `${Nm} is already in a battle.`;
+  else if (d.why === "resting") text = d.s >= 999 ? `${Nm} is resting for the rest of this round.` : `${Nm} is resting after a battle. Try again in ${d.s} s.`;
+  else if (d.why === "you") text = d.s >= 999 ? "You've had your battles for this round." : d.s ? `You're resting after a battle. ${d.s} s to go.` : `${Nm} couldn't be reached. Back to the shore.`;
+  else if (d.why === "far") text = `Get closer to battle ${nm}.`;
+  else if (d.why === "prey") text = `${Nm}'s ${SP[n.sp].name.toLowerCase()} hunts you: you can't start that fight.`;
+  else if (d.why === "gone") text = `${Nm} couldn't be reached. Back to the shore.`;
+  else if (d.why === "drop") { text = `${Nm} lost connection. Battle off: +${d.bonus || 0} kai.`; mbKai(d.bonus || 0); MB.restUntil = Math.max(MB.restUntil, performance.now() + (d.s || 0) * 1000); }   // Māia's kinder wording
+  else if (d.why === "dropme") text = "The battle was called off. Back to the shore.";
+  MB.stats.offs.push(d.why); if (MB.stats.offs.length > 40) MB.stats.offs.shift();
+  mbAbort(text || "The battle was called off. Back to the shore.");
+}
+function mbAbort(text) {       // back to the shore, no change (beyond a no-show bonus already applied)
+  mbClear(); const was = MB.st; MB.st = null; MB.b = null; MB.ask = null; MB.q = []; MB.playing = false; MB.acts = []; FH.on = false; FH.oppNm = null;
+  const done = () => { uiBusy = false; if (G) { handleEvents(G); runQueue(); } if (text && G) mbSayLater(text); if (JOINV && RMS.id !== null) rmReport(true); };
+  if (was && BT.open) btClose(done); else done();
+}
+function mbSayLater(text) { setTimeout(() => { if (G && !MB.st) { MB.stats.says.push(text); refuseToast(G, G.events.length, text); } }, 450); }
+function mbVsHead() { const nm = mbNick(MB.foe), sp = SP[MB.foe.sp].up;
+  return MB.kind === "hunt" ? (MB.role === "hunter" ? `YOU HUNT ${nm ? nm.toUpperCase() + "'S" : "A CLASSMATE'S"} ${sp}` : `${nm ? nm.toUpperCase() + "'S" : "A CLASSMATE'S"} ${sp} HUNTS YOU`) : `${nm ? nm.toUpperCase() : "A CLASSMATE"} · ${sp}`; }
+function mbStakeLine() {
+  const k = MB.mk, s = MB.stake;
+  if (k === "mprey") return "First to 2 rounds. Win and you eat."; if (k === "mhunted") return "First to 2 rounds. Win and you get away.";
+  if (k === "mpicked") return MB.own ? `No knockouts. Winner takes ${s} kai.` : `No knockouts. Winner takes ${s} kai. Your attacks count ${TUNE.mate.clash.offKindPenalty} less.`;
+  if (k === "mpickedon") return `No knockouts. Winner takes ${s} kai.`;
+  return `Winner takes ${s} kai.`;
+}
+function mbMeLeft() { return MB.kind === "hunt" && MB.role === "hunter"; }
+function mbScreen(g, calling) { // the battle screen, built once (as btOpen): her side and the classmate's side
+  const S = Math.min(SPEED, 4), bgk = stageFor(g); G.fightBg = bgk; BT.open = true; BT.round = 0; const meLeft = calling ? mateKind(g.me.sp, MB.foe.sp).k === "hunt" && mateKind(g.me.sp, MB.foe.sp).hunter === "a" : mbMeLeft();
+  BT.meLeft = meLeft; BT.wet = !!UNDERWATER[bgk] || bgk === "wash" || isWet(g, g.me.x, g.me.y); BT.bgk = bgk; sndLabels();
+  const fake = { type: "mate", mk: MB.mk || (calling ? mbGuessMk(g) : "mown"), rival: { mate: true, nick: (mbFoeRow(MB.foe.gid) || {}).nick || MB.foe.nick || "", gid: MB.foe.gid, sp: MB.foe.sp } };
+  BT.m = fake; MB.meLeft = meLeft;
+  const s = { opp: MB.foe.sp, me: g.me.sp, meLeft, L: meLeft ? g.me.sp : MB.foe.sp, R: meLeft ? MB.foe.sp : g.me.sp };
+  const op = $("nk-payoff"); op.classList.add("bt-on");
+  op.style.background = `linear-gradient(rgba(4,10,14,.18),rgba(4,10,14,.05) 30%,rgba(4,10,14,0) 60%,rgba(4,10,14,.78) 80%,rgba(4,10,14,.92)), url("${stageUrl(bgk)}") center/cover no-repeat`;
+  const bubbles = UNDERWATER[bgk] && !NOMOTION ? Array.from({ length: 16 }, (_, i) => { const sz = 6 + (i * 7) % 16; return `<i class="nk-pbub" style="left:${(3 + (i * 37) % 94)}%;width:${sz}px;height:${sz}px;animation-duration:${(2.6 + (i % 5) * .5).toFixed(1)}s;animation-delay:${(-(i * .41) % 3).toFixed(2)}s;--sw:${(i % 2 ? 1 : -1) * (6 + i % 9)}px"></i>`; }).join("") : "";
+  const nm = mbNick(MB.foe), foeTag = esc(nm ? nm.toUpperCase() : "CLASSMATE"), vsL = meLeft ? "YOU" : foeTag, vsR = meLeft ? foeTag : "YOU";
+  const sub = calling ? `<span class="mb-call"><i class="mb-spin"></i>Calling ${esc(mbName(MB.foe))} out...</span>` : `<b>${esc(mbVsHead())}</b> · ${esc(mbStakeLine())}`;
+  show("nk-payoff", fhHeader(g, fake, s, 1) + `
+    <div class="nk-pay bt-arena mb-arena" id="nk-pay">${bubbles}
+      <div class="nk-pfw nk-pfw-l" id="nk-pfw-l"><img class="nk-pay-img" src="${ART}cut/fighter-${s.L}.webp" alt=""></div>
+      <div class="nk-pfw nk-pfw-r" id="nk-pfw-r"><img class="nk-pay-img" src="${ART}cut/fighter-${s.R}.webp" alt=""></div>
+      <div id="bt-fx"></div>
+      <div class="bt-vs" id="bt-vs"><span class="bt-vs-n bt-vs-n--l">${vsL}</span><b>VS</b><span class="bt-vs-n bt-vs-n--r">${vsR}</span><p>${sub}</p></div>
+    </div>
+    <div class="bt-timer" id="bt-timer"><i id="nk-ftimer"></i></div>
+    <div class="bt-band" id="bt-band"></div>`);
+  FH.oppNm = nm ? nm.toUpperCase() : "CLASSMATE";
+  if (MB.mk) { const st = document.querySelector(".nk-fh-stake"); if (st) st.textContent = mbStakeLine(); }
+  if (MB.kind === "hunt") fhSetRounds(TUNE.mate.hunt.firstTo);
+  op.style.transition = "none"; op.style.opacity = "0"; void op.offsetWidth; op.style.transition = `opacity ${(0.25 / S).toFixed(2)}s ease`; op.style.opacity = "1";
+  sfx("vs-sting");
+}
+function mbGuessMk(g) { const k = mateKind(g.me.sp, MB.foe.sp); return k.k === "hunt" ? (k.hunter === "a" ? "mprey" : "mhunted") : k.k === "clash" ? (k.why === "own" ? "mown" : "mfood") : "mpicked"; }
+function mbHeader(g) {         // the open has landed for the starter: the real tag and stakes line (the header was built from her own guess)
+  const top = document.querySelector(".nk-fh"); if (!top) return;
+  const fake = { type: "mate", mk: MB.mk, rival: { mate: true, nick: (mbFoeRow(MB.foe.gid) || {}).nick || MB.foe.nick || "", gid: MB.foe.gid, sp: MB.foe.sp } };
+  const s = { opp: MB.foe.sp, me: g.me.sp, meLeft: mbMeLeft() };
+  const tmp = document.createElement("div"); tmp.innerHTML = fhHeader(g, fake, s, 1); const nt = tmp.querySelector(".nk-fh"); if (nt) top.replaceWith(nt);
+  const st = document.querySelector(".nk-fh-stake"); if (st) st.textContent = mbStakeLine();
+  FH.oppNm = (mbNick(MB.foe) || "CLASSMATE").toUpperCase(); if (MB.kind === "hunt") fhSetRounds(TUNE.mate.hunt.firstTo);
+}
+function mbWatch() {           // her laptop's own guards: nothing from the teacher's laptop = called off; the 50 s hard stop
+  const T = TUNE.mate, b = MB.b; clearTimeout(MB.hard);
+  MB.hard = setTimeout(() => { if (MB.st && MB.b === b && !MB.ended) mbAbort("The battle was called off. Back to the shore."); }, T.maxBattleSeconds * 1000);
+}
+function mbBand(n) {           // ROUND n: PICK YOUR MOVE. Hunter: her two attacks; everyone else: her four (+ BACK OFF on the target's first band in a clash or challenge)
+  if (MB.st !== "open" || !BT.open) return; const T = TUNE.mate, S = Math.min(SPEED, 4), band = $("bt-band"); if (!band) return;
+  const vs = $("bt-vs"); if (vs) vs.remove();
+  MB.round = n; MB.picked = null; MB.bandAt = performance.now(); MB.playing = false;
+  const L = MOVES[G.me.sp], hunter = MB.kind === "hunt" && MB.role === "hunter";
+  $("bt-head").innerHTML = MB.kind === "hunt" ? `ROUND ${n}: FIRST TO 2` : `ROUND ${n} OF 3`;
+  const back = MB.kind !== "hunt" && MB.role === "b" && n === 1 ? `<div class="bt-grp mb-backgrp"><h3>OR</h3><div class="bt-row"><button class="nk-move bt-btn mb-back" data-i="back" type="button"><b>BACK OFF</b><span class="nk-fh-wheel">−${T.backOffForfeit} kai</span></button></div></div>` : "";
+  band.innerHTML = (hunter ? `<div class="bt-grp bt-grp--one"><h3>ATTACK</h3><div class="bt-row">${btBtn(L[0], 0)}${btBtn(L[1], 1)}</div></div>`
+    : `<div class="bt-grp"><h3 class="bt-h-atk">ATTACK</h3><div class="bt-row">${btBtn(L[0], 0)}${btBtn(L[1], 1)}</div></div><div class="bt-grp"><h3 class="bt-h-def">DEFEND</h3><div class="bt-row">${btBtn(L[2], 2)}${btBtn(L[3], 3)}</div></div>`) + back;
+  band.insertAdjacentHTML("afterbegin", `<div class="bt-plays mb-pick">ROUND ${n}: PICK YOUR MOVE</div>`);
+  band.style.setProperty("--rise", (TUNE.fight.bandRiseSeconds / S).toFixed(2) + "s");
+  band.classList.remove("bt-band--up", "bt-band--locked"); void band.offsetWidth; band.classList.add("bt-band--up"); $("bt-timer").classList.add("bt-timer--on"); $("bt-timer").classList.remove("bt-timer--warn");
+  for (const sd of ["l", "r"]) { const w = $("nk-pfw-" + sd); if (w) w.className = w.className.replace(/ ?(nk-act|bt-act|mb-act)-\S+/g, ""); }
+  sfx("ui-tick"); fhLongNames(band);
+  const nBtn = hunter ? 2 : 4; let fired = false; const start = performance.now(), secs = T.choiceSeconds;
+  const fire = (i, auto) => { if (fired || MB.st !== "open") return; fired = true; cancelAnimationFrame(MB.raf);
+    if (i === "back") { band.classList.add("bt-band--locked"); MB.picked = "back"; mbActOnly({ a: "back", b: MB.b }); mbLocked(null, false); return; }
+    const mv = L[i]; MB.picked = i; MB.pickedAt = performance.now(); MB.stats.pk = { r: n, at: Date.now() };   // (tests: the wall-clock moment of her pick)
+    band.classList.add("bt-band--locked"); band.querySelectorAll(".nk-move").forEach(b => b.classList.toggle("bt-lit", b.dataset.i === String(i)));
+    sfx("ui-click"); mbAct({ a: "pick", b: MB.b, r: n, mv: i, auto: auto ? 1 : 0 });   // sent at once (a timed-out pick too), then the stamp
+    if (auto) { MB.autoN = (MB.autoN || 0) + 1; MB.autoMv = mv.n; band.insertAdjacentHTML("beforeend", `<div class="bt-slow">TOO SLOW! ${mv.n} picked for you</div>`); }
+    mbLocked(mv, !!auto); };
+  band.querySelectorAll(".nk-move").forEach(b => b.addEventListener("click", () => fire(b.dataset.i === "back" ? "back" : Number(b.dataset.i))));
+  let warned = false;
+  const tick = () => { if (MB.st !== "open" || fired) return; const left = secs - (performance.now() - start) / 1000 * SPEED, t = $("nk-ftimer"); if (t) t.style.width = clamp(left / secs * 100, 0, 100) + "%";
+    if (!warned && left <= 1.5) { warned = true; const tm = $("bt-timer"); if (tm) tm.classList.add("bt-timer--warn"); }
+    if (left <= 0) return fire(Math.floor(Math.random() * nBtn), true); MB.raf = requestAnimationFrame(tick); };
+  MB.raf = requestAnimationFrame(tick);
+  if (MB.autoPick !== undefined && MB.autoPick !== null) { const ap = MB.autoPick; mbLater(() => fire(typeof ap === "function" ? ap(n) : ap), 250); }   // test hook only
+  // nothing from the teacher's laptop long after its own deadline: called off (Dayo 7, teacher drop)
+  const lim = (T.choiceSeconds + (n === 1 ? T.openTransit : 0) + T.graceSeconds + T.giveUpSeconds) * 1000;
+  clearTimeout(MB.give); MB.give = setTimeout(() => { if (MB.st === "open" && MB.round === n && !MB.playing && !MB.ended) mbAbort("The battle was called off. Back to the shore."); }, lim);
+}
+function mbLocked(mv, auto) {   // LOCKED IN, Waiting for {Nick}..., the rival's thinking bob; then the CLASH! charge
+  const T = TUNE.mate, band = $("bt-band"), nm = mbName(MB.foe); if (!band) return;
+  const pk = band.querySelector(".mb-pick"); if (pk) pk.remove();
+  if (mv) band.insertAdjacentHTML("afterbegin", `<div class="bt-plays mb-locked">LOCKED IN: ${mv.n}<small>Waiting for ${esc(nm)}...</small></div>`);
+  const tm = $("bt-timer"); if (tm) tm.classList.remove("bt-timer--on", "bt-timer--warn");
+  const foeSide = MB.meLeft ? "r" : "l", w = $("nk-pfw-" + foeSide); if (w && !NOMOTION) w.classList.add("mb-act-think"); if (w && !w.querySelector(".mb-q")) w.insertAdjacentHTML("beforeend", `<span class="mb-q">?</span>`);
+  const left = Math.max(0, T.choiceSeconds * 1000 - (performance.now() - MB.bandAt)), n = MB.round;
+  MB.clashT = mbLater(() => { if (MB.st !== "open" || MB.round !== n || MB.playing) return; mbClash(); }, left + 300);
+}
+function mbClash() {           // both in (or her own window is over): both crouch and charge into a dust cloud, CLASH!
+  const T = TUNE.mate, fx = $("bt-fx"), band = $("bt-band"); if (!fx) return; MB.clashAt = performance.now();
+  if (band) { band.classList.remove("bt-band--up"); }
+  for (const sd of ["l", "r"]) { const w = $("nk-pfw-" + sd); if (w) { w.className = w.className.replace(/ ?(nk-act|bt-act|mb-act)-\S+/g, ""); if (!NOMOTION) w.classList.add("mb-act-charge-" + sd); } const q = w && w.querySelector(".mb-q"); if (q) q.remove(); }
+  fx.className = ""; fx.innerHTML = `<div class="mb-dust"></div><div class="nk-burst mb-clash"><svg viewBox="0 0 560 330"><polygon points="${burstPts()}" fill="#ffd23f" stroke="#000" stroke-width="8" stroke-linejoin="round"/></svg><b>CLASH!</b></div><div class="nk-pay-line mb-wait" id="mb-wait"></div>`;
+  const n = MB.round; mbLater(() => { const e = $("mb-wait"); if (e && MB.st === "open" && MB.round === n && !MB.playing) e.textContent = "Waiting for the game server..."; }, T.clashMaxSeconds * 1000);
+}
+function mbRound(d) {           // the round lands: it plays (3 s), the pip, the line; then the next pick band, or the result
+  if (!MB.st || d.r !== MB.round) return;   // a late duplicate
+  const T = TUNE.mate, g = G, meLeft = MB.meLeft, mySp = g.me.sp, foeSp = MB.foe.sp; MB.playing = true; clearTimeout(MB.give);
+  if (MB.clashAt) MB.stats.waits.push(Math.round(performance.now() - MB.clashAt));
+  if (MB.pickedAt && !d.backoff) MB.stats.pickToRound = (MB.stats.pickToRound || []).concat(Math.round(performance.now() - Math.max(MB.pickedAt, MB.bandAt + T.choiceSeconds * 1000)));
+  MB.clashAt = 0; MB.stats.rounds++; (MB.stats.tl = MB.stats.tl || []).push({ b: d.b, r: d.r, pick: MB.stats.pk && MB.stats.pk.r === d.r ? MB.stats.pk.at : null, at: Date.now() }); if (MB.stats.tl.length > 200) MB.stats.tl.shift();
+  if (d.backoff) { MB.ended = true; return mbResult(d.end); }
+  const mine = MOVES[mySp][d.mine], theirs = MOVES[foeSp][d.theirs], nm = mbName(MB.foe), NM = mbUp(MB.foe);
+  const win = d.win === "me" ? (meLeft ? "l" : "r") : d.win === "them" ? (meLeft ? "r" : "l") : null;
+  const lm = meLeft ? mine : theirs, rm = meLeft ? theirs : mine, la = ATTACK(lm.t), ra = ATTACK(rm.t), act = {};
+  act.lunge = la && ra ? "both" : la ? "l" : ra ? "r" : null; act.hurt = win ? (win === "l" ? "r" : "l") : null;
+  for (const [sd, mv, other] of [["l", lm, ra], ["r", rm, la]]) if (act.hurt !== sd) { if (mv.t === "EVADE" && other) act.dodge = sd; else if (mv.t === "GUARD") act.guard = act.guard || sd; }
+  const call = !win ? "STARE!" : (win === (meLeft ? "l" : "r") ? mine.call : theirs.call);
+  const words = mbRoundLine(d, mine, theirs); MB.foeMove = theirs.n;
+  MB.rlog = MB.rlog || []; MB.rlog.push({ r: d.r, mine: mine.n, theirs: theirs.n, win: d.win, cls: d.cls, words }); if (MB.rlog.length > 40) MB.rlog.shift();
+  const fx = $("bt-fx"); if (fx) { fx.className = ""; fx.innerHTML = ""; }
+  for (const sd of ["l", "r"]) { const w = $("nk-pfw-" + sd); if (w) { w.className = w.className.replace(/ ?(nk-act|bt-act|mb-act)-\S+/g, ""); const q = w.querySelector(".mb-q"); if (q) q.remove(); } }
+  const head = $("bt-head"); if (head) head.innerHTML = MB.kind === "hunt" ? `ROUND ${d.r}: FIRST TO 2` : `ROUND ${d.r} OF 3`;
+  const go = () => btRound({ left: meLeft ? mySp : foeSp, right: meLeft ? foeSp : mySp, call, words, secs: T.roundSeconds, lm: Object.assign({}, lm), rm: Object.assign({}, rm), meLeft, act, win, last: !d.next,
+      tag: `YOUR ${mine.n} v HER ${theirs.n}` }, () => {
+    if (!MB.st) return;
+    if (d.end) { MB.ended = true; return mbResult(d.end); }
+    setTimeout(() => { if (!MB.st) return; MB.playing = false; const nx = MB.q.shift(); if (nx) return mbRound(nx); mbBand(d.r + 1); }, T.betweenSeconds * 1000 / Math.min(SPEED, 4)); });
+  if (d.lostMine) { const band = $("bt-band"); if (band) band.insertAdjacentHTML("beforeend", `<div class="bt-slow">Your pick didn't arrive in time: ${mine.n} was picked for you.</div>`); setTimeout(go, 1300 / Math.min(SPEED, 4)); MB.stats.lostShown = (MB.stats.lostShown || 0) + 1; }
+  else go();
+  setTimeout(() => { const band = $("bt-band"); if (band) { band.querySelectorAll(".bt-slow").forEach(e => e.remove()); band.classList.remove("bt-band--up"); } }, 1400);
+}
+function mbRoundLine(d, mine, theirs) {   // Dayo 5b: one line under the result
+  const me = d.win === "me", them = d.win === "them";
+  if (MB.kind === "hunt") {
+    if (MB.role === "prey") {
+      if (d.cls === "read") return me ? `You read it! ${mine.n} stops ${theirs.n}.` : "Right read, but it got through anyway.";
+      if (d.cls === "back") return "Fighting back doesn’t change a hunt’s chances.";
+      return `${theirs.n} gets past your ${mine.n}.`;
+    }
+    if (d.cls === "read") return me ? `She read it, but your ${mine.n} got through.` : `She read your ${mine.n}.`;
+    if (d.cls === "back") return me ? `She fought back: your ${mine.n} lands.` : "She fought back and broke free.";
+    return `She guessed wrong: your ${mine.n} lands.`;
+  }
+  if (d.cls === "stare") return "You both defended: nobody takes it.";
+  if (d.cls === "both") return "Both attacked: the stronger move wins more often.";
+  const myFav = (d.cls === "fav-a" && MB.role === "a") || (d.cls === "fav-b" && MB.role === "b");
+  if (myFav) return me ? `Your ${mine.n} beats her ${theirs.n}.` : "Right move, but the round went her way.";
+  return them ? `Her ${theirs.n} beats your ${mine.n}.` : `Your ${mine.n} got through anyway.`;
+}
+function mbKai(n) { if (!G || !G.cl || !n) return 0; const m = G.cl.members[0]; if (n > 0) { m.kai += n; return n; } return -take(m, -n); }
+function mbWhy(end) {           // the WHY line (v36 style, 20-word cap, built from the real rounds)
+  const rl = (MB.rlog || []).filter(x => x.b === undefined).slice(-(MB.round || 3)), n = rl.length, read = rl.filter(x => x.cls === "read").length;
+  const parts = [];
+  if (MB.autoN) parts.push(MB.autoN > 1 ? `Too slow in ${MB.autoN} rounds: moves were picked for you.` : `Too slow: ${MB.autoMv} was picked for you.`);
+  if (MB.kind === "hunt") {
+    const h = MB.role === "hunter" ? G.me.sp : MB.foe.sp, p = MB.role === "hunter" ? MB.foe.sp : G.me.sp;
+    parts.push(`${whyCap(whyA(h))} catches ${whyA(p)} ${whyOdds(catchOf(h, p))}.`);
+    parts.push(MB.role === "prey" ? `You read her ${read} of ${n} round${n === 1 ? "" : "s"}.` : `She read you ${read} of ${n} round${n === 1 ? "" : "s"}.`);
+  } else if (end.res === "won" || end.res === "lost" || end.res === "level") {
+    const mine = rl.filter(x => (x.cls === "fav-a" && MB.role === "a") || (x.cls === "fav-b" && MB.role === "b")).length, theirs = rl.filter(x => /^fav-/.test(x.cls)).length - mine;
+    if (end.res === "won" && mine < theirs) parts.push("Lucky! Her moves were better, but the rounds went your way.");
+    else if (end.res === "lost" && mine > theirs) parts.push("Right moves, unlucky rounds: a right read wins 3 in 4.");
+    else parts.push(`You read her ${mine} time${mine === 1 ? "" : "s"}; she read you ${theirs}.`);
+    if (end.res === "lost" && MB.mk === "mpicked" && !MB.own) parts.push(`Picking on another kind counts your attacks ${TUNE.mate.clash.offKindPenalty} less.`);
+  }
+  return whyJoin(parts);
+}
+function mbResult(end) {        // Dayo 5d: the result card (the v35/v36 card, with the classmate's name), then the science card
+  const g = G, me = g.me, T = TUNE.mate, S = Math.min(SPEED, 4), nm = mbName(MB.foe), NM = mbUp(MB.foe), sp = SP[MB.foe.sp].up, score = FH.wins[FH.meSide] + "–" + FH.wins[FH.meSide === "l" ? "r" : "l"];
+  if (!end) return mbAbort(null);
+  MB.end = end; const e0 = me.energy; let head, out, kaiLine = "", won = null;
+  const chip = n => `<span class="nk-rc-chip${n < 0 ? " loss" : ""}">${n < 0 ? "−" : "+"}${KAI(Math.abs(n))}</span>`;
+  const r = end.res; let gone = null;
+  if (r === "caught") {          // her catch: a meal as any hunt (her own laptop's figure), plus the classmate catch bonus
+    const HB = TUNE.bigBody.hunger, gain = Math.round(mealOf(me.sp, MB.foe.sp) * TUNE.hunt1.mealScale * (BIG[me.sp] ? HB.mealX : 1) * (WX_BIRDS[me.sp] ? birdWx(g, me, true).intake : 1));
+    me.energy = Math.min(TUNE.maxEnergy, me.energy + gain); const meal = Math.round(gainKai(g, gain, true)); me.fullUntil = g.t + herFullSecs(me.sp); g.stats.meals++;
+    if (g.aw) g.aw.meal = Math.max(g.aw.meal || 0, meal), g.aw.mealSp = g.aw.meal === meal ? me.sp : g.aw.mealSp;
+    mbKai(end.kai); head = `CAUGHT ${NM === "A CLASSMATE" ? "A CLASSMATE" : NM}'S ${sp}! ${score}`; out = `A meal! ${chip(meal)} · Classmate catch ${chip(end.kai)}`; won = true; gone = "foe";
+  } else if (r === "eaten") { head = `${NM === "A CLASSMATE" ? "A CLASSMATE" : NM}'S ${sp} CAUGHT YOU ${FH.wins[FH.meSide === "l" ? "r" : "l"]}–${FH.wins[FH.meSide]}`;   /* the winner's score first */ out = "Eaten."; won = false; gone = "me"; }
+  else if (r === "escaped") { mbKai(end.kai); head = `GOT AWAY FROM ${NM === "A CLASSMATE" ? "A CLASSMATE" : NM}! ${score}`; out = `Escaped a classmate ${chip(end.kai)}`; won = true; }
+  else if (r === "missed") { me.energy += end.energy; head = `${NM === "A CLASSMATE" ? "THE CLASSMATE" : NM} GOT AWAY ${score}`; out = "No meal this time."; won = false; }
+  else if (r === "won") { mbKai(end.kai); head = `YOU BEAT ${NM === "A CLASSMATE" ? "A CLASSMATE" : NM} ${score}`; out = `${chip(end.kai)} from ${esc(nm)}`; won = true; }
+  else if (r === "lost") { const k = mbKai(end.kai); me.energy = Math.max(1, me.energy + end.energy); head = `${NM === "A CLASSMATE" ? "THE CLASSMATE" : NM} WINS ${FH.wins[FH.meSide === "l" ? "r" : "l"]}–${FH.wins[FH.meSide]}`; out = `${chip(k || end.kai)} to ${esc(nm)}`; won = false;
+    MB.stepBack = end.step || 0; }
+  else if (r === "level") { head = "LEVEL!"; out = "Nobody takes anything."; won = null; }
+  else if (r === "backedOff") { mbKai(end.kai); head = "YOU BACKED OFF"; out = `${chip(end.kai)}`; won = false; }
+  else if (r === "theyBacked") { mbKai(end.kai); head = `${NM === "A CLASSMATE" ? "THE CLASSMATE" : NM} BACKED OFF`; out = `${chip(end.kai)}`; won = true; }
+  if (end.safe) MB.safeSay = performance.now();
+  const why = (r === "backedOff" || r === "theyBacked") ? "" : mbWhy(end);
+  const de = Math.round(me.energy - e0), enLine = r === "eaten" || !de ? "" : `Energy ${de < 0 ? "−" : "+"}${Math.abs(de)}`;
+  const meS = MB.meLeft ? "l" : "r", opS = MB.meLeft ? "r" : "l";
+  if (won !== null) for (const [sd, c] of [[won ? opS : meS, "bt-act-slump"], [won ? meS : opS, NOMOTION ? "" : "bt-act-win"]]) { const w = $("nk-pfw-" + sd); if (w) { w.className = w.className.replace(/ ?(nk-act|bt-act|mb-act)-\S+/g, ""); if (c) w.classList.add(c); } }
+  if (gone) { const w = $("nk-pfw-" + (gone === "me" ? meS : opS)); if (w) w.classList.add("bt-act-gone"); }
+  if (r === "eaten") { sfx("eaten-gulp"); play("eaten"); }
+  setTimeout(() => sfx(won ? "win-ping" : "lose-thud", { vol: 0.7 }), 250);
+  const L = MB.meLeft ? me.sp : MB.foe.sp, R = MB.meLeft ? MB.foe.sp : me.sp, goneL = gone && (gone === "me") === MB.meLeft, goneR = gone && !goneL;
+  const lines = FH.lines.slice(0, 3);
+  const html = `<div class="nk-rc-scrim" id="nk-rc"><div class="nk-rc mb-rc"><i class="${goneL ? "gone" : ""}" style="background-image:url('${ART}portrait-${L}.webp')"></i>
+    <div class="nk-rc-mid"><div class="mb-rc-chip">${MATE_SVG}CLASSMATE</div><h2 class="${won === true ? "" : won === false ? "lose" : "even"}">${esc(head)}</h2><div class="nk-rc-out">${out}</div>${why ? `<div class="nk-rc-why">${esc(why)}</div>` : ""}${enLine ? `<div class="nk-rc-en">${enLine}</div>` : ""}</div>
+    <i class="${goneR ? "gone" : ""}" style="background-image:url('${ART}portrait-${R}.webp')"></i>
+    ${lines.length ? `<div class="nk-rc-while"><h5>WHILE YOU FOUGHT</h5>${lines.map(l => `<div>${esc(l.text)}${l.amt ? " " + chip(l.amt) : ""}</div>`).join("")}</div>` : ""}</div></div>`;
+  const pay = $("nk-payoff"), c = $("nk-fh-call"); if (c) setTimeout(() => { c.className = "nk-fh-call"; }, 400);
+  pay.insertAdjacentHTML("beforeend", html);
+  MB.lastCard = { head, out: out.replace(/<[^>]+>/g, ""), why, en: enLine, res: r }; MB.cards = (MB.cards || []).concat(MB.lastCard).slice(-20);   // test log only (her own card; nothing leaves this laptop)
+  MB.rest = end.res; MB.restUntil = performance.now() + TUNE.mate.cool.afterBattle * 1000;
+  MB.acts = [];                  // Māia 5: who she fought leaves her record in her next report
+  if (JOINV && RMS.id !== null) rmReport(true);   // the board agrees (her kai), and the emptied bt goes out
+  const secs = Math.min(6, TUNE.fight.resultSeconds + 1.5);
+  let closed = false; const close = () => { if (closed) return; closed = true; pay.onclick = null; const rc = $("nk-rc"); if (rc) rc.remove(); FH.on = false; mbScience(); };
+  setTimeout(() => pay.onclick = close, 500); setTimeout(close, secs * 1000 / S);
+}
+function mbSciText(g) {         // Wren 2 and 4: the pair's card; her own words for the four no-clash species; the generic line where a challenge has none
+  const me = g.me.sp, o = MB.foe.sp, first = !g.met[o]; g.met[o] = true;
+  if (me === o && MATE_OWN_CARD[me]) return { text: MATE_OWN_CARD[me], first };
+  const own = sciText(me, o);
+  if (!own) return first ? { text: mateSoCard(me, o), first } : null;
+  if (first) return { text: own, first };
+  const lf = laterFact(g, me, o); return lf ? { text: lf, first: false } : null;
+}
+function mbScience() {
+  const g = G, s = MB.end && MB.end.res !== "backedOff" && MB.end.res !== "theyBacked" ? mbSciText(g) : null;
+  MB.lastSci = s ? s.text : null;
+  if (!s) return btClose(mbFinish);
+  const sp = MB.foe.sp, title = sp === g.me.sp ? `Your own kind: ${SP[sp].name}` : `${SP[sp].name} (${SP[sp].what})`;
+  const o = show("nk-science", `<div class="nk-card"><div class="nk-sci"><i style="background-image:url('${ART}portrait-${sp}.webp')"></i><div><div class="nk-kicker">${s.first ? "First meeting" : "Met again"}</div><h2>${title}</h2><p>${esc(s.text)}</p><button class="nk-btn" style="margin-top:8px;font-size:18px">Back to the shore</button></div></div></div>`);
+  o.querySelector(".nk-card").classList.add("bt-slidein"); sfx("card-slide", { vol: 0.6 });
+  const close = () => { hide("nk-science"); o.onclick = null; btClose(mbFinish); };
+  setTimeout(() => o.onclick = close, 300);
+  if (AUTOPLAY || MB.autoClose) setTimeout(close, 600);
+}
+function mbFinish() {           // back on the shore: a death (eaten) goes through the usual card and deal; a lost clash steps her back
+  const g = G, end = MB.end || {}, foe = MB.foe; MB.st = null; MB.b = null; MB.ask = null; MB.playing = false; MB.ended = false; MB.q = []; MB.autoN = 0; MB.autoMv = null; MB.rlog = []; FH.oppNm = null; clearTimeout(MB.hard); clearTimeout(MB.give);
+  uiBusy = false;
+  if (!g) return;
+  if (end.res === "eaten" && g.me.alive !== false) endRun(g, "eaten", foe.sp, MB.foeMove || MOVES[foe.sp][0].n);   // Māia v35 1: the cause is the species ("eaten by a kekeno")
+  if (end.res === "lost" && MB.stepBack) {   /* she steps back from where she stands (the classmate's spot is on another shore) */
+    const me = g.me, a = Math.random() * 6.28, d = MB.stepBack; let dest = { x: clamp(me.x + Math.cos(a) * d, 30, 1570), y: clamp(me.y + Math.sin(a) * d * 0.7, MINY, MAXY) };
+    if (WATERBOUND(me.sp) && !isWet(g, dest.x, dest.y)) dest = { x: me.x, y: me.y }; me.mode = "moving"; me.target = { kind: "point" }; me.patch = null; me.refuge = null; me.dest = dest; MB.stepBack = 0; }
+  if (end.safe) mbSayLater("You're safe from classmates for a bit.");
+  MB.end = null; handleEvents(g); runQueue();
+}
+// the room told her laptop the tide has turned, or Pause: her battle is called off at once (the teacher's laptop says the same)
+function mbRoomCheck(r) {
+  if (!MB.st || MB.ended) return;
+  if (r.phase === "over" || r.phase === "ended") return mbAbort(MB_OFF.tide);
+  if (r.paused) return mbAbort(MB_OFF.paused);
+}
+
+/* ---------- her shore: classmate shadows come alive (Dayo 2c, Raj's plates; Wren 5: the red ring reads the whitelist) ---------- */
+function mateRel(meSp, oSp) {   // the plate and ring for a classmate: hunts (red), eat (green), kind (lilac), fight (grey: same food or a challenge), null (no battle)
+  const k = mateKind(meSp, oSp);
+  if (k.k === "hunt") return k.hunter === "b" ? "hunts" : "eat";
+  if (k.k === "clash") return k.why === "own" ? "kind" : "fight";
+  return TUNE.mate.challenges ? "fight" : null;
+}
+function mateState(g, s) {      // what her plate says about this classmate: tap / far / hunts / resting / fighting / quiet
+  const m = s.m, r = RMS.room, on = !!(r && r.mates !== false), rel = on ? mateRel(g.me.sp, s.sp) : null, d = dist(s, g.me);
+  if (s.fight) return { st: "fighting", rel };
+  if (!rel) return { st: "quiet", rel: null };
+  if (rel === "hunts") return { st: d <= 600 ? "hunts" : "far", rel };
+  if (mbRestLeft(m) > 0) return { st: "resting", rel };
+  const rt = r ? roomT(r) : 0; if (rt < TUNE.mate.startGrace || TUNE.runSeconds - rt < TUNE.mate.endGuard || MB.restUntil > performance.now()) return { st: "far", rel };
+  return { st: d <= TUNE.mate.reach ? "tap" : "far", rel };
+}
+const MATE = { label: false };
+const MB_CLAW_SVG = `<svg class="mb-glyph" viewBox="0 0 22 22" aria-hidden="true"><g stroke="#10181d" stroke-width="2.8" stroke-linecap="round" fill="none"><path d="M5 5 Q11 9 17 17"/><path d="M17 5 Q11 9 5 17"/><path d="M4 8 l2-4 M15 4 l3 3"/></g></svg>`;   // the small crossed claws (as the v36 fighting badge)
+
+/* ---------- the projector: the battle strip, the species-only stamp, the map burst and joining line, the sounds (Dayo 8; Māia 3) ---------- */
+const PJM = { cards: new Map(), seenRound: new Map(), seenRes: new Set(), seenId: new Set(), line: null, burst: null };
+function mateSynth(kind) {      // made in the browser, projector only: a bell "ding-ding", a short "ooh", the fanfare quieter
+  if (!SND.on || !SND.ctx) return; const c = SND.ctx, t = c.currentTime, out = c.createGain(); out.gain.value = 0.5; out.connect(SND.out);
+  const tone = (f0, f1, a, at, len, type) => { const o = c.createOscillator(); o.type = type || "sine"; o.frequency.setValueAtTime(f0, t + at); o.frequency.exponentialRampToValueAtTime(f1, t + at + len); const gg = c.createGain(); gg.gain.setValueAtTime(0.001, t + at); gg.gain.linearRampToValueAtTime(a, t + at + 0.01); gg.gain.exponentialRampToValueAtTime(0.001, t + at + len); o.connect(gg).connect(out); o.start(t + at); o.stop(t + at + len + 0.05); };
+  if (kind === "bell") { for (const at of [0, 0.32]) { tone(1568, 1560, 0.3, at, 0.9, "sine"); tone(3136, 3120, 0.12, at, 0.5, "sine"); tone(2349, 2340, 0.08, at, 0.6, "triangle"); } }
+  else if (kind === "ooh") { tone(330, 440, 0.18, 0, 0.45, "triangle"); tone(392, 523, 0.12, 0.05, 0.4, "sine"); }
+  else if (kind === "fan") { [[523, 0], [659, .1], [784, .2], [1047, .34]].forEach(([f, at]) => tone(f, f, 0.12, at, at > .3 ? 0.7 : 0.14, "triangle")); }
+}
+function pjMateFrame(v, r, board) {
+  let box = $("pj-mb"); if (!box) { box = document.createElement("div"); box.id = "pj-mb"; $("pj").appendChild(box); }
+  box.classList.toggle("board", !!board);
+  const list = (v && Array.isArray(v.bt) ? v.bt : []).slice(0, 2), keep = new Set();
+  const memOf = id => v.members.find(m => m.id === id);
+  const label = (side, e, res) => { const m = memOf(e[side][0]), sp = SP[e[side][1]] ? e[side][1] : "koura", up = SP[sp].up;
+    if (res || !m || !pjNameOk(r, m.gid)) return { who: res ? "A" : "A classmate's", sp: up };   // Māia 3: the names leave the card when the stamp lands
+    return { who: m.name + "'s", sp: up }; };
+  for (const e of list) {
+    keep.add(e.id); let c = PJM.cards.get(e.id);
+    if (!c) { c = document.createElement("div"); c.className = "pj-mb-card"; box.appendChild(c); PJM.cards.set(e.id, c);
+      if (!PJM.seenId.has(e.id)) { PJM.seenId.add(e.id); mateSynth("bell"); } }
+    const A = label("a", e, e.res), B = label("b", e, e.res), n = e.kind === "hunt" ? 2 : 3;
+    const pips = w => '<i class="on"></i>'.repeat(Math.min(n, w)) + "<i></i>".repeat(Math.max(0, n - w));
+    const tag = e.kind === "hunt" ? "CLASSMATE HUNT" : e.kind === "clash" ? "CLASH" : "CHALLENGE";
+    const key = JSON.stringify([A, B, e.p, e.r, e.res]);
+    if (c._key !== key) { c._key = key;
+      c.innerHTML = `<div class="pj-mb-tag">${tag}</div><div class="pj-mb-row"><i style="background-image:url('${ART}portrait-${SP[e.a[1]] ? e.a[1] : "koura"}.webp')"></i><div class="pj-mb-nm"><span></span><b>${A.sp}</b><div class="pj-mb-pips">${pips(e.p[0])}</div></div><em>v</em><div class="pj-mb-nm r"><span></span><b>${B.sp}</b><div class="pj-mb-pips">${pips(e.p[1])}</div></div><i class="r" style="background-image:url('${ART}portrait-${SP[e.b[1]] ? e.b[1] : "koura"}.webp')"></i></div><div class="pj-mb-round">${e.res ? "" : "ROUND " + e.r}</div>${e.res ? `<div class="pj-mb-stamp">${esc(e.res)}</div>` : ""}`;
+      const sp = c.querySelectorAll(".pj-mb-nm span"); sp[0].textContent = A.who; sp[1].textContent = B.who;   // textContent: a girl typed it
+    }
+    const was = PJM.seenRound.get(e.id); if (was !== undefined && was !== e.r && !e.res) mateSynth("ooh"); PJM.seenRound.set(e.id, e.r);
+    if (e.res && !PJM.seenRes.has(e.id)) { PJM.seenRes.add(e.id); mateSynth("fan"); }
+  }
+  PJM.cards.forEach((c, id) => { if (!keep.has(id)) { c.remove(); PJM.cards.delete(id); } });
+  // the map: a crossed-claws burst between the two animals and a dotted line joining them (names drop with the stamp, as on the card)
+  const fx = $("pj-fx"); if (!fx) return; let svg = $("pj-mb-lines"); if (!svg) { svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"); svg.id = "pj-mb-lines"; fx.appendChild(svg); }
+  let html = ""; if (!board) for (const e of list) { const sa = PJ.stage.get(e.a[0]), sb = PJ.stage.get(e.b[0]); if (!sa || !sb) continue;
+    const p = pjXY(sa.x, sa.y), q = pjXY(sb.x, sb.y), mx = (p.X + q.X) / 2, my = (p.Y + q.Y) / 2;
+    html += `<line x1="${p.X.toFixed(0)}" y1="${p.Y.toFixed(0)}" x2="${q.X.toFixed(0)}" y2="${q.Y.toFixed(0)}"/><g transform="translate(${mx.toFixed(0)},${my.toFixed(0)})"><circle r="22"/><path d="M-11 -11 Q0 -3 11 11 M11 -11 Q0 -3 -11 11"/></g>`; }
+  if (svg._h !== html) { svg._h = html; svg.innerHTML = html; }
+}
 
 buildTideBar();
 netStart();     // v34: anonymous sign-in (live), nothing (local)
@@ -10831,6 +11661,7 @@ Object.assign(window.__niche, { LANE, HUNTTAP, LABELS, applyRound, herNote, roun
 Object.assign(window.__niche, V35_HOOKS); Object.defineProperty(window.__niche, "G", { get: () => G });   // v35 (tests)
 Object.assign(window.__niche, { v36: { whyText, whyOdds, whyWords, fightRound, finishFight, MOVES, CATCH1, catchOf, SWELL_CLEAR, SWELL_HOLD, DIET, dietText, PLAYABLE, NOT_DEALT, PREYOF, SP, CHOOSE,
   SHD, V36, DPILL, FH, BT, clearPlan, getClear, clearSpot, swellNextHit, holdOn, cmdGo, dbCls, rmMirror, pjNameOk, mateName, shownName, namedRule, nearMateRow, EV_HIT, NEAR, tgName, tgRow, shadowAt, pickPlates, cpuBoxes, whyBody, swellLine, herLine, v31Event } });   // v36 (tests)
+Object.assign(window.__niche, { v37: { MB, REF, REF_PJ, PJM, MATE_HUNT, MATE_OWN_CARD, mateKind, mateR, mateHuntRound, mateClashRound, mateHuntSim, mateStake, mateRel, mateState, mateSoCard, mbCheck, mbTap, mbSciText, refView, refRestLeft, refTopBattler, refLiveCount, SHD, NEAR, FH, BT, nearMateRow, pickPlates, mbIn, get T() { return TUNE.mate; } } });   // v37 (tests)
 </script>
 </body>
 </html>

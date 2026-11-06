@@ -1482,7 +1482,7 @@ body.pj #nk-lane,.nk-teacher #nk-lane{display:none!important}
 .nk-fh-mid{display:flex;flex-direction:column;align-items:center;gap:6px}
 .nk-fh .bt-head{position:static;transform:none;display:inline-flex}
 .nk-fh-stake{font:700 17px/1.2 "Segoe UI",Arial,sans-serif;color:#fff;text-shadow:0 2px 0 #000;text-align:center}
-.nk-fh-ahead{min-height:22px;font:900 20px/1.1 "Arial Black",Impact,sans-serif;letter-spacing:.06em;color:#fff;text-shadow:0 2px 0 #000}
+.nk-fh-ahead{min-height:22px;font:900 20px/1.1 "Arial Black",Impact,sans-serif;letter-spacing:.06em;color:#fff;text-shadow:0 2px 0 #000;text-wrap:balance}
 .nk-fh-ahead.you{color:var(--side-you)}.nk-fh-ahead.rival{color:var(--side-rival)}
 .nk-fh-call{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);z-index:6;display:none;flex-direction:column;align-items:center;gap:6px;pointer-events:none}
 .nk-fh-call.on{display:flex;animation:nkFhIn .18s ease-out both}
@@ -1623,6 +1623,9 @@ body.pj #nk-lane,.nk-teacher #nk-lane{display:none!important}
 #nk-stage .nk-nt svg.mb-glyph{width:14px;height:14px}
 .nk-nt small.mb-hunts{color:#b3221c;font-weight:800}
 .nk-nt.nk-nt--quiet{opacity:.8}
+.nk-nt.mb-two{flex-wrap:wrap;justify-content:center;row-gap:3px;max-width:166px;border-radius:12px;padding:3px 9px 4px}   /* v37b (Hugh S1): the name keeps its row (about 14 characters); the label sits under it */
+.nk-nt.mb-two>span{flex:0 1 auto;min-width:0;max-width:calc(100% - 19px)}   /* glyph and name always share the top row */
+.nk-nt.mb-two>.mb-br{flex:0 0 100%;height:0}
 .nk-tok.nk-shadow.nk-tok--rel-hunts{border:3px solid var(--rel-hunts)}
 .nk-tok.nk-shadow.nk-tok--rel-eat{border:3px solid var(--rel-eat)}
 .nk-tok.nk-shadow.nk-tok--rel-kind{border:3px solid var(--rel-kind)}
@@ -1651,29 +1654,46 @@ body.pj #nk-lane,.nk-teacher #nk-lane{display:none!important}
 @keyframes mbChargeR{from{translate:0 0}to{translate:-12% 2%}}
 .mb-dust{position:absolute;left:50%;top:58%;width:40%;height:34%;translate:-50% -50%;border-radius:50%;background:radial-gradient(closest-side,rgba(226,207,154,.95),rgba(179,150,99,.6) 60%,rgba(179,150,99,0));animation:mbDust .6s ease-in-out infinite alternate;pointer-events:none}
 @keyframes mbDust{from{scale:.9}to{scale:1.08}}
-.nk-burst.mb-clash{animation:none}
+.nk-burst.mb-clash{animation:none;transform:translate(-50%,-50%) rotate(-6deg) scale(1)}   /* v37b (Hugh M1): the base burst sits at scale(0) until its animation runs */
 .mb-wait{bottom:6%}
+#mb-wait:empty{display:none}   /* v37b (Hugh M1): no blank pill before "Waiting for the game server..." */
+.nk-rc.mb-rc{grid-template-columns:84px minmax(0,1fr) 84px}   /* v37b (Hugh M2): a long nickname can no longer push a portrait out of the card */
+.mb-rc h2{overflow-wrap:anywhere;text-wrap:balance}
+.mb-rc h2.mb-long{font-size:30px}
+.mb-rc h2.mb-vlong{font-size:25px}
+.mb-sc{white-space:nowrap}
 .mb-rc-chip{display:inline-flex;align-items:center;gap:5px;font:900 12px/1 "Arial Black",Impact,sans-serif;letter-spacing:.06em;background:#fff;color:#10181d;border:2px solid #000;border-radius:999px;padding:3px 8px;margin-bottom:4px}
 .mb-rc-chip svg{width:12px;height:12px}
 @media (prefers-reduced-motion:reduce){.mb-act-think,.mb-q,.mb-act-charge-l,.mb-act-charge-r,.mb-dust,.nk-nt .mb-tap,.mb-spin{animation:none}}
 /* the projector's battle strip (Dayo 8) */
 #pj-mb{position:absolute;left:24px;top:84px;z-index:6;display:flex;flex-direction:column;gap:12px;pointer-events:none}
-#pj-mb.board{left:50%;top:78px;translate:-50% 0;flex-direction:row}
+#pj-mb.board{left:1340px;top:auto;bottom:100px;width:540px;flex-direction:column;gap:22px}   /* v37b (Hugh M3): in the Scoreboard's right-hand column under Just lost, clear of rank 1 and the heading */
+#pj-mb.board .pj-mb-card{width:540px;padding-top:18px}
+#pj-mb.board .pj-mb-row{display:grid;grid-template-columns:64px minmax(0,1fr);grid-template-areas:"ia na" "v v" "ib nb";column-gap:12px;row-gap:0;margin-top:2px;align-items:center}   /* v37b: in the narrow column the two girls stack, so each name has the full width */
+#pj-mb.board .pj-mb-row>i{width:64px;height:64px;grid-area:ia}
+#pj-mb.board .pj-mb-row>i.r{grid-area:ib;transform:none}
+#pj-mb.board .pj-mb-row>.pj-mb-nm{grid-area:na}
+#pj-mb.board .pj-mb-row>.pj-mb-nm.r{grid-area:nb;text-align:left;align-items:flex-start}
+#pj-mb.board .pj-mb-row>em{grid-area:v;font-size:26px;line-height:1;padding-left:20px}
+#pj-mb.board .pj-mb-nm{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"n n" "s p";column-gap:12px;row-gap:2px;align-items:center}
+#pj-mb.board .pj-mb-nm span{grid-area:n;-webkit-line-clamp:1;line-height:1.22;overflow-wrap:normal;white-space:nowrap;text-overflow:ellipsis;display:block}
+#pj-mb.board .pj-mb-nm b{grid-area:s;font-size:26px}
+#pj-mb.board .pj-mb-pips{grid-area:p}
 .pj-mb-card{position:relative;width:660px;box-sizing:border-box;padding:10px 16px 12px;background:#fff6cf;color:#10181d;border:4px solid #000;border-radius:16px;box-shadow:0 6px 0 #000;animation:pjMbIn .35s cubic-bezier(.2,1.5,.4,1) both}
 @keyframes pjMbIn{from{translate:0 -30px;opacity:0}to{translate:0 0;opacity:1}}
-.pj-mb-tag{position:absolute;left:16px;top:-16px;font:900 18px/1 "Arial Black",Impact,sans-serif;letter-spacing:.06em;background:#ff6b5b;color:#fff;border:3px solid #000;border-radius:999px;padding:5px 12px}
+.pj-mb-tag{position:absolute;left:16px;top:-18px;font:900 22px/1 "Arial Black",Impact,sans-serif;letter-spacing:.06em;background:#ff6b5b;color:#fff;border:3px solid #000;border-radius:999px;padding:5px 12px}
 .pj-mb-row{display:flex;align-items:center;gap:12px;margin-top:6px}
 .pj-mb-row>i{flex:0 0 76px;height:76px;border-radius:50%;border:4px solid #000;background-size:cover;background-position:center}
 .pj-mb-row>i.r{transform:scaleX(-1)}
 .pj-mb-row>em{font:900 36px/1 "Arial Black",Impact,sans-serif;color:#ff6b5b;-webkit-text-stroke:2px #000;paint-order:stroke fill;font-style:normal}
 .pj-mb-nm{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:2px}
 .pj-mb-nm.r{text-align:right;align-items:flex-end}
-.pj-mb-nm span{font:800 22px/1.1 "Segoe UI",Arial,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.pj-mb-nm span{font:800 30px/1.22 "Segoe UI",Arial,sans-serif;max-width:100%;overflow-wrap:anywhere;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}   /* v37b (Hugh S2): 30 px names for the wall, up to two lines (was 22 px, one line, cut) */
 .pj-mb-nm b{font:900 28px/1.05 "Arial Black",Impact,sans-serif}
 .pj-mb-pips{display:flex;gap:6px}
 .pj-mb-pips i{width:18px;height:18px;border-radius:50%;border:3px solid #000;background:#fff}
 .pj-mb-pips i.on{background:#ffd23f}
-.pj-mb-round{position:absolute;right:16px;top:-14px;font:900 16px/1 "Arial Black",Impact,sans-serif;background:#10181d;color:#fff;border-radius:999px;padding:5px 10px}
+.pj-mb-round{position:absolute;right:16px;top:-16px;font:900 20px/1 "Arial Black",Impact,sans-serif;background:#10181d;color:#fff;border-radius:999px;padding:5px 10px}
 .pj-mb-round:empty{display:none}
 .pj-mb-stamp{position:absolute;left:50%;top:50%;translate:-50% -50%;rotate:-4deg;white-space:nowrap;font:900 44px/1 "Arial Black",Impact,sans-serif;color:#2a1600;background:#ffd23f;border:5px solid #000;border-radius:14px;padding:10px 24px;box-shadow:0 6px 0 #000;animation:btSlowIn .2s cubic-bezier(.2,1.5,.4,1) both}
 #pj-mb-lines{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible}
@@ -1771,7 +1791,7 @@ body.pj #nk-lane,.nk-teacher #nk-lane{display:none!important}
       <div class="ch-right">
         <button class="nk-snd" type="button">Sound: on</button>
         <div class="ch-timer"><small>Your pick goes in when time runs out</small><div class="t ch-disp" id="ch-timer"><span>0:30</span></div></div>
-        <span class="ch-ver">V37</span>
+        <span class="ch-ver">V37B</span>
       </div>
     </div>
     <div class="ch-roster" id="ch-roster" aria-hidden="true"></div>
@@ -7706,7 +7726,7 @@ function showEnd() {
   else if (c.cause === "eaten") { head = "Eaten!"; got = `What got you: ${SP[c.bySp].name}, ${c.byMove}.`; }
   else if (c.cause === "rivalry") { head = "Driven off!"; got = `What got you: a rival ${SP[c.bySp].name.toLowerCase()}, when you were already weak.`; }
   else { head = "Starved!"; got = c.bySp ? `What got you: hunger, after a ${SP[c.bySp].name.toLowerCase()} attack.` : "What got you: hunger. The bar ran out."; }
-  show("nk-end", `<div class="nk-card nk-card--cast"><div class="nk-kicker">One tide <span class="nk-ver">V37</span></div><h2>${head}</h2>
+  show("nk-end", `<div class="nk-card nk-card--cast"><div class="nk-kicker">One tide <span class="nk-ver">V37B</span></div><h2>${head}</h2>
     <div class="nk-big">${t}</div><p>${got}</p>${list}
     <p class="nk-small">Meals caught: ${G.stats.meals} · Fights: ${G.stats.fights} · Escapes: ${G.stats.escapes} · Best this session: ${fmt(best)}</p>
     <div class="nk-row" style="margin-top:14px"><button class="nk-btn" id="nk-again" type="button">Play again</button></div></div>`);
@@ -8343,7 +8363,7 @@ function showPodium() {
     const steal = H.steal ? `<b>Biggest steal:</b> ${KAI(H.steal.amt)} kai from ${H.steal.from}` : `<b>Biggest steal:</b> none this tide`;
     const hurt = H.hurt ? `<b>Biggest hit you took:</b> ${KAI(H.hurt.amt)} kai, from ${H.hurt.by}` : `<b>Biggest hit you took:</b> nothing landed on you`;
     const animals = `<b>Animals you played:</b> ${H.animals.map(sp => SP[sp].name).join(", ")}`;
-    show("nk-end", `<div class="pd-card"><div class="pd-kicker">One tide · ${cl.n} in the class <span class="nk-ver">V37</span></div><h2 class="pd-title">The tide has turned</h2>
+    show("nk-end", `<div class="pd-card"><div class="pd-kicker">One tide · ${cl.n} in the class <span class="nk-ver">V37B</span></div><h2 class="pd-title">The tide has turned</h2>
       ${podiumHTML(cl.order, {})}
       <div class="pd-you">You: ${ORD(me.rank)}, ${KAI(me.kai)} kai</div>
       <ul class="pd-lines"><li>${steal}</li><li>${hurt}</li><li>${animals}</li></ul>
@@ -8370,7 +8390,7 @@ const CLV = { cl: null, snap: null, snapAt: -1e9, mode: "", rows: new Map(), sho
 function startClassView() {
   document.body.classList.add("nk-classview");
   $("nk-class").innerHTML = `<div class="cv-top"><div class="cv-title">NICHE · THE ROCKY SHORE</div><span class="cv-src" id="cv-src"></span>
-      <div class="cv-clock" id="cv-clock">ROUND ENDS IN <b>8:00</b></div><button class="nk-btn nk-snd" type="button">Sound: on</button><span class="nk-ver">V37</span></div>
+      <div class="cv-clock" id="cv-clock">ROUND ENDS IN <b>8:00</b></div><button class="nk-btn nk-snd" type="button">Sound: on</button><span class="nk-ver">V37B</span></div>
     <div class="cv-main"><section class="cv-board"><h2>KAI</h2><div class="cv-rows" id="cv-rows"></div></section>
       <section class="cv-feed"><h2>ON THE SHORE</h2><ul class="cv-list" id="cv-feed"></ul></section></div>
     <div id="cv-banner"></div><div id="cv-podium"></div>`;
@@ -9341,7 +9361,7 @@ const GUIDE_STEPS = [
     "Press <b>Open the projector</b>. It opens in a new window: drag it to the projector screen and click <b>FULL SCREEN</b> once. That click also turns the sound on. The projector only shows the game, so nothing in it can change anything.")]] },
   { h: "Girls join", pics: [["S1", "guide-S1-join", LV("Each girl opens the Niche link, types the code and a nickname that isn't her real name, and taps <b>JOIN</b>.",
     "Each girl opens the student link, types the code and a nickname that isn't her real name, and taps <b>JOIN</b>.")]] },
-  { h: "Check the names, then start", pics: [["A1", "guide-A1-dashboard-names", "Names appear as girls join. Read them, press <b>Tick all</b>, then <b>START THE GAME</b>. Girls whose animals meet can battle each other. Check the nicknames, then tick them so girls see who they're fighting. Set <b>Class size</b> and <b>Round</b> on the right first; computer classmates fill any empty places."]] },
+  { h: "Check the names, then start", pics: [["A1", "guide-A1-dashboard-names", "Names appear as girls join. Read them, press <b>Tick all</b>, then <b>START THE GAME</b>. Girls whose animals meet can battle each other, and a ticked nickname lets them see who they're fighting. Set <b>Class size</b> and <b>Round</b> on the right first; computer classmates fill any empty places."]] },
   { h: "Girls choose", pics: [["S2", "guide-S2-deal", "Each girl is dealt an animal. She picks one of its three Styles and taps <b>LOCK IN!</b>. She has about 30 seconds, and the game starts by itself."]] },
   { h: "Watch the shore", pics: [["P2", "guide-P2-projector-shore", "The whole shore is on the wall: every animal, the Kai leaderboard and what is happening. There is nothing to press here. Let it run." + LV("", " When an oil spill, a dog or a big swell arrives, it arrives on every girl's shore at the same moment.")]] },
   { h: "What the girls are doing", pics: [["S3", "guide-S3-fight", "On her own screen a girl fights in three rounds when animals meet, picks a card from each wave chest, and hides when she is warned. If she is eaten, she loses a tenth of her kai and gets a new animal."]] },
@@ -9413,7 +9433,7 @@ function startDash() {
     <div class="db-ctrls"><span class="db-group"><b>PROJECTOR</b><button class="db-btn on" id="db-mute" type="button">Sound: on</button><label>Volume <input type="range" id="db-vol" min="0" max="1" step="0.05" value="1"></label></span>
     <span class="db-group"><b>GIRLS' LAPTOPS</b><button class="db-btn on" id="db-lap" type="button">Sound effects: on</button></span>
     <button class="db-btn" id="db-calm" type="button">Calm effects: off</button>
-    <button class="db-btn on" id="db-snd" type="button" title="A quiet pop on this laptop each time a girl joins">Join pops here: on</button><span class="db-ver">V37</span></div></div>
+    <button class="db-btn on" id="db-snd" type="button" title="A quiet pop on this laptop each time a girl joins">Join pops here: on</button><span class="db-ver">V37B</span></div></div>
     <div class="db-main" id="db-main"></div><div class="db-toast" id="db-toast"></div>
     <div class="db-dlg" id="db-dlg"><div><p>End the game and clear everything? Nicknames and results are deleted now and can't be brought back.</p>
     <div class="btns"><button class="db-btn" id="db-keep" type="button">Keep playing</button><button class="db-btn danger" id="db-wipe" type="button">End game and clear</button></div></div></div>
@@ -9422,7 +9442,7 @@ function startDash() {
       <p class="dw-lede">Each girl plays a real shore animal for one round. The most kai (food points) when the tide turns wins.</p>
       <ol class="dw-steps">
         <li><span class="dw-n">1</span><div><h3>Put the code on the wall.</h3><p>Press <b>Open the projector</b>, drag that window to the screen, then click <b>FULL SCREEN</b>. The game code appears there, big.</p></div></li>
-        <li><span class="dw-n">2</span><div><h3>Get the girls in.</h3><p>${LV("Send the class the Niche link.", "Press <b>Copy the student link</b> and paste it wherever your class usually gets links.")} They type the code and a nickname, and their names appear on this page. Read them, then press <b>Tick all</b>. Girls whose animals meet can battle each other. Check the nicknames, then tick them so girls see who they're fighting.</p></div></li>
+        <li><span class="dw-n">2</span><div><h3>Get the girls in.</h3><p>${LV("Send the class the Niche link.", "Press <b>Copy the student link</b> and paste it wherever your class usually gets links.")} They type the code and a nickname, and their names appear on this page. Read them, then press <b>Tick all</b>. Girls whose animals meet can battle each other, and a ticked nickname lets them see who they're fighting.</p></div></li>
         <li><span class="dw-n">3</span><div><h3>Press START THE GAME.</h3><p>The girls each pick a style for their animal (about 30 seconds), then the tide starts. A round is 8 minutes; change <b>Round</b> first if you want 5 or 12.</p></div></li>
       </ol>
       <button class="db-btn big dw-go" id="dw-go" type="button">Take me to the lobby</button>
@@ -9699,7 +9719,7 @@ function startProjector() {
   SND.vol = 1;
   const root = $("pj");
   root.innerHTML = `<div id="pj-top"><span class="pj-word">NICHE</span><div id="pj-tide"><b id="pj-phase">HIGH TIDE</b><div id="pj-tidebar"><i></i></div></div>
-      <div id="pj-clock">ROUND ENDS IN <b>8:00</b></div><button class="pj-chip" id="pj-snd" type="button">Click for sound</button><span id="pj-ver">V37</span></div>
+      <div id="pj-clock">ROUND ENDS IN <b>8:00</b></div><button class="pj-chip" id="pj-snd" type="button">Click for sound</button><span id="pj-ver">V37B</span></div>
     <div id="pj-map"><div id="pj-zones"></div><div id="pj-world"></div><div id="pj-toks"></div><div id="pj-names"></div><div id="pj-fx"></div>
       <div id="pj-edge"></div><div id="pj-count"></div><div id="pj-paused">PAUSED</div></div>
     <div id="pj-ladder"><h2>KAI</h2><div id="pj-rows"></div></div>
@@ -10513,7 +10533,7 @@ function fhHeader(g, m, s, e0) {
   Object.assign(FH, { on: true, kind: k, kai0: kai, e0: g.me.energy, rounds: 3, wins: { l: 0, r: 0 }, meSide, opp, lines: [], stamp: "", won: null, oppNm: m.type === "mate" ? FH.oppNm : null });
   const pips = side => `<div class="nk-fh-pips" id="nk-fh-pips-${side}">${"<i></i>".repeat(3)}</div>`;
   // v36 (Raj 5): the CLASSMATE chip ships DORMANT: no fight is with a classmate in v36 (Dayo 3c), so `mate` is never set; computers are unchanged
-  const oa = m.rival || m.hunter || m.prey || null, mate = !!(oa && oa.mate && oa.nick), mateNm = mate ? (mateName({ name: oa.nick, gid: oa.gid }) || "Classmate") : "";
+  const oa = m.rival || m.hunter || m.prey || null, mate = !!(oa && oa.mate && oa.nick), mateNm = mate ? (battleName(oa.gid, oa.nick) || "Classmate") : "";   /* v37b (Simon's ruling): her own battle screen always names the classmate */
   const rival = side => `<div class="nk-fh-side nk-fh-side--rival nk-fh-${side}"><div class="nk-fh-name">${mate ? `<b style="max-width:100%;overflow:hidden;text-overflow:ellipsis;display:inline-block;vertical-align:bottom">${esc(mateNm)}</b><small> · ${SP[opp].up}</small>` : `<b>${SP[opp].up}</b><small> · ${plainOf(opp)}</small>`}</div><div class="nk-fh-tagrow"><span class="nk-fh-tag nk-fh-tag--${k}">${FH_TAG[k][0]}</span>${mate ? `<span class="nk-fh-tag nk-fh-tag--mate">${MATE_SVG}CLASSMATE</span>` : ""}</div><div class="nk-fh-bar"><i id="bt-bar-${side}" style="width:100%"></i></div>${pips(side)}</div>`;
   const her = side => `<div class="nk-fh-side nk-fh-side--you nk-fh-${side}"><div class="nk-fh-name"><small>YOU · </small><b>${SP[g.me.sp].up}</b></div><div class="nk-fh-tagrow nk-fh-nums"><span>Energy<b>${Math.max(0, Math.round(g.me.energy))}</b></span><span>Kai<b>${KAI(kai)}</b></span></div><div class="nk-fh-bar"><i id="bt-bar-${side}" style="width:${(clamp(e0, 0, 1) * 100).toFixed(1)}%"></i></div>${pips(side)}</div>`;
   return `<div class="bt-top nk-fh">${meSide === "l" ? her("l") : rival("l")}<div class="nk-fh-mid"><div class="bt-head" id="bt-head">VS</div><div class="nk-fh-stake">${FH_TAG[k][1]}</div><div class="nk-fh-ahead" id="nk-fh-ahead"></div><div class="bt-sub" id="bt-sub" hidden></div></div>${meSide === "r" ? her("r") : rival("r")}</div><div class="nk-fh-call" id="nk-fh-call"></div>`;
@@ -10527,7 +10547,7 @@ function fhCall(kick, text, cls, stamp) {
 }
 function fhAhead() {
   const a = $("nk-fh-ahead"); if (!a || !FH.on) return; const me = FH.wins[FH.meSide], th = FH.wins[FH.meSide === "l" ? "r" : "l"];
-  a.className = "nk-fh-ahead " + (me > th ? "you" : th > me ? "rival" : ""); a.textContent = me > th ? "YOU’RE AHEAD" : th > me ? (FH.oppNm || SP[FH.opp].up) + " IS AHEAD" : "LEVEL";   // v37: a classmate by name (or CLASSMATE)
+  a.className = "nk-fh-ahead " + (me > th ? "you" : th > me ? "rival" : ""); a.textContent = me > th ? "YOU’RE AHEAD" : th > me ? (FH.oppNm ? FH.oppNm + " LEADS" : SP[FH.opp].up + " IS AHEAD") : "LEVEL"; a.style.fontSize = a.textContent.length > 18 ? "16px" : "";   /* v37b (Hugh S4): a long classmate name no longer orphans "AHEAD" */   // v37: a classmate by name (or CLASSMATE)
 }
 function fhRoundLands(p) {
   if (!FH.on || !$("nk-pay")) return;
@@ -10619,7 +10639,7 @@ function shadowFrame(g) {
     s.fight = !!m.pos[2]; s.e.classList.toggle("nk-shadow--fight", s.fight); s.m = m; if (s.e.style.display !== "block") s.e.style.display = "block";
     { const ms = JOINV ? mateState(g, s) : { st: "quiet", rel: null }; s.mst = ms;   // v37 (Dayo 2c; Wren 5): the ring reads the whitelist, not CATCH1
       const rk = ms.st === "quiet" ? null : ms.rel; if (s.rk !== rk) { s.rk = rk; for (const c of ["hunts", "eat", "kind", "fight"]) s.e.classList.toggle("nk-tok--rel-" + c, rk === c); }
-      s.e.classList.toggle("mb-rest", ms.st === "resting" || ms.st === "quiet"); if (ms.st !== "quiet" && ms.st !== "fighting") SHD.anyFightable = true; }
+      s.e.classList.toggle("mb-rest", ms.st === "resting" || ms.st === "quiet"); if (ms.st === "tap") SHD.anyFightable = true; }   /* v37b (Hugh S5): the "Tap one near you!" label only when one she can tap is in reach */
     if (s.y + s.size / 2 >= vy0 && s.y - s.size / 2 <= vy1) SHD.inView.add(m.id);
   }
   for (const [id, s] of SHD.map) if (!seen.has(id)) { s.e.remove(); SHD.map.delete(id); }
@@ -10642,7 +10662,8 @@ function pickPlates(g) {   // Raj 3: priority (related first, then nearest), cro
     if (out.length >= 4) break;
     const s = G0.lead, nm = mateName(s.m), text = (nm || "Classmate") + (G0.n ? " +" + Math.min(9, G0.n) : "");
     const st = s.mst ? s.mst.st : (s.fight ? "fighting" : "far");   // v37 (Dayo 2c): tap / far / hunts / resting / fighting / quiet
-    const extra = st === "tap" ? 108 : st === "hunts" ? 62 : st === "resting" ? 56 : s.fight ? 52 : 0, w = Math.min(st === "tap" ? 230 : 132, 30 + Math.min(text.length, st === "tap" ? 11 : 99) * 8.4 + extra) * K, h = 24 * K, r = s.size / 2;
+    const two = st === "tap" || st === "hunts" || st === "resting" || st === "fighting";   /* v37b (Hugh S1): a labelled plate is two rows, so the label no longer eats the name */
+    const w = (two ? Math.min(166,Math.max(st === "tap" ? 128 : 84, 34 + Math.min(text.length, 14) * 8.4)) : Math.min(132, 30 + text.length * 8.4)) * K, h = (two ? (st === "tap" ? 44 : 40) : 24) * K, r = s.size / 2;
     // Raj: below the token first, then above; v36 QA fixes: then beside it (right, left) before giving the plate up
     const spots = [[s.x, s.y + r + 4], [s.x, s.y - r - 4 - h], [s.x + r + 4 + w / 2, s.y - h / 2], [s.x - r - 4 - w / 2, s.y - h / 2]];
     let at = null; for (const [cx, top] of spots) { const b = { x0: cx - w / 2, y0: top, x1: cx + w / 2, y1: top + h }; if (!hit(b)) { at = { b, ox: cx - s.x, oy: top - s.y }; break; } }
@@ -10675,8 +10696,9 @@ function platesFrame(g, now) {
     if (!P.wantSince) P.wantSince = now; P.missSince = 0; P.w = w;
     const key = [w.text, w.fight, w.rel, w.st].join("|"); if (P.key !== key) { P.key = key;   // v37 (Dayo 2c): the plate says what she can do
       const st = w.st || (w.fight ? "fighting" : "far"), glyph = st === "tap" ? MB_CLAW_SVG : MATE_SVG;   /* Dayo 2c: the claws only when she can tap to battle */
-      P.e.innerHTML = glyph + "<span></span>" + (st === "tap" ? "<b class=\"mb-tap\">TAP TO BATTLE</b>" : st === "hunts" ? "<small class=\"mb-hunts\">hunts you</small>" : st === "resting" ? "<small>resting</small>" : st === "fighting" ? "<small>fighting</small>" : ""); P.e.querySelector("span").textContent = w.text;   // textContent: a girl typed it
-      P.e.className = "nk-nt" + (w.rel ? " nk-nt--" + w.rel : "") + (st === "tap" ? " nk-nt--tap" : "") + (st === "resting" || st === "quiet" ? " nk-nt--quiet" : "") + (P.on ? " on" : ""); }
+      const lab = st === "tap" ? "<b class=\"mb-tap\">TAP TO BATTLE</b>" : st === "hunts" ? "<small class=\"mb-hunts\">hunts you</small>" : st === "resting" ? "<small>resting</small>" : st === "fighting" ? "<small>fighting</small>" : "";
+      P.e.innerHTML = glyph + "<span></span>" + (lab ? "<i class=\"mb-br\"></i>" + lab : ""); P.e.querySelector("span").textContent = w.text;   // textContent: a girl typed it
+      P.e.className = "nk-nt" + (w.rel ? " nk-nt--" + w.rel : "") + (st === "tap" ? " nk-nt--tap" : "") + (st === "resting" || st === "quiet" ? " nk-nt--quiet" : "") + (lab ? " mb-two" : "") + (P.on ? " on" : ""); }
     if (!P.on && now - P.wantSince >= 300) { P.on = true; P.e.classList.add("on"); }   // a new plate waits 0.3 s
   }
   for (const [id, P] of SHD.plates) {
@@ -10867,7 +10889,7 @@ TUNE.mate = {
   choiceSeconds: 5, openTransit: 3, graceSeconds: 2.5, clashMaxSeconds: 4,
   roundSeconds: 3, betweenSeconds: 1, openWaitSeconds: 6, maxBattleSeconds: 50,
   giveUpSeconds: 8,               // her laptop: nothing from the teacher's laptop this long after its deadline = called off
-  vsSeconds: 0.8, bannerSeconds: 1, heardSeconds: 12,
+  vsSeconds: 0.8, bannerSeconds: 1, heardSeconds: 20,   /* v37b (Jisoo 1): was 12, only about 1.5 s above a girl's report gap; a shadow goes stale at 30 */
   maxLive: 6,                     // classmate battles at once in one class
   perGirlPerRound: 6,             // a girl is in at most 6 a round; then her plate says "resting" for the rest of it
   hunt: { firstTo: 2, rCap: 0.85 },
@@ -10984,9 +11006,12 @@ function refStep(r) {     // every dashboard tick while playing: new lives, dead
 function refAllOff(why) { for (const B of [...REF.live.values()]) refOff(B, why); }
 function refActs(x, acts) {   // her report's bt: her last three actions, each with its own sequence number (a coalesced snapshot loses nothing)
   if (!Array.isArray(acts)) return;
-  for (const a of acts.slice(-3)) {
+  const last = acts.slice(-3);
+  for (const a of last) {
     if (!a || !(Number(a.s) > (x.btS || 0))) continue; x.btS = Number(a.s);
-    if (a.a === "ask") refAsk(x, a);
+    if (a.a === "ask" && last.some(c => c && c.a === "cancel" && c.id === a.id)) continue;   /* v37b: asked and already given up in the same report: never opened */
+    if (a.a === "cancel") refCancel(x, a);
+    else if (a.a === "ask") refAsk(x, a);
     else if (a.a === "pick") refPick(x, a);
     else if (a.a === "no") refDecline(x, a);
     else if (a.a === "back") refBack(x, a);
@@ -10994,7 +11019,7 @@ function refActs(x, acts) {   // her report's bt: her last three actions, each w
 }
 function refAsk(x, a) {
   const r = DB.room, T = TUNE.mate, now = refNow(); REF.stats.asks++;
-  const no = (why, s) => { REF.stats.off++; REF.lastNo = { why, s: s || 0 };   /* (tests) the last refusal reason only, no ids */ refSend(x, { ph: "off", ask: String(a.id).slice(0, 40), b: null, why, s: s || 0 }); };
+  const no = (why, s) => { REF.stats.off++; if (MB_LOG) REF.lastNo = { why, s: s || 0 };   /* (tests) the last refusal reason only, no ids */ refSend(x, { ph: "off", ask: String(a.id).slice(0, 40), b: null, why, s: s || 0 }); };
   if (!r || r.phase !== "playing" || !DB.cl) return no("tide");
   if (r.paused) return no("paused");
   if (r.mates === false) return no("switch");
@@ -11021,7 +11046,7 @@ function refAsk(x, a) {
   if (REF.live.size >= T.maxLive) return no("max");
   const cl = DB.cl, mx = cl.members.find(m => m.gid === x.id), my = cl.members.find(m => m.gid === y.id); if (!mx || !my) return no("gone");
   const kind = k.k, B = { id: ++REF.n, kind, why: k.why || null, own: !!k.own, t0: now, round: 1, deadline: now + (T.choiceSeconds + T.openTransit + T.graceSeconds) * 1000,
-    a: { gid: x.id, mid: mx.id, sp: x.rep.sp, stake: mateStake(mx.kai, kind) }, b: { gid: y.id, mid: my.id, sp: y.rep.sp, stake: mateStake(my.kai, kind) },
+    a: { gid: x.id, mid: mx.id, sp: x.rep.sp, stake: refStakeOf(mx.kai, kind) }, b: { gid: y.id, mid: my.id, sp: y.rep.sp, stake: refStakeOf(my.kai, kind) },
     hunter: kind === "hunt" ? k.hunter : null, picks: { a: null, b: null }, auto: { a: 0, b: 0 }, miss: { a: 0, b: 0 }, wins: { a: 0, b: 0 }, reads: { a: 0, b: 0 }, rounds: [], ask: String(a.id).slice(0, 40), pjEnd: 0, res: null };
   if (kind === "hunt") { const H = B[B.hunter], P = B[B.hunter === "a" ? "b" : "a"]; B.r = mateR(H.sp, P.sp); B.q = catchOf(H.sp, P.sp); }
   REF.live.set(B.id, B); REF.stats.opened++;
@@ -11031,6 +11056,16 @@ function refAsk(x, a) {
     return { ph: "open", at: Math.round(rmNow()), b: B.id, ask: side === "a" ? B.ask : null, kind, own: B.own, role, mk: hk2, r: 1, stake: me.stake, win: other.stake,
       foe: { gid: other.gid, mid: other.mid, sp: other.sp, nick: refNick(row) } }; };
   refSend(x, mk("a")); refSend(y, mk("b"));
+}
+/* v37b (Jisoo 5): a stake is never more than the girl holds (her kai is held still in a battle), so a win never makes kai from nothing */
+const refStakeOf = (kai, kind) => Math.min(mateStake(kai, kind), Math.max(0, Math.floor(Number(kai) || 0)));
+/* v37b (Jisoo 4): the teacher's laptop applies the loser's side to her last report as well, so a girl who closes her laptop after her first pick
+   still pays (a clash stake, a back-off forfeit, or a tenth of her kai when eaten). Safe both ways: if her laptop is alive its own next report,
+   already paid, replaces this one; if it has gone, the board and her rejoin carry the loss. Kai only: her animal is not re-dealt here. */
+function refApplyLoss(gid, e) {
+  const x = refRow(gid), s = x && x.rep; if (!e || !s || !DB.room || s.rid !== DB.room.rid || !Number.isFinite(s.kai)) return;
+  const k = Math.max(0, s.kai), cost = e.dies ? Math.round(k * TUNE.kai.deathLoss) : e.kai < 0 ? -e.kai : 0;
+  if (cost > 0) s.kai = Math.max(0, k - cost);
 }
 const refSide = (B, gid) => B.a.gid === gid ? "a" : B.b.gid === gid ? "b" : null;
 function refPick(x, a) {
@@ -11046,9 +11081,14 @@ function refDecline(x, a) {   // only the target's laptop, only in a race (busy,
   const xa = refRow(B.a.gid), why = a.why === "hidden" ? "hidden" : a.why === "dead" ? "gone" : "busy";
   if (xa) refSend(xa, { ph: "off", b: B.id, ask: B.ask, why, s: 0 });
 }
+function refCancel(x, a) {    /* v37b (Jisoo 2): the starter gave up waiting before her open landed: closed with no cool-downs, the target told */
+  const id = String(a.id).slice(0, 40); let B = null; for (const q of REF.live.values()) if (q.ask === id && q.a.gid === x.id) B = q; if (!B) return;
+  REF.live.delete(B.id); REF.stats.off++;
+  const xb = refRow(B.b.gid); if (xb) refSend(xb, { ph: "off", b: B.id, ask: null, why: "ended", s: 0 });
+}
 function refBack(x, a) {      // Dayo 5c: the target backs off a CLASH or CHALLENGE, before her first pick only
   const B = REF.live.get(Number(a.b)); if (!B || refSide(B, x.id) !== "b" || B.kind === "hunt" || B.round !== 1 || B.picks.b !== null) return;
-  const f = TUNE.mate.backOffForfeit; B.res = "back"; refFinish(B, { a: { res: "theyBacked", kai: f, energy: 0 }, b: { res: "backedOff", kai: -f, energy: 0 } }, null);
+  const mb = DB.cl && DB.cl.members.find(m => m.id === B.b.mid), f = Math.min(TUNE.mate.backOffForfeit, mb ? Math.max(0, Math.floor(mb.kai)) : TUNE.mate.backOffForfeit); B.res = "back";   /* v37b (Jisoo 5): never more than she holds */ refFinish(B, { a: { res: "theyBacked", kai: f, energy: 0 }, b: { res: "backedOff", kai: -f, energy: 0 } }, null);
 }
 function refDeadline(B) {     // Dayo 4c-4: a missing pick gets a random move (as a timed-out pick); two rounds missing in a row = she has gone
   for (const side of ["a", "b"]) if (B.picks[side] === null) {
@@ -11115,7 +11155,7 @@ function refEnds(B) {         // each girl's side of the result: her result word
 function refFinish(B, ends, played) {   // cool-downs, shields and the win count (teacher memory only); the projector keeps the stamp 3 s
   const T = TUNE.mate.cool, now = refNow(); REF.live.delete(B.id); REF.stats.ended++;
   for (const side of ["a", "b"]) { const s = refGirl(B[side].gid); s.rest = now + T.afterBattle * 1000; s.battles++;
-    const e = ends[side]; if (!e) continue;
+    const e = ends[side]; if (!e) continue; refApplyLoss(B[side].gid, e);
     if (e.res === "lost") s.shield = Math.max(s.shield, now + T.afterLoss * 1000);   // the beaten shield: no piling on
     if (e.res === "eaten") { s.eaten = s.eaten.filter(t => now - t < T.eatenWindow * 1000).concat(now);
       if (s.eaten.length >= T.eatenCap) { s.shield = Math.max(s.shield, now + T.eatenShield * 1000); s.eaten = []; e.safe = T.eatenShield; } }
@@ -11147,6 +11187,10 @@ function refTopBattler(r) {   // the award: most classmate battles won this roun
 const refLiveCount = () => REF.live.size;
 
 /* ---------- a girl's laptop: the battle ---------- */
+/* v37b (Jisoo 7, Māia 2 spirit): the test logs (lines she was told, her result cards, why a battle was called off) and window.__niche.v37
+   are kept only on the test emulator or ?local=1. On the real site nothing of the kind is kept, so no battle history sits in her console. */
+const MB_LOG = !!(window.NICHE_FIREBASE && window.NICHE_FIREBASE.emulator) || params.get("local") === "1";
+const mbLog = (list, v) => { if (!MB_LOG) return; list.push(v); if (list.length > 40) list.shift(); };
 const MB = { st: null, b: null, ask: null, acts: [], seq: 0, restUntil: 0, safeSay: 0, q: [], playing: false, stats: { opens: 0, rounds: 0, waits: [], offs: [], says: [] }, timers: [] };
 function mbClear() { MB.timers.forEach(t => clearTimeout(t)); MB.timers = []; cancelAnimationFrame(MB.raf); }
 const mbLater = (f, ms) => { const t = setTimeout(f, ms); MB.timers.push(t); return t; };
@@ -11156,17 +11200,25 @@ function mbAct(a) {           // Māia 5: the classmate's game member id, never 
   RMS.btUrgent = true; rmReport(true);
 }
 function mbFoeRow(gid) { const r = RMS.room; return r && (r.names || []).find(y => y.id === gid); }
-function mbNick(foe) {        // Māia 1: built locally at the moment it draws, so a Rename or Remove mid-battle is followed; else null ("Classmate")
-  if (!foe) return null; const x = mbFoeRow(foe.gid); const nm = x ? x.nick : foe.nick; if (!nm) return null;
-  return mateName({ name: nm, gid: foe.gid }) || null;
+/* v37b (Simon's ruling 2026-11-06, battle names: "it didn't show the students names on the battle screen. It must!!!!"):
+   on a girl's OWN laptop the classmate battle screen always names the other girl (header, calling line, banner, LOCKED IN line,
+   ROUND TO / LEADS, round lines, result card). Every nickname passed nickCheck and the banned list in the lobby. This relaxes Māia's
+   condition 1 on the laptop battle screen only: the projector (pjNameOk), the plates, Near you, tgName and the shore toasts before a
+   battle keep the old rule (mateName). Nothing new is sent or kept: the name is read from the room list this laptop already holds,
+   at the moment it draws (so a Rename or Remove mid-battle is followed). */
+function battleName(gid, nick) { const r = typeof RMS !== "undefined" ? RMS.room : null, x = r && gid != null ? (r.names || []).find(y => y.id === gid) : null;
+  const nm = x ? x.nick : nick; return nm ? String(nm) : null; }
+function mbNick(foe) {        // the battle screen's name for the classmate (battleName); null only if she has left the list and none was sent ("Classmate")
+  if (!foe) return null; return battleName(foe.gid, foe.nick);
 }
+const mbShore = (gid, nick, start) => mateName({ name: nick, gid }) || (start ? "A classmate" : "a classmate");   /* the shore rule, for the lines before a battle opens */
 const mbName = (foe, start) => mbNick(foe) || (start ? "A classmate" : "a classmate");
 const mbUp = foe => (mbNick(foe) || "a classmate").toUpperCase();
-const mbSay = text => { MB.stats.says.push(text); if (MB.stats.says.length > 40) MB.stats.says.shift(); refuseToast(G, G.events.length, text); };
+const mbSay = text => { mbLog(MB.stats.says, text); refuseToast(G, G.events.length, text); };
 function mbRestLeft(m) { if (!m || !(m.rest > 0)) return 0; return Math.max(0, Math.ceil(m.rest - (performance.now() - (m.restAt || 0)) / 1000)); }
 function mbPrey(m) { return { sp: m.sp, x: m.pos[0], y: m.pos[1], alive: true }; }
 function mbCheck(g, m) {      // her laptop checks first (Dayo 2b, Wren 1): { ok } or { say, travel }
-  const T = TUNE.mate, r = RMS.room, me = g.me, now = performance.now(), Nm = mbName({ gid: m.gid, nick: m.name }, true), nm = mbName({ gid: m.gid, nick: m.name });
+  const T = TUNE.mate, r = RMS.room, me = g.me, now = performance.now(), Nm = mbShore(m.gid, m.name, true), nm = mbShore(m.gid, m.name);   /* v37b: on the shore, before a battle, the plate's rule */
   if (!r || r.mates === false) return { say: "Your teacher has turned classmate battles off.", travel: true };
   const rt = roomT(r); if (rt < T.startGrace) return { say: "Classmate battles start after the first minute.", travel: true };
   if (TUNE.runSeconds - rt < T.endGuard) return { say: "Too close to the end of the round.", travel: true };
@@ -11188,12 +11240,12 @@ function mbCheck(g, m) {      // her laptop checks first (Dayo 2b, Wren 1): { ok
 }
 function mbTap(g, s, p) {     // a tap on a classmate's shadow (or her Near you row): battle, or the reason, or travel towards her
   const m = s && s.m; if (!m || !Array.isArray(m.pos) || MB.st || g.over || g.waiting || g.modal || uiBusy) return false;
-  const c = mbCheck(g, m); MB.stats.lastCheck = c;
+  const c = mbCheck(g, m); if (MB_LOG) MB.stats.lastCheck = c;
   if (c.ok) return mbCall(g, m, c.k);
   const n0 = g.events.length;
   if (c.travel) { const ok = tapPoint(g, p ? p.x : m.pos[0], p ? p.y : m.pos[1]); SHD.lastTapMoved = ok !== false; }
   if (c.say) refuseToast(g, n0, c.say); else if (g.events.slice(n0).some(e => e.k === "say")) refuseToast(g, n0, null);
-  if (c.say) { MB.stats.says.push(c.say); if (MB.stats.says.length > 40) MB.stats.says.shift(); }
+  if (c.say) mbLog(MB.stats.says, c.say);
   return false;
 }
 function mbBusyFor(g) {        // the target's laptop, when the open lands: is she free?
@@ -11209,7 +11261,9 @@ function mbCall(g, m, k) {
   htClose(false); swClose(); uiBusy = true; g.me.mode = "idle"; g.me.dest = null; g.me.target = null;
   mbScreen(g, true);
   mbAct({ id: MB.ask, a: "ask", to: m.gid, kind: k.k });
-  mbLater(() => { if (MB.st === "call") mbAbort(`${mbName(MB.foe, true)} couldn't be reached. Back to the shore.`); }, T.openWaitSeconds * 1000);
+  mbLater(() => { if (MB.st !== "call") return; const ask = MB.ask; mbAbort(`${mbName(MB.foe, true)} couldn't be reached. Back to the shore.`);
+    mbActOnly({ a: "cancel", id: ask });
+    setTimeout(() => { if (!MB.st && MB.acts.length && MB.acts.every(q => q.a === "cancel")) { MB.acts = []; if (JOINV && RMS.id !== null) rmReport(true); } }, 6000); }, T.openWaitSeconds * 1000);   /* v37b (Jisoo 2): tell the teacher's laptop, so the girl she called is not left in a battle against nobody */
   return true;
 }
 function mbIn(d) {             // a battle message from the teacher's laptop (her inbox, or the BroadcastChannel in ?local=1)
@@ -11227,6 +11281,7 @@ function mbOpen(d) {
     const vs = $("bt-vs"); if (vs) { const p = vs.querySelector("p"); if (p) p.innerHTML = `<b>${esc(mbVsHead())}</b> · ${esc(mbStakeLine())}`; }
     mbLater(() => mbBand(1), T.vsSeconds * 1000 / Math.min(SPEED, 4)); mbWatch(); return;
   }
+  if (d.ask) return;   /* v37b (Jisoo 2): the starter's own open, landing after she gave up: never a battle (the teacher's laptop is told to cancel it) */
   const busy = MB.st ? "busy" : mbBusyFor(g);
   if (busy) { MB.stats.declines = (MB.stats.declines || 0) + 1; mbActOnly({ a: "no", b: d.b, why: busy }); return; }
   mbClear(); MB.q = [];
@@ -11257,7 +11312,7 @@ function mbOffIn(d) {
   else if (d.why === "gone") text = `${Nm} couldn't be reached. Back to the shore.`;
   else if (d.why === "drop") { text = `${Nm} lost connection. Battle off: +${d.bonus || 0} kai.`; mbKai(d.bonus || 0); MB.restUntil = Math.max(MB.restUntil, performance.now() + (d.s || 0) * 1000); }   // Māia's kinder wording
   else if (d.why === "dropme") text = "The battle was called off. Back to the shore.";
-  MB.stats.offs.push(d.why); if (MB.stats.offs.length > 40) MB.stats.offs.shift();
+  mbLog(MB.stats.offs, d.why);
   mbAbort(text || "The battle was called off. Back to the shore.");
 }
 function mbAbort(text) {       // back to the shore, no change (beyond a no-show bonus already applied)
@@ -11265,7 +11320,7 @@ function mbAbort(text) {       // back to the shore, no change (beyond a no-show
   const done = () => { uiBusy = false; if (G) { handleEvents(G); runQueue(); } if (text && G) mbSayLater(text); if (JOINV && RMS.id !== null) rmReport(true); };
   if (was && BT.open) btClose(done); else done();
 }
-function mbSayLater(text) { setTimeout(() => { if (G && !MB.st) { MB.stats.says.push(text); refuseToast(G, G.events.length, text); } }, 450); }
+function mbSayLater(text) { setTimeout(() => { if (G && !MB.st) { mbLog(MB.stats.says, text); refuseToast(G, G.events.length, text); } }, 450); }
 function mbVsHead() { const nm = mbNick(MB.foe), sp = SP[MB.foe.sp].up;
   return MB.kind === "hunt" ? (MB.role === "hunter" ? `YOU HUNT ${nm ? nm.toUpperCase() + "'S" : "A CLASSMATE'S"} ${sp}` : `${nm ? nm.toUpperCase() + "'S" : "A CLASSMATE'S"} ${sp} HUNTS YOU`) : `${nm ? nm.toUpperCase() : "A CLASSMATE"} · ${sp}`; }
 function mbStakeLine() {
@@ -11386,7 +11441,7 @@ function mbRound(d) {           // the round lands: it plays (3 s), the pip, the
       tag: `YOUR ${mine.n} v HER ${theirs.n}` }, () => {
     if (!MB.st) return;
     if (d.end) { MB.ended = true; return mbResult(d.end); }
-    setTimeout(() => { if (!MB.st) return; MB.playing = false; const nx = MB.q.shift(); if (nx) return mbRound(nx); mbBand(d.r + 1); }, T.betweenSeconds * 1000 / Math.min(SPEED, 4)); });
+    setTimeout(() => { if (!MB.st) return; MB.playing = false; const nx = MB.q.shift(); if (nx) { MB.round = nx.r; return mbRound(nx); } mbBand(d.r + 1); }   /* v37b (Jisoo 3): a queued round message is played, not dropped */, T.betweenSeconds * 1000 / Math.min(SPEED, 4)); });
   if (d.lostMine) { const band = $("bt-band"); if (band) band.insertAdjacentHTML("beforeend", `<div class="bt-slow">Your pick didn't arrive in time: ${mine.n} was picked for you.</div>`); setTimeout(go, 1300 / Math.min(SPEED, 4)); MB.stats.lostShown = (MB.stats.lostShown || 0) + 1; }
   else go();
   setTimeout(() => { const band = $("bt-band"); if (band) { band.querySelectorAll(".bt-slow").forEach(e => e.remove()); band.classList.remove("bt-band--up"); } }, 1400);
@@ -11427,6 +11482,10 @@ function mbWhy(end) {           // the WHY line (v36 style, 20-word cap, built f
   }
   return whyJoin(parts);
 }
+function mbHeadHTML(head) {     /* v37b (Hugh M2): the score ("2–1") never splits; a long name may wrap */
+  const m = /^(.*?)(\d+–\d+)$/.exec(head); if (!m) return esc(head);
+  return esc(m[1]) + '<span class="mb-sc">' + esc(m[2]) + "</span>";
+}
 function mbResult(end) {        // Dayo 5d: the result card (the v35/v36 card, with the classmate's name), then the science card
   const g = G, me = g.me, T = TUNE.mate, S = Math.min(SPEED, 4), nm = mbName(MB.foe), NM = mbUp(MB.foe), sp = SP[MB.foe.sp].up, score = FH.wins[FH.meSide] + "–" + FH.wins[FH.meSide === "l" ? "r" : "l"];
   if (!end) return mbAbort(null);
@@ -11458,12 +11517,12 @@ function mbResult(end) {        // Dayo 5d: the result card (the v35/v36 card, w
   const L = MB.meLeft ? me.sp : MB.foe.sp, R = MB.meLeft ? MB.foe.sp : me.sp, goneL = gone && (gone === "me") === MB.meLeft, goneR = gone && !goneL;
   const lines = FH.lines.slice(0, 3);
   const html = `<div class="nk-rc-scrim" id="nk-rc"><div class="nk-rc mb-rc"><i class="${goneL ? "gone" : ""}" style="background-image:url('${ART}portrait-${L}.webp')"></i>
-    <div class="nk-rc-mid"><div class="mb-rc-chip">${MATE_SVG}CLASSMATE</div><h2 class="${won === true ? "" : won === false ? "lose" : "even"}">${esc(head)}</h2><div class="nk-rc-out">${out}</div>${why ? `<div class="nk-rc-why">${esc(why)}</div>` : ""}${enLine ? `<div class="nk-rc-en">${enLine}</div>` : ""}</div>
+    <div class="nk-rc-mid"><div class="mb-rc-chip">${MATE_SVG}CLASSMATE</div><h2 class="${won === true ? "" : won === false ? "lose" : "even"}${head.length > 34 ? " mb-vlong" : head.length > 24 ? " mb-long" : ""}">${mbHeadHTML(head)}</h2><div class="nk-rc-out">${out}</div>${why ? `<div class="nk-rc-why">${esc(why)}</div>` : ""}${enLine ? `<div class="nk-rc-en">${enLine}</div>` : ""}</div>
     <i class="${goneR ? "gone" : ""}" style="background-image:url('${ART}portrait-${R}.webp')"></i>
     ${lines.length ? `<div class="nk-rc-while"><h5>WHILE YOU FOUGHT</h5>${lines.map(l => `<div>${esc(l.text)}${l.amt ? " " + chip(l.amt) : ""}</div>`).join("")}</div>` : ""}</div></div>`;
   const pay = $("nk-payoff"), c = $("nk-fh-call"); if (c) setTimeout(() => { c.className = "nk-fh-call"; }, 400);
   pay.insertAdjacentHTML("beforeend", html);
-  MB.lastCard = { head, out: out.replace(/<[^>]+>/g, ""), why, en: enLine, res: r }; MB.cards = (MB.cards || []).concat(MB.lastCard).slice(-20);   // test log only (her own card; nothing leaves this laptop)
+  if (MB_LOG) { MB.lastCard = { head, out: out.replace(/<[^>]+>/g, ""), why, en: enLine, res: r }; MB.cards = (MB.cards || []).concat(MB.lastCard).slice(-20); }   // test log only (her own card; nothing leaves this laptop)
   MB.rest = end.res; MB.restUntil = performance.now() + TUNE.mate.cool.afterBattle * 1000;
   MB.acts = [];                  // Māia 5: who she fought leaves her record in her next report
   if (JOINV && RMS.id !== null) rmReport(true);   // the board agrees (her kai), and the emptied bt goes out
@@ -11661,7 +11720,7 @@ Object.assign(window.__niche, { LANE, HUNTTAP, LABELS, applyRound, herNote, roun
 Object.assign(window.__niche, V35_HOOKS); Object.defineProperty(window.__niche, "G", { get: () => G });   // v35 (tests)
 Object.assign(window.__niche, { v36: { whyText, whyOdds, whyWords, fightRound, finishFight, MOVES, CATCH1, catchOf, SWELL_CLEAR, SWELL_HOLD, DIET, dietText, PLAYABLE, NOT_DEALT, PREYOF, SP, CHOOSE,
   SHD, V36, DPILL, FH, BT, clearPlan, getClear, clearSpot, swellNextHit, holdOn, cmdGo, dbCls, rmMirror, pjNameOk, mateName, shownName, namedRule, nearMateRow, EV_HIT, NEAR, tgName, tgRow, shadowAt, pickPlates, cpuBoxes, whyBody, swellLine, herLine, v31Event } });   // v36 (tests)
-Object.assign(window.__niche, { v37: { MB, REF, REF_PJ, PJM, MATE_HUNT, MATE_OWN_CARD, mateKind, mateR, mateHuntRound, mateClashRound, mateHuntSim, mateStake, mateRel, mateState, mateSoCard, mbCheck, mbTap, mbSciText, refView, refRestLeft, refTopBattler, refLiveCount, SHD, NEAR, FH, BT, nearMateRow, pickPlates, mbIn, get T() { return TUNE.mate; } } });   // v37 (tests)
+if (MB_LOG) Object.assign(window.__niche, { v37: { MB, REF, REF_PJ, PJM, MATE_HUNT, MATE_OWN_CARD, mateKind, mateR, mateHuntRound, mateClashRound, mateHuntSim, mateStake, mateRel, mateState, mateSoCard, mbCheck, mbTap, mbSciText, refView, refRestLeft, refTopBattler, refLiveCount, SHD, NEAR, FH, BT, nearMateRow, pickPlates, mbIn, get T() { return TUNE.mate; } } });   // v37 (tests)
 </script>
 </body>
 </html>
